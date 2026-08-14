@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: docs-check
+        name: docs check
+        entry: mise run check
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,18 @@
+[tools]
+node = "24"
+"npm:oxlint" = "latest"
+"npm:oxfmt" = "latest"
+prek = "latest"
+cocogitto = "latest"
+
+[tasks.check]
+description = "Validate trilingual docs and lint tools/"
+run = ["node tools/check-docs.ts", "oxlint tools", "oxfmt --check tools"]
+
+[tasks.fix]
+description = "Recompute doc digests and format tools/"
+run = ["node tools/check-docs.ts --fix", "oxfmt tools"]
+
+[tasks.test]
+description = "Run validator tests"
+run = "node --test tools/check-docs.test.ts"
