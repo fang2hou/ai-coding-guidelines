@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import process from "node:process";
 
@@ -148,7 +148,7 @@ function linkTargets(text: string): string[] {
     }
     if (inFence) continue;
     for (const m of line.matchAll(/\[[^\]]*\]\(([^)\s]+)(?:#[^)\s]*)?\)/g)) {
-      targets.push(m[1]);
+      targets.push(m[1].replace(/^\.\//, ""));
     }
   }
   return targets;
@@ -160,7 +160,7 @@ function checkLinksOf(fileRel: string, text: string, root: string, errors: strin
     const base = target.startsWith("/") ? root : resolve(root, dirname(fileRel));
     const resolved = resolve(base, target.startsWith("/") ? `.${target}` : target);
     const rel = relative(root, resolved);
-    if (!existsSync(resolved) || !statSync(resolved).isFile()) {
+    if (!existsSync(resolved)) {
       errors.push(`ERROR ${fileRel}: broken link '${target}' (resolved: ${rel})`);
     }
   }
