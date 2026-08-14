@@ -203,11 +203,8 @@ function parseTermRules(root: string, errors: string[]): TermRule[] {
   return rules;
 }
 
-// Flags forbidden renderings in document bodies, skipping front matter and
-// fenced code blocks.
-function checkTermsOf(doc: Doc, rules: TermRule[], errors: string[]): void {
-  const langRules = rules.filter((r) => r.lang === doc.lang);
-  if (langRules.length === 0) return;
+// Yields [index, line] for body lines outside fenced code blocks.
+function* proseLines(doc: Doc): Generator<[number, string]> {
   let close = 0;
   for (let i = 1; i < doc.rawLines.length; i++) {
     if (doc.rawLines[i].trimEnd() === "---") {
@@ -223,6 +220,76 @@ function checkTermsOf(doc: Doc, rules: TermRule[], errors: string[]): void {
       continue;
     }
     if (inFence) continue;
+    yield [i, line];
+  }
+}
+
+const CJK_RE = /[\u3000-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef]/;
+const PUNCT_FULL: Record<Lang, Record<string, string>> = {
+  en: {},
+  zh: { ",": "，", ";": "；", ":": "：" },
+  ja: { ",": "、", ";": "；", ":": "：" },
+};
+
+// Enforces full-width punctuation in zh/ja prose: a half-width ,;: directly
+// adjacent to a CJK character is a translation artifact, and a full-width
+// punctuation mark never needs a trailing ASCII space (spaces before table
+// pipes are structural and exempt). Skips front matter, fenced blocks, and
+// inline code spans; --fix rewrites in place and refreshes doc.body so the
+// digest pass hashes the fixed bytes.
+function checkPunctuationOf(doc: Doc, fix: boolean, errors: string[]): void {
+  const mapping = PUNCT_FULL[doc.lang];
+  if (Object.keys(mapping).length === 0) return;
+  let mutated = false;
+  for (const [i, line] of proseLines(doc)) {
+    const masked = line.replace(/`[^`]*`/g, (m) => " ".repeat(m.length));
+    let fixed = line;
+    for (const m of masked.matchAll(/[,;:]/g)) {
+      const prev = masked[m.index - 1] ?? "";
+      const next = masked[m.index + 1] ?? "";
+      if (!CJK_RE.test(prev) && !CJK_RE.test(next)) continue;
+      const full = mapping[m[0]];
+      if (fix) {
+        fixed = fixed.slice(0, m.index) + full + fixed.slice(m.index + 1);
+      } else {
+        errors.push(
+          `ERROR ${doc.relPath}:${i + 1}: half-width '${m[0]}' adjacent to CJK text; use '${full}' (run 'mise run fix')`,
+        );
+      }
+    }
+    const masked2 = fixed.replace(/`[^`]*`/g, (m) => " ".repeat(m.length));
+    for (const run of [...masked2.matchAll(/([，。、；：])( +)(?=[^|\s])/g)].reverse()) {
+      if (fix) {
+        fixed = fixed.slice(0, run.index + 1) + fixed.slice(run.index + 1 + run[2].length);
+      } else {
+        errors.push(
+          `ERROR ${doc.relPath}:${i + 1}: full-width '${run[1]}' followed by redundant space (run 'mise run fix')`,
+        );
+      }
+    }
+    if (fixed !== line) {
+      doc.rawLines[i] = fixed;
+      mutated = true;
+    }
+  }
+  if (!mutated) return;
+  writeFileSync(doc.absPath, doc.rawLines.join("\n"));
+  let close = 0;
+  for (let i = 1; i < doc.rawLines.length; i++) {
+    if (doc.rawLines[i].trimEnd() === "---") {
+      close = i;
+      break;
+    }
+  }
+  doc.body = normalizeBody(doc.rawLines.slice(close + 1).join("\n"));
+}
+
+// Flags forbidden renderings in document bodies, skipping front matter and
+// fenced code blocks.
+function checkTermsOf(doc: Doc, rules: TermRule[], errors: string[]): void {
+  const langRules = rules.filter((r) => r.lang === doc.lang);
+  if (langRules.length === 0) return;
+  for (const [i, line] of proseLines(doc)) {
     for (const rule of langRules) {
       if (line.includes(rule.forbidden)) {
         errors.push(
@@ -271,6 +338,13 @@ function run(root: string, fix: boolean): number {
           `ERROR ${doc.relPath}: body has ${bodyLines} lines (max ${MAX_BODY_LINES}); split the document`,
         );
       }
+    }
+  }
+
+  // Punctuation: full-width in zh/ja prose; --fix rewrites before digests
+  for (const docs of docsByLang.values()) {
+    for (const doc of docs) {
+      checkPunctuationOf(doc, fix, errors);
     }
   }
 

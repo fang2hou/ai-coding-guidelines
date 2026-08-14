@@ -14,29 +14,29 @@ standards consumed by AI agents in other projects. Consumers start at
 
 ## Commands
 
-| Command | Run it | Effect |
-| --- | --- | --- |
-| `mise run fix` | After any content edit | Recomputes digests; formats `tools/` |
-| `mise run check` | Before every commit | Full validation (CI runs the same) |
-| `mise run test` | After changing `tools/` | Validator test suite |
+| Command          | Run it                  | Effect                                                               |
+| ---------------- | ----------------------- | -------------------------------------------------------------------- |
+| `mise run fix`   | After any content edit  | Fixes zh/ja punctuation + digests; formats all Markdown and `tools/` |
+| `mise run check` | Before every commit     | Full validation (CI runs the same)                                   |
+| `mise run test`  | After changing `tools/` | Validator test suite                                                 |
 
 CI (GitHub Actions) and the pre-commit hook (prek) run `mise run check` on
 every commit and pull request.
 
 ## Repository map
 
-| Path | Content | Language |
-| --- | --- | --- |
-| `guidelines/{en,zh,ja}/` | Guideline content — isomorphic trilingual trees | en / zh / ja |
-| `guidelines/en/principles/` | Core engineering principles | trilingual |
-| `guidelines/en/toolchain/` | Mandatory tools and platform standards | trilingual |
-| `guidelines/en/libraries/` | Library/framework selection catalog | trilingual |
-| `guidelines/en/practices/` | Cross-cutting engineering practices | trilingual |
-| `docs/adr/` | ADRs — decisions about this repository | English only |
-| `templates/` | Copyable templates for consuming projects | English only |
-| `tools/check-docs.ts` | Trilingual consistency validator | code |
-| `PORTAL.md` | Task-based reading routes for consumers | English only |
-| `GLOSSARY.md` | Canonical trilingual terminology | English only |
+| Path                        | Content                                         | Language     |
+| --------------------------- | ----------------------------------------------- | ------------ |
+| `guidelines/{en,zh,ja}/`    | Guideline content — isomorphic trilingual trees | en / zh / ja |
+| `guidelines/en/principles/` | Core engineering principles                     | trilingual   |
+| `guidelines/en/toolchain/`  | Mandatory tools and platform standards          | trilingual   |
+| `guidelines/en/libraries/`  | Library/framework selection catalog             | trilingual   |
+| `guidelines/en/practices/`  | Cross-cutting engineering practices             | trilingual   |
+| `docs/adr/`                 | ADRs — decisions about this repository          | English only |
+| `templates/`                | Copyable templates for consuming projects       | English only |
+| `tools/check-docs.ts`       | Trilingual consistency validator                | code         |
+| `PORTAL.md`                 | Task-based reading routes for consumers         | English only |
+| `GLOSSARY.md`               | Canonical trilingual terminology                | English only |
 
 Rule of thumb: guideline content (the product) goes to `guidelines/`;
 repository documentation goes to `docs/` in English. See
@@ -66,14 +66,14 @@ repository documentation goes to `docs/` in English. See
 
 ## Front matter
 
-| Key | Rule |
-| --- | --- |
-| `id` | Path-derived (`guidelines/<lang>/` prefix and `.md` suffix removed) |
-| `lang` | Matches the tree: `en` / `zh` / `ja` |
-| `version` | Positive integer, identical across the trio; increment on any meaningful change |
-| `source-lang` | Language the current version was authored in; identical across the trio |
-| `status` | `draft` / `active` / `deprecated`; identical across the trio |
-| `digest` | sha256 of the normalized body (first 8 hex) — tool-maintained |
+| Key           | Rule                                                                            |
+| ------------- | ------------------------------------------------------------------------------- |
+| `id`          | Path-derived (`guidelines/<lang>/` prefix and `.md` suffix removed)             |
+| `lang`        | Matches the tree: `en` / `zh` / `ja`                                            |
+| `version`     | Positive integer, identical across the trio; increment on any meaningful change |
+| `source-lang` | Language the current version was authored in; identical across the trio         |
+| `status`      | `draft` / `active` / `deprecated`; identical across the trio                    |
+| `digest`      | sha256 of the normalized body (first 8 hex) — tool-maintained                   |
 
 ## Edit protocol
 
@@ -95,8 +95,8 @@ Worked example — tighten a rule in `toolchain/typescript`:
 1. Edit guidelines/en/toolchain/typescript.md (add the rule).
 2. Set version: 2 / source-lang: en in en, zh, ja files.
 3. Rewrite guidelines/{zh,ja}/toolchain/typescript.md natively.
-4. mise run fix   → digests recomputed
-5. mise run check → OK: 66 documents, 22 ids x 3 languages
+4. mise run fix   → punctuation + digests fixed, Markdown formatted
+5. mise run check → OK: N documents, N/3 ids x 3 languages
 6. git commit -m "docs(toolchain): require type-aware oxlint rules"
 ```
 
@@ -119,6 +119,10 @@ Worked example — tighten a rule in `toolchain/typescript`:
   glossary in the same change. Product names and industry terms stay in
   English. The glossary's "Forbidden renderings" table is machine-enforced
   by the validator; when you fix a recurring mistranslation, add it there.
+- Punctuation: zh prose uses full-width ，；：; ja prose uses 、。：.
+  Half-width `,;:` stays only inside code spans, paths, and pure-latin
+  clusters (e.g. `E, F, I`). Machine-enforced; `mise run fix` auto-corrects
+  CJK-adjacent violations.
 - Code blocks, commands, identifiers: verbatim. Translate only `lang` in
   front matter; `digest` is recomputed by `mise run fix`.
 - Follow the cross-language quality clauses in

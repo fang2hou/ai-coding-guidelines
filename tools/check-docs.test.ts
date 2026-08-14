@@ -199,3 +199,56 @@ test("term rules with no occurrences pass", () => {
     assert.equal(out.status, 0, out.stdout);
   });
 });
+
+test("half-width punctuation adjacent to CJK fails", () => {
+  withRepo((root) => {
+    const file = join(root, "guidelines/zh/foo.md");
+    writeFileSync(
+      file,
+      readFileSync(file, "utf8")
+        .replace("Body.", "工具链,保持一致:")
+        .replace("Text.", "参考： 模板"),
+    );
+    const out = runChecker(root);
+    assert.equal(out.status, 1);
+    assert.match(out.stdout, /foo\.md:12: half-width ',' adjacent to CJK text; use '，'/);
+    assert.match(out.stdout, /half-width ':' adjacent to CJK text; use '：'/);
+    assert.match(out.stdout, /full-width '：' followed by redundant space/);
+  });
+});
+
+test("punctuation fix rewrites to full-width", () => {
+  withRepo((root) => {
+    const zhFile = join(root, "guidelines/zh/foo.md");
+    const jaFile = join(root, "guidelines/ja/foo.md");
+    writeFileSync(
+      zhFile,
+      readFileSync(zhFile, "utf8")
+        .replace("Body.", "工具链,保持一致; 例如:")
+        .replace("Text.", "参考： 模板"),
+    );
+    writeFileSync(
+      jaFile,
+      readFileSync(jaFile, "utf8").replace("Body.", "たとえば:次のようにする,"),
+    );
+    const fixed = runChecker(root, "--fix");
+    assert.equal(fixed.status, 0, fixed.stdout);
+    assert.match(readFileSync(zhFile, "utf8"), /工具链，保持一致；例如：/);
+    assert.match(readFileSync(zhFile, "utf8"), /参考：模板/);
+    assert.match(readFileSync(jaFile, "utf8"), /たとえば：次のようにする、/);
+    const out = runChecker(root);
+    assert.equal(out.status, 0, out.stdout);
+  });
+});
+
+test("latin clusters and code spans keep half-width", () => {
+  withRepo((root) => {
+    const file = join(root, "guidelines/zh/foo.md");
+    writeFileSync(file, readFileSync(file, "utf8").replace("Body.", "启用 `E,F` 与规则 E, F, I。"));
+    const fixed = runChecker(root, "--fix");
+    assert.equal(fixed.status, 0, fixed.stdout);
+    assert.match(readFileSync(file, "utf8"), /启用 `E,F` 与规则 E, F, I。/);
+    const out = runChecker(root);
+    assert.equal(out.status, 0, out.stdout);
+  });
+});

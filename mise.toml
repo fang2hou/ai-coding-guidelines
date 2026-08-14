@@ -6,12 +6,12 @@ prek = "latest"
 cocogitto = "latest"
 
 [tasks.check]
-description = "Validate trilingual docs and lint tools/"
-run = ["node tools/check-docs.ts", "oxlint tools", "oxfmt --check tools"]
+description = "Validate trilingual docs, lint and format-check"
+run = ["node tools/check-docs.ts", "oxlint tools", "oxfmt --check ."]
 
 [tasks.fix]
-description = "Recompute doc digests and format tools/"
-run = ["node tools/check-docs.ts --fix", "oxfmt tools"]
+description = "Fix punctuation and digests, then format markdown and tools/"
+run = ["node tools/check-docs.ts --fix", "oxfmt .", "node tools/check-docs.ts --fix"]
 
 [tasks.test]
 description = "Run validator tests"
