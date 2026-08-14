@@ -1,15 +1,31 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 2b66cd7b
+digest: 9bd2032e
 ---
 
 # TypeScript Toolchain
 
-The standard TypeScript / JavaScript toolchain: pnpm for package management, oxlint for linting, oxfmt for formatting. For framework selection, see [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md).
+## Mandate
+
+TypeScript is the default language for AI-assisted product development. Its library and agent ecosystem support is the strongest of the available languages.
+
+Language priority:
+
+* TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
+* Python is used for the justified cases listed in [Python Toolchain](../toolchain/python.md).
+* Go or Rust are reserved for performance-critical or systems scenarios; they require explicit justification plus user approval, recorded in a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
+
+For framework selection, see [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md).
+
+## Version Policy
+
+Use the latest stable TypeScript and Node.js versions, managed by mise.
+
+Pin both the Node.js and TypeScript versions in the project's mise configuration instead of relying on globally installed versions.
 
 ## pnpm
 
@@ -51,7 +67,7 @@ Do not leave useful recommended checks disabled simply because the generated pro
 
 When a rule set or compatibility layer is not supported correctly by oxlint, configure it explicitly rather than attempting to force incompatible ESLint behavior into the project.
 
-### Type-Aware / Type Checking Rules
+### Type-Aware and Type Checking Rules
 
 Use oxlint's officially supported TypeScript type-aware or type-checking capabilities when they are appropriate for the project.
 
@@ -76,3 +92,57 @@ Do not run multiple competing formatters over the same source files.
 ### Rejected Alternatives
 
 Do not use Prettier.
+
+## tsconfig Baseline
+
+Start every project from a strict tsconfig baseline:
+
+* `"strict": true` — the strictness base; do not disable individual strict flags without an ADR-level reason.
+* `"noUncheckedIndexedAccess": true` — indexed access yields `T | undefined`, forcing the undefined case to be handled.
+* `"verbatimModuleSyntax": true` — type-only imports must use `import type`, preventing accidental runtime imports.
+* `"isolatedModules": true` — every file must compile independently, matching how bundlers and transpilers actually process the code.
+* ESM only. Applications use `"module": "ESNext"` with `"moduleResolution": "Bundler"`; Node libraries use `"module": "NodeNext"` with `"moduleResolution": "NodeNext"`.
+* Applications do not emit with tsc: set `"noEmit": true` and let the bundler produce the output.
+
+Baseline example:
+
+```jsonc
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "noEmit": true
+  }
+}
+```
+
+## Language Usage Rules
+
+* Prefer `unknown` over `any` when a value's type is not yet known, and narrow it before use. Reserve `any` for genuinely dynamic interop, with a comment justifying it.
+* Do not use the non-null assertion operator (`!`) without a comment explaining why the value cannot be null or undefined at that point.
+* Declare explicit return types on exported functions.
+* Model state with discriminated unions instead of groups of booleans.
+* Validate configuration objects with `satisfies`: errors surface at the definition while literal types are preserved.
+* Apply `as const` to literal tables so element types stay narrow.
+* Use union types or `const` objects instead of `enum`.
+* Do not leave promises floating: `await` them, or discard deliberately with `void` plus a comment stating why the result is ignored.
+* Throw `Error` subclasses; never throw strings or plain objects.
+
+## Project Conventions
+
+* Keep application source under `src/` and expose entry points through `package.json`.
+* Name files in kebab-case (`user-profile-card.tsx`), values in camelCase, and types, components, and classes in PascalCase.
+* Avoid barrel files (an `index.ts` re-exporting a whole directory); import directly from the defining module. Barrels hurt tree-shaking and invite import cycles.
+
+## Works with
+
+* [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md)
+* [Quality Gates](../toolchain/quality-gates.md)
+* [Testing Strategy](../practices/testing.md)
+* [Coding Standards](../practices/coding-standards.md)
