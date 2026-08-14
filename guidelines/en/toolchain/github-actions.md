@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 26d78c0e
+digest: 72fbdfe4
 ---
 
 # GitHub Actions
@@ -44,5 +44,5 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
 
 ## Related
 
-* [Quality Gates](../toolchain/quality-gates.md) — run equivalent local checks with the same project configuration.
-* [Git Workflow](../toolchain/git.md) — Conventional Commits validation in CI, including the squash-merge pull-request-title rule.
+- [Quality Gates](../toolchain/quality-gates.md) — run equivalent local checks with the same project configuration.
+- [Git Workflow](../toolchain/git.md) — Conventional Commits validation in CI, including the squash-merge pull-request-title rule.

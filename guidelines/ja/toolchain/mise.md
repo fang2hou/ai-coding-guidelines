@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 2e323e5e
+digest: 9181418c
 ---
 
 # mise
@@ -15,23 +15,23 @@ digest: 2e323e5e
 
 mise は、次の項目に関するプロジェクトレベルの信頼できる唯一の情報源である。
 
-* ランタイムのバージョン
-* CLI ツールのバージョン
-* 開発ツール
-* 環境構成
-* プロジェクト共通のタスク
-* CI が使用するツールチェーンのセットアップ
+- ランタイムのバージョン
+- CLI ツールのバージョン
+- 開発ツール
+- 環境構成
+- プロジェクト共通のタスク
+- CI が使用するツールチェーンのセットアップ
 
 mise で管理するツールの例は次のとおりである。
 
-* Node.js
-* pnpm
-* Python
-* uv
-* Databricks CLI
-* Cocogitto
-* prek
-* その他のプロジェクト CLI ツール
+- Node.js
+- pnpm
+- Python
+- uv
+- Databricks CLI
+- Cocogitto
+- prek
+- その他のプロジェクト CLI ツール
 
 mise で要件を満たせる場合は、別の汎用ツールマネージャーを導入しない。
 
@@ -73,7 +73,7 @@ mise run deploy
 
 その場合、プロジェクト専用の別タスクシステムを作るのではなく、該当するワークフローを mise タスクとして公開する。
 
-例:
+例：
 
 ```text
 mise task

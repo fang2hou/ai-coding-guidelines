@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: ee7cba3d
+digest: e587ba72
 ---
 
 # Security
@@ -15,21 +15,21 @@ Never include sensitive information in the repository.
 
 This includes, but is not limited to:
 
-* Passwords
-* API keys
-* Access tokens
-* Private credentials
-* Secrets
-* Sensitive connection strings
+- Passwords
+- API keys
+- Access tokens
+- Private credentials
+- Secrets
+- Sensitive connection strings
 
 ## Where secrets belong
 
 Use appropriate:
 
-* Environment variables
-* Secret-management systems
-* Deployment-platform secrets
-* Secure configuration
+- Environment variables
+- Secret-management systems
+- Deployment-platform secrets
+- Secure configuration
 
 Ensure local secret files are excluded from version control.
 

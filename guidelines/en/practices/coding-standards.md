@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: dafd28da
+digest: 6e48b8b5
 ---
 
 # Coding Standards
@@ -15,12 +15,12 @@ Use appropriate modern best practices for the selected language and framework.
 
 This includes:
 
-* Clear structure
-* Appropriate data structures
-* Established framework conventions
-* Appropriate design patterns
-* Type safety where appropriate
-* Idiomatic APIs
+- Clear structure
+- Appropriate data structures
+- Established framework conventions
+- Appropriate design patterns
+- Type safety where appropriate
+- Idiomatic APIs
 
 Do not apply a design pattern merely because it exists.
 
@@ -30,11 +30,11 @@ Do not make the codebase more complex without a concrete need.
 
 Prefer code that is:
 
-* Simple
-* Readable
-* Explicit
-* Maintainable
-* Easy to modify
+- Simple
+- Readable
+- Explicit
+- Maintainable
+- Easy to modify
 
 Avoid premature generalization.
 
@@ -44,10 +44,10 @@ Use meaningful English names that accurately describe purpose and behavior.
 
 Avoid:
 
-* Ambiguous abbreviations
-* Generic names such as `data`, `thing`, or `value` when a better name exists
-* Transliteration
-* Project-specific slang when a standard English term exists
+- Ambiguous abbreviations
+- Generic names such as `data`, `thing`, or `value` when a better name exists
+- Transliteration
+- Project-specific slang when a standard English term exists
 
 Follow the code-language rules in [Language Policy](language-policy.md).
 
@@ -55,11 +55,11 @@ Follow the code-language rules in [Language Policy](language-policy.md).
 
 Write modular code where modularity improves:
 
-* Testing
-* Readability
-* Ownership
-* Reuse
-* Change isolation
+- Testing
+- Readability
+- Ownership
+- Reuse
+- Change isolation
 
 Do not create artificial modules merely to satisfy an abstract idea of modularity.
 
@@ -69,10 +69,10 @@ Before creating a new file or module, confirm that it has a clear responsibility
 
 Do not create:
 
-* Redundant modules
-* Duplicate helpers
-* Empty abstractions
-* Parallel implementations of existing functionality
+- Redundant modules
+- Duplicate helpers
+- Empty abstractions
+- Parallel implementations of existing functionality
 
 New code must remain consistent with the existing architecture.
 
@@ -82,9 +82,9 @@ Frontend applications should provide complete responsive behavior.
 
 The application should remain usable across relevant:
 
-* Desktop sizes
-* Tablet sizes
-* Mobile sizes
+- Desktop sizes
+- Tablet sizes
+- Mobile sizes
 
 Use modern responsive layout techniques.
 

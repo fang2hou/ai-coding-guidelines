@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 77eae4d4
+digest: e210ea2c
 ---
 
 # Vercel AI SDK
@@ -15,14 +15,14 @@ Situational — use the Vercel AI SDK only when it provides real value to a Next
 
 ## Use when
 
-- The actual Next.js implementation benefits from the SDK's capabilities.
+- A Next.js implementation actually uses the SDK's capabilities.
 - The feature maps directly onto what the SDK concretely provides, such as streaming AI response handling.
 
 ## Avoid when
 
 - The application merely contains an LLM feature — that alone never justifies the dependency.
 - Adding the SDK automatically to every AI-related project.
-- The project has no Next.js implementation that the SDK would benefit.
+- The project has no Next.js implementation for the SDK to serve.
 
 ## Strengths
 
@@ -44,7 +44,6 @@ Situational — use the Vercel AI SDK only when it provides real value to a Next
 - Use the Vercel AI SDK only when it provides real value to a Next.js project.
 - Do not add it automatically to every AI-related project.
 - Do not introduce it merely because the application contains an LLM feature.
-- Use it when the actual Next.js implementation benefits from its capabilities.
 
 ## Works with
 

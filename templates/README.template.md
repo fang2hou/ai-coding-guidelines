@@ -29,11 +29,11 @@ mise run dev
 
 ## Language Policy
 
-| Item | Value |
-| --- | --- |
-| Primary UI language | `<e.g. Japanese>` |
-| Additional languages | `<e.g. none / English>` |
-| Tone / formality | `<e.g. polite (です/ます), casual>` |
+| Item                 | Value                               |
+| -------------------- | ----------------------------------- |
+| Primary UI language  | `<e.g. Japanese>`                   |
+| Additional languages | `<e.g. none / English>`             |
+| Tone / formality     | `<e.g. polite (です/ます), casual>` |
 
 Code identifiers, comments, and commit messages are always English.
 Do not infer UI language from conversation language.

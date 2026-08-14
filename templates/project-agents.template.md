@@ -18,12 +18,12 @@ Repository documentation always takes precedence over remembered summaries.
 
 ## Confirmed Language Policy
 
-| Item | Value |
-| --- | --- |
-| Conversation | `<follows the user>` |
-| Code / comments / commits | English |
-| UI language | `<confirmed value>` |
-| Tone | `<confirmed value>` |
+| Item                      | Value                |
+| ------------------------- | -------------------- |
+| Conversation              | `<follows the user>` |
+| Code / comments / commits | English              |
+| UI language               | `<confirmed value>`  |
+| Tone                      | `<confirmed value>`  |
 
 Do not infer UI language from conversation language.
 

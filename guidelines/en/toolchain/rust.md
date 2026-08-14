@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: draft
-digest: 862dea6e
+digest: 154c8f5a
 ---
 
 # Rust Toolchain
@@ -17,10 +17,10 @@ Rust is not a default choice.
 
 Choose Rust only when the project genuinely needs:
 
-* Maximum performance with memory safety
-* Systems components
-* Native extensions for other languages
-* WebAssembly targets
+- Maximum performance with memory safety
+- Systems components
+- Native extensions for other languages
+- WebAssembly targets
 
 Adopting Rust requires explicit justification and user approval, recorded in a project ADR.
 
@@ -90,7 +90,7 @@ Run `cargo test` in CI.
 
 ## Works with
 
-* [mise](../toolchain/mise.md) — versioning: the Rust toolchain and related tools are managed and exposed through mise tasks.
-* [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
-* [Git Workflow](../toolchain/git.md) — commit discipline: Rust changes follow the standard commit and PR rules.
-* [Testing Strategy](../practices/testing.md) — test focus: what to verify, and at which level.
+- [mise](../toolchain/mise.md) — versioning: the Rust toolchain and related tools are managed and exposed through mise tasks.
+- [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
+- [Git Workflow](../toolchain/git.md) — commit discipline: Rust changes follow the standard commit and PR rules.
+- [Testing Strategy](../practices/testing.md) — test focus: what to verify, and at which level.

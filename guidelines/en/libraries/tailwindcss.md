@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 215ee678
+digest: 6a02910c
 ---
 
 # Tailwind CSS
@@ -26,7 +26,7 @@ Preferred — Tailwind CSS is the preferred CSS framework for frontend projects.
 ## Strengths
 
 - Utility-first classes keep styling colocated with markup and avoid growing bespoke stylesheets.
-- Broad adoption across the React ecosystem, including first-class use by shadcn/ui.
+- Broad adoption across the React ecosystem; it is the styling foundation of shadcn/ui.
 - Theming and design tokens configurable in one place per major version.
 
 ## Tradeoffs

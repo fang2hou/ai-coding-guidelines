@@ -4,16 +4,16 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: bb3b3a6e
+digest: 4c0d3b27
 ---
 
-# フロントエンドフレームワーク: Vite vs Next.js
+# フロントエンドフレームワーク：Vite vs Next.js
 
 ## 判定
 
 推奨 — Vite をデフォルトのフロントエンドフレームワークとし、Next.js はフルスタック機能が本当に必要な場合に限って選択する。
 
-判定基準:
+判定基準：
 
 - デフォルトでは Vite を使う。
 - プロジェクトがフルスタックの React アプリケーション、または Next.js を選ぶ正当な理由となる機能を必要とする場合に限り、Next.js を使う。

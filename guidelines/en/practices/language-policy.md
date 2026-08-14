@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 6c81b563
+digest: fc7702dd
 ---
 
 # Language Policy
@@ -35,30 +35,30 @@ All source code must use standard English except for intentional literal values 
 
 The following must be written in English:
 
-* Variable names
-* Function names
-* Method names
-* Class names
-* Type names
-* Interface names
-* Enum names
-* Module names
-* File names
-* Directory names
-* Code comments
-* Docstrings
-* Configuration identifiers
-* Internal symbolic identifiers
+- Variable names
+- Function names
+- Method names
+- Class names
+- Type names
+- Interface names
+- Enum names
+- Module names
+- File names
+- Directory names
+- Code comments
+- Docstrings
+- Configuration identifiers
+- Internal symbolic identifiers
 
 Do not use non-English languages for code identifiers or comments.
 
 In particular, do not use:
 
-* Japanese kana
-* Japanese-language identifiers
-* Chinese-language identifiers
-* Pinyin identifiers
-* Japanese romaji identifiers
+- Japanese kana
+- Japanese-language identifiers
+- Chinese-language identifiers
+- Pinyin identifiers
+- Japanese romaji identifiers
 
 Examples of prohibited identifiers and their standard-English replacements:
 
@@ -77,12 +77,12 @@ The requirement is **standard English**, not merely ASCII.
 
 Non-English text is allowed when it is intentionally part of a literal value, including:
 
-* UI copy
-* Localization resources
-* User-facing errors
-* Test fixtures containing localized content
-* Example user content
-* Domain data whose original form must be preserved
+- UI copy
+- Localization resources
+- User-facing errors
+- Test fixtures containing localized content
+- Example user content
+- Domain data whose original form must be preserved
 
 Literal values do not justify non-English variable names or comments.
 
@@ -92,11 +92,11 @@ Communicate naturally in the language used by the user.
 
 Conversation should be:
 
-* Natural
-* Friendly
-* Clear
-* Idiomatic
-* Appropriate for the user's communication style
+- Natural
+- Friendly
+- Clear
+- Idiomatic
+- Appropriate for the user's communication style
 
 Avoid unnecessary language mixing.
 
@@ -104,12 +104,12 @@ When communicating in Chinese, do not insert English phrases merely because the 
 
 English is appropriate when referring to:
 
-* Code identifiers
-* API names
-* Library names
-* Commands
-* Product names
-* Established technical terminology where translation would reduce clarity
+- Code identifiers
+- API names
+- Library names
+- Commands
+- Product names
+- Established technical terminology where translation would reduce clarity
 
 Otherwise, communicate naturally in Chinese.
 
@@ -121,9 +121,9 @@ Never infer the product language solely from the conversation language.
 
 Before implementing substantial user-facing content when the project language has not already been documented, confirm with the user:
 
-* Primary UI language
-* Additional supported languages
-* Relevant formality or tone requirements
+- Primary UI language
+- Additional supported languages
+- Relevant formality or tone requirements
 
 Record the confirmed language policy in the project documentation (see [Required Project Documentation](project-documentation.md)).
 
@@ -131,9 +131,9 @@ Once recorded, follow it without repeatedly asking the same question.
 
 Only reconfirm when:
 
-* The user explicitly changes the requirement
-* A new requirement conflicts with the documented policy
-* The required target language is genuinely ambiguous
+- The user explicitly changes the requirement
+- A new requirement conflicts with the documented policy
+- The required target language is genuinely ambiguous
 
 Do not silently change UI language because the user changed conversation language.
 
@@ -145,12 +145,12 @@ Do not mechanically translate wording across languages.
 
 In particular:
 
-* Do not create Chinese-influenced Japanese.
-* Do not reproduce Chinese sentence structures unnaturally in Japanese.
-* Do not insert implementation-oriented English directly into otherwise natural Chinese conversation without a reason.
-* Do not translate the same domain concept inconsistently across the UI.
-* Do not infer Japanese UI terminology from Chinese developer conversation.
-* Do not infer Chinese UI terminology from English source code identifiers.
+- Do not create Chinese-influenced Japanese.
+- Do not reproduce Chinese sentence structures unnaturally in Japanese.
+- Do not insert implementation-oriented English directly into otherwise natural Chinese conversation without a reason.
+- Do not translate the same domain concept inconsistently across the UI.
+- Do not infer Japanese UI terminology from Chinese developer conversation.
+- Do not infer Chinese UI terminology from English source code identifiers.
 
 User-facing UI copy should prioritize:
 

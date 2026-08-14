@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 37d8a976
+digest: 5198d008
 ---
 
 # shadcn/ui
@@ -69,4 +69,4 @@ digest: 37d8a976
 ## 連携
 
 - [Tailwind CSS](tailwindcss.md) — requires: shadcn/ui は Tailwind ベースのアプリケーション用のコンポーネントシステムで、Tailwind が必要である。
-- [フロントエンドフレームワーク: Vite vs Next.js](frontend-framework.md) — works-with: プロジェクトが Vite と Next.js のどちらであっても、shadcn/ui は適用できる。
+- [フロントエンドフレームワーク：Vite vs Next.js](frontend-framework.md) — works-with: プロジェクトが Vite と Next.js のどちらであっても、shadcn/ui は適用できる。

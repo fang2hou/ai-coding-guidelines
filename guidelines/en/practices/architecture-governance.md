@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 6614cd2d
+digest: 02a04159
 ---
 
 # Architecture Governance
@@ -17,14 +17,14 @@ Use `ARCHITECTURE.md` for current architectural boundaries and invariants.
 
 Examples include:
 
-* Which layer owns domain logic
-* Which modules may call external APIs
-* Authentication boundaries
-* State-management boundaries
-* Databricks access boundaries
-* Frontend/backend responsibilities
-* Dependency direction
-* Integration boundaries
+- Which layer owns domain logic
+- Which modules may call external APIs
+- Authentication boundaries
+- State-management boundaries
+- Databricks access boundaries
+- Frontend/backend responsibilities
+- Dependency direction
+- Integration boundaries
 
 Keep this document concise.
 
@@ -42,11 +42,11 @@ Each important architectural decision should be stored separately using a consis
 
 An ADR should explain:
 
-* Context
-* Decision
-* Alternatives considered
-* Reasoning
-* Consequences
+- Context
+- Decision
+- Alternatives considered
+- Reasoning
+- Consequences
 
 Use the shared [ADR template](../../../templates/adr.template.md) for this structure.
 

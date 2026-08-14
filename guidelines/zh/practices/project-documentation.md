@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 51facf73
+digest: 83e66a80
 ---
 
 # 必备项目文档
@@ -17,64 +17,64 @@ digest: 51facf73
 
 README 同时面向人类开发者与 AI Agent。
 
-它应包含理解和使用项目所需的信息,包括:
+它应包含理解和使用项目所需的信息，包括：
 
-* 项目概览
-* 项目目的
-* 环境搭建说明
-* 基本用法
-* 重要的架构或工作流参考
-* 相关的环境要求
+- 项目概览
+- 项目目的
+- 环境搭建说明
+- 基本用法
+- 重要的架构或工作流参考
+- 相关的环境要求
 
 随项目演进保持更新。
 
-项目已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))也应记录在合适且显眼的项目文档中,首选 README 或 DEVELOPMENT 文档。
+项目已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))也应记录在合适且显眼的项目文档中，首选 README 或 DEVELOPMENT 文档。
 
-模板:[README.template.md](../../../templates/README.template.md)
+模板：[README.template.md](../../../templates/README.template.md)
 
 ## DEVELOPMENT.md
 
 每个项目必须包含 `DEVELOPMENT.md`。
 
-它应描述:
+它应描述：
 
-* 开发工作流
-* 工具链
-* 常用 mise 任务
-* 编码标准
-* 测试工作流
-* 本地环境搭建
-* 校验工作流
-* 部署工作流(如适用)
+- 开发工作流
+- 工具链
+- 常用 mise 任务
+- 编码标准
+- 测试工作流
+- 本地环境搭建
+- 校验工作流
+- 部署工作流(如适用)
 
 它应让人类和 AI Agent 都能据此理解开发如何进行。
 
-模板:[DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
+模板：[DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 
 ## CONTRIBUTING.md
 
 每个项目必须包含 `CONTRIBUTING.md`。
 
-它应记录:
+它应记录：
 
-* 贡献要求
-* issue 工作流(如适用)
-* pull request 工作流
-* 评审要求
-* 必须执行的校验
-* 提交规范
+- 贡献要求
+- issue 工作流(如适用)
+- pull request 工作流
+- 评审要求
+- 必须执行的校验
+- 提交规范
 
-对于 AI 生成或 AI 辅助的 pull request,描述中应明确包含:
+对于 AI 生成或 AI 辅助的 pull request，描述中应明确包含：
 
-* 变更目的
-* 变更影响
-* 相关背景或上下文
-* 潜在风险或顾虑
-* 已执行的测试或校验
+- 变更目的
+- 变更影响
+- 相关背景或上下文
+- 潜在风险或顾虑
+- 已执行的测试或校验
 
 GitHub 的 pull request 模板必须与这些要求保持同步。
 
-模板:[CONTRIBUTING.template.md](../../../templates/CONTRIBUTING.template.md)
+模板：[CONTRIBUTING.template.md](../../../templates/CONTRIBUTING.template.md)
 
 ## ARCHITECTURE.md
 
@@ -88,4 +88,4 @@ GitHub 的 pull request 模板必须与这些要求保持同步。
 
 不变量与 ADR 实践见[架构治理](architecture-governance.md)。
 
-模板:[ARCHITECTURE.template.md](../../../templates/ARCHITECTURE.template.md)
+模板：[ARCHITECTURE.template.md](../../../templates/ARCHITECTURE.template.md)

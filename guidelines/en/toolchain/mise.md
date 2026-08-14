@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 5f26ccc0
+digest: 49719d43
 ---
 
 # mise
@@ -15,23 +15,23 @@ digest: 5f26ccc0
 
 It is the project-level source of truth for:
 
-* Runtime versions
-* CLI tool versions
-* Development tools
-* Environment configuration
-* Common project tasks
-* Toolchain setup used by CI
+- Runtime versions
+- CLI tool versions
+- Development tools
+- Environment configuration
+- Common project tasks
+- Toolchain setup used by CI
 
 Examples of tools managed through mise include:
 
-* Node.js
-* pnpm
-* Python
-* uv
-* Databricks CLI
-* Cocogitto
-* prek
-* Other project CLI tools
+- Node.js
+- pnpm
+- Python
+- uv
+- Databricks CLI
+- Cocogitto
+- prek
+- Other project CLI tools
 
 Do not introduce a separate general-purpose tool manager when mise can manage the requirement.
 

@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 1fce9598
+digest: b2e95167
 ---
 
 # Required Project Documentation
@@ -19,12 +19,12 @@ The README is written for both human developers and AI agents.
 
 It should contain the information necessary to understand and use the project, including:
 
-* Project overview
-* Purpose
-* Setup instructions
-* Basic usage
-* Important architecture or workflow references
-* Relevant environment requirements
+- Project overview
+- Purpose
+- Setup instructions
+- Basic usage
+- Important architecture or workflow references
+- Relevant environment requirements
 
 Keep it current as the project evolves.
 
@@ -38,14 +38,14 @@ Every project must include `DEVELOPMENT.md`.
 
 It should describe:
 
-* Development workflow
-* Toolchain
-* Common mise tasks
-* Coding standards
-* Testing workflow
-* Local setup
-* Validation workflow
-* Deployment workflow when relevant
+- Development workflow
+- Toolchain
+- Common mise tasks
+- Coding standards
+- Testing workflow
+- Local setup
+- Validation workflow
+- Deployment workflow when relevant
 
 It should make it possible for both humans and AI agents to understand how development should be performed.
 
@@ -57,20 +57,20 @@ Every project must include `CONTRIBUTING.md`.
 
 It should document:
 
-* Contribution expectations
-* Issue workflow when relevant
-* Pull request workflow
-* Review expectations
-* Required validation
-* Commit conventions
+- Contribution expectations
+- Issue workflow when relevant
+- Pull request workflow
+- Review expectations
+- Required validation
+- Commit conventions
 
 For AI-generated or AI-assisted pull requests, the pull request description should clearly include:
 
-* Purpose of the change
-* Impact of the change
-* Relevant context or background
-* Potential risks or concerns
-* Testing or validation performed
+- Purpose of the change
+- Impact of the change
+- Relevant context or background
+- Potential risks or concerns
+- Testing or validation performed
 
 The GitHub pull request template must stay synchronized with these requirements.
 

@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: e19446ea
+digest: 0ed82a81
 ---
 
 # GitHub Actions
@@ -44,5 +44,5 @@ mise は CI が呼び出すエントリーポイントであり、ツールの�
 
 ## 関連
 
-* [Quality Gates](../toolchain/quality-gates.md) — 同じプロジェクト設定で同等のローカルチェックを実行する。
-* [Git Workflow](../toolchain/git.md) — CI における Conventional Commits 検証。squash merge 時のプルリクエストタイトルの規則を含む。
+- [Quality Gates](../toolchain/quality-gates.md) — 同じプロジェクト設定で同等のローカルチェックを実行する。
+- [Git Workflow](../toolchain/git.md) — CI における Conventional Commits 検証。squash merge 時のプルリクエストタイトルの規則を含む。

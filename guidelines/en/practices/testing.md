@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 45fc8001
+digest: 7870e427
 ---
 
 # Testing Strategy
@@ -17,13 +17,13 @@ Before adding a test, understand which failure mode the test is intended to dete
 
 Prioritize:
 
-* Core business logic
-* Important user behavior
-* Known failure-prone paths
-* Boundary conditions
-* Error handling
-* Exceptional conditions
-* Integration boundaries
+- Core business logic
+- Important user behavior
+- Known failure-prone paths
+- Boundary conditions
+- Error handling
+- Exceptional conditions
+- Integration boundaries
 
 Coverage metrics may provide information, but coverage percentage is not the objective.
 
@@ -35,9 +35,9 @@ Frontend projects should include E2E tests whenever reasonably practical.
 
 E2E tests should focus on:
 
-* Main user flows
-* Critical product behavior
-* Important integration behavior
+- Main user flows
+- Critical product behavior
+- Important integration behavior
 
 Prefer realistic test data.
 
@@ -57,12 +57,12 @@ Use realistic sanitized data where it improves test quality.
 
 Prioritize:
 
-* Important component behavior
-* Business logic
-* State transitions
-* Data transformations
-* Edge cases
-* Error conditions
+- Important component behavior
+- Business logic
+- State transitions
+- Data transformations
+- Edge cases
+- Error conditions
 
 Keep unit tests fast.
 

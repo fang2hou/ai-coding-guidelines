@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: draft
-digest: a46b7a95
+digest: ac3b5816
 ---
 
 # Rust ツールチェーン
@@ -17,10 +17,10 @@ Rust はデフォルトの選択肢ではない。
 
 次の要件が本当に必要な場合にのみ Rust を選ぶ。
 
-* メモリ安全性を保ちながらの最大性能
-* システムコンポーネント
-* 他言語から呼び出すネイティブ拡張
-* WebAssembly ターゲット
+- メモリ安全性を保ちながらの最大性能
+- システムコンポーネント
+- 他言語から呼び出すネイティブ拡張
+- WebAssembly ターゲット
 
 Rust の採用には明確な理由とユーザーの承認が必要であり、プロジェクトの ADR に記録する。
 
@@ -88,7 +88,7 @@ CI では `cargo test` を実行する。
 
 ## 連携
 
-* [mise](../toolchain/mise.md) — バージョン管理: Rust ツールチェーンと関連ツールを mise で管理し、mise タスクとして公開する。
-* [品質ゲート](../toolchain/quality-gates.md) — 同じチェック: prek と CI が同じリント・フォーマット設定を実行する。
-* [Git ワークフロー](../toolchain/git.md) — コミット規律: Rust の変更も標準のコミットおよび PR ルールに従う。
-* [テスト戦略](../practices/testing.md) — テストの焦点: 何をどのレベルで検証するか。
+- [mise](../toolchain/mise.md) — バージョン管理：Rust ツールチェーンと関連ツールを mise で管理し、mise タスクとして公開する。
+- [品質ゲート](../toolchain/quality-gates.md) — 同じチェック：prek と CI が同じリント・フォーマット設定を実行する。
+- [Git ワークフロー](../toolchain/git.md) — コミット規律：Rust の変更も標準のコミットおよび PR ルールに従う。
+- [テスト戦略](../practices/testing.md) — テストの焦点：何をどのレベルで検証するか。

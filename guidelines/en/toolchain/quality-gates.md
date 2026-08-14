@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 72d28c5d
+digest: 89011393
 ---
 
 # Quality Gates
@@ -17,8 +17,8 @@ Do not introduce another pre-commit framework unless the user explicitly approve
 
 ### Rejected Alternatives
 
-* pre-commit
-* Lefthook
+- pre-commit
+- Lefthook
 
 ## Default Check Set
 
@@ -26,12 +26,12 @@ The repository's prek configuration should include the relevant fast checks for 
 
 By default, this should include:
 
-* Linting
-* Formatting checks
-* Language-specific static checks
-* Security-related checks
-* Dependency checks where appropriate
-* Secret scanning
+- Linting
+- Formatting checks
+- Language-specific static checks
+- Security-related checks
+- Dependency checks where appropriate
+- Secret scanning
 
 ## Keep Checks Fast
 

@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 70578ef0
+digest: 3d1e426d
 ---
 
 # Git Workflow
@@ -73,8 +73,8 @@ If the repository uses squash merging and the resulting commit message is based 
 
 The goal is to keep both:
 
-* Pull request validation
-* Final repository history
+- Pull request validation
+- Final repository history
 
 consistent.
 

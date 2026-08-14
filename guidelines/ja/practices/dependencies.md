@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 6fe46845
+digest: 45675de4
 ---
 
 # 依存関係の規律
@@ -27,10 +27,10 @@ digest: 6fe46845
 
 互換性は、必須ツールチェーンを基準に評価すること。
 
-* [TypeScript ツールチェーン](../toolchain/typescript.md) — pnpm、oxlint、oxfmt
-* [Python ツールチェーン](../toolchain/python.md) — uv、ruff
-* [品質ゲート](../toolchain/quality-gates.md) — prek
-* [Git ワークフロー](../toolchain/git.md) — Conventional Commits 用の Cocogitto
+- [TypeScript ツールチェーン](../toolchain/typescript.md) — pnpm、oxlint、oxfmt
+- [Python ツールチェーン](../toolchain/python.md) — uv、ruff
+- [品質ゲート](../toolchain/quality-gates.md) — prek
+- [Git ワークフロー](../toolchain/git.md) — Conventional Commits 用の Cocogitto
 
 推奨ライブラリの選定については、[フロントエンドフレームワーク](../libraries/frontend-framework.md)と[Python API スタック](../libraries/python-api-stack.md)を参照のこと。
 

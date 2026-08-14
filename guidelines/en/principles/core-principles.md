@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 1ae651c8
+digest: 2e75e0ac
 ---
 
 # Core Engineering Principles
@@ -15,13 +15,13 @@ This guideline defines the engineering standards for AI-assisted rapid idea vali
 
 The goal is to move quickly while keeping projects:
 
-* Simple
-* Consistent
-* Reproducible
-* Easy to understand
-* Easy for both humans and AI agents to maintain
-* Resistant to accidental architectural drift
-* Consistent across repositories
+- Simple
+- Consistent
+- Reproducible
+- Easy to understand
+- Easy for both humans and AI agents to maintain
+- Resistant to accidental architectural drift
+- Consistent across repositories
 
 The central principle is:
 
@@ -39,14 +39,14 @@ These projects are primarily intended for rapid idea validation.
 
 Do not introduce unnecessary:
 
-* Abstractions
-* Layers
-* Frameworks
-* Services
-* Infrastructure
-* Documentation
-* Processes
-* Generic extensibility
+- Abstractions
+- Layers
+- Frameworks
+- Services
+- Infrastructure
+- Documentation
+- Processes
+- Generic extensibility
 
 Prefer the simplest coherent implementation that solves the current problem correctly.
 
@@ -62,11 +62,11 @@ When this guideline specifies a tool, the tool is mandatory unless the user expl
 
 Do not replace a standardized tool merely because:
 
-* Another tool is more popular
-* A framework recommends another tool
-* A generated template uses another tool
-* An AI agent is more familiar with another tool
-* Another project on the internet uses something different
+- Another tool is more popular
+- A framework recommends another tool
+- A generated template uses another tool
+- An AI agent is more familiar with another tool
+- Another project on the internet uses something different
 
 If a genuine technical incompatibility exists, explain it to the user before changing the standardized toolchain.
 
@@ -83,11 +83,11 @@ When a warning, lint error, test failure, type error, or other validation proble
 
 Do not:
 
-* Blindly change code until the warning disappears
-* Disable rules simply to make CI green
-* Add ignore comments without understanding the issue
-* Weaken tests to make them pass
-* Hide failures instead of resolving them
+- Blindly change code until the warning disappears
+- Disable rules simply to make CI green
+- Add ignore comments without understanding the issue
+- Weaken tests to make them pass
+- Hide failures instead of resolving them
 
 If a rule is genuinely inappropriate for the project, changing its configuration is allowed, but the change must be intentional and technically justified.
 

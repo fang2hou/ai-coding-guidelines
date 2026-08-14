@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: ebfebe63
+digest: fbf4812b
 ---
 
 # Agent Operating Protocol
@@ -44,14 +44,14 @@ Persistent agents should periodically return to the current project guideline du
 
 In particular, re-read relevant sections:
 
-* At the beginning of substantial project work
-* Before architectural changes
-* Before adding or replacing dependencies
-* Before modifying CI/CD
-* Before changing toolchain configuration
-* Before changing UI language behavior
-* When existing project conventions are unclear
-* When remembered information conflicts with the repository
+- At the beginning of substantial project work
+- Before architectural changes
+- Before adding or replacing dependencies
+- Before modifying CI/CD
+- Before changing toolchain configuration
+- Before changing UI language behavior
+- When existing project conventions are unclear
+- When remembered information conflicts with the repository
 
 Do not rely on a remembered summary when the repository contains the current rule.
 

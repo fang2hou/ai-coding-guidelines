@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 51a6f784
+digest: f936786a
 ---
 
 # Vercel AI SDK
@@ -15,14 +15,14 @@ digest: 51a6f784
 
 ## 使用する場面
 
-- 実際の Next.js 実装が SDK の機能を活かせる場合。
+- Next.js 実装が SDK の機能を実際に使っている場合。
 - 実装する機能が、SDK が具体的に提供する機能(AI レスポンスのストリーミング処理など)と直接対応する場合。
 
 ## 避けるべき場面
 
 - アプリケーションが単に LLM 機能を含むだけの場合 — それだけでは依存関係を追加する理由にならない。
 - AI 関連プロジェクトすべてに SDK を自動的に追加すること。
-- SDK の機能を活かせる Next.js 実装が、プロジェクトに存在しない場合。
+- SDK を使う Next.js 実装がプロジェクトに存在しない場合。
 
 ## 長所
 
@@ -44,8 +44,7 @@ digest: 51a6f784
 - Vercel AI SDK は、Next.js プロジェクトに実際の価値をもたらす場合にのみ使う。
 - AI 関連プロジェクトすべてに自動的に追加してはならない。
 - アプリケーションが LLM 機能を含むという理由だけで導入してはならない。
-- 実際の Next.js 実装が SDK の機能を活かせる場合に使う。
 
 ## 連携
 
-- [フロントエンドフレームワーク: Vite vs Next.js](frontend-framework.md) — pairs-with: Next.js のみ。SDK を採用するのは、Next.js 実装に実際の価値がある場合だけである。
+- [フロントエンドフレームワーク：Vite vs Next.js](frontend-framework.md) — pairs-with: Next.js のみ。SDK を採用するのは、Next.js 実装に実際の価値がある場合だけである。

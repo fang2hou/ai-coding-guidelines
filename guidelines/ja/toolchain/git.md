@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 17f67476
+digest: ee8ce0ae
 ---
 
 # Git ワークフロー
@@ -28,7 +28,7 @@ chore
 
 明確さが増す場合はスコープを使う。
 
-例:
+例：
 
 ```text
 feat(chat): add streaming response rendering
@@ -71,8 +71,8 @@ GitHub Actions には、Conventional Commits の検証チェックを含めな�
 
 目標は、次の両方を一貫させることである。
 
-* プルリクエストの検証
-* 最終的なリポジトリの履歴
+- プルリクエストの検証
+- 最終的なリポジトリの履歴
 
 CI ワークフローの標準については [GitHub Actions](../toolchain/github-actions.md) を参照。
 

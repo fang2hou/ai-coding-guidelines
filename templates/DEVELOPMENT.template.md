@@ -6,11 +6,11 @@ How development is performed in this repository, for both humans and AI agents.
 
 All tools are managed by mise. Run `mise install` after checkout.
 
-| Tool | Purpose | Managed via |
-| --- | --- | --- |
-| `<node>` | Runtime | `mise.toml` |
-| `<pnpm>` | Package manager | `mise.toml` |
-| `<oxlint>` | Linter | `mise.toml` |
+| Tool       | Purpose         | Managed via |
+| ---------- | --------------- | ----------- |
+| `<node>`   | Runtime         | `mise.toml` |
+| `<pnpm>`   | Package manager | `mise.toml` |
+| `<oxlint>` | Linter          | `mise.toml` |
 
 Do not substitute tools without explicit approval (see the guideline repository's toolchain standards).
 
