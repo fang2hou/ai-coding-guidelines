@@ -81,7 +81,8 @@ repository documentation goes to `docs/` in English. See
 2. Edit the file in your working language; if it would exceed 300 lines,
    split it first.
 3. Bump `version` in all three language files; set `source-lang` to the
-   language you edited.
+   language you edited. Exception: a translation-quality-only polish (no
+   semantic change) keeps `version` and `source-lang` as they are.
 4. Rewrite the other two languages natively (Translation rules below),
    keeping heading structure isomorphic.
 5. Run `mise run fix`, then `mise run check` — it must pass before commit.
@@ -116,7 +117,8 @@ Worked example — tighten a rule in `toolchain/typescript`:
   (常体 / である調).
 - Terminology must match `GLOSSARY.md`; add missing recurring terms to the
   glossary in the same change. Product names and industry terms stay in
-  English.
+  English. The glossary's "Forbidden renderings" table is machine-enforced
+  by the validator; when you fix a recurring mistranslation, add it there.
 - Code blocks, commands, identifiers: verbatim. Translate only `lang` in
   front matter; `digest` is recomputed by `mise run fix`.
 - Follow the cross-language quality clauses in

@@ -1,9 +1,9 @@
 # Glossary
 
 Canonical terminology across the three language trees. Translations of
-`docs/**` must use these equivalents. Product names (mise, pnpm, oxlint,
+`guidelines/**` must use these equivalents. Product names (mise, pnpm, oxlint,
 oxfmt, uv, ruff, prek, Cocogitto, Vite, Next.js, Tailwind CSS, shadcn/ui,
-FastAPI, Pydantic, Uvicorn, Databricks, GitHub Actions, ...) and
+FastAPI, Pydantic, Uvicorn, Databricks, GitHub Actions, Go, Rust, ...) and
 industry-standard terms (Conventional Commits, monorepo, ...) stay in
 English in all languages.
 
@@ -29,7 +29,7 @@ to this table in the same change.
 | root cause | 根本原因 | 根本原因 |
 | code review | 代码评审 | コードレビュー |
 | pull request | pull request | プルリクエスト |
-| AI agent | AI agent | AI agent |
+| AI agent | AI Agent | AI エージェント |
 | quality gates | 质量门禁 | 品質ゲート |
 | invariant | 不变量 | 不変条件 |
 | coverage | 覆盖率 | カバレッジ |
@@ -44,3 +44,20 @@ to this table in the same change.
 | secret scanning | 凭据扫描 | シークレットスキャニング |
 | design token | 设计令牌 | デザイントークン |
 | tradeoff | 权衡 | トレードオフ |
+| workload | 工作负载 | ワークロード |
+| discriminated union | 可辨识联合 | 判別可能なユニオン |
+| barrel file | 桶文件 | バレルファイル |
+
+## Forbidden renderings
+
+Machine-enforced by `tools/check-docs.ts`: these strings must not appear in
+the body of any document in the corresponding language tree. When you fix a
+recurring mistranslation, add a row here so it cannot come back.
+
+| English term | Lang | Forbidden | Use instead |
+| --- | --- | --- | --- |
+| workflow | zh | 工作流程 | 工作流 |
+| pull request | zh | 拉取请求 | pull request |
+| secret scanning | zh | 秘密扫描 | 凭据扫描 |
+| quality gate | zh | 质量门槛 | 质量门禁 |
+| pull request | ja | プル要求 | プルリクエスト |

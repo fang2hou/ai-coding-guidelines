@@ -166,6 +166,73 @@ function checkLinksOf(fileRel: string, text: string, root: string, errors: strin
   }
 }
 
+interface TermRule {
+  term: string;
+  lang: Lang;
+  forbidden: string;
+  instead: string;
+}
+
+// Parses the "## Forbidden renderings" table in GLOSSARY.md. Missing file or
+// section means no rules; a data row with an unknown lang is an error.
+function parseTermRules(root: string, errors: string[]): TermRule[] {
+  const path = join(root, "GLOSSARY.md");
+  if (!existsSync(path)) return [];
+  const lines = readFileSync(path, "utf8").split("\n");
+  const start = lines.findIndex((l) => /^##\s+Forbidden renderings\s*$/.test(l.trimEnd()));
+  if (start === -1) return [];
+  const rules: TermRule[] = [];
+  for (let i = start + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (/^##\s/.test(line)) break;
+    if (!line.startsWith("|")) continue;
+    const cells = line
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((c) => c.trim());
+    if (cells.length < 4) continue;
+    if (cells[1] === "Lang" || /^:?-{3,}:?$/.test(cells[1])) continue;
+    if (!LANGS.includes(cells[1] as Lang)) {
+      errors.push(`ERROR GLOSSARY.md: forbidden-renderings row has unknown lang '${cells[1]}'`);
+      continue;
+    }
+    if (cells[2] === "") continue;
+    rules.push({ term: cells[0], lang: cells[1] as Lang, forbidden: cells[2], instead: cells[3] });
+  }
+  return rules;
+}
+
+// Flags forbidden renderings in document bodies, skipping front matter and
+// fenced code blocks.
+function checkTermsOf(doc: Doc, rules: TermRule[], errors: string[]): void {
+  const langRules = rules.filter((r) => r.lang === doc.lang);
+  if (langRules.length === 0) return;
+  let close = 0;
+  for (let i = 1; i < doc.rawLines.length; i++) {
+    if (doc.rawLines[i].trimEnd() === "---") {
+      close = i;
+      break;
+    }
+  }
+  let inFence = false;
+  for (let i = close + 1; i < doc.rawLines.length; i++) {
+    const line = doc.rawLines[i];
+    if (/^ {0,3}(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    for (const rule of langRules) {
+      if (line.includes(rule.forbidden)) {
+        errors.push(
+          `ERROR ${doc.relPath}:${i + 1}: forbidden rendering '${rule.forbidden}' for '${rule.term}'; use '${rule.instead}'`,
+        );
+      }
+    }
+  }
+}
+
 function run(root: string, fix: boolean): number {
   const errors: string[] = [];
   const docsByLang = new Map<Lang, Doc[]>();
@@ -283,6 +350,16 @@ function run(root: string, fix: boolean): number {
   for (const lang of LANGS) {
     for (const doc of docsByLang.get(lang) ?? []) {
       checkLinksOf(doc.relPath, doc.raw, root, errors);
+    }
+  }
+
+  // Terminology: forbidden renderings from GLOSSARY.md
+  const termRules = parseTermRules(root, errors);
+  if (termRules.length > 0) {
+    for (const lang of LANGS) {
+      for (const doc of docsByLang.get(lang) ?? []) {
+        checkTermsOf(doc, termRules, errors);
+      }
     }
   }
 

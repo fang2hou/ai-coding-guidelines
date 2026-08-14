@@ -165,3 +165,37 @@ test("portal broken link fails link resolution", () => {
     assert.match(out.stdout, /broken link 'guidelines\/en\/nope\.md'/);
   });
 });
+
+const GLOSSARY_WITH_RULE = [
+  "# Glossary",
+  "",
+  "## Forbidden renderings",
+  "",
+  "| English term | Lang | Forbidden | Use instead |",
+  "| --- | --- | --- | --- |",
+  "| workflow | zh | 工作流程 | 工作流 |",
+  "",
+].join("\n");
+
+test("forbidden rendering in a language tree fails term lint", () => {
+  withRepo((root) => {
+    writeFileSync(join(root, "GLOSSARY.md"), GLOSSARY_WITH_RULE);
+    const file = join(root, "guidelines/zh/foo.md");
+    writeFileSync(file, `${readFileSync(file, "utf8")}遵循既定工作流程。\n`);
+    runChecker(root, "--fix"); // repairs the digest; the term error persists
+    const out = runChecker(root);
+    assert.equal(out.status, 1);
+    assert.match(
+      out.stdout,
+      /guidelines\/zh\/foo\.md:\d+: forbidden rendering '工作流程' for 'workflow'; use '工作流'/,
+    );
+  });
+});
+
+test("term rules with no occurrences pass", () => {
+  withRepo((root) => {
+    writeFileSync(join(root, "GLOSSARY.md"), GLOSSARY_WITH_RULE);
+    const out = runChecker(root);
+    assert.equal(out.status, 0, out.stdout);
+  });
+});
