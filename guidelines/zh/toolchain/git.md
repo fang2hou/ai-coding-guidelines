@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: a75ab7b2
+digest: 224a7bec
 ---
 
 # Git 工作流
@@ -26,7 +26,7 @@ ci
 chore
 ```
 
-scope 有助于提升清晰度时使用 scope。
+当 scope 有助于提升清晰度时,使用 scope。
 
 示例:
 
@@ -38,7 +38,7 @@ test(search): cover empty-result behavior
 ci(commit): validate conventional commits
 ```
 
-对于将进入共享仓库历史的提交,避免如下无意义的提交信息:
+对于会进入共享仓库历史的提交,避免如下无意义的提交信息:
 
 ```text
 update
@@ -55,9 +55,9 @@ Cocogitto 是标准的 Conventional Commits 校验工具。
 
 在各项目间统一使用 Cocogitto,不要每个仓库另选一个提交校验器。
 
-在合适的场景,通过标准化项目工具把 Cocogitto 接入本地提交流程。
+在合适的情况下,通过标准化项目工具把 Cocogitto 接入本地提交流程。
 
-Cocogitto 已提供所需校验时,不要再实现自定义的 Conventional Commits 解析器。
+Cocogitto 已提供所需校验时,不要实现自定义的 Conventional Commits 解析器。
 
 ## 在 GitHub Actions 中校验
 
@@ -65,9 +65,9 @@ GitHub Actions 必须包含 Conventional Commits 校验检查。
 
 该校验使用 Cocogitto。
 
-包含非法提交信息的 pull request 应使相应的校验流水线失败。
+包含非法提交信息的 pull request 应让相应的校验流水线失败。
 
-若仓库采用 squash merge、且最终提交信息以 pull request 标题为准,则 pull request 标题必须遵循同样的 Conventional Commits 约定。
+若仓库采用 squash merge,且最终提交信息以 pull request 标题为准,则 pull request 标题必须遵循同样的 Conventional Commits 约定。
 
 目标是让两者保持一致:
 
@@ -84,4 +84,4 @@ CI 工作流标准见 [GitHub Actions](../toolchain/github-actions.md)。
 
 不要仅为图省事而改写共享历史。
 
-AI agent 不得随意执行破坏性 Git 操作。
+AI Agent 不得随意执行破坏性 Git 操作。

@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 90ad50b7
+digest: 1ae651c8
 ---
 
 # Core Engineering Principles
@@ -95,7 +95,7 @@ If a rule is genuinely inappropriate for the project, changing its configuration
 
 The purpose of this guideline is not to maximize process.
 
-It is to create a predictable engineering environment in which both humans and AI agents can move quickly without repeatedly solving the same tooling and workflow decisions.
+It is to create a predictable engineering environment in which both humans and AI agents can move quickly without re-making the same tooling and workflow decisions.
 
 When a choice does not materially depend on the product:
 

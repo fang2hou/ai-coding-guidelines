@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 0f724aa2
+digest: 72d28c5d
 ---
 
 # Quality Gates
@@ -57,4 +57,4 @@ For example:
 mise run check
 ```
 
-should provide a predictable entry point for the project's main validation workflow.
+The task above is the predictable entry point for the project's main validation workflow.

@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: a9ac8937
+digest: 1d8e4afb
 ---
 
 # 变更纪律
@@ -14,7 +14,7 @@ digest: a9ac8937
 * 确认所要求的行为已真正实现。
 * 运行相关的格式检查。
 * 运行 Lint 检查。
-* 在适用之处运行类型检查。
+* 在适用时运行类型检查。
 * 运行相关测试。
 * 运行相应的 [prek 检查](../toolchain/quality-gates.md)。
 * 处理提交时,校验 [Conventional Commits](../toolchain/git.md)。
@@ -29,6 +29,6 @@ digest: a9ac8937
 
 CI 通过是必要条件,但它本身并不能证明实现正确。
 
-不要把绿色流水线当作检查 diff、判断变更是否正确的替代品。
+不要把流水线的绿色通过当作检查 diff、判断变更是否正确的替代品。
 
 除[操作协议](agent-protocol.md)外,任何非平凡变更在交付评审之前,都要执行这份清单。

@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 90b89060
+digest: 540c3f66
 ---
 
 # GitHub Actions
@@ -27,7 +27,7 @@ GitHub Actions 是标准 CI/CD 平台。
 
 ## CI 分层
 
-只要实际可行,CI 应使用与本地开发相同的标准化项目工具。
+在可行的情况下,CI 应使用与本地开发相同的标准化项目工具。
 
 优先采用:
 

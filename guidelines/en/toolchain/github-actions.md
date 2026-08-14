@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 317d2f59
+digest: 26d78c0e
 ---
 
 # GitHub Actions
@@ -40,7 +40,7 @@ GitHub Actions
 
 rather than duplicating project logic directly inside workflow YAML.
 
-mise is the entry point CI invokes rather than duplicating tool setup in workflow YAML; see [mise](../toolchain/mise.md).
+mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML. See [mise](../toolchain/mise.md).
 
 ## Related
 

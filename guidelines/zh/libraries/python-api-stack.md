@@ -4,14 +4,14 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 3b236856
+digest: deec4798
 ---
 
 # Python API 技术栈
 
 ## 结论
 
-优先采用——FastAPI + Pydantic + Uvicorn 是首选的 Python API 基线;三者作为一个整体技术栈采用,而非分别挑选。
+优先采用——FastAPI + Pydantic + Uvicorn 是首选的 Python API 基线;三者作为一个整体技术栈一起采用,而不是分别挑选。
 
 ## 适用场景
 
@@ -43,8 +43,8 @@ digest: 3b236856
 ## 使用规则
 
 - 使用 FastAPI 作为 Python API 框架。
-- 在合适的场景使用 Pydantic 完成 Python 数据校验与结构化建模。
-- FastAPI 应用默认以 Uvicorn 作为标准 ASGI 服务器,除非部署平台提供了合适的托管替代方案。
+- 在合适的情况下使用 Pydantic 完成 Python 数据校验与结构化建模。
+- FastAPI 应用默认以 Uvicorn 作为 ASGI 服务器,除非部署平台提供了合适的托管替代方案。
 
 ## 联动
 

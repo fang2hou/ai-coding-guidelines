@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: f64a6d5f
+digest: 57055840
 ---
 
 # Vercel AI SDK
@@ -15,14 +15,14 @@ digest: f64a6d5f
 
 ## 适用场景
 
-- 实际的 Next.js 实现能受益于该 SDK 的能力。
+- 项目中实际的 Next.js 实现能从该 SDK 的能力中受益。
 - 功能与 SDK 具体提供的能力直接对应,例如流式 AI 响应处理。
 
 ## 不适用场景
 
 - 应用只是包含某个 LLM 功能——这本身永远不构成引入该依赖的正当理由。
 - 向所有 AI 相关项目自动添加该 SDK。
-- 项目中没有能因该 SDK 受益的 Next.js 实现。
+- 项目中没有能从该 SDK 受益的 Next.js 实现。
 
 ## 优势
 
@@ -44,8 +44,8 @@ digest: f64a6d5f
 - 仅当 Vercel AI SDK 能为 Next.js 项目带来实际价值时才使用。
 - 不要向所有 AI 相关项目自动添加。
 - 不要仅因应用包含 LLM 功能就引入。
-- 实际的 Next.js 实现能受益于其能力时使用。
+- 项目中实际的 Next.js 实现能从其能力中受益时使用。
 
 ## 联动
 
-- [前端框架:Vite 与 Next.js](frontend-framework.md)——搭配:仅限 Next.js;引入该 SDK 的正当性只来自对 Next.js 实现的实际价值。
+- [前端框架:Vite 与 Next.js](frontend-framework.md)——搭配:仅限 Next.js;是否引入该 SDK,只取决于它对 Next.js 实现是否有实际价值。

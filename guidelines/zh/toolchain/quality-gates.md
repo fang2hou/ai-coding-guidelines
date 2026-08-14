@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: f6edba8b
+digest: e153c2da
 ---
 
 # 质量门禁
@@ -35,21 +35,21 @@ digest: f6edba8b
 
 ## 保持检查快速
 
-pre-commit 检查要有意义。
+预提交检查要有意义。
 
 不要为了让钩子配置显得大而全而加入高开销检查。
 
-需要每次提交都运行的检查,必须快到人和 AI agent 都能高频使用。
+需要每次提交都运行的检查,必须足够快,让人和 AI Agent 都能高频使用。
 
 ## 本地 / CI 一致性
 
-对托管在 GitHub 上的仓库,GitHub Actions 应使用同一套项目配置运行等价检查,使本地与 CI 的校验不分叉。
+对托管在 GitHub 上的仓库,GitHub Actions 应使用同一套项目配置运行等价检查,让本地与 CI 的校验不分叉。
 
-CI 分层模型见 [GitHub Actions](../toolchain/github-actions.md),基于任务调用同一套工具见 [mise](../toolchain/mise.md)。
+CI 分层模型见 [GitHub Actions](../toolchain/github-actions.md),通过任务使用同一套工具的方式见 [mise](../toolchain/mise.md)。
 
 ## 校验入口
 
-只要实际可行,就把相关质量工作流通过 mise task 暴露出来。
+在可行的情况下,把相关质量工作流通过 mise task 暴露出来。
 
 例如:
 
@@ -57,4 +57,4 @@ CI 分层模型见 [GitHub Actions](../toolchain/github-actions.md),基于任务
 mise run check
 ```
 
-应为项目的主校验工作流提供稳定可预期的入口。
+上面的任务就是项目主校验工作流的稳定入口。

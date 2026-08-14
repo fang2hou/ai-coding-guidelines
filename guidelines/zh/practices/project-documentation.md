@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 77bdeeda
+digest: 51facf73
 ---
 
 # 必备项目文档
@@ -17,7 +17,7 @@ digest: 77bdeeda
 
 README 同时面向人类开发者与 AI Agent。
 
-它应包含理解与使用项目所需的必要信息,包括:
+它应包含理解和使用项目所需的信息,包括:
 
 * 项目概览
 * 项目目的
@@ -28,7 +28,7 @@ README 同时面向人类开发者与 AI Agent。
 
 随项目演进保持更新。
 
-项目已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))也应记录在合适且清晰可见的项目文档中,首选 README 或 DEVELOPMENT 文档。
+项目已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))也应记录在合适且显眼的项目文档中,首选 README 或 DEVELOPMENT 文档。
 
 模板:[README.template.md](../../../templates/README.template.md)
 
@@ -45,9 +45,9 @@ README 同时面向人类开发者与 AI Agent。
 * 测试工作流
 * 本地环境搭建
 * 校验工作流
-* 相关时的部署工作流
+* 部署工作流(如适用)
 
-它应让人类和 AI Agent 都能据此理解开发应当如何进行。
+它应让人类和 AI Agent 都能据此理解开发如何进行。
 
 模板:[DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 
@@ -58,13 +58,13 @@ README 同时面向人类开发者与 AI Agent。
 它应记录:
 
 * 贡献要求
-* 相关时的 issue 工作流
-* Pull request 工作流
+* issue 工作流(如适用)
+* pull request 工作流
 * 评审要求
 * 必须执行的校验
 * 提交规范
 
-对于 AI 生成或 AI 辅助的 pull request,描述中应清楚包含:
+对于 AI 生成或 AI 辅助的 pull request,描述中应明确包含:
 
 * 变更目的
 * 变更影响

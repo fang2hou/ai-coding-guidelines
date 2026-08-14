@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 570c883a
+digest: abd80b71
 ---
 
 # エージェント運用プロトコル
@@ -19,12 +19,12 @@ digest: 570c883a
 4. アーキテクチャの不変条件と関連する ADR を確認する([アーキテクチャガバナンス](../practices/architecture-governance.md))。
 5. 既存のツールチェーンとプロジェクトの規約を確認する。
 6. 既存の依存関係とパターンを優先する。
-7. 要件を解決する、最小の一貫した変更を行う。
+7. 要件を満たす、最小かつ一貫した変更を行う。
 8. 無関係なクリーンアップを避ける。
 9. 関連する検証を実行する。
 10. 結果の diff をレビューする。
-11. 偶然紛れ込んだファイルや無関係な変更がないことを確認する。
-12. 重要なアーキテクチャ・依存関係・セキュリティ・動作面の変更を説明する。
+11. 意図せず紛れ込んだファイルや無関係な変更がないことを確認する。
+12. アーキテクチャ・依存関係・セキュリティ・動作に関する重要な変更を説明する。
 
 エージェント自身が別のスタイルを好むという理由だけで、動作しているコードを書き直さないこと。
 
@@ -38,9 +38,9 @@ digest: 570c883a
 
 メモリはリマインダーであり、信頼できる唯一の情報源ではない。
 
-リポジトリ上のガイドラインとプロジェクトドキュメントは、常に記憶された情報より優先される。
+リポジトリ上のガイドラインとプロジェクトドキュメントは、記憶している情報より常に優先される。
 
-永続的なエージェントは、大きな作業の間、現在のプロジェクトガイドラインへ定期的に立ち返るべきである。
+永続的なエージェントは、大きな作業に取り組んでいる間も、現在のプロジェクトガイドラインに定期的に立ち返るべきである。
 
 特に、次のタイミングで関連する節を読み直すこと。
 
@@ -53,11 +53,11 @@ digest: 570c883a
 * 既存のプロジェクト規約が不明確なとき
 * 記憶とリポジトリの内容が矛盾するとき
 
-リポジトリに現行の規則が存在するのに、記憶された要約に依存しないこと。
+リポジトリに現在の規則があるのに、記憶にある要約に頼らないこと。
 
 ## ハードルール早見表
 
-以下の行為は禁止である。各項目は規則を定義するドキュメントへリンクする。規則を変更したときは、必ずこのリストを同期すること。
+以下の行為は禁止である。各項目は、規則を定義するドキュメントにリンクしている。規則を変更したときは、必ずこのリストも更新すること。
 
 1. ユーザーの明示的な承諾なしに、必須の標準化ツールを置き換える。([エンジニアリング基本原則](../principles/core-principles.md))
 2. pnpm の代わりに npm や yarn を使用する。([TypeScript ツールチェーン](../toolchain/typescript.md))
@@ -66,21 +66,21 @@ digest: 570c883a
 5. uv の代わりに Pipenv や Poetry を使用する。([Python ツールチェーン](../toolchain/python.md))
 6. ruff の代わりに flake8 や black を使用する。([Python ツールチェーン](../toolchain/python.md))
 7. prek の代わりに pre-commit や Lefthook を使用する。([品質ゲート](../toolchain/quality-gates.md))
-8. 理由と承諾なしに、Cocogitto を無関係の Conventional Commits バリデーターで置き換える。([Git ワークフロー](../toolchain/git.md))
+8. 理由と承諾なしに、Cocogitto を無関係の Conventional Commits バリデーターに置き換える。([Git ワークフロー](../toolchain/git.md))
 9. 内容を理解しないまま、lint や検証の問題を無視する。([エンジニアリング基本原則](../principles/core-principles.md))
 10. チェックを通すためだけに、有用なルールを無効化する。([エンジニアリング基本原則](../principles/core-principles.md))
 11. 迅速な検証が求められるプロジェクトを、過剰に設計する。([エンジニアリング基本原則](../principles/core-principles.md))
 12. 不要な依存関係を導入する。([依存関係の規律](../practices/dependencies.md))
 13. 冗長なファイルやモジュールを作成する。([コーディング規約](../practices/coding-standards.md))
 14. ADR を黙って違反する。([アーキテクチャガバナンス](../practices/architecture-governance.md))
-15. うっかりアーキテクチャの不変条件を変更する。([アーキテクチャガバナンス](../practices/architecture-governance.md))
+15. 誤ってアーキテクチャの不変条件を変更する。([アーキテクチャガバナンス](../practices/architecture-governance.md))
 16. ソースコードに、英語以外の識別子やコメントを使用する。([言語ポリシー](../practices/language-policy.md))
 17. ローマ字(romaji)やピンイン(pinyin)をコード識別子として使用する。([言語ポリシー](../practices/language-policy.md))
 18. 会話言語から UI 言語を推測する。([言語ポリシー](../practices/language-policy.md))
-19. 複数言語が絡む UI 作業で、低品質な直訳を生む。([言語ポリシー](../practices/language-policy.md))
+19. 複数言語が絡む UI 作業で、低品質な直訳を作り出す。([言語ポリシー](../practices/language-policy.md))
 20. 不必要に、shadcn/ui コンポーネントの内部を改変する。([shadcn/ui](../libraries/shadcn-ui.md))
-21. 必要だった shadcn/ui コンポーネントの変更を、文書化しないまま放置する。([shadcn/ui](../libraries/shadcn-ui.md))
+21. 必要が生じた shadcn/ui コンポーネントの変更を、文書化しないまま放置する。([shadcn/ui](../libraries/shadcn-ui.md))
 22. 互換性を確認せずに、GitHub Actions を無闇にアップグレードする。([GitHub Actions](../toolchain/github-actions.md))
 23. シークレットや機密情報をコミットする。([セキュリティ](../practices/security.md))
 24. 適切な承諾なしに、共有ヒストリーへ force push する。([Git ワークフロー](../toolchain/git.md))
-25. CI の通過をもって、実装が正しいかの理解の代わりにする。([変更の規律](../practices/change-discipline.md))
+25. 実装の正しさを理解する代わりに、CI が通っているだけで済ませる。([変更の規律](../practices/change-discipline.md))

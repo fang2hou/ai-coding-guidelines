@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 30b70ff2
+digest: 6c81b563
 ---
 
 # Language Policy
@@ -60,22 +60,13 @@ In particular, do not use:
 * Pinyin identifiers
 * Japanese romaji identifiers
 
-Examples of prohibited identifiers include patterns such as:
+Examples of prohibited identifiers and their standard-English replacements:
 
 ```text
-kokyakuName
-shinseiStatus
-kehuName
-yonghuId
-```
-
-Use clear semantic English instead:
-
-```text
-customerName
-applicationStatus
-customerName
-userId
+kokyakuName   -> customerName
+shinseiStatus -> applicationStatus
+kehuName      -> customerName
+yonghuId      -> userId
 ```
 
 Do not transliterate a non-English word into Latin characters merely to satisfy an ASCII requirement.

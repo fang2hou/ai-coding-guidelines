@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 491292c6
+digest: dee97f49
 ---
 
 # Tailwind CSS
@@ -16,7 +16,7 @@ digest: 491292c6
 ## 适用场景
 
 - 默认用于任何前端项目的样式开发。
-- 构建将以 [shadcn/ui](shadcn-ui.md) 作为组件系统的 Tailwind 应用。
+- 构建 Tailwind 应用,且组件系统采用 [shadcn/ui](shadcn-ui.md)。
 
 ## 不适用场景
 
@@ -26,7 +26,7 @@ digest: 491292c6
 ## 优势
 
 - 工具类优先(utility-first)的写法让样式与标记放在一起,避免自定义样式表越积越大。
-- 在 React 生态中被广泛采用,shadcn/ui 对其提供一级支持。
+- 在 React 生态中被广泛采用,shadcn/ui 对其提供一流支持。
 - 主题与设计令牌在每个大版本内集中于一处配置。
 
 ## 代价
@@ -45,7 +45,7 @@ digest: 491292c6
 - 前端项目默认使用 Tailwind CSS 作为 CSS 框架。
 - 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时,以用户要求为准。
 - 遵循所选 Tailwind 版本的约定与配置模型。
-- 不要混用互不兼容的 Tailwind 大版本的模式。
+- 不要混用来自互不兼容大版本的模式。
 
 ## 联动
 

@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: cbf5a10c
+digest: 8a13584d
 ---
 
 # shadcn/ui
@@ -26,7 +26,7 @@ Preferred — shadcn/ui is the preferred component system for Tailwind-based app
 ## Strengths
 
 - Components are copied into the repository as source, keeping them fully inspectable and adjustable.
-- Reduces development cost, maintenance cost, visual inconsistency, upgrade conflicts, and AI-generated component duplication.
+- Reduces development and maintenance cost; avoids visual inconsistency, upgrade conflicts, and AI-generated component duplication.
 - Official variants and configuration mechanisms cover most customization without editing component internals.
 
 ## Tradeoffs

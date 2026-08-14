@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: d051bd10
+digest: fa2987fa
 ---
 
 # 依赖纪律
@@ -13,7 +13,7 @@ digest: d051bd10
 
 添加依赖之前:
 
-1. 检查项目是否已具备合适的功能。
+1. 检查项目是否已具备所需功能。
 2. 检查框架或标准工具链是否已有现成方案。
 3. 确认该依赖解决的是真实需求。
 4. 权衡维护成本。
@@ -34,4 +34,4 @@ digest: d051bd10
 
 认可的库选型见[前端框架](../libraries/frontend-framework.md)与 [Python API 技术栈](../libraries/python-api-stack.md)。
 
-这些规则背后的标准化原则定义于[核心工程原则](../principles/core-principles.md)。
+这些规则背后的标准化原则在[核心工程原则](../principles/core-principles.md)中定义。
