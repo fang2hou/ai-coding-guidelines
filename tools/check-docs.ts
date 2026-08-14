@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import process from "node:process";
 
-// Trilingual docs validator. See docs/en/decisions/0001-guideline-repo-structure.md
+// Trilingual guidelines validator. See docs/adr/0001-guideline-repo-structure.md
 // and AGENTS.md for the model this enforces.
 
 const LANGS = ["en", "zh", "ja"] as const;
@@ -104,7 +104,7 @@ function parseDoc(absPath: string, relPath: string, lang: Lang, errors: string[]
     if (!fm.has(key)) err(`missing front matter key '${key}'`);
   }
 
-  const expectedId = relPath.slice(`docs/${lang}/`.length, -".md".length);
+  const expectedId = relPath.slice(`guidelines/${lang}/`.length, -".md".length);
   if (fm.get("id") !== undefined && fm.get("id") !== expectedId) {
     err(`id '${fm.get("id")}' does not match path-derived id '${expectedId}'`);
   }
@@ -171,7 +171,7 @@ function run(root: string, fix: boolean): number {
   const docsByLang = new Map<Lang, Doc[]>();
 
   for (const lang of LANGS) {
-    const dir = join(root, "docs", lang);
+    const dir = join(root, "guidelines", lang);
     const docs: Doc[] = [];
     for (const relPath of listMarkdown(dir, root)) {
       const doc = parseDoc(join(root, relPath), relPath, lang, errors);
@@ -191,7 +191,7 @@ function run(root: string, fix: boolean): number {
     for (const id of unionIds) {
       if (own.has(id)) continue;
       const others = LANGS.filter((l) => idsByLang.get(l)?.has(id));
-      errors.push(`ERROR docs/${lang}/${id}.md: missing (present in ${others.join(", ")})`);
+      errors.push(`ERROR guidelines/${lang}/${id}.md: missing (present in ${others.join(", ")})`);
     }
   }
 
@@ -227,14 +227,14 @@ function run(root: string, fix: boolean): number {
         if (values.size > 1) {
           const detail = [...trio.values()].map((d) => `${d.lang}=${d.fm.get(key)}`).join(", ");
           errors.push(
-            `ERROR docs/{${langs.join(",")}}/${id}.md: trio '${key}' mismatch (${detail})`,
+            `ERROR guidelines/{${langs.join(",")}}/${id}.md: trio '${key}' mismatch (${detail})`,
           );
         }
       }
       const seqs = new Set([...trio.values()].map((d) => d.headings.join(",")));
       if (seqs.size > 1) {
         errors.push(
-          `ERROR docs/{${langs.join(",")}}/${id}.md: heading level sequences differ across languages`,
+          `ERROR guidelines/{${langs.join(",")}}/${id}.md: heading level sequences differ across languages`,
         );
       }
     }
@@ -273,8 +273,8 @@ function run(root: string, fix: boolean): number {
     const enIds = new Set((docsByLang.get("en") ?? []).map((d) => d.id));
     const linked = new Set(linkTargets(portalText));
     for (const id of enIds) {
-      if (!linked.has(`docs/en/${id}.md`)) {
-        errors.push(`ERROR PORTAL.md: docs/en/${id}.md not linked in portal inventory`);
+      if (!linked.has(`guidelines/en/${id}.md`)) {
+        errors.push(`ERROR PORTAL.md: guidelines/en/${id}.md not linked in portal inventory`);
       }
     }
   }

@@ -42,7 +42,7 @@ function docContent(id: string, lang: string): string {
 }
 
 function writeDoc(root: string, lang: string, id: string): void {
-  const file = join(root, "docs", lang, `${id}.md`);
+  const file = join(root, "guidelines", lang, `${id}.md`);
   mkdirSync(join(file, ".."), { recursive: true });
   writeFileSync(file, docContent(id, lang));
 }
@@ -52,7 +52,7 @@ function makeRepo(): string {
   for (const lang of ["en", "zh", "ja"]) for (const id of IDS) writeDoc(root, lang, id);
   writeFileSync(
     join(root, "PORTAL.md"),
-    "# Portal\n\n- [foo](docs/en/foo.md)\n- [bar](docs/en/sub/bar.md)\n",
+    "# Portal\n\n- [foo](guidelines/en/foo.md)\n- [bar](guidelines/en/sub/bar.md)\n",
   );
   const fixed = runChecker(root, "--fix");
   assert.equal(fixed.status, 0, `bootstrap --fix failed: ${fixed.stdout}`);
@@ -78,16 +78,16 @@ test("valid repo passes", () => {
 
 test("missing file in one language tree fails isomorphism", () => {
   withRepo((root) => {
-    unlinkSync(join(root, "docs/zh/foo.md"));
+    unlinkSync(join(root, "guidelines/zh/foo.md"));
     const out = runChecker(root);
     assert.equal(out.status, 1);
-    assert.match(out.stdout, /ERROR docs\/zh\/foo\.md: missing \(present in en, ja\)/);
+    assert.match(out.stdout, /ERROR guidelines\/zh\/foo\.md: missing \(present in en, ja\)/);
   });
 });
 
 test("trio version mismatch fails", () => {
   withRepo((root) => {
-    const file = join(root, "docs/en/foo.md");
+    const file = join(root, "guidelines/en/foo.md");
     writeFileSync(file, readFileSync(file, "utf8").replace("version: 1", "version: 2"));
     const out = runChecker(root);
     assert.equal(out.status, 1);
@@ -97,7 +97,7 @@ test("trio version mismatch fails", () => {
 
 test("body edit without digest update fails, --fix repairs only the digest line", () => {
   withRepo((root) => {
-    const file = join(root, "docs/en/foo.md");
+    const file = join(root, "guidelines/en/foo.md");
     const before = readFileSync(file, "utf8");
     writeFileSync(file, `${before}Added line.\n`);
     const out = runChecker(root);
@@ -117,7 +117,7 @@ test("body edit without digest update fails, --fix repairs only the digest line"
 
 test("removed heading in one language fails heading parity", () => {
   withRepo((root) => {
-    const file = join(root, "docs/ja/foo.md");
+    const file = join(root, "guidelines/ja/foo.md");
     writeFileSync(file, readFileSync(file, "utf8").replace("## A", ""));
     const out = runChecker(root);
     assert.equal(out.status, 1);
@@ -130,7 +130,7 @@ test("body over 300 lines fails size cap", () => {
     const filler = `${Array.from({ length: 301 }, (_, i) => `line ${i}`).join("\n")}\n`;
     for (const lang of ["en", "zh", "ja"]) {
       writeDoc(root, lang, "foo");
-      const file = join(root, "docs", lang, "foo.md");
+      const file = join(root, "guidelines", lang, "foo.md");
       writeFileSync(file, readFileSync(file, "utf8") + filler);
     }
     runChecker(root, "--fix"); // repairs digests; size errors intentionally persist
@@ -143,19 +143,25 @@ test("body over 300 lines fails size cap", () => {
 test("portal link removal fails coverage", () => {
   withRepo((root) => {
     const file = join(root, "PORTAL.md");
-    writeFileSync(file, readFileSync(file, "utf8").replace("- [bar](docs/en/sub/bar.md)\n", ""));
+    writeFileSync(
+      file,
+      readFileSync(file, "utf8").replace("- [bar](guidelines/en/sub/bar.md)\n", ""),
+    );
     const out = runChecker(root);
     assert.equal(out.status, 1);
-    assert.match(out.stdout, /docs\/en\/sub\/bar\.md not linked in portal/);
+    assert.match(out.stdout, /guidelines\/en\/sub\/bar\.md not linked in portal/);
   });
 });
 
 test("portal broken link fails link resolution", () => {
   withRepo((root) => {
     const file = join(root, "PORTAL.md");
-    writeFileSync(file, readFileSync(file, "utf8").replace("docs/en/foo.md", "docs/en/nope.md"));
+    writeFileSync(
+      file,
+      readFileSync(file, "utf8").replace("guidelines/en/foo.md", "guidelines/en/nope.md"),
+    );
     const out = runChecker(root);
     assert.equal(out.status, 1);
-    assert.match(out.stdout, /broken link 'docs\/en\/nope\.md'/);
+    assert.match(out.stdout, /broken link 'guidelines\/en\/nope\.md'/);
   });
 });

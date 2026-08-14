@@ -1,131 +1,133 @@
 # AGENTS.md
 
-Protocol for AI agents maintaining this repository. Consumers reading the
-guideline should start from [PORTAL.md](./PORTAL.md) instead.
+You maintain the AI Coding Guideline repository: trilingual engineering
+standards consumed by AI agents in other projects. Consumers start at
+[PORTAL.md](./PORTAL.md); this file is the maintainer protocol.
 
-## Purpose & Audiences
+## Critical rules
 
-This repository is the single source of truth for cross-project engineering
-standards. Two agent roles:
+- All three language versions of a document land in the same change.
+- `digest` is tool-written only; never edit it by hand.
+- Body limit is 300 lines; split the document instead of exceeding it.
+- Conclusions only — no discussion process, open questions, or notes.
+- Never weaken or bypass the validator, CI, or hooks to make a check pass.
 
-- **Consumers** (read-only): project agents applying the guideline in other
-  repositories. Enter via [PORTAL.md](./PORTAL.md).
-- **Maintainers** (read-write): agents and humans evolving the guideline.
-  Follow this document.
+## Commands
 
-Repository documents always take precedence over remembered summaries.
+| Command | Run it | Effect |
+| --- | --- | --- |
+| `mise run fix` | After any content edit | Recomputes digests; formats `tools/` |
+| `mise run check` | Before every commit | Full validation (CI runs the same) |
+| `mise run test` | After changing `tools/` | Validator test suite |
 
-## Repository Map
+CI (GitHub Actions) and the pre-commit hook (prek) run `mise run check` on
+every commit and pull request.
 
-| Path | Purpose |
-| --- | --- |
-| `docs/{en,zh,ja}/` | Trilingual content trees (isomorphic) |
-| `docs/en/principles/` | Core engineering principles |
-| `docs/en/toolchain/` | Mandatory tools and platform standards |
-| `docs/en/libraries/` | Library/framework selection catalog |
-| `docs/en/practices/` | Cross-cutting engineering practices |
-| `docs/en/decisions/` | ADRs about this repository itself |
-| `templates/` | Copyable templates for consuming projects (English only) |
-| `tools/check-docs.ts` | Trilingual consistency validator |
-| `PORTAL.md` | Task-based reading routes for consumers (English only) |
-| `GLOSSARY.md` | Canonical trilingual terminology (English only) |
+## Repository map
 
-## Content Model
+| Path | Content | Language |
+| --- | --- | --- |
+| `guidelines/{en,zh,ja}/` | Guideline content — isomorphic trilingual trees | en / zh / ja |
+| `guidelines/en/principles/` | Core engineering principles | trilingual |
+| `guidelines/en/toolchain/` | Mandatory tools and platform standards | trilingual |
+| `guidelines/en/libraries/` | Library/framework selection catalog | trilingual |
+| `guidelines/en/practices/` | Cross-cutting engineering practices | trilingual |
+| `docs/adr/` | ADRs — decisions about this repository | English only |
+| `templates/` | Copyable templates for consuming projects | English only |
+| `tools/check-docs.ts` | Trilingual consistency validator | code |
+| `PORTAL.md` | Task-based reading routes for consumers | English only |
+| `GLOSSARY.md` | Canonical trilingual terminology | English only |
 
-- Five categories: `principles` (why), `toolchain` (mandatory tools),
-  `libraries` (selection catalog), `practices` (process standards),
-  `decisions` (ADRs about this repository).
-- One concern per document. Body (excluding front matter) must stay within
-  300 lines — split the document when it grows past that.
-- Write conclusions only. Never record discussion process, open questions,
-  or meeting notes.
-- Normative imperative tone: Use / Prefer / Do not / Never.
-- `libraries/*` documents follow the fixed section order: Verdict, Use when,
-  Avoid when, Strengths, Tradeoffs, Version policy, Usage rules, Works with,
+Rule of thumb: guideline content (the product) goes to `guidelines/`;
+repository documentation goes to `docs/` in English. See
+[ADR-0001](./docs/adr/0001-guideline-repo-structure.md).
+
+## Content model
+
+- Four content categories: `principles` (why), `toolchain` (mandatory
+  tools), `libraries` (selection catalog), `practices` (process standards).
+- One concern per document. `#` title, `##` sections, normative imperative
+  tone: Use / Prefer / Do not / Never.
+- `libraries/*` follows the fixed section order: Verdict, Use when, Avoid
+  when, Strengths, Tradeoffs, Version policy, Usage rules, Works with,
   Rejected alternatives (omit the last when nothing is rejected).
-- `toolchain/*` documents must contain at least: Mandate, Version policy,
-  Usage rules — plus Rejected alternatives when the tool bans replacements.
-- `decisions/*` follow `templates/adr.template.md` and are numbered
-  `NNNN-slug`.
+- `toolchain/*` must contain at least Mandate, Version policy, Usage rules —
+  plus Rejected alternatives when the tool bans replacements.
 - Cross-links are relative, within the same language tree only (plus root
-  files like `templates/`). Never link across language trees.
+  files such as `templates/`). Never link across language trees.
 
-## Trilingual Model
+## Trilingual model
 
-- Content exists in three isomorphic trees: `docs/en/`, `docs/zh/`, `docs/ja/`.
-  Every document id exists in all three, or the build fails.
-- There is no canonical language. Any language may be edited first; the
-  front matter `source-lang` records which language authored the current
-  version.
-- All three languages must land in the same change. Never merge a partially
-  translated trio.
-- Machine-facing root files — `AGENTS.md`, `PORTAL.md`, `GLOSSARY.md`,
-  `README.md`, `templates/**`, `tools/**` — are English only (ADR-0001).
-- Heading level sequences must match 1:1 across the trio; heading text is
+- Every document id exists in all three trees with identical structure.
+- No canonical language: edit any language first; front matter
+  `source-lang` records which one authored the current version.
+- Heading level sequences match 1:1 across the trio; heading text is
   idiomatic per language.
 
-## Front Matter
+## Front matter
 
 | Key | Rule |
 | --- | --- |
-| `id` | Path-derived (`docs/<lang>/` prefix and `.md` suffix removed) |
-| `lang` | Must match the tree (`en` / `zh` / `ja`) |
+| `id` | Path-derived (`guidelines/<lang>/` prefix and `.md` suffix removed) |
+| `lang` | Matches the tree: `en` / `zh` / `ja` |
 | `version` | Positive integer, identical across the trio; increment on any meaningful change |
 | `source-lang` | Language the current version was authored in; identical across the trio |
 | `status` | `draft` / `active` / `deprecated`; identical across the trio |
-| `digest` | sha256 of the normalized body (first 8 hex). Tool-maintained — never edit by hand |
+| `digest` | sha256 of the normalized body (first 8 hex) — tool-maintained |
 
-Run `mise run fix` after content edits; it recomputes digests.
-
-## Edit Protocol
+## Edit protocol
 
 1. Locate the document via the PORTAL inventory.
-2. Edit the version in your working language. One concern per document; if
-   it would exceed 300 lines, split first.
+2. Edit the file in your working language; if it would exceed 300 lines,
+   split it first.
 3. Bump `version` in all three language files; set `source-lang` to the
    language you edited.
-4. Rewrite the other two languages natively per Translation rules, keeping
-   heading structure isomorphic.
-5. Run `mise run fix` (digests, formatting).
-6. `mise run check` must pass before committing.
-7. Adding/removing/renaming a document: apply to all three trees, update the
-   PORTAL inventory and any affected recipe. Category-level structure
-   changes additionally require a new ADR and an AGENTS.md update.
-8. Reversing a standing recommendation (e.g. replacing a mandated tool):
-   add a superseding ADR, update every affected document, and keep the Hard
-   rules quick reference in `practices/agent-protocol` in sync.
-9. Commit with Conventional Commits, English, scope = top-level id segment:
-   `docs(toolchain): tighten oxlint type-aware rules`.
+4. Rewrite the other two languages natively (Translation rules below),
+   keeping heading structure isomorphic.
+5. Run `mise run fix`, then `mise run check` — it must pass before commit.
+6. Commit with Conventional Commits, English, scope = top-level id segment,
+   e.g. `docs(toolchain): tighten oxlint type-aware rules`.
 
-## Translation Rules
+Worked example — tighten a rule in `toolchain/typescript`:
 
-- Produce native text, never literal translation. No translationese.
-- zh: Simplified Chinese, direct technical register, no honorifics.
-- ja: technical-document register (常体 / である調).
-- Follow `practices/language-policy` cross-language quality clauses.
+```text
+1. Edit guidelines/en/toolchain/typescript.md (add the rule).
+2. Set version: 2 / source-lang: en in en, zh, ja files.
+3. Rewrite guidelines/{zh,ja}/toolchain/typescript.md natively.
+4. mise run fix   → digests recomputed
+5. mise run check → OK: 66 documents, 22 ids x 3 languages
+6. git commit -m "docs(toolchain): require type-aware oxlint rules"
+```
+
+### Structural changes
+
+- Add/remove/rename a document: apply to all three trees; update the PORTAL
+  inventory and any affected recipe.
+- Reverse a standing recommendation (e.g. replace a mandated tool): add a
+  superseding ADR in `docs/adr/`, update every affected document, and sync
+  the Hard rules quick reference in `practices/agent-protocol`.
+- Change the repository's structure or model: write a new ADR
+  (English, `templates/adr.template.md`) and update this file.
+
+## Translation rules
+
+- Native rewrite, zero translationese. zh: Simplified Chinese, direct
+  technical register, no honorifics. ja: technical-document register
+  (常体 / である調).
 - Terminology must match `GLOSSARY.md`; add missing recurring terms to the
-  glossary in the same change.
-- Product names and industry-standard terms stay in English in all
-  languages (see GLOSSARY.md).
-- Code blocks, commands, identifiers: verbatim. Translate only `lang` in the
+  glossary in the same change. Product names and industry terms stay in
+  English.
+- Code blocks, commands, identifiers: verbatim. Translate only `lang` in
   front matter; `digest` is recomputed by `mise run fix`.
+- Follow the cross-language quality clauses in
+  `guidelines/en/practices/language-policy.md`.
 
-## Validation
+## Boundaries
 
-| Command | Effect |
-| --- | --- |
-| `mise run check` | Full validation: tree isomorphism, front matter, trio consistency, digests, heading parity, size cap, portal coverage + lint/format of `tools/` |
-| `mise run fix` | Recompute digests; format `tools/` |
-| `mise run test` | Validator test suite |
-
-CI (GitHub Actions) and the pre-commit hook (prek) run the same checks.
-Never bypass or weaken a check to make it pass.
-
-## Hard Rules
-
-- Never merge a change with an out-of-sync language trio.
-- Never hand-edit `digest`.
-- Never exceed 300 body lines — split instead.
-- Never record discussion process; conclusions only.
-- Never commit machine-translation-style text.
-- Never bypass the validator, CI, or hooks.
+- **Always**: sync the trio in one change; run `mise run check` before
+  committing; keep one concern per document.
+- **Ask first**: adding a new content category; changing the front matter
+  schema or validator behavior; anything ADR-0001 lists as a review trigger.
+- **Never**: merge a partially translated trio; hand-edit `digest`;
+  translate files under `docs/`; record discussion process; commit
+  machine-translation-style text; bypass validation.

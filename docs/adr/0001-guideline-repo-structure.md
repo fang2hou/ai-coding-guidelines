@@ -1,15 +1,6 @@
----
-id: decisions/0001-guideline-repo-structure
-lang: en
-version: 1
-source-lang: en
-status: active
-digest: a2eb49ba
----
-
 # ADR-0001: Guideline Repository Structure and i18n Model
 
-- **Status**: accepted
+- **Status**: accepted (revised 2026-08-15: guideline content moved from `docs/` to `guidelines/`; ADRs de-trilingualized into `docs/adr/`)
 - **Date**: 2026-08-15
 
 ## Context
@@ -18,20 +9,27 @@ The engineering guideline lived as a single ~1300-line Markdown file. It was
 too long for humans to edit reliably and impossible for AI agents to load
 selectively. The team works across Chinese, English, and Japanese; every
 member must be able to improve the guideline in their strongest language
-without forking the content.
+without forking the content. The repository also produces two different kinds
+of Markdown: the guideline product itself, and ordinary project documentation
+— conflating them under `docs/` misled agents into treating the product as
+project documentation.
 
 ## Decision
 
-- Content lives in three isomorphic language trees: `docs/en/**`,
-  `docs/zh/**`, `docs/ja/**`. Each document is a small, single-concern file
-  (body limited to 300 lines).
-- There is **no canonical language**. Any language may be edited first; the
-  front matter records `version`, `source-lang`, and `status`, which must be
-  identical across the trio, plus a per-file `digest` of the normalized body.
-  The other two languages are native-quality rewrites landed in the same
-  change.
+- **Guideline content (the product) lives in `guidelines/{en,zh,ja}/**`** —
+  three isomorphic language trees. Each document is a small, single-concern
+  file (body limited to 300 lines).
+- **This repository's own documentation is English-only and lives under
+  `docs/`** — currently `docs/adr/` for architecture decision records. ADRs
+  are never trilingual; they record repository decisions, not product
+  content.
 - Machine-facing root files (`AGENTS.md`, `PORTAL.md`, `GLOSSARY.md`,
   `README.md`, `templates/**`, `tools/**`) are English-only.
+- There is **no canonical language** for guideline content. Any language may
+  be edited first; the front matter records `version`, `source-lang`, and
+  `status`, which must be identical across the trio, plus a per-file
+  `digest` of the normalized body. The other two languages are native-quality
+  rewrites landed in the same change.
 - A zero-dependency validator (`tools/check-docs.ts`) enforces tree
   isomorphism, front matter schema, trio consistency, digests, heading-level
   parity, the size cap, and portal coverage. CI and the pre-commit hook run
@@ -45,7 +43,7 @@ without forking the content.
 - Cons: every directory carries 3x files; noisy browsing; contradicts the
   goal of a clean repository layout.
 
-### One folder per document (`docs/toolchain/mise/{en,zh,ja}.md`)
+### One folder per document (`guidelines/toolchain/mise/{en,zh,ja}.md`)
 
 - Pros: trio co-located; directory count unchanged.
 - Cons: deeper nesting; file names lose semantics; no single-language
@@ -58,6 +56,13 @@ without forking the content.
   the requirement that any team member improves the content in their own
   language.
 
+### Trilingual ADRs under the language trees
+
+- Pros: single reading path for all content.
+- Cons: decisions are repository documentation, not product; translating
+  them triples the cost of every structural decision without serving any
+  consumer.
+
 ## Consequences
 
 - Every content edit touches at least three files; agents handle this as a
@@ -65,6 +70,9 @@ without forking the content.
 - The validator must stay zero-dependency and fast, or it will be bypassed.
 - Heading-level parity is enforced, not full structural identity, so each
   language can phrase headings idiomatically.
+- `guidelines/` and `docs/` have disjoint concerns; adding project
+  documentation goes to `docs/` (English), adding guideline content goes to
+  `guidelines/` (trilingual).
 
 ## Review Triggers
 
