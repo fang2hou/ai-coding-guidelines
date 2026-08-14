@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 9bd2032e
+digest: a429da8e
 ---
 
 # TypeScript Toolchain
@@ -15,9 +15,9 @@ TypeScript is the default language for AI-assisted product development. Its libr
 
 Language priority:
 
-* TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
-* Python is used for the justified cases listed in [Python Toolchain](../toolchain/python.md).
-* Go or Rust are reserved for performance-critical or systems scenarios; they require explicit justification plus user approval, recorded in a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
+- TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
+- Python is used for the justified cases listed in [Python Toolchain](../toolchain/python.md).
+- Go or Rust are reserved for performance-critical or systems scenarios; they require explicit justification plus user approval, recorded in a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
 
 For framework selection, see [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md).
 
@@ -41,8 +41,8 @@ The project lockfile must remain consistent with pnpm.
 
 Do not use:
 
-* npm
-* yarn
+- npm
+- yarn
 
 ## oxlint
 
@@ -97,12 +97,12 @@ Do not use Prettier.
 
 Start every project from a strict tsconfig baseline:
 
-* `"strict": true` — the strictness base; do not disable individual strict flags without an ADR-level reason.
-* `"noUncheckedIndexedAccess": true` — indexed access yields `T | undefined`, forcing the undefined case to be handled.
-* `"verbatimModuleSyntax": true` — type-only imports must use `import type`, preventing accidental runtime imports.
-* `"isolatedModules": true` — every file must compile independently, matching how bundlers and transpilers actually process the code.
-* ESM only. Applications use `"module": "ESNext"` with `"moduleResolution": "Bundler"`; Node libraries use `"module": "NodeNext"` with `"moduleResolution": "NodeNext"`.
-* Applications do not emit with tsc: set `"noEmit": true` and let the bundler produce the output.
+- `"strict": true` — the strictness base; do not disable individual strict flags without an ADR-level reason.
+- `"noUncheckedIndexedAccess": true` — indexed access yields `T | undefined`, forcing the undefined case to be handled.
+- `"verbatimModuleSyntax": true` — type-only imports must use `import type`, preventing accidental runtime imports.
+- `"isolatedModules": true` — every file must compile independently, matching how bundlers and transpilers actually process the code.
+- ESM only. Applications use `"module": "ESNext"` with `"moduleResolution": "Bundler"`; Node libraries use `"module": "NodeNext"` with `"moduleResolution": "NodeNext"`.
+- Applications do not emit with tsc: set `"noEmit": true` and let the bundler produce the output.
 
 Baseline example:
 
@@ -117,32 +117,33 @@ Baseline example:
     "moduleResolution": "Bundler",
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
-    "noEmit": true
-  }
+    "noEmit": true,
+  },
 }
 ```
 
 ## Language Usage Rules
 
-* Prefer `unknown` over `any` when a value's type is not yet known, and narrow it before use. Reserve `any` for genuinely dynamic interop, with a comment justifying it.
-* Do not use the non-null assertion operator (`!`) without a comment explaining why the value cannot be null or undefined at that point.
-* Declare explicit return types on exported functions.
-* Model state with discriminated unions instead of groups of booleans.
-* Validate configuration objects with `satisfies`: errors surface at the definition while literal types are preserved.
-* Apply `as const` to literal tables so element types stay narrow.
-* Use union types or `const` objects instead of `enum`.
-* Do not leave promises floating: `await` them, or discard deliberately with `void` plus a comment stating why the result is ignored.
-* Throw `Error` subclasses; never throw strings or plain objects.
+- Prefer `unknown` over `any` when a value's type is not yet known, and narrow it before use. Reserve `any` for genuinely dynamic interop, with a comment justifying it.
+- Do not use the non-null assertion operator (`!`) without a comment explaining why the value cannot be null or undefined at that point.
+- Declare explicit return types on exported functions.
+- Model state with discriminated unions instead of groups of booleans.
+- Validate configuration objects with `satisfies`: errors surface at the definition while literal types are preserved.
+- Apply `as const` to literal tables so element types stay narrow.
+- Use union types or `const` objects instead of `enum`.
+- Do not leave promises floating: `await` them, or discard deliberately with `void` plus a comment stating why the result is ignored.
+- Throw `Error` subclasses; never throw strings or plain objects.
 
 ## Project Conventions
 
-* Keep application source under `src/` and expose entry points through `package.json`.
-* Name files in kebab-case (`user-profile-card.tsx`), values in camelCase, and types, components, and classes in PascalCase.
-* Avoid barrel files (an `index.ts` re-exporting a whole directory); import directly from the defining module. Barrels hurt tree-shaking and invite import cycles.
+- Keep application source under `src/` and expose entry points through `package.json`.
+- Name files in kebab-case (`user-profile-card.tsx`), values in camelCase, and types, components, and classes in PascalCase.
+- Avoid barrel files (an `index.ts` re-exporting a whole directory); import directly from the defining module. Barrels hurt tree-shaking and invite import cycles.
 
 ## Works with
 
-* [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md)
-* [Quality Gates](../toolchain/quality-gates.md)
-* [Testing Strategy](../practices/testing.md)
-* [Coding Standards](../practices/coding-standards.md)
+- [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md)
+- [TypeScript Backend: Elysia/Hono](../libraries/typescript-backend.md)
+- [Quality Gates](../toolchain/quality-gates.md)
+- [Testing Strategy](../practices/testing.md)
+- [Coding Standards](../practices/coding-standards.md)

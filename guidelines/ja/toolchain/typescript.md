@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: ac455776
+digest: 4c054070
 ---
 
 # TypeScript ツールチェーン
@@ -13,13 +13,13 @@ digest: ac455776
 
 TypeScript は AI 支援のプロダクト開発におけるデフォルト言語である。ライブラリとエージェントのエコシステム支援が、利用可能な言語の中で最も強いためである。
 
-言語の優先順位:
+言語の優先順位：
 
-* TypeScript と Python は、ライブラリとエージェントのエコシステム支援が最も強いため、AI 支援開発のデフォルト言語である。
-* Python は [Python ツールチェーン](../toolchain/python.md)に挙げた正当なケースでのみ使う。
-* Go と Rust はパフォーマンスが重要なケースやシステムレベルのケースに限る。導入には明確な根拠に加えてユーザーの承認が必要で、プロジェクトの ADR に記録する。[Go](../toolchain/go.md) と [Rust](../toolchain/rust.md) を参照。
+- TypeScript と Python は、ライブラリとエージェントのエコシステム支援が最も強いため、AI 支援開発のデフォルト言語である。
+- Python は [Python ツールチェーン](../toolchain/python.md)に挙げた正当なケースでのみ使う。
+- Go と Rust はパフォーマンスが重要なケースやシステムレベルのケースに限る。導入には明確な根拠に加えてユーザーの承認が必要で、プロジェクトの ADR に記録する。[Go](../toolchain/go.md) と [Rust](../toolchain/rust.md) を参照。
 
-フレームワークの選定については [フロントエンドフレームワーク: Vite vs Next.js](../libraries/frontend-framework.md) を参照。
+フレームワークの選定については [フロントエンドフレームワーク：Vite vs Next.js](../libraries/frontend-framework.md) を参照。
 
 ## バージョン方針
 
@@ -41,8 +41,8 @@ Node.js と TypeScript のバージョンはプロジェクトの mise 設定に
 
 次は使わない。
 
-* npm
-* yarn
+- npm
+- yarn
 
 ## oxlint
 
@@ -97,14 +97,14 @@ Prettier を使わない。
 
 すべてのプロジェクトを、厳格な tsconfig のベースラインから始める。
 
-* `"strict": true`——厳格モードの基盤。ADR レベルの理由なく、個別の strict フラグを無効化しない。
-* `"noUncheckedIndexedAccess": true`——インデックスアクセスが `T | undefined` になり、未定義ケースの処理を強制する。
-* `"verbatimModuleSyntax": true`——型だけのインポートには `import type` を必須とし、誤ってランタイムのインポートが混入するのを防ぐ。
-* `"isolatedModules": true`——各ファイルが独立してコンパイルできることを強制し、bundler やトランスパイラの実際の処理単位と一致させる。
-* ESM のみ。アプリケーションは `"module": "ESNext"` と `"moduleResolution": "Bundler"`、Node 向けライブラリは `"module": "NodeNext"` と `"moduleResolution": "NodeNext"` を使う。
-* アプリケーションで tsc から出力しない。`"noEmit": true` を設定し、出力は bundler に任せる。
+- `"strict": true`——厳格モードの基盤。ADR レベルの理由なく、個別の strict フラグを無効化しない。
+- `"noUncheckedIndexedAccess": true`——インデックスアクセスが `T | undefined` になり、未定義ケースの処理を強制する。
+- `"verbatimModuleSyntax": true`——型だけのインポートには `import type` を必須とし、誤ってランタイムのインポートが混入するのを防ぐ。
+- `"isolatedModules": true`——各ファイルが独立してコンパイルできることを強制し、bundler やトランスパイラの実際の処理単位と一致させる。
+- ESM のみ。アプリケーションは `"module": "ESNext"` と `"moduleResolution": "Bundler"`、Node 向けライブラリは `"module": "NodeNext"` と `"moduleResolution": "NodeNext"` を使う。
+- アプリケーションで tsc から出力しない。を設定し、出力は bundler に任せる。
 
-ベースラインの例:
+ベースラインの例：
 
 ```jsonc
 {
@@ -117,32 +117,33 @@ Prettier を使わない。
     "moduleResolution": "Bundler",
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
-    "noEmit": true
-  }
+    "noEmit": true,
+  },
 }
 ```
 
 ## 言語の利用ルール
 
-* 値の型が不明なときは `any` ではなく `unknown` を使い、使用前に絞り込む。`any` は本当に動的な相互運用に限り、理由をコメントで示す。
-* 非nullアサーション演算子 (`!`) を使う場合は、その時点で値が null や undefined になり得ない理由をコメントで示す。
-* エクスポートする関数には戻り値の型を明示する。
-* 状態はブール値の羅列ではなく、判別可能なユニオン (discriminated union) でモデル化する。
-* 設定オブジェクトは `satisfies` で検証する。定義時点でエラーが表面化し、リテラル型も保持される。
-* 静的なリテラルテーブルには `as const` を付け、要素型を狭く保つ。
-* `enum` の代わりにユニオン型または `const` オブジェクトを使う。
-* promise を放置しない。`await` するか、結果を意図的に破棄する場合のみ `void` を使い、なぜ無視するのかをコメントで示す。
-* 例外として投げるのは `Error` のサブクラスだけにする。文字列や素のオブジェクトを throw しない。
+- 値の型が不明なときは `any` ではなく `unknown` を使い、使用前に絞り込む。は本当に動的な相互運用に限り、理由をコメントで示す。
+- 非nullアサーション演算子 (`!`) を使う場合は、その時点で値が null や undefined になり得ない理由をコメントで示す。
+- エクスポートする関数には戻り値の型を明示する。
+- 状態はブール値の羅列ではなく、判別可能なユニオン (discriminated union) でモデル化する。
+- 設定オブジェクトは `satisfies` で検証する。定義時点でエラーが表面化し、リテラル型も保持される。
+- 静的なリテラルテーブルには `as const` を付け、要素型を狭く保つ。
+- `enum` の代わりにユニオン型または `const` オブジェクトを使う。
+- promise を放置しない。するか、結果を意図的に破棄する場合のみ `void` を使い、なぜ無視するのかをコメントで示す。
+- 例外として投げるのは `Error` のサブクラスだけにする。文字列や素のオブジェクトを throw しない。
 
 ## プロジェクト規約
 
-* アプリケーションのソースは `src/` に置き、エントリポイントは `package.json` 経由で公開する。
-* ファイル名は kebab-case(`user-profile-card.tsx`)、値は camelCase、型・コンポーネント・クラスは PascalCase とする。
-* バレルファイル(`index.ts` でディレクトリ全体を再エクスポートする構成)は避け、定義元のモジュールから直接インポートする。バレルファイルは tree-shaking を阻害し、循環インポートを招きやすい。
+- アプリケーションのソースは `src/` に置き、エントリポイントは `package.json` 経由で公開する。
+- ファイル名は kebab-case(`user-profile-card.tsx`)、値は camelCase、型・コンポーネント・クラスは PascalCase とする。
+- バレルファイル(`index.ts` でディレクトリ全体を再エクスポートする構成)は避け、定義元のモジュールから直接インポートする。バレルファイルは tree-shaking を阻害し、循環インポートを招きやすい。
 
 ## 連携
 
-* [フロントエンドフレームワーク: Vite vs Next.js](../libraries/frontend-framework.md)
-* [品質ゲート](../toolchain/quality-gates.md)
-* [テスト戦略](../practices/testing.md)
-* [コーディング規約](../practices/coding-standards.md)
+- [フロントエンドフレームワーク：Vite vs Next.js](../libraries/frontend-framework.md)
+- [TypeScript バックエンド：Elysia/Hono](../libraries/typescript-backend.md)
+- [品質ゲート](../toolchain/quality-gates.md)
+- [テスト戦略](../practices/testing.md)
+- [コーディング規約](../practices/coding-standards.md)

@@ -1,10 +1,10 @@
 ---
 id: toolchain/go
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: draft
-digest: 7f52fdc5
+digest: 138c749f
 ---
 
 # Go Toolchain
@@ -17,10 +17,10 @@ Go is not a default choice.
 
 Choose Go only when the project genuinely needs:
 
-* Performance-sensitive network services
-* Command-line tools distributed as standalone binaries
-* Static single-binary deployment targets
-* High-concurrency workloads
+- Performance-sensitive network services
+- Command-line tools distributed as standalone binaries
+- Static single-binary deployment targets
+- High-concurrency workloads
 
 Adopting Go requires explicit justification and user approval, recorded in a project ADR.
 
@@ -49,6 +49,21 @@ Do not pin an older Go release without a recorded reason.
 Use `golangci-lint` as the linter.
 
 Expose it through mise tasks so local development and CI use the same configuration.
+
+Commit the configuration as `.golangci.yml` and tailor it to the project's emphasis. Do not use `enable-all`: it enables slow, opinionated checks and buries the signal.
+
+Always-on baseline:
+
+- `govet` — suspicious constructs, roughly the `go vet` passes
+- `staticcheck` — correctness, simplification, and style checks; includes error-string style (ST1005): error messages start lowercase and carry no trailing punctuation
+- `unused` — unused constants, variables, functions, and types
+- `ineffassign` — ineffective assignments
+- `misspell` — commonly misspelled English words
+
+Add emphasis groups on top of the baseline:
+
+- Context-heavy services: `contextcheck`, `containedctx`, `fatcontext`, `noctx`
+- Error-handling-focused projects: `errcheck` plus `errorlint` and `wrapcheck`
 
 ### Formatting
 
@@ -88,6 +103,20 @@ Cover behavior with multiple inputs using table-driven tests.
 
 Run `go test -race` in CI.
 
+Give `_test.go` files relaxed lint rules through per-path exclusions in `.golangci.yml`. Tests optimize for readability and intent, not production lint strictness; error-wrapping and duplication style checks stay off in tests:
+
+```yaml
+version: "2"
+linters:
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters:
+          - wrapcheck
+          - errorlint
+          - dupl
+```
+
 ### Panics
 
 Do not `panic` in library code; return errors instead.
@@ -96,16 +125,20 @@ Reserve `panic` for unrecoverable startup errors in `cmd/` entrypoints.
 
 ### Project Layout
 
-Place entrypoints under `cmd/`.
+Go has no official standard project layout. The `golang-standards/project-layout` repository is a community reference, not an official standard; the official "Organizing a Go module" guide starts from keeping a basic package in the module root.
 
-Place packages that are not part of the public API under `internal/`.
+- Small libraries may keep a flat root: `go.mod` plus the package files.
+- Complex services design a structure that fits their business layering instead of copying a template.
+
+`cmd/` (one entrypoint per binary) and `internal/` (import restriction enforced by the compiler) remain useful conventions. Apply them when they serve the design, not as template obligations.
 
 ## Works with
 
-* [mise](../toolchain/mise.md) — versioning: Go and golangci-lint are managed and exposed through mise tasks.
-* [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
-* [Git Workflow](../toolchain/git.md) — commit discipline: Go changes follow the standard commit and PR rules.
-* [Testing Strategy](../practices/testing.md) — test focus: what to verify, and at which level.
+- [mise](../toolchain/mise.md) — versioning: Go and golangci-lint are managed and exposed through mise tasks.
+- [Go API Stack](../libraries/go-api-stack.md) — web framework and validation stack for HTTP services.
+- [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
+- [Git Workflow](../toolchain/git.md) — commit discipline: Go changes follow the standard commit and PR rules.
+- [Testing Strategy](../practices/testing.md) — test focus: what to verify, and at which level.
 
 ## Rejected Alternatives
 
