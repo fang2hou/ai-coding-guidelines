@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 3f1a4f98
+digest: 0d852d6b
 ---
 
 # Agent 操作协议
@@ -80,7 +80,8 @@ digest: 3f1a4f98
 19. 在跨语言 UI 工作中写出低质量的直译。([language-policy](../practices/language-policy.md))
 20. 不必要地修改 shadcn/ui 组件内部实现。([shadcn-ui](../libraries/shadcn-ui.md))
 21. 不记录对 shadcn/ui 组件的必要修改。([shadcn-ui](../libraries/shadcn-ui.md))
-22. 不审查兼容性就盲目升级 GitHub Actions。([github-actions](../toolchain/github-actions.md))
-23. 提交敏感凭据或敏感信息。([security](../practices/security.md))
-24. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
-25. 用 CI 通过代替对实现正确性的理解。([change-discipline](../practices/change-discipline.md))
+22. 直接编辑已安装的 coss ui 组件文件，而不是通过组合、包装或主题定制实现。([coss](../libraries/coss.md))
+23. 不审查兼容性就盲目升级 GitHub Actions。([github-actions](../toolchain/github-actions.md))
+24. 提交敏感凭据或敏感信息。([security](../practices/security.md))
+25. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
+26. 用 CI 通过代替对实现正确性的理解。([change-discipline](../practices/change-discipline.md))

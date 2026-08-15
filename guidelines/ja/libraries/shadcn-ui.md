@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 4984286b
+digest: 76613ca7
 ---
 
 # shadcn/ui
@@ -42,6 +42,12 @@ digest: 4984286b
 ## 利用ルール
 
 - プロジェクトのセットアップでは、公式の shadcn/ui ドキュメントに従う。
+
+### プリミティブ層（Radix / Base UI / React Aria）
+
+- shadcn/ui のすべてのコンポーネントは、複数のプリミティブ層で提供される。Base UI は 2026 年 7 月以降の公式デフォルトであり、本ガイドラインの推奨でもある。Radix と React Aria も引き続き利用できる。
+- 新規プロジェクトではデフォルトの Base UI 層をそのまま使う。ユーザーの明示的な要求なしに Radix や React Aria へ切り替えない。
+- 既存の Radix プロジェクトは Radix を維持する。移行は任意であり、必須ではない。移行はユーザーの明示的な要求がある場合のみ、公式の移行スキルを使い、コンポーネント単位で行う。
 
 ### コンポーネントのパスと構成
 
@@ -91,12 +97,15 @@ components/
 { "ignorePatterns": ["components/ui/**"] }
 ```
 
-### shadcn MCP
+### ツール連携：MCP または CLI
 
-- 開発環境が MCP に対応している場合、公式または適切な shadcn MCP 統合を優先する。
+- コンポーネントの追加と更新は shadcn CLI または shadcn MCP ツールで行う。ツールが利用できるとき、コンポーネントファイルを手作業でコピーしない。
+- 開発環境が MCP に対応している場合、公式の shadcn MCP 統合を優先する。同じツールは `components.json` に設定された shadcn 互換レジストリをそのまま扱える。
 - MCP に対応したユーザーが shadcn/ui を使う際に MCP 統合が未設定であれば、エージェントはその設定を手伝ってよい。
+- 同名のコンポーネントがローカルに既にある可能性がある場合は、まず `--dry-run` か `--diff` で変更内容を確認する。
 
 ## 連携
 
 - [Tailwind CSS](tailwindcss.md) — requires: shadcn/ui は Tailwind ベースのアプリケーション用のコンポーネントシステムで、Tailwind が必要である。
 - [フロントエンドフレームワーク：Vite vs Next.js](frontend-framework.md) — works-with: プロジェクトが Vite と Next.js のどちらであっても、shadcn/ui は適用できる。
+- [coss ui](coss.md) — alternative: 同じレジストリモデルとツールチェーンを共有し、乗り換え可能である。shadcn/ui は引き続き第一のデフォルト。

@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 15596765
+digest: 091ade5a
 ---
 
 # エージェント運用プロトコル
@@ -80,7 +80,8 @@ digest: 15596765
 19. 複数言語が絡む UI 作業で、低品質な直訳を作り出す。([言語ポリシー](../practices/language-policy.md))
 20. 不必要に、shadcn/ui コンポーネントの内部を改変する。([shadcn/ui](../libraries/shadcn-ui.md))
 21. 必要が生じた shadcn/ui コンポーネントの変更を、文書化しないまま放置する。([shadcn/ui](../libraries/shadcn-ui.md))
-22. 互換性を確認せずに、GitHub Actions を無闇にアップグレードする。([GitHub Actions](../toolchain/github-actions.md))
-23. シークレットや機密情報をコミットする。([セキュリティ](../practices/security.md))
-24. 適切な承諾なしに、共有ヒストリーへ force push する。([Git ワークフロー](../toolchain/git.md))
-25. 実装の正しさを理解する代わりに、CI が通っているだけで済ませる。([変更の規律](../practices/change-discipline.md))
+22. インストール済みの coss ui コンポーネントファイルを、合成・ラッパー・テーマ設定ではなく直接編集する。([coss](../libraries/coss.md))
+23. 互換性を確認せずに、GitHub Actions を無闇にアップグレードする。([GitHub Actions](../toolchain/github-actions.md))
+24. シークレットや機密情報をコミットする。([セキュリティ](../practices/security.md))
+25. 適切な承諾なしに、共有ヒストリーへ force push する。([Git ワークフロー](../toolchain/git.md))
+26. 実装の正しさを理解する代わりに、CI が通っているだけで済ませる。([変更の規律](../practices/change-discipline.md))
