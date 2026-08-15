@@ -1,10 +1,10 @@
 ---
 id: practices/coding-standards
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: fc51bca2
+digest: 496bd691
 ---
 
 # Coding Standards
@@ -100,6 +100,27 @@ let hasUnsavedChanges = false;
 
 Follow the code-language rules in [Language Policy](language-policy.md).
 
+## Comments
+
+Write code that needs few comments. Naming, structure, and decomposition carry the meaning; a comment covers only what they cannot express.
+
+- Comment the why, never restate the what.
+- Do not narrate logic step by step; if a passage needs a running commentary, restructure it first.
+- Do not keep comments that describe removed behavior or past intentions.
+- Keep configuration files comment-free; put the rationale in the pull request or the project documentation.
+
+```ts
+// bad
+// renew the subscription if it is still active
+if (user.subscription && user.subscription.endsAt > now) {
+  renew(user.subscription);
+}
+// good
+if (user.hasActiveSubscription(now)) {
+  renew(user.subscription);
+}
+```
+
 ## Modularity
 
 Write modular code where modularity improves:
@@ -113,6 +134,7 @@ Write modular code where modularity improves:
 Do not create artificial modules merely to satisfy an abstract idea of modularity.
 
 Decision test: a helper used by exactly one screen stays in that screen's file; it moves to a shared module when a second consumer imports it.
+Write for the reader who arrives later: group functions by concern, separate levels of logic, and let file order tell the story — the main flow first, its helpers below.
 
 ## New files and modules
 
@@ -128,6 +150,15 @@ Do not create:
 `src/utils/date.ts` has a responsibility; `src/utils/misc.ts` does not.
 
 New code must remain consistent with the existing architecture.
+
+## Performance
+
+Correctness and readability come first; do not trade structure for speed you have not measured.
+
+- Do not avoidably allocate, copy, or recompute.
+- Keep O(n) work out of loops that run O(n) times.
+- Fix the algorithm or the data structure before scattering micro-optimizations.
+- Optimize only measured hot paths, and only with evidence.
 
 ## Responsive frontend
 

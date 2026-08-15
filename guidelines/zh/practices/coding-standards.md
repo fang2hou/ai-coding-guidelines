@@ -1,10 +1,10 @@
 ---
 id: practices/coding-standards
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: d93af50b
+digest: 5df90234
 ---
 
 # 编码标准
@@ -100,6 +100,27 @@ let hasUnsavedChanges = false;
 
 遵循[语言政策](language-policy.md)中的代码语言规则。
 
+## 注释
+
+编写几乎不需要注释的代码。命名、结构与拆分承担语义，注释只覆盖它们表达不了的部分。
+
+- 注释解释为什么，不复述做了什么。
+- 不要逐步解说逻辑；如果一段代码需要连篇解说，先重构它。
+- 不要保留描述已删除行为或旧时意图的注释。
+- 配置文件保持零注释，理由写进 pull request 或项目文档。
+
+```ts
+// bad
+// renew the subscription if it is still active
+if (user.subscription && user.subscription.endsAt > now) {
+  renew(user.subscription);
+}
+// good
+if (user.hasActiveSubscription(now)) {
+  renew(user.subscription);
+}
+```
+
 ## 模块化
 
 在模块化能改进以下方面时，编写模块化代码：
@@ -113,6 +134,7 @@ let hasUnsavedChanges = false;
 不要为了抽象的模块化理念，人为制造模块。
 
 判断标准：只被一个页面使用的辅助函数就留在该页面的文件里；出现第二个使用方导入时，再移入共享模块。
+为后来的读者而写：按关注点分组函数，分离不同层级的逻辑，并让文件顺序本身呈现脉络——主流程在前，辅助函数在后。
 
 ## 新文件与新模块
 
@@ -128,6 +150,15 @@ let hasUnsavedChanges = false;
 `src/utils/date.ts` 有明确职责；`src/utils/misc.ts` 没有。
 
 新代码必须与既有架构保持一致。
+
+## 性能
+
+正确性与可读性优先，不要用未经度量的速度去交换代码结构。
+
+- 不要做本可避免的分配、复制与重复计算。
+- 不要在执行 O(n) 次的循环里做 O(n) 的工作。
+- 先修正算法或数据结构，再考虑零散的微优化。
+- 只优化度量过的热点路径，且必须有证据支撑。
 
 ## 响应式前端
 
