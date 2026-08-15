@@ -67,6 +67,11 @@ mise run check
 | `mise run fix`   | Fix zh/ja punctuation + digests; format everything |
 | `mise run test`  | Validator test suite                               |
 
+All changes — including agent-made ones — land through pull requests. CI
+validates the trilingual corpus and the PR title (Conventional Commits via
+Cocogitto); merge only after it passes. See
+[ADR-0002](./docs/adr/0002-pr-based-contribution-workflow.md).
+
 Editing rules, the trilingual model, and the commit protocol live in
 [AGENTS.md](./AGENTS.md). Repository decisions are recorded as ADRs in
 [docs/adr/](./docs/adr/).
