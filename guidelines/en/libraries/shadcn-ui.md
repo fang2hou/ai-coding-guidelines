@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: b4183ae9
+digest: 05213a0d
 ---
 
 # shadcn/ui
@@ -42,6 +42,12 @@ Preferred — shadcn/ui is the preferred component system for Tailwind-based app
 ## Usage rules
 
 - Follow the official shadcn/ui documentation when setting up the project.
+
+### Primitives layer (Radix / Base UI / React Aria)
+
+- shadcn/ui ships every component on several primitive layers. Base UI is the upstream default since July 2026 and this guideline's preference; Radix and React Aria remain available.
+- New projects: keep the default Base UI layer; do not opt into Radix or React Aria without an explicit user requirement.
+- Existing Radix projects: stay on Radix; migrating is optional and never required. Migrate only on explicit user request, with the official migration skill, one component at a time.
 
 ### Component paths and structure
 
@@ -91,12 +97,15 @@ components/
 { "ignorePatterns": ["components/ui/**"] }
 ```
 
-### shadcn MCP
+### Tooling: MCP or CLI
 
-- When the development environment supports MCP, prefer the official or appropriate shadcn MCP integration.
+- Add and update components through the shadcn CLI or the shadcn MCP tools; do not copy component files by hand when the tooling is available.
+- When the development environment supports MCP, prefer the official shadcn MCP integration; the same tools operate on any shadcn-compatible registry configured in `components.json`.
 - If an MCP-capable user is working with shadcn/ui but the MCP integration has not been configured, the agent may help the user configure it.
+- Preview with `--dry-run` or `--diff` when a component might already exist locally.
 
 ## Works with
 
 - [Tailwind CSS](tailwindcss.md) — requires: shadcn/ui is the component system for Tailwind-based applications.
 - [Frontend Framework: Vite vs Next.js](frontend-framework.md) — works-with: shadcn/ui is applicable whether the project uses Vite or Next.js.
+- [coss ui](coss.md) — alternative: same registry model and toolchain, interchangeable; shadcn/ui stays the preferred default.

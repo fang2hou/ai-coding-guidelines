@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: fbf4812b
+digest: cb9cde0b
 ---
 
 # Agent Operating Protocol
@@ -80,7 +80,8 @@ The following behaviors are prohibited. Each item links to the document that def
 19. Produce low-quality literal translations in cross-language UI work. ([language-policy](../practices/language-policy.md))
 20. Modify shadcn/ui component internals unnecessarily. ([shadcn-ui](../libraries/shadcn-ui.md))
 21. Leave undocumented required shadcn/ui component modifications. ([shadcn-ui](../libraries/shadcn-ui.md))
-22. Blindly upgrade GitHub Actions without reviewing compatibility. ([github-actions](../toolchain/github-actions.md))
-23. Commit secrets or sensitive information. ([security](../practices/security.md))
-24. Force push shared history without appropriate approval. ([git](../toolchain/git.md))
-25. Treat passing CI as a substitute for understanding whether the implementation is correct. ([change-discipline](../practices/change-discipline.md))
+22. Edit installed coss ui component files instead of composing, wrapping, or theming. ([coss](../libraries/coss.md))
+23. Blindly upgrade GitHub Actions without reviewing compatibility. ([github-actions](../toolchain/github-actions.md))
+24. Commit secrets or sensitive information. ([security](../practices/security.md))
+25. Force push shared history without appropriate approval. ([git](../toolchain/git.md))
+26. Treat passing CI as a substitute for understanding whether the implementation is correct. ([change-discipline](../practices/change-discipline.md))

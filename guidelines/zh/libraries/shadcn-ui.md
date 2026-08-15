@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 493cd319
+digest: d15942be
 ---
 
 # shadcn/ui
@@ -42,6 +42,12 @@ digest: 493cd319
 ## 使用规则
 
 - 初始化项目时遵循 shadcn/ui 官方文档。
+
+### 原语层（Radix / Base UI / React Aria）
+
+- shadcn/ui 的每个组件都有多个底层原语实现。Base UI 自 2026 年 7 月起是官方默认，也是本指南的偏好；Radix 与 React Aria 仍然可用。
+- 新项目保持默认的 Base UI 层；除非用户明确要求，不要改用 Radix 或 React Aria。
+- 存量 Radix 项目继续使用 Radix；迁移是可选项，绝非必须。仅在用户明确要求时迁移，使用官方迁移 skill，一次迁移一个组件。
 
 ### 组件路径与结构
 
@@ -91,12 +97,15 @@ components/
 { "ignorePatterns": ["components/ui/**"] }
 ```
 
-### shadcn MCP
+### 工具链：MCP 或 CLI
 
-- 开发环境支持 MCP 时，优先使用官方或合适的 shadcn MCP 集成。
+- 组件的添加与更新通过 shadcn CLI 或 shadcn MCP 工具完成；工具可用时，不要手工复制组件文件。
+- 开发环境支持 MCP 时，优先使用官方 shadcn MCP 集成；同一套工具可直接操作 `components.json` 中配置的任何 shadcn 兼容 registry。
 - 用户环境支持 MCP、正在使用 shadcn/ui 但尚未配置 MCP 集成时，Agent 可协助完成配置。
+- 本地可能已有同名组件时，先用 `--dry-run` 或 `--diff` 预览变更。
 
 ## 联动
 
 - [Tailwind CSS](tailwindcss.md)——依赖：shadcn/ui 是面向 Tailwind 应用的组件系统。
 - [前端框架：Vite 与 Next.js](frontend-framework.md)——配合：无论项目使用 Vite 还是 Next.js,shadcn/ui 均可使用。
+- [coss ui](coss.md)——备选：同一套 registry 模型与工具链，可互换；shadcn/ui 仍为首选默认。
