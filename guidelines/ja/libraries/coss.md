@@ -1,10 +1,10 @@
 ---
 id: libraries/coss
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 0c9ecdb0
+digest: 1d22dd03
 ---
 
 # coss ui
@@ -39,14 +39,14 @@ digest: 0c9ecdb0
 ## バージョン方針
 
 - Tailwind CSS v4 と Base UI が必須。レジストリの最新状態に追従する。
-- コンポーネントの更新は npm パッケージのバージョンではなく、shadcn CLI（`npx shadcn@latest add`）で行う。
+- コンポーネントの更新は npm パッケージのバージョンではなく、shadcn CLI（`pnpm dlx shadcn@latest add`）で行う。
 
 ## 利用ルール
 
 ### インストールとツール連携
 
-- コンポーネントのインストールは shadcn CLI で行う：`npx shadcn@latest add @coss/<component>`。プロジェクトの初期化は `npx shadcn@latest init @coss/style`。
-- coss ui の作業では agent スキルをインストールする：`npx skills add cosscom/coss`。既定はプロジェクトスコープ。グローバルインストールはユーザーから要求された場合のみ。
+- コンポーネントのインストールは shadcn CLI で行う：`pnpm dlx shadcn@latest add @coss/<component>`。プロジェクトの初期化は `pnpm dlx shadcn@latest init @coss/style`。
+- coss ui の作業では agent スキルをインストールする：`pnpm dlx skills add cosscom/coss`。既定はプロジェクトスコープ。グローバルインストールはユーザーから要求された場合のみ。
 - 手作業でのファイルコピーよりも、shadcn MCP ツールまたは shadcn CLI を優先する。ローカルに同名のコンポーネントが既にある可能性がある場合は、まず `--dry-run` か `--diff` で確認する。
 - プロジェクトのセットアップでは coss ui の公式ドキュメントに従う。
 
