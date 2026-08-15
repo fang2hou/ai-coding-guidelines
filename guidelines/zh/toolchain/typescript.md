@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: zh
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: e7a04176
+digest: 84554dc4
 ---
 
 # TypeScript 工具链
@@ -70,6 +70,8 @@ TypeScript 是 AI 辅助产品开发的默认语言，其库生态与 agent 生�
 不要因为生成的项目配置没有开启，就让有用的推荐检查处于关闭状态。
 
 当某个规则集或兼容层无法被 oxlint 正确支持时，应显式配置处理，而不是把不兼容的 ESLint 行为硬塞进项目。
+
+按代码实际运行的平台加载插件，而不止于默认项：运行在 Node.js 上的代码应在 `.oxlintrc.json` 中启用 `node` 插件，并有意识地开启其规则——包括 CommonJS 时代的模式防护——同时跳过与项目意图冲突的限制类规则（例如同步文件访问是有意为之的 CLI，应保持 `no-sync` 关闭）。
 
 ### Type-Aware 与类型检查规则
 

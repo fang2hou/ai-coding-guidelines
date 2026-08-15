@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: 5c381c23
+digest: 746df516
 ---
 
 # TypeScript Toolchain
@@ -70,6 +70,13 @@ Enable the rules and recommended rule sets that are appropriate and officially s
 Do not leave useful recommended checks disabled simply because the generated project configuration does not enable them.
 
 When a rule set or compatibility layer is not supported correctly by oxlint, configure it explicitly rather than attempting to force incompatible ESLint behavior into the project.
+
+Load the plugins the code actually runs on, not only the defaults: for code
+that runs on Node.js, enable the `node` plugin in `.oxlintrc.json` and turn on
+its rules deliberately — including the CommonJS-era pattern guards — while
+skipping restriction rules that conflict with the project's intent (for
+example, keep `no-sync` off for CLIs whose synchronous file access is
+intentional).
 
 ### Type-Aware and Type Checking Rules
 

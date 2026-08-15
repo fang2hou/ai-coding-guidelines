@@ -1,7 +1,18 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["node", "typescript", "unicorn", "import"],
   "options": {
     "typeAware": true,
     "typeCheck": true
+  },
+  "rules": {
+    "node/callback-return": "warn",
+    "node/exports-style": "warn",
+    "node/global-require": "warn",
+    "node/handle-callback-err": "warn",
+    "node/no-exports-assign": "error",
+    "node/no-mixed-requires": "warn",
+    "node/no-new-require": "warn",
+    "node/no-path-concat": "error"
   }
 }
