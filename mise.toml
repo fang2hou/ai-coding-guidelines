@@ -1,6 +1,8 @@
 [tools]
 node = "24"
 pnpm = "latest"
+prek = "latest"
+cocogitto = "latest"
 
 [tasks.check]
 description = "Validate trilingual docs, lint and format-check"
