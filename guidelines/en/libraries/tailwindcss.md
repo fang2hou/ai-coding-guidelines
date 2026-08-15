@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 6a02910c
+digest: 049bf683
 ---
 
 # Tailwind CSS
@@ -46,6 +46,35 @@ Preferred — Tailwind CSS is the preferred CSS framework for frontend projects.
 - If the user explicitly requests another Tailwind version, another CSS framework, or a project-specific styling architecture, follow the user's requirement.
 - Follow the conventions and configuration model of the selected Tailwind version.
 - Do not mix patterns from incompatible major Tailwind versions.
+
+### Class linting and sort interop
+
+- Install `oxlint-tailwindcss` as a dev dependency and load it through the `jsPlugins` array in `.oxlintrc.json`.
+- Set `settings.tailwindcss.entryPoint` to the project's Tailwind v4 CSS entry — the file that imports `tailwindcss` and declares `@theme` design tokens. The setting is required and explicit; the plugin performs no filesystem auto-detect.
+- Enable `oxlint-tailwindcss/enforce-sort-order`, which produces the official Tailwind class sort order.
+- Keep the linter and oxfmt on the same design system: point oxfmt's `sortTailwindcss.stylesheet` in `.oxfmtrc.json` at the same CSS file. Otherwise oxfmt reads the `theme.css` bundled inside the `tailwindcss` package and disagrees with the linter on custom `@theme` tokens.
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["oxlint-tailwindcss"],
+  "rules": {
+    "tailwindcss/enforce-sort-order": "warn"
+  },
+  "settings": {
+    "tailwindcss": {
+      "entryPoint": "src/styles.css"
+    }
+  }
+}
+
+// .oxfmtrc.json
+{
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles.css"
+  }
+}
+```
 
 ## Works with
 

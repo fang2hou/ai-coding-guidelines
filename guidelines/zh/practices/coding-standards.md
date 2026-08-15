@@ -1,17 +1,17 @@
 ---
 id: practices/coding-standards
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 34b378a6
+digest: 76dd388b
 ---
 
 # 编码标准
 
 ## 遵循生态最佳实践
 
-针对所选语言和框架，采用合适的现代最佳实践。
+遵循所选语言和框架的既有惯例，不要用一套私有变体取而代之。
 
 具体包括：
 
@@ -22,7 +22,21 @@ digest: 34b378a6
 - 在适用处保证类型安全
 - API 用法地道
 
-不要仅仅因为某个设计模式存在，就套用它。
+用提前返回处理边界情况，让主路径保持扁平：
+
+```ts
+// bad
+if (order !== null) {
+  if (order.isPaid) {
+    ship(order);
+  }
+}
+// good
+if (order === null || !order.isPaid) return;
+ship(order);
+```
+
+只有当设计模式能命名代码库中真实存在的问题时才采用它，而不是因为它出现在某个模式目录里。
 
 ## 避免过度设计
 
@@ -36,7 +50,27 @@ digest: 34b378a6
 - 可维护
 - 易于修改
 
-避免过早泛化。
+避免过早泛化：出现第二个用例之前，不要引入抽象。
+
+```ts
+// bad
+const users = UserRepositoryFactory.create();
+const cache = CacheFactory.createCache();
+// good
+const users = new UserRepository();
+const cache = new Cache();
+```
+
+不要用布尔参数把第二种行为藏在一个函数里；拆成两个函数，让调用处不查标志位也能读懂。
+
+```ts
+// bad
+function saveReport(report: Report, silent: boolean) { /* ... */ }
+saveReport(report, true);
+// good
+function saveReport(report: Report) { /* ... */ }
+function saveReportSilently(report: Report) { /* ... */ }
+```
 
 ## 命名
 
@@ -48,6 +82,15 @@ digest: 34b378a6
 - 已有更好的名称时，仍使用 `data`、`thing`、`value` 之类的通用名称
 - 音译
 - 已有标准英文术语时，仍使用项目专属俚语
+
+```ts
+// bad
+const usr = findUsrById(uid);
+let flag = false;
+// good
+const user = findUserById(userId);
+let hasUnsavedChanges = false;
+```
 
 遵循[语言政策](language-policy.md)中的代码语言规则。
 
@@ -63,9 +106,11 @@ digest: 34b378a6
 
 不要为了抽象的模块化理念，人为制造模块。
 
+判断标准：只被一个页面使用的辅助函数就留在该页面的文件里；出现第二个使用方导入时，再移入共享模块。
+
 ## 新文件与新模块
 
-创建新文件或新模块之前，确认它有明确的职责。
+创建新文件或新模块之前，先用一句话说清它的职责。如果这句话必须用“和”才说得准，说明它承担了两件事——拆分，或者重新考虑。
 
 禁止创建：
 
@@ -74,18 +119,19 @@ digest: 34b378a6
 - 空洞的抽象
 - 与既有功能平行的重复实现
 
+`src/utils/date.ts` 有明确职责；`src/utils/misc.ts` 没有。
+
 新代码必须与既有架构保持一致。
 
 ## 响应式前端
 
-前端应用应实现完整的响应式行为。
+前端应用必须实现完整的响应式行为：在桌面、平板、移动尺寸下都可用，并使用现代响应式布局技术。
 
-应用应在以下相关尺寸类别下保持可用：
+```tsx
+// bad
+<div className="w-[960px] px-8">
+// good
+<div className="w-full max-w-3xl px-4 sm:px-6 lg:px-8">
+```
 
-- 桌面端尺寸
-- 平板尺寸
-- 移动端尺寸
-
-使用现代响应式布局技术。
-
-不要等应用已经按单一固定视口实现完毕，才把响应式行为当作最后的修饰步骤。
+在实现第一个页面时就确定断点。不要等应用已经按单一固定视口实现完毕，才把响应式行为当作最后的修饰步骤。

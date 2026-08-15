@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 9889a65f
+digest: 161ca8a5
 ---
 
 # Tailwind CSS
@@ -46,6 +46,35 @@ digest: 9889a65f
 - ユーザーが別の Tailwind バージョン、別の CSS フレームワーク、またはプロジェクト固有のスタイル設計を明示的に要求した場合は、ユーザーの要求に従う。
 - 選択した Tailwind バージョンの規約と設定モデルに従う。
 - 互換性のない Tailwind メジャーバージョンのパターンを混在させてはならない。
+
+### クラスのリントとソートの相互運用
+
+- `oxlint-tailwindcss` を開発用依存関係としてインストールし、`.oxlintrc.json` の `jsPlugins` 配列から読み込む。
+- `settings.tailwindcss.entryPoint` に、プロジェクトの Tailwind v4 の CSS エントリを指定する。`tailwindcss` をインポートし、`@theme` のデザイントークンを宣言するファイルのことである。この設定は必須で、明示的に指定する。プラグインによるファイルシステムの自動検出はない。
+- `oxlint-tailwindcss/enforce-sort-order` を有効にする。このルールが生成する並び順は、Tailwind 公式のクラス並び順と一致する。
+- リンターと oxfmt が同じデザインシステムを読み込むようにすること。`.oxfmtrc.json` の oxfmt 用設定 `sortTailwindcss.stylesheet` を同じ CSS ファイルに向ける。この指定がないと、oxfmt は `tailwindcss` パッケージに同梱された `theme.css` を読み込み、カスタム `@theme` トークンの扱いでリンターと食い違う。
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["oxlint-tailwindcss"],
+  "rules": {
+    "tailwindcss/enforce-sort-order": "warn"
+  },
+  "settings": {
+    "tailwindcss": {
+      "entryPoint": "src/styles.css"
+    }
+  }
+}
+
+// .oxfmtrc.json
+{
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles.css"
+  }
+}
+```
 
 ## 連携
 

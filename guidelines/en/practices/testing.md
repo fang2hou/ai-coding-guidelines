@@ -1,10 +1,10 @@
 ---
 id: practices/testing
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 7870e427
+digest: f585bfd2
 ---
 
 # Testing Strategy
@@ -48,6 +48,26 @@ Never expose sensitive production information in test fixtures.
 Keep E2E execution time under control.
 
 Do not build a huge E2E suite that significantly slows the rapid validation workflow (see [Quality Gates](../toolchain/quality-gates.md)) without providing corresponding confidence.
+
+For projects using Playwright, load `eslint-plugin-playwright` into oxlint via the `jsPlugins` array. The plugin is officially conformance-tested with oxlint; oxlint's JS plugin support is currently in alpha.
+
+Scope the rules to Playwright test files with an `overrides` entry so they do not fire on application code.
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["eslint-plugin-playwright"],
+  "overrides": [
+    {
+      "files": ["e2e/**/*.ts"],
+      "rules": {
+        "playwright/no-networkidle": "error",
+        "playwright/no-wait-for-timeout": "warn"
+      }
+    }
+  ]
+}
+```
 
 ## Frontend unit tests
 

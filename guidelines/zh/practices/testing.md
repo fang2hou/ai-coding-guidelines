@@ -1,10 +1,10 @@
 ---
 id: practices/testing
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 3d221545
+digest: dc4c0c55
 ---
 
 # 测试策略
@@ -48,6 +48,26 @@ E2E 测试应聚焦：
 控制 E2E 的执行时间。
 
 不要构建庞大的 E2E 套件——这类套件带不来相应的信心，还会显著拖慢快速校验流程(参见[质量门禁](../toolchain/quality-gates.md))。
+
+使用 Playwright 的项目，通过 `jsPlugins` 数组把 `eslint-plugin-playwright` 加载到 oxlint 中。该插件经 oxlint 官方一致性测试验证；oxlint 的 JS 插件支持目前处于 alpha 阶段。
+
+用一条 `overrides` 配置把这些规则限定在 Playwright 测试文件上，避免它们作用于应用代码。
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["eslint-plugin-playwright"],
+  "overrides": [
+    {
+      "files": ["e2e/**/*.ts"],
+      "rules": {
+        "playwright/no-networkidle": "error",
+        "playwright/no-wait-for-timeout": "warn"
+      }
+    }
+  ]
+}
+```
 
 ## 前端单元测试
 

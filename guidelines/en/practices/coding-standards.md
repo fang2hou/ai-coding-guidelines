@@ -1,19 +1,19 @@
 ---
 id: practices/coding-standards
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 6e48b8b5
+digest: 4b39f4fa
 ---
 
 # Coding Standards
 
 ## Follow ecosystem best practices
 
-Use appropriate modern best practices for the selected language and framework.
+Follow the established conventions of the selected language and framework; do not substitute a private variant of them.
 
-This includes:
+This covers:
 
 - Clear structure
 - Appropriate data structures
@@ -22,7 +22,21 @@ This includes:
 - Type safety where appropriate
 - Idiomatic APIs
 
-Do not apply a design pattern merely because it exists.
+Handle edge cases with early returns so the main path stays flat:
+
+```ts
+// bad
+if (order !== null) {
+  if (order.isPaid) {
+    ship(order);
+  }
+}
+// good
+if (order === null || !order.isPaid) return;
+ship(order);
+```
+
+Adopt a design pattern only when it names a problem that actually exists in the codebase, not because a catalog lists it.
 
 ## Avoid over-engineering
 
@@ -36,7 +50,27 @@ Prefer code that is:
 - Maintainable
 - Easy to modify
 
-Avoid premature generalization.
+Avoid premature generalization: wait for the second use case before introducing an abstraction.
+
+```ts
+// bad
+const users = UserRepositoryFactory.create();
+const cache = CacheFactory.createCache();
+// good
+const users = new UserRepository();
+const cache = new Cache();
+```
+
+Do not hide a second behavior behind a boolean parameter; split the function so call sites read without flags.
+
+```ts
+// bad
+function saveReport(report: Report, silent: boolean) { /* ... */ }
+saveReport(report, true);
+// good
+function saveReport(report: Report) { /* ... */ }
+function saveReportSilently(report: Report) { /* ... */ }
+```
 
 ## Naming
 
@@ -48,6 +82,15 @@ Avoid:
 - Generic names such as `data`, `thing`, or `value` when a better name exists
 - Transliteration
 - Project-specific slang when a standard English term exists
+
+```ts
+// bad
+const usr = findUsrById(uid);
+let flag = false;
+// good
+const user = findUserById(userId);
+let hasUnsavedChanges = false;
+```
 
 Follow the code-language rules in [Language Policy](language-policy.md).
 
@@ -63,9 +106,11 @@ Write modular code where modularity improves:
 
 Do not create artificial modules merely to satisfy an abstract idea of modularity.
 
+Decision test: a helper used by exactly one screen stays in that screen's file; it moves to a shared module when a second consumer imports it.
+
 ## New files and modules
 
-Before creating a new file or module, confirm that it has a clear responsibility.
+Before creating a new file or module, state its responsibility in one sentence. If the sentence needs "and" to stay accurate, the file is doing two jobs — split it or reconsider it.
 
 Do not create:
 
@@ -74,18 +119,19 @@ Do not create:
 - Empty abstractions
 - Parallel implementations of existing functionality
 
+`src/utils/date.ts` has a responsibility; `src/utils/misc.ts` does not.
+
 New code must remain consistent with the existing architecture.
 
 ## Responsive frontend
 
-Frontend applications should provide complete responsive behavior.
+Frontend applications must provide complete responsive behavior: usable across desktop, tablet, and mobile sizes, built with modern responsive layout techniques.
 
-The application should remain usable across relevant:
+```tsx
+// bad
+<div className="w-[960px] px-8">
+// good
+<div className="w-full max-w-3xl px-4 sm:px-6 lg:px-8">
+```
 
-- Desktop sizes
-- Tablet sizes
-- Mobile sizes
-
-Use modern responsive layout techniques.
-
-Do not treat responsive behavior as a final cosmetic step after the application has already been implemented for one fixed viewport.
+Decide breakpoints while implementing the first screen. Do not treat responsive behavior as a final cosmetic step after the application has been built for one fixed viewport.

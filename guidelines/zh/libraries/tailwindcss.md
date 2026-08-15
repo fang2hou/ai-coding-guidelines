@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: d012fc0d
+digest: 2b6b6b36
 ---
 
 # Tailwind CSS
@@ -46,6 +46,35 @@ digest: d012fc0d
 - 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时，以用户要求为准。
 - 遵循所选 Tailwind 版本的约定与配置模型。
 - 不要混用来自互不兼容大版本的模式。
+
+### 类名 Lint 与排序互操作
+
+- 将 `oxlint-tailwindcss` 安装为开发依赖，并通过 `.oxlintrc.json` 的 `jsPlugins` 数组加载。
+- 将 `settings.tailwindcss.entryPoint` 指向项目的 Tailwind v4 CSS 入口——即引入 `tailwindcss` 并声明 `@theme` 设计令牌的文件。该设置必填且必须显式指定；插件不做文件系统自动探测。
+- 启用 `oxlint-tailwindcss/enforce-sort-order`，其排序结果与官方 Tailwind 类顺序一致。
+- 把 `.oxfmtrc.json` 中 oxfmt 的 `sortTailwindcss.stylesheet` 指向同一个 CSS 文件，让 Lint 工具和 oxfmt 基于同一套设计系统。否则 oxfmt 读取的是 `tailwindcss` 包内置的 `theme.css`，在自定义 `@theme` 令牌的排序上与 Lint 工具不一致。
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["oxlint-tailwindcss"],
+  "rules": {
+    "tailwindcss/enforce-sort-order": "warn"
+  },
+  "settings": {
+    "tailwindcss": {
+      "entryPoint": "src/styles.css"
+    }
+  }
+}
+
+// .oxfmtrc.json
+{
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles.css"
+  }
+}
+```
 
 ## 联动
 

@@ -1,10 +1,10 @@
 ---
 id: practices/testing
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 47fe1919
+digest: 63539d2f
 ---
 
 # テスト戦略
@@ -48,6 +48,26 @@ E2E テストの対象は次のとおりである。
 E2E テストの実行時間を、管理可能な範囲に保つこと。
 
 それに見合う確信を与えないまま、迅速な検証ワークフロー([品質ゲート](../toolchain/quality-gates.md)を参照)を大幅に遅くする巨大な E2E スイートを作らないこと。
+
+Playwright を使うプロジェクトでは、`eslint-plugin-playwright` を `jsPlugins` 配列から oxlint に読み込む。このプラグインは oxlint の適合性テストの対象として公式にサポートされている。oxlint の JS プラグイン機能は現在アルファ段階である。
+
+`overrides` エントリでルールの適用範囲を Playwright のテストファイルに限定し、アプリケーションコードには適用されないようにすること。
+
+```jsonc
+// .oxlintrc.json
+{
+  "jsPlugins": ["eslint-plugin-playwright"],
+  "overrides": [
+    {
+      "files": ["e2e/**/*.ts"],
+      "rules": {
+        "playwright/no-networkidle": "error",
+        "playwright/no-wait-for-timeout": "warn"
+      }
+    }
+  ]
+}
+```
 
 ## フロントエンドのユニットテスト
 
