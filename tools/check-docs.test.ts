@@ -68,7 +68,7 @@ function withRepo(fn: (root: string) => void): void {
   }
 }
 
-test("valid repo passes", () => {
+void test("valid repo passes", () => {
   withRepo((root) => {
     const out = runChecker(root);
     assert.equal(out.status, 0, out.stdout);
@@ -76,7 +76,7 @@ test("valid repo passes", () => {
   });
 });
 
-test("missing file in one language tree fails isomorphism", () => {
+void test("missing file in one language tree fails isomorphism", () => {
   withRepo((root) => {
     unlinkSync(join(root, "guidelines/zh/foo.md"));
     const out = runChecker(root);
@@ -85,7 +85,7 @@ test("missing file in one language tree fails isomorphism", () => {
   });
 });
 
-test("trio version mismatch fails", () => {
+void test("trio version mismatch fails", () => {
   withRepo((root) => {
     const file = join(root, "guidelines/en/foo.md");
     writeFileSync(file, readFileSync(file, "utf8").replace("version: 1", "version: 2"));
@@ -95,7 +95,7 @@ test("trio version mismatch fails", () => {
   });
 });
 
-test("body edit without digest update fails, --fix repairs only the digest line", () => {
+void test("body edit without digest update fails, --fix repairs only the digest line", () => {
   withRepo((root) => {
     const file = join(root, "guidelines/en/foo.md");
     const before = readFileSync(file, "utf8");
@@ -115,7 +115,7 @@ test("body edit without digest update fails, --fix repairs only the digest line"
   });
 });
 
-test("removed heading in one language fails heading parity", () => {
+void test("removed heading in one language fails heading parity", () => {
   withRepo((root) => {
     const file = join(root, "guidelines/ja/foo.md");
     writeFileSync(file, readFileSync(file, "utf8").replace("## A", ""));
@@ -125,7 +125,7 @@ test("removed heading in one language fails heading parity", () => {
   });
 });
 
-test("body over 300 lines fails size cap", () => {
+void test("body over 300 lines fails size cap", () => {
   withRepo((root) => {
     const filler = `${Array.from({ length: 301 }, (_, i) => `line ${i}`).join("\n")}\n`;
     for (const lang of ["en", "zh", "ja"]) {
@@ -140,7 +140,7 @@ test("body over 300 lines fails size cap", () => {
   });
 });
 
-test("portal link removal fails coverage", () => {
+void test("portal link removal fails coverage", () => {
   withRepo((root) => {
     const file = join(root, "PORTAL.md");
     writeFileSync(
@@ -153,7 +153,7 @@ test("portal link removal fails coverage", () => {
   });
 });
 
-test("portal broken link fails link resolution", () => {
+void test("portal broken link fails link resolution", () => {
   withRepo((root) => {
     const file = join(root, "PORTAL.md");
     writeFileSync(
@@ -177,7 +177,7 @@ const GLOSSARY_WITH_RULE = [
   "",
 ].join("\n");
 
-test("forbidden rendering in a language tree fails term lint", () => {
+void test("forbidden rendering in a language tree fails term lint", () => {
   withRepo((root) => {
     writeFileSync(join(root, "GLOSSARY.md"), GLOSSARY_WITH_RULE);
     const file = join(root, "guidelines/zh/foo.md");
@@ -192,7 +192,7 @@ test("forbidden rendering in a language tree fails term lint", () => {
   });
 });
 
-test("term rules with no occurrences pass", () => {
+void test("term rules with no occurrences pass", () => {
   withRepo((root) => {
     writeFileSync(join(root, "GLOSSARY.md"), GLOSSARY_WITH_RULE);
     const out = runChecker(root);
@@ -200,7 +200,7 @@ test("term rules with no occurrences pass", () => {
   });
 });
 
-test("half-width punctuation adjacent to CJK fails", () => {
+void test("half-width punctuation adjacent to CJK fails", () => {
   withRepo((root) => {
     const file = join(root, "guidelines/zh/foo.md");
     writeFileSync(
@@ -217,7 +217,7 @@ test("half-width punctuation adjacent to CJK fails", () => {
   });
 });
 
-test("punctuation fix rewrites to full-width", () => {
+void test("punctuation fix rewrites to full-width", () => {
   withRepo((root) => {
     const zhFile = join(root, "guidelines/zh/foo.md");
     const jaFile = join(root, "guidelines/ja/foo.md");
@@ -241,7 +241,7 @@ test("punctuation fix rewrites to full-width", () => {
   });
 });
 
-test("latin clusters and code spans keep half-width", () => {
+void test("latin clusters and code spans keep half-width", () => {
   withRepo((root) => {
     const file = join(root, "guidelines/zh/foo.md");
     writeFileSync(file, readFileSync(file, "utf8").replace("Body.", "启用 `E,F` 与规则 E, F, I。"));
@@ -250,5 +250,24 @@ test("latin clusters and code spans keep half-width", () => {
     assert.match(readFileSync(file, "utf8"), /启用 `E,F` 与规则 E, F, I。/);
     const out = runChecker(root);
     assert.equal(out.status, 0, out.stdout);
+  });
+});
+
+void test("space collapse never eats inline code spans", () => {
+  withRepo((root) => {
+    const file = join(root, "guidelines/zh/foo.md");
+    writeFileSync(
+      file,
+      readFileSync(file, "utf8")
+        .replace("Body.", "使用：`oxlint`。")
+        .replace("Text.", "启用 `contextcheck`、`containedctx` 与 `E, F, I`。"),
+    );
+    const out = runChecker(root);
+    assert.doesNotMatch(out.stdout, /redundant space|half-width/);
+    const fixed = runChecker(root, "--fix");
+    assert.equal(fixed.status, 0, fixed.stdout);
+    const after = readFileSync(file, "utf8");
+    assert.match(after, /使用：`oxlint`。/);
+    assert.match(after, /启用 `contextcheck`、`containedctx` 与 `E, F, I`。/);
   });
 });

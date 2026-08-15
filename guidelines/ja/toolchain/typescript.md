@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 4c054070
+digest: 3e84002b
 ---
 
 # TypeScript ツールチェーン
@@ -23,7 +23,11 @@ TypeScript は AI 支援のプロダクト開発におけるデフォルト言�
 
 ## バージョン方針
 
-最新の安定版 TypeScript と Node.js を、mise で管理して使う。
+最新の安定版 TypeScript と、Active LTS ライン上の Node.js を、mise で管理して使う。
+
+2026-08 時点の Active LTS ラインは Node.js 24（EOL 2028-04）である。Node.js 22 はメンテナンス期（EOL 2027-04）にあり、Node.js 26 は 2026-10 まで Current ラインである。Current ラインを対象にせず、Node のメジャーは新しい LTS ラインが落ち着いてから上げる。
+
+モデルは訓練データに基づいてコードを生成するため、主流で十分に検証されたバージョンほど AI 支援開発での破綻が少なく、限界的な性能より優先する。この原則は[中核となるエンジニアリング原則](../principles/core-principles.md)に定める。
 
 Node.js と TypeScript のバージョンはプロジェクトの mise 設定に固定し、グローバルにインストールされたバージョンに依存しない。
 
@@ -102,7 +106,7 @@ Prettier を使わない。
 - `"verbatimModuleSyntax": true`——型だけのインポートには `import type` を必須とし、誤ってランタイムのインポートが混入するのを防ぐ。
 - `"isolatedModules": true`——各ファイルが独立してコンパイルできることを強制し、bundler やトランスパイラの実際の処理単位と一致させる。
 - ESM のみ。アプリケーションは `"module": "ESNext"` と `"moduleResolution": "Bundler"`、Node 向けライブラリは `"module": "NodeNext"` と `"moduleResolution": "NodeNext"` を使う。
-- アプリケーションで tsc から出力しない。を設定し、出力は bundler に任せる。
+- アプリケーションで tsc から出力しない。`"noEmit": true` を設定し、出力は bundler に任せる。
 
 ベースラインの例：
 
@@ -124,14 +128,14 @@ Prettier を使わない。
 
 ## 言語の利用ルール
 
-- 値の型が不明なときは `any` ではなく `unknown` を使い、使用前に絞り込む。は本当に動的な相互運用に限り、理由をコメントで示す。
+- 値の型が不明なときは `any` ではなく `unknown` を使い、使用前に絞り込む。`any` は本当に動的な相互運用に限り、理由をコメントで示す。
 - 非nullアサーション演算子 (`!`) を使う場合は、その時点で値が null や undefined になり得ない理由をコメントで示す。
 - エクスポートする関数には戻り値の型を明示する。
 - 状態はブール値の羅列ではなく、判別可能なユニオン (discriminated union) でモデル化する。
 - 設定オブジェクトは `satisfies` で検証する。定義時点でエラーが表面化し、リテラル型も保持される。
 - 静的なリテラルテーブルには `as const` を付け、要素型を狭く保つ。
 - `enum` の代わりにユニオン型または `const` オブジェクトを使う。
-- promise を放置しない。するか、結果を意図的に破棄する場合のみ `void` を使い、なぜ無視するのかをコメントで示す。
+- promise を放置しない。`await` するか、結果を意図的に破棄する場合のみ `void` を使い、なぜ無視するのかをコメントで示す。
 - 例外として投げるのは `Error` のサブクラスだけにする。文字列や素のオブジェクトを throw しない。
 
 ## プロジェクト規約

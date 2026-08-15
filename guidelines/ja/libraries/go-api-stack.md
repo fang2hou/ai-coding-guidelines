@@ -4,7 +4,7 @@ lang: ja
 version: 1
 source-lang: en
 status: draft
-digest: 3882eb11
+digest: da8d80ac
 ---
 
 # Go API Stack
@@ -30,7 +30,7 @@ digest: 3882eb11
 
 ## トレードオフ
 
-- フレームワークのコンテキストは結合を誘う。は便利で、これに沿って書いたビジネスロジックはフレームワークの中に閉じ込められる。下のレイヤー規則はこの問題を抑えるためにある。
+- フレームワークのコンテキストは結合を誘う。`echo.Context` は便利で、これに沿って書いたビジネスロジックはフレームワークの中に閉じ込められる。下のレイヤー規則はこの問題を抑えるためにある。
 - サービスは Echo のアップグレード周期を継承する。メジャーラインの移行（v4 から v5）はプロジェクトではなくフレームワークの日程で来る。
 
 ## バージョン方針
@@ -45,7 +45,7 @@ digest: 3882eb11
 ### レイヤー構成：ハンドラは薄いアダプタ
 
 - HTTP ハンドラはトランスポート境界にある薄いアダプタである。コア層を呼ぶ前に、フレームワークのコンテキスト（`echo.Context`）を標準の `context.Context` と検証済みの型付きリクエスト値に変換する。
-- コア／ビジネス層が依存するのは標準ライブラリの context とドメイン型だけである。echo も他のどの Web フレームワークも import しない。
+- コア／ビジネス層が依存するのは標準ライブラリの context とドメイン型だけである。`echo` も他のどの Web フレームワークも import しない。
 - これによりコア層は素の Go テストで検証でき、トランスポート方式にも縛られない。
 
 ```go
@@ -62,7 +62,7 @@ func (h *Handler) CreateUser(c echo.Context) error {
 }
 ```
 
-`core.Service.Do(ctx context.Context, req CreateUser)` は標準の context とドメイン型だけを受け取り、には決して触れない。
+`core.Service.Do(ctx context.Context, req CreateUser)` は標準の context とドメイン型だけを受け取り、`echo.Context` には決して触れない。
 
 ### リクエスト検証
 

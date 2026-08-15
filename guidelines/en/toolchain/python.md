@@ -1,10 +1,10 @@
 ---
 id: toolchain/python
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: aeb909bd
+digest: f12bcf0f
 ---
 
 # Python Toolchain
@@ -34,7 +34,9 @@ For the standard API framework, validation, and server stack, see [Python API St
 
 ## Version Policy
 
-Use Python 3.12 or newer, managed by mise.
+Default to Python 3.12, managed by mise. Do not adopt newer CPython lines until the ML ecosystem and model training data have caught up; revisit when the ecosystem's default shifts.
+
+Models generate code from training data, so a mature, widely trained-on version breaks less in AI-assisted development. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
 
 Pin the exact Python version in the project's mise configuration.
 

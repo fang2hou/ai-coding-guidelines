@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 0fa9ba43
+digest: 6fdf2a10
 ---
 
 # TypeScript 工具链
@@ -23,7 +23,11 @@ TypeScript 是 AI 辅助产品开发的默认语言，其库生态与 agent 生�
 
 ## 版本策略
 
-通过 mise 使用最新稳定版 TypeScript 与 Node.js。
+通过 mise 使用最新稳定版 TypeScript 与 Active LTS 线上的 Node.js。
+
+截至 2026-08，Active LTS 线是 Node.js 24（EOL 2028-04）；Node.js 22 处于维护期（EOL 2027-04），Node.js 26 在 2026-10 之前仍是 Current 线。绝不以 Current 线为目标；只有新的 LTS 线稳定之后，才升级 Node 主版本。
+
+模型基于训练数据生成代码，主流且经过充分验证的版本在 AI 辅助开发中出错更少——优先于边际收益。该原则见[核心工程原则](../principles/core-principles.md)。
 
 在项目 mise 配置中固定 Node.js 与 TypeScript 的版本，不要依赖全局安装的版本。
 
@@ -124,7 +128,7 @@ oxlint 已具备所需能力时，不要仅为获得 type-aware Lint 而引入 E
 
 ## 语言使用规则
 
-- 值的类型未知时用 `unknown` 而不是 `any`，先收窄再使用。只保留给真正的动态互操作场景，并附注释说明理由。
+- 值的类型未知时用 `unknown` 而不是 `any`，先收窄再使用。`any` 只保留给真正的动态互操作场景，并附注释说明理由。
 - 非空断言(`!`)必须附带注释，说明该值在此处为何不可能为 null 或 undefined。
 - 导出函数显式声明返回类型。
 - 用可辨识联合(discriminated union)建模状态，不要堆一组布尔标志。

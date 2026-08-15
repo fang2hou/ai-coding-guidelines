@@ -41,6 +41,9 @@ to this table in the same change.
 | workflow                           | 工作流            | ワークフロー                |
 | identifier                         | 标识符            | 識別子                      |
 | lockfile                           | lockfile          | ロックファイル              |
+| framework-agnostic                 | 框架无关          | フレームワーク非依存        |
+| long-term support (LTS)            | LTS               | LTS                         |
+| hallucination                      | 幻觉              | 幻覚                        |
 | secret scanning                    | 凭据扫描          | シークレットスキャニング    |
 | design token                       | 设计令牌          | デザイントークン            |
 | tradeoff                           | 权衡              | トレードオフ                |

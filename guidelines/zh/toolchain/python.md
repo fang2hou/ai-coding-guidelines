@@ -1,10 +1,10 @@
 ---
 id: toolchain/python
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 2a0dc5a3
+digest: ac504412
 ---
 
 # Python 工具链
@@ -34,7 +34,9 @@ Python 与 TypeScript 并列，是 AI 辅助开发的默认语言：二者的库
 
 ## 版本策略
 
-通过 mise 使用 Python 3.12 及以上版本。
+默认使用 Python 3.12，由 mise 管理。在 ML 生态与模型训练数据跟上之前，不要采用更新的 CPython 线；待生态默认版本迁移后再重新评估。
+
+模型基于训练数据生成代码，成熟且被广泛训练覆盖的版本在 AI 辅助开发中出错更少。该原则见[核心工程原则](../principles/core-principles.md)。
 
 在项目 mise 配置中固定 Python 的确切版本。
 
@@ -105,7 +107,7 @@ E 与 F 检查语法与正确性问题，I 保持导入有序，B 捕捉常见 b
 - 字符串拼接用 f-string；新代码不再使用 `%` 格式化与 `str.format`。
 - 禁止可变默认参数(`def f(items=[])`)。默认值用 `None`，集合在函数内创建。
 - 文件、socket、session、client 等资源用上下文管理器(`with`)管理。
-- 重新抛出异常时保留原因：。
+- 重新抛出异常时保留原因：`raise NewError(...) from err`。
 - 内部数据结构用 `dataclasses`;Pydantic 只用于校验边界，见 [Python API 技术栈](../libraries/python-api-stack.md)。
 
 ## 项目布局

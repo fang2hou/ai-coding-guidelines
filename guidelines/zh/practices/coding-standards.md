@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: f5e76d33
+digest: 34b378a6
 ---
 
 # 编码标准
@@ -45,7 +45,7 @@ digest: f5e76d33
 避免：
 
 - 语义模糊的缩写
-- 已有更好的名称时，仍使用 `data`、、之类的通用名称
+- 已有更好的名称时，仍使用 `data`、`thing`、`value` 之类的通用名称
 - 音译
 - 已有标准英文术语时，仍使用项目专属俚语
 

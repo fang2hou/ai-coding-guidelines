@@ -1,17 +1,19 @@
 ---
 id: libraries/typescript-backend
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 97c1039c
+digest: bf8ea483
 ---
 
 # TypeScript Backend
 
 ## Verdict
 
-Preferred — Elysia is the preferred TypeScript backend framework; run it on Bun, managed through mise. Hono is the standard alternative when the runtime must be Node.js, an edge platform such as Cloudflare Workers, or several runtimes at once. Express is rejected.
+Preferred — Hono is the preferred TypeScript backend framework. The default runtime is Node.js on the Active LTS line; Web-standard APIs keep services portable to Cloudflare Workers and other runtimes. Models generate code from training data, so mainstream, thoroughly validated stacks break less in AI-assisted development — that bias shapes this verdict.
+
+Elysia is a justified exception only: it requires Bun, whose compatibility risk with the Node ecosystem is unacceptable by default. Choosing Elysia requires explicit user approval plus a recorded reason — a project ADR when one exists. Express remains rejected.
 
 ## Use when
 
@@ -24,23 +26,24 @@ Preferred — Elysia is the preferred TypeScript backend framework; run it on Bu
 
 ## Strengths
 
+- Hono: multi-runtime — the same code runs on Node.js, Cloudflare Workers, Bun, and Deno. This is the decisive strength: one framework covers the Node LTS default and edge deployment with the same codebase.
+- Hono: built on Web-standard `Request`/`Response`; tiny core with a good middleware set.
+- Hono: typed RPC client (`hono/client`) keeps route contracts typed end to end.
 - Elysia: end-to-end type inference — route schemas flow to clients through Eden.
 - Elysia: first-class performance on Bun's HTTP stack.
 - Elysia: schema validation built in (TypeBox); no separate validation layer to wire.
-- Hono: built on Web-standard `Request`/`Response`; tiny core with a good middleware set.
-- Hono: multi-runtime — the same code runs on Cloudflare Workers, Bun, Node.js, and Deno.
 
 ## Tradeoffs
 
-- Elysia is Bun-first. The Node adapter (`@elysiajs/node`) exists but is younger than running on Bun; treat Node as a constrained deployment target, not the default.
+- Elysia requires Bun. Bun's compatibility risk with the Node ecosystem is the decisive tradeoff: it is not an acceptable default runtime, and every Elysia service carries that exception.
 - Hono ships thinner batteries than legacy frameworks; full applications need more assembly.
-- Splitting Elysia-on-Bun and Hono-elsewhere forks service patterns by runtime — pick one framework per service, not per route.
+- An approved Elysia service forks backend patterns by runtime — keep such exceptions isolated and recorded, one framework per service.
 
 ## Version policy
 
-- Use the latest stable majors of Elysia, Hono, and Bun; do not hold services on old majors without a concrete compatibility reason.
-- Manage Bun through mise like every other tool, pinned in the project's mise configuration.
-- Follow each framework's current documented idioms; do not import Express-era middleware patterns into either.
+- Use the latest stable majors of Hono and Elysia; do not hold services on old majors without a concrete compatibility reason.
+- Pin the runtime to the Node.js Active LTS line through mise — Node.js 24 as of 2026-08 (EOL 2028-04). Never run services on the Current line.
+- Bun, reserved for approved Elysia services, is managed and pinned through mise like every other tool.
 
 ## Usage rules
 
@@ -49,14 +52,14 @@ Preferred — Elysia is the preferred TypeScript backend framework; run it on Bu
 - Validate at the transport boundary: declare schemas on Elysia routes, or attach Hono's validator middleware. Handlers receive already-valid, typed values.
 - The core layer does not re-check transport concerns.
 
-### Thin handlers, framework-free core
+### Thin handlers, framework-agnostic core
 
 - Handlers are thin adapters: convert the framework request into plain typed values at the boundary, then call the core layer. Core modules import neither Elysia nor Hono.
 - This mirrors the Go layering rule in [Go API Stack](../libraries/go-api-stack.md): the core depends on plain typed inputs and Web-standard APIs, never on the web framework.
 
 ### Web-standard APIs
 
-- Prefer Web-standard APIs (`Request`/`Response`, `fetch`, `URL`, streams) over runtime-specific equivalents; they keep the core portable across Bun, Node.js, and Workers.
+- Prefer Web-standard APIs (`Request`/`Response`, `fetch`, `URL`, streams) over runtime-specific equivalents; they keep the core portable across Node.js, Workers, and the approved Bun exception.
 
 ### Typed routes end to end
 
@@ -66,19 +69,27 @@ Preferred — Elysia is the preferred TypeScript backend framework; run it on Bu
 
 - Middleware lives only in the transport layer; the core layer does not know middleware exists.
 
+### Deployment defaults
+
+- Personal projects target Cloudflare Workers: Hono has first-class Workers support, and a core kept on Web-standard APIs runs the same service locally on Node.js.
+- Work projects target Databricks Apps; follow [Databricks](../toolchain/databricks.md). Verified as of 2026-08: Databricks Apps hosts apps built with Python, Node.js, or both; Node dependencies install from `package.json` (a `pnpm-lock.yaml` triggers `pnpm install --frozen-lockfile`), and the command declared in `app.yaml` runs the app. The managed Node runtime is platform-pinned — Node 22 as of mid-2026, older than the current Active LTS line — and the platform-documented Node frameworks are React, Angular, Svelte, and Express.
+- On Databricks the platform, not the project, decides the Node version: keep the service compatible with the platform's runtime instead of assuming the local LTS. Hono deploys there as an ordinary Node.js app via `@hono/node-server`, and the Express rejection stands even though the platform documents it.
+- Data- and AI-heavy Databricks workloads remain Python territory per [Python API Stack](../libraries/python-api-stack.md); add a Node service there only when it clearly earns its place.
+
 ## Works with
 
 ### Internal interplay
 
-- Elysia + Bun — Elysia is Bun-first, built on Bun's HTTP, file-system, and hot-reload APIs; Bun is the default runtime for Elysia services.
-- Elysia ↔ Hono — the runtime decides: Elysia on Bun by default; Hono when the service must run on Node.js, Cloudflare Workers, or multiple runtimes.
+- Hono + Node.js LTS — the default pairing for TypeScript services; the same Hono code also deploys to Cloudflare Workers for personal projects.
+- Elysia + Bun — the approved-exception pairing only: Elysia is Bun-first, built on Bun's HTTP, file-system, and hot-reload APIs.
 
 ### Related guidelines
 
 - [TypeScript Toolchain](../toolchain/typescript.md) — pairs-with: pnpm, oxlint, oxfmt, and the strict tsconfig baseline apply to backend services unchanged.
-- [Testing Strategy](../practices/testing.md) — the framework-free core gets plain unit tests; HTTP concerns get thin-adapter coverage.
+- [Databricks](../toolchain/databricks.md) — deployment target for work projects: Apps vs Jobs, the working window, and deployment files.
+- [Testing Strategy](../practices/testing.md) — the framework-agnostic core gets plain unit tests; HTTP concerns get thin-adapter coverage.
 - [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
 
 ## Rejected alternatives
 
-- Express: callback-era API, weak TypeScript inference, stagnant middleware model. Do not scaffold new services on it, even when a template defaults to it.
+- Express: callback-era API, weak TypeScript inference, stagnant middleware model. Do not scaffold new services on it, even when a template or the hosting platform defaults to it.

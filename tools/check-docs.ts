@@ -40,9 +40,9 @@ function listMarkdown(dir: string, root: string): string[] {
 function normalizeBody(rawAfterFm: string): string {
   let text = rawAfterFm.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
   const lines = text.split("\n");
-  while (lines.length > 0 && lines[0].trim() === "") lines.shift();
+  while (lines[0]?.trim() === "") lines.shift();
   const trimmed = lines.map((l) => l.replace(/[ \t]+$/, ""));
-  while (trimmed.length > 0 && trimmed[trimmed.length - 1] === "") trimmed.pop();
+  while (trimmed[trimmed.length - 1] === "") trimmed.pop();
   return trimmed.length === 0 ? "" : trimmed.join("\n") + "\n";
 }
 
@@ -56,7 +56,7 @@ function headingLevels(body: string): number[] {
     }
     if (inFence) continue;
     const m = /^(#{1,6})(\s|$)/.exec(line);
-    if (m) levels.push(m[1].length);
+    if (m?.[1] !== undefined) levels.push(m[1].length);
   }
   return levels;
 }
@@ -70,13 +70,7 @@ function parseDoc(absPath: string, relPath: string, lang: Lang, errors: string[]
     err("missing front matter (must open with '---')");
     return null;
   }
-  let close = -1;
-  for (let i = 1; i < rawLines.length; i++) {
-    if (rawLines[i].trimEnd() === "---") {
-      close = i;
-      break;
-    }
-  }
+  const close = frontMatterEnd(rawLines);
   if (close === -1) {
     err("unterminated front matter (missing closing '---')");
     return null;
@@ -85,13 +79,14 @@ function parseDoc(absPath: string, relPath: string, lang: Lang, errors: string[]
   const fm = new Map<string, string>();
   let digestLineIdx = -1;
   for (let i = 1; i < close; i++) {
-    const line = rawLines[i];
+    const line = rawLines[i] ?? "";
     const m = /^([a-z-]+):\s*(\S.*)$/.exec(line);
-    if (!m) {
+    if (!m?.[1] || !m[2]) {
       err(`front matter line ${i + 1} is not a flat 'key: value' pair: ${JSON.stringify(line)}`);
       continue;
     }
-    const [, key, value] = m;
+    const key = m[1];
+    const value = m[2];
     if (!REQUIRED_KEYS.includes(key as (typeof REQUIRED_KEYS)[number])) {
       err(`unknown front matter key '${key}' (allowed: ${REQUIRED_KEYS.join(", ")})`);
       continue;
@@ -138,6 +133,14 @@ function parseDoc(absPath: string, relPath: string, lang: Lang, errors: string[]
   };
 }
 
+// Index of the closing '---' of the front matter, or -1 when unterminated.
+function frontMatterEnd(rawLines: string[]): number {
+  for (let i = 1; i < rawLines.length; i++) {
+    if ((rawLines[i] ?? "").trimEnd() === "---") return i;
+  }
+  return -1;
+}
+
 function linkTargets(text: string): string[] {
   const targets: string[] = [];
   let inFence = false;
@@ -148,7 +151,8 @@ function linkTargets(text: string): string[] {
     }
     if (inFence) continue;
     for (const m of line.matchAll(/\[[^\]]*\]\(([^)\s]+)(?:#[^)\s]*)?\)/g)) {
-      targets.push(m[1].replace(/^\.\//, ""));
+      const href = m[1] ?? "";
+      if (href) targets.push(href.replace(/^\.\//, ""));
     }
   }
   return targets;
@@ -183,7 +187,7 @@ function parseTermRules(root: string, errors: string[]): TermRule[] {
   if (start === -1) return [];
   const rules: TermRule[] = [];
   for (let i = start + 1; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const line = (lines[i] ?? "").trim();
     if (/^##\s/.test(line)) break;
     if (!line.startsWith("|")) continue;
     const cells = line
@@ -192,29 +196,29 @@ function parseTermRules(root: string, errors: string[]): TermRule[] {
       .split("|")
       .map((c) => c.trim());
     if (cells.length < 4) continue;
-    if (cells[1] === "Lang" || /^:?-{3,}:?$/.test(cells[1])) continue;
-    if (!LANGS.includes(cells[1] as Lang)) {
-      errors.push(`ERROR GLOSSARY.md: forbidden-renderings row has unknown lang '${cells[1]}'`);
+    const lang = cells[1] ?? "";
+    if (lang === "Lang" || /^:?-{3,}:?$/.test(lang)) continue;
+    if (!LANGS.includes(lang as Lang)) {
+      errors.push(`ERROR GLOSSARY.md: forbidden-renderings row has unknown lang '${lang}'`);
       continue;
     }
-    if (cells[2] === "") continue;
-    rules.push({ term: cells[0], lang: cells[1] as Lang, forbidden: cells[2], instead: cells[3] });
+    if (!cells[2]) continue;
+    rules.push({
+      term: cells[0] ?? "",
+      lang: lang as Lang,
+      forbidden: cells[2],
+      instead: cells[3] ?? "",
+    });
   }
   return rules;
 }
 
 // Yields [index, line] for body lines outside fenced code blocks.
 function* proseLines(doc: Doc): Generator<[number, string]> {
-  let close = 0;
-  for (let i = 1; i < doc.rawLines.length; i++) {
-    if (doc.rawLines[i].trimEnd() === "---") {
-      close = i;
-      break;
-    }
-  }
+  const close = frontMatterEnd(doc.rawLines);
   let inFence = false;
   for (let i = close + 1; i < doc.rawLines.length; i++) {
-    const line = doc.rawLines[i];
+    const line = doc.rawLines[i] ?? "";
     if (/^ {0,3}(```|~~~)/.test(line)) {
       inFence = !inFence;
       continue;
@@ -240,15 +244,19 @@ const PUNCT_FULL: Record<Lang, Record<string, string>> = {
 function checkPunctuationOf(doc: Doc, fix: boolean, errors: string[]): void {
   const mapping = PUNCT_FULL[doc.lang];
   if (Object.keys(mapping).length === 0) return;
+  // Mask code spans with NUL (not spaces): a space mask would let the
+  // space-collapse rule mistake a span for redundant prose spacing and
+  // splice its characters out of the real line.
+  const maskCode = (s: string) => s.replace(/`[^`]*`/g, (m) => "\u0000".repeat(m.length));
   let mutated = false;
   for (const [i, line] of proseLines(doc)) {
-    const masked = line.replace(/`[^`]*`/g, (m) => " ".repeat(m.length));
+    const masked = maskCode(line);
     let fixed = line;
     for (const m of masked.matchAll(/[,;:]/g)) {
       const prev = masked[m.index - 1] ?? "";
       const next = masked[m.index + 1] ?? "";
       if (!CJK_RE.test(prev) && !CJK_RE.test(next)) continue;
-      const full = mapping[m[0]];
+      const full = mapping[m[0]] ?? "";
       if (fix) {
         fixed = fixed.slice(0, m.index) + full + fixed.slice(m.index + 1);
       } else {
@@ -257,10 +265,10 @@ function checkPunctuationOf(doc: Doc, fix: boolean, errors: string[]): void {
         );
       }
     }
-    const masked2 = fixed.replace(/`[^`]*`/g, (m) => " ".repeat(m.length));
+    const masked2 = maskCode(fixed);
     for (const run of [...masked2.matchAll(/([，。、；：])( +)(?=[^|\s])/g)].reverse()) {
       if (fix) {
-        fixed = fixed.slice(0, run.index + 1) + fixed.slice(run.index + 1 + run[2].length);
+        fixed = fixed.slice(0, run.index + 1) + fixed.slice(run.index + 1 + (run[2] ?? "").length);
       } else {
         errors.push(
           `ERROR ${doc.relPath}:${i + 1}: full-width '${run[1]}' followed by redundant space (run 'mise run fix')`,
@@ -274,13 +282,7 @@ function checkPunctuationOf(doc: Doc, fix: boolean, errors: string[]): void {
   }
   if (!mutated) return;
   writeFileSync(doc.absPath, doc.rawLines.join("\n"));
-  let close = 0;
-  for (let i = 1; i < doc.rawLines.length; i++) {
-    if (doc.rawLines[i].trimEnd() === "---") {
-      close = i;
-      break;
-    }
-  }
+  const close = frontMatterEnd(doc.rawLines);
   doc.body = normalizeBody(doc.rawLines.slice(close + 1).join("\n"));
 }
 

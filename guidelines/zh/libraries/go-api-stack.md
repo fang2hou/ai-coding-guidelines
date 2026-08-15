@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: draft
-digest: ec02610b
+digest: 8fe938ae
 ---
 
 # Go API 技术栈
@@ -30,7 +30,7 @@ digest: ec02610b
 
 ## 代价
 
-- 框架上下文诱发耦合：用起来顺手，针对它写的业务逻辑会被困在框架里。下面的分层规则就是用来约束这一点的。
+- 框架上下文诱发耦合：`echo.Context` 用起来顺手，针对它写的业务逻辑会被困在框架里。下面的分层规则就是用来约束这一点的。
 - 服务继承 Echo 的升级节奏：主线迁移（v4 到 v5）按框架的时间表到来，而不是项目的时间表。
 
 ## 版本策略
@@ -82,7 +82,7 @@ func (h *Handler) CreateUser(c echo.Context) error {
 ### 相关指南
 
 - [Go 工具链](../toolchain/go.md) —— 搭配：本技术栈的 Lint、格式化、context 与错误处理规则。
-- [测试策略](../practices/testing.md) —— 测试重点：不依赖框架的核心层用表驱动 Go 测试覆盖；HTTP 部分按薄适配器覆盖。
+- [测试策略](../practices/testing.md) —— 测试重点：框架无关的核心层用表驱动 Go 测试覆盖；HTTP 部分按薄适配器覆盖。
 - [质量门禁](../toolchain/quality-gates.md) —— 同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。
 
 ## 不采用的替代方案

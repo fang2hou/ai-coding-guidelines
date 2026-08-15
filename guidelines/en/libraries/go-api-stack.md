@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: draft
-digest: 6d517b9c
+digest: 5a64b0e1
 ---
 
 # Go API Stack
@@ -82,7 +82,7 @@ func (h *Handler) CreateUser(c echo.Context) error {
 ### Related guidelines
 
 - [Go Toolchain](../toolchain/go.md) — pairs-with: linting, formatting, context, and error-handling rules for this stack.
-- [Testing Strategy](../practices/testing.md) — the framework-free core gets table-driven Go tests; HTTP concerns get thin-adapter coverage.
+- [Testing Strategy](../practices/testing.md) — the framework-agnostic core gets table-driven Go tests; HTTP concerns get thin-adapter coverage.
 - [Quality Gates](../toolchain/quality-gates.md) — same checks: prek and CI run the same lint and format configuration.
 
 ## Rejected alternatives

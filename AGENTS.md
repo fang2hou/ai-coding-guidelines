@@ -23,6 +23,10 @@ standards consumed by AI agents in other projects. Consumers start at
 CI (GitHub Actions) and the pre-commit hook (prek) run `mise run check` on
 every commit and pull request.
 
+Tooling dependencies (`oxlint`, `oxfmt`, `oxlint-tsgolint`, `@types/node`,
+`typescript`) are managed by pnpm (`package.json` / `pnpm-lock.yaml`); mise
+provides only `node` and `pnpm` themselves.
+
 ## Repository map
 
 | Path                        | Content                                         | Language     |

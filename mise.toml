@@ -1,17 +1,14 @@
 [tools]
 node = "24"
-"npm:oxlint" = "latest"
-"npm:oxfmt" = "latest"
-prek = "latest"
-cocogitto = "latest"
+pnpm = "latest"
 
 [tasks.check]
 description = "Validate trilingual docs, lint and format-check"
-run = ["node tools/check-docs.ts", "oxlint tools", "oxfmt --check ."]
+run = ["node tools/check-docs.ts", "pnpm exec oxlint tools", "pnpm exec oxfmt --check ."]
 
 [tasks.fix]
 description = "Fix punctuation and digests, then format markdown and tools/"
-run = ["node tools/check-docs.ts --fix", "oxfmt .", "node tools/check-docs.ts --fix"]
+run = ["node tools/check-docs.ts --fix", "pnpm exec oxfmt .", "node tools/check-docs.ts --fix"]
 
 [tasks.test]
 description = "Run validator tests"

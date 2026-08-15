@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: draft
-digest: 79ace68f
+digest: 0647ed07
 ---
 
 # Go 工具链
@@ -60,8 +60,8 @@ Lint 工具使用 `golangci-lint`。
 
 在基线之上按项目性质加侧重组：
 
-- 重度使用 context 的服务：、、、`noctx`
-- 以错误处理为重点的项目：之外加 `errorlint` 与 `wrapcheck`
+- 重度使用 context 的服务：`contextcheck`、`containedctx`、`fatcontext`、`noctx`
+- 以错误处理为重点的项目：在 `errcheck` 之上加 `errorlint` 与 `wrapcheck`
 
 ### 格式化
 
@@ -123,9 +123,9 @@ linters:
 
 ### 目录结构
 
-Go 没有官方的标准项目布局。仓库是社区参考而非官方标准；官方指南 Organizing a Go module 的起点也是把基础包直接放在模块根目录。
+Go 没有官方的标准项目布局。`golang-standards/project-layout` 仓库是社区参考而非官方标准；官方指南 Organizing a Go module 的起点也是把基础包直接放在模块根目录。
 
-- 小型库可以保持根目录扁平：加包文件即可。
+- 小型库可以保持根目录扁平：`go.mod` 加包文件即可。
 - 复杂服务应按业务分层设计自己的结构，而不是照搬模板。
 
 `cmd/`（每个二进制一个入口）与 `internal/`（由编译器强制限制导入）仍然是有用的惯例。当它们服务于设计时才采用，而不是当作模板义务。

@@ -16,7 +16,7 @@ project documentation.
 
 ## Decision
 
-- **Guideline content (the product) lives in `guidelines/{en,zh,ja}/**`** —
+- **Guideline content (the product) lives in `guidelines/{en,zh,ja}/**`\*\* —
   three isomorphic language trees. Each document is a small, single-concern
   file (body limited to 300 lines).
 - **This repository's own documentation is English-only and lives under

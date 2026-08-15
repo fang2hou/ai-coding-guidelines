@@ -1,10 +1,10 @@
 ---
 id: principles/core-principles
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 2e75e0ac
+digest: 2f995b9d
 ---
 
 # Core Engineering Principles
@@ -72,6 +72,23 @@ If a genuine technical incompatibility exists, explain it to the user before cha
 
 Do not silently substitute tools.
 
+## Prefer Mainstream, Well-Validated Choices
+
+AI agents generate code from training data, not from live documentation.
+
+Brand-new or niche versions and stacks are underrepresented in that data, which increases hallucination-driven breakage: crashes, wrong APIs, inconsistent behavior.
+
+Therefore, default to mainstream, thoroughly validated choices:
+
+- Runtimes ride LTS or mature lines: Node.js Active LTS by default, Python 3.12 for ML work.
+- Libraries prefer mainstream, widely documented options over brand-new or obscure alternatives.
+- Bleeding-edge majors, niche frameworks, and niche runtimes (for example, Bun-backed stacks) require explicit user approval and a recorded reason.
+- In default decisions, compatibility beats marginal performance gains.
+
+Prefer stability over marginal gains.
+
+Treat model knowledge coverage as a selection criterion, alongside benchmarks and feature lists.
+
 ## Root Cause Over Symptom Suppression
 
 When a warning, lint error, test failure, type error, or other validation problem appears:
@@ -100,6 +117,10 @@ It is to create a predictable engineering environment in which both humans and A
 When a choice does not materially depend on the product:
 
 > **Standardize it.**
+
+When versions or stacks differ in maturity:
+
+> **Prefer the well-validated one.**
 
 When a change affects architecture:
 
