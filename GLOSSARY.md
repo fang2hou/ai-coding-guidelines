@@ -57,6 +57,7 @@ to this table in the same change.
 | script injection                   | 脚本注入          | スクリプトインジェクション  |
 | pipeline                           | 流水线            | パイプライン                |
 | stage                              | 阶段              | ステージ                    |
+| whitelist                          | 白名单            | ホワイトリスト              |
 
 ## Forbidden renderings
 

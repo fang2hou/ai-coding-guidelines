@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: ee8ce0ae
+digest: 615c3eb8
 ---
 
 # Git ワークフロー
@@ -75,6 +75,24 @@ GitHub Actions には、Conventional Commits の検証チェックを含めな�
 - 最終的なリポジトリの履歴
 
 CI ワークフローの標準については [GitHub Actions](../toolchain/github-actions.md) を参照。
+
+## リポジトリ属性
+
+GitHub でホストするプロジェクトは、`.gitattributes` ファイルをコミットすること。
+
+GitHub の言語統計を正しく保つために使う。生成ファイルや付帯ファイル（ロックファイル、設定、CI 定義）が、プロジェクトの中核を覆い隠してはならない。
+
+ブラックリストではなくホワイトリストを優先する。デフォルトですべてを統計から除外し、プロジェクトの本体だけを改めて有効にする。
+
+```gitattributes
+* -linguist-detectable
+src/** linguist-detectable
+pnpm-lock.yaml linguist-generated
+```
+
+Markdown などの文章系の言語はデフォルトでは統計に含まれないため、明示的な `linguist-detectable` ルールが必要である。後から追加したファイルは、明示的に有効にするまで統計対象外のままにとどまる。
+
+ファイル自体はコメントなしに保ち、根拠はプルリクエストまたはプロジェクトのドキュメントに記録する。
 
 ## Git の安全運用
 

@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 3d1e426d
+digest: de58d827
 ---
 
 # Git Workflow
@@ -79,6 +79,24 @@ The goal is to keep both:
 consistent.
 
 See [GitHub Actions](../toolchain/github-actions.md) for CI workflow standards.
+
+## Repository Attributes
+
+GitHub-hosted projects should commit a `.gitattributes` file.
+
+Use it to keep GitHub's language statistics honest: generated and incidental files (lockfiles, configs, CI definitions) must not drown out the project's core content.
+
+Prefer a whitelist over a blacklist: exclude everything from the statistics by default and re-include only what the project is.
+
+```gitattributes
+* -linguist-detectable
+src/** linguist-detectable
+pnpm-lock.yaml linguist-generated
+```
+
+Prose languages such as Markdown are not counted by default; they need an explicit `linguist-detectable` rule. Files added later stay out of the statistics until they are opted in.
+
+Keep the file itself comment-free; record the rationale in the pull request or the project documentation.
 
 ## Git Safety
 
