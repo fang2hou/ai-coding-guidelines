@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 4b39f4fa
+digest: fc51bca2
 ---
 
 # Coding Standards
@@ -65,11 +65,17 @@ Do not hide a second behavior behind a boolean parameter; split the function so 
 
 ```ts
 // bad
-function saveReport(report: Report, silent: boolean) { /* ... */ }
+function saveReport(report: Report, silent: boolean) {
+  /* ... */
+}
 saveReport(report, true);
 // good
-function saveReport(report: Report) { /* ... */ }
-function saveReportSilently(report: Report) { /* ... */ }
+function saveReport(report: Report) {
+  /* ... */
+}
+function saveReportSilently(report: Report) {
+  /* ... */
+}
 ```
 
 ## Naming

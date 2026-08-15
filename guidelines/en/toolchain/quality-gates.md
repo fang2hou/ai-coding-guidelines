@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 0d36d39a
+digest: 86cf5833
 ---
 
 # Quality Gates
@@ -83,9 +83,9 @@ mise run check && mise run test
 
 ```yaml
 # .github/workflows/ci.yml - steps section
-    - uses: jdx/mise-action@v2   # installs the mise-managed toolchain
-    - run: mise run check
-    - run: mise run test
+- uses: jdx/mise-action@v2 # installs the mise-managed toolchain
+- run: mise run check
+- run: mise run test
 ```
 
 If these commands pass locally but fail in CI, the two environments have diverged. Align them instead of accumulating CI-only fixes.
