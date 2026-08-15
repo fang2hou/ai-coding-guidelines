@@ -38,7 +38,7 @@ TypeScript project", "Add a dependency", "Write tests", and so on.
 this repository's [PORTAL.md](./PORTAL.md), or install the skill:
 
 ```bash
-npx skills add fang2hou/ai-coding-guideline@apply-ai-coding-guideline
+pnpm dlx skills add fang2hou/ai-coding-guideline@apply-ai-coding-guideline
 ```
 
 The skill ships no guideline content; on every run it fetches the current
