@@ -1,10 +1,10 @@
 ---
 id: toolchain/github-actions
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 72fbdfe4
+digest: eee9e7e7
 ---
 
 # GitHub Actions
@@ -41,6 +41,57 @@ GitHub Actions
 rather than duplicating project logic directly inside workflow YAML.
 
 mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML. See [mise](../toolchain/mise.md).
+
+## Naming and Readability
+
+This principle applies to any CI system, not only GitHub Actions: once a
+pipeline grows beyond a few steps, structure it with the primitives the tool
+recommends — stages, jobs, separate files — instead of accreting anonymous
+steps. Every level of the pipeline must stay explainable from the run log
+alone.
+
+For GitHub Actions:
+
+- Give the workflow a `name` that states what it does (`CI`, `Release`). Do
+  not rely on the filename, and do not repeat a job name as the workflow name.
+- Give every job a readable `name`. Job names surface as status checks in
+  branch protection; a reader must be able to map a failed check to a
+  responsibility (`Validate`, `Validate PR title`), not to a tool invocation.
+- Name every step with a short imperative phrase saying what it does or
+  verifies (`Install dependencies (pnpm)`, `Check commit history (cog)`). A
+  `run:` step without `name` renders as its raw command, and commands are not
+  documentation.
+- One concern per workflow file. Split by trigger or audience when they
+  diverge; prefer several small workflows over one growing file.
+
+## Hardening Defaults
+
+Apply these to every workflow unless it has a stated reason not to:
+
+```yaml
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    timeout-minutes: 15
+```
+
+- Least privilege: default `permissions` to `contents: read`; widen only in
+  the job that needs more.
+- Set `timeout-minutes` on every job so a hung job cannot burn runner minutes
+  up to the platform default.
+- Use `concurrency` with `cancel-in-progress` so superseded runs on the same
+  ref are cancelled instead of queuing.
+- Pass untrusted input (PR titles, branch names, issue text) into `run:`
+  scripts through environment variables, never via direct `${{ }}`
+  interpolation — direct interpolation enables script injection.
+- Pin actions to major version tags from verified creators at minimum;
+  prefer full commit SHAs for third-party actions.
 
 ## Related
 
