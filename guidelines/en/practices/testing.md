@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: f585bfd2
+digest: 81ee8d03
 ---
 
 # Testing Strategy
@@ -62,10 +62,10 @@ Scope the rules to Playwright test files with an `overrides` entry so they do no
       "files": ["e2e/**/*.ts"],
       "rules": {
         "playwright/no-networkidle": "error",
-        "playwright/no-wait-for-timeout": "warn"
-      }
-    }
-  ]
+        "playwright/no-wait-for-timeout": "warn",
+      },
+    },
+  ],
 }
 ```
 

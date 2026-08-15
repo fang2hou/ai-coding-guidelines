@@ -4,7 +4,7 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: ddc38b57
+digest: e9cd32e5
 ---
 
 # 品質ゲート
@@ -83,9 +83,9 @@ mise run check && mise run test
 
 ```yaml
 # .github/workflows/ci.yml - steps section
-    - uses: jdx/mise-action@v2   # installs the mise-managed toolchain
-    - run: mise run check
-    - run: mise run test
+- uses: jdx/mise-action@v2 # installs the mise-managed toolchain
+- run: mise run check
+- run: mise run test
 ```
 
 これらのコマンドがローカルで通って CI で失敗するなら、両環境はすでに乖離している。CI 専用の修正を積み重ねるのではなく、環境どうしを一致させること。

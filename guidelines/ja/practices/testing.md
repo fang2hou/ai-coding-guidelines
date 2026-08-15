@@ -4,7 +4,7 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 63539d2f
+digest: 83dcae43
 ---
 
 # テスト戦略
@@ -62,10 +62,10 @@ Playwright を使うプロジェクトでは、`eslint-plugin-playwright` を `j
       "files": ["e2e/**/*.ts"],
       "rules": {
         "playwright/no-networkidle": "error",
-        "playwright/no-wait-for-timeout": "warn"
-      }
-    }
-  ]
+        "playwright/no-wait-for-timeout": "warn",
+      },
+    },
+  ],
 }
 ```
 

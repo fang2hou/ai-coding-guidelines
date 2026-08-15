@@ -7,6 +7,7 @@ standards consumed by AI agents in other projects. Consumers start at
 ## Critical rules
 
 - All three language versions of a document land in the same change.
+- All changes land through a pull request; never push directly to `main`.
 - `digest` is tool-written only; never edit it by hand.
 - Body limit is 300 lines; split the document instead of exceeding it.
 - Conclusions only — no discussion process, open questions, or notes.
@@ -99,6 +100,10 @@ verification, audit procedure) touch `skills/`.
 5. Run `mise run fix`, then `mise run check` — it must pass before commit.
 6. Commit with Conventional Commits, English, scope = top-level id segment,
    e.g. `docs(toolchain): tighten oxlint type-aware rules`.
+7. Push the branch and open a pull request. The PR title follows the same
+   Conventional Commits convention — CI validates it with `cog verify` and
+   validates the commits with `cog check`. Merge only after CI passes.
+   See [ADR-0002](./docs/adr/0002-pr-based-contribution-workflow.md).
 
 Worked example — tighten a rule in `toolchain/typescript`:
 
@@ -109,6 +114,8 @@ Worked example — tighten a rule in `toolchain/typescript`:
 4. mise run fix   → punctuation + digests fixed, Markdown formatted
 5. mise run check → OK: N documents, N/3 ids x 3 languages
 6. git commit -m "docs(toolchain): require type-aware oxlint rules"
+7. git push + open PR "docs(toolchain): require type-aware oxlint rules"
+8. CI green (check + pr-title) → merge
 ```
 
 ### Structural changes
@@ -142,9 +149,11 @@ Worked example — tighten a rule in `toolchain/typescript`:
 ## Boundaries
 
 - **Always**: sync the trio in one change; run `mise run check` before
-  committing; keep one concern per document.
+  committing; keep one concern per document; land every change through a
+  pull request.
 - **Ask first**: adding a new content category; changing the front matter
   schema or validator behavior; anything ADR-0001 lists as a review trigger.
 - **Never**: merge a partially translated trio; hand-edit `digest`;
   translate files under `docs/`; record discussion process; commit
-  machine-translation-style text; bypass validation.
+  machine-translation-style text; bypass validation; push directly to
+  `main`.

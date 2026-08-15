@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 2109dea0
+digest: 954c102c
 ---
 
 # 质量门禁
@@ -83,9 +83,9 @@ mise run check && mise run test
 
 ```yaml
 # .github/workflows/ci.yml - steps section
-    - uses: jdx/mise-action@v2   # installs the mise-managed toolchain
-    - run: mise run check
-    - run: mise run test
+- uses: jdx/mise-action@v2 # installs the mise-managed toolchain
+- run: mise run check
+- run: mise run test
 ```
 
 如果这些命令本地通过、CI 失败，说明两个环境已经分叉；对齐它们，不要攒 CI 专用的补丁。

@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 76dd388b
+digest: d93af50b
 ---
 
 # 编码标准
@@ -65,11 +65,17 @@ const cache = new Cache();
 
 ```ts
 // bad
-function saveReport(report: Report, silent: boolean) { /* ... */ }
+function saveReport(report: Report, silent: boolean) {
+  /* ... */
+}
 saveReport(report, true);
 // good
-function saveReport(report: Report) { /* ... */ }
-function saveReportSilently(report: Report) { /* ... */ }
+function saveReport(report: Report) {
+  /* ... */
+}
+function saveReportSilently(report: Report) {
+  /* ... */
+}
 ```
 
 ## 命名

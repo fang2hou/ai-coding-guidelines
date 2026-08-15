@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: dc4c0c55
+digest: 30507b95
 ---
 
 # 测试策略
@@ -62,10 +62,10 @@ E2E 测试应聚焦：
       "files": ["e2e/**/*.ts"],
       "rules": {
         "playwright/no-networkidle": "error",
-        "playwright/no-wait-for-timeout": "warn"
-      }
-    }
-  ]
+        "playwright/no-wait-for-timeout": "warn",
+      },
+    },
+  ],
 }
 ```
 
