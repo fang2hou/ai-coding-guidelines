@@ -1,7 +1,9 @@
 # Project Audit Procedure
 
-Quick check of an existing project against the AI Coding Guideline. Produces a
-structured divergence report and ranked optimization directions.
+Quick check of an existing project against the AI Coding Guideline. The
+comparison criteria are ALWAYS the fetched guideline repository (Step 1 of the
+skill) — PORTAL.md inventory plus the toolchain/ and libraries/ documents —
+never a summary or memory.
 
 ## Step 1: Inventory (read-only, no edits)
 
@@ -9,20 +11,20 @@ Collect, without modifying anything:
 
 1. Runtimes and tools: `mise.toml` / `.mise.toml` (or absence), `.tool-versions`, CI workflow files.
 2. Package managers: `pnpm-lock.yaml`, `uv.lock`, `package-lock.json`, `yarn.lock`, `requirements.txt`, `Pipfile`, `poetry.lock`.
-3. Lint/format configs: `.oxlintrc.json`, `oxfmt` config, `pyproject.toml` `[tool.ruff]`, `.golangci.yml`, `rustfmt.toml`, `.eslintrc*`, `biome.json` (banned tools show up here).
-4. Stack markers: framework imports in manifests (`package.json` dependencies, `pyproject.toml`), `components/ui` presence, `app.yaml` (Databricks), `wrangler.toml` (Workers).
-5. Gates: `.pre-commit-config.yaml`, CI jobs, `mise` tasks.
+3. Lint/format configs: `.oxlintrc.json`, oxfmt config, `pyproject.toml` `[tool.ruff]`, `.golangci.yml`, `rustfmt.toml`, and any banned-tool configs (`.eslintrc*`, `biome.json`, `.prettierrc*`).
+4. Stack markers: framework dependencies in `package.json` / `pyproject.toml`, `components/ui` presence, `app.yaml` (Databricks), `wrangler.toml` (Workers).
+5. Gates: `.pre-commit-config.yaml`, CI jobs, mise tasks.
 6. Frontend structure: where shadcn components and custom components live.
 
-## Step 2: Compare against the defaults matrix
+## Step 2: Compare against the fetched guidelines
 
-Use [stack-defaults.md](stack-defaults.md). For every inventory item decide:
+Open the fetched documents that govern each inventory item (for example
+`toolchain/typescript`, `toolchain/python`, `libraries/typescript-backend`,
+`libraries/shadcn-ui`) and decide per item:
 
-- **compliant** — matches the standard;
+- **compliant** — matches the fetched standard;
 - **justified divergence** — differs AND a project ADR (or explicit user decision) records why;
 - **violation** — differs with no recorded reason.
-
-Banned-tool presence (eslint, prettier, biome, npm/yarn lockfiles, pip/conda usage, Express in a new backend, Bun-bound stacks) is a violation by default.
 
 ## Step 3: Classify risk
 
@@ -39,10 +41,10 @@ Return exactly this structure:
 
 ```
 ## Compliance summary
-<one line: X compliant, Y justified, Z violations>
+<one line: X compliant, Y justified, Z violations — guideline @ <commit SHA>>
 
 ## Violations
-- <area>: <found> → <expected> (risk: <1-4>)
+- <area>: <found> → <expected per <document>> (risk: <1-4>)
   fix: <concrete action>
 
 ## Justified divergences
@@ -54,6 +56,6 @@ Return exactly this structure:
 
 Rules for the report:
 
-- Every violation names the concrete fix, not a principle.
+- Every violation names the governing document and the concrete fix, not a principle.
 - Optimization directions are ranked by risk reduction; never propose rewrites that churn working code for consistency alone.
 - Do not apply fixes during the audit; the report is the deliverable.

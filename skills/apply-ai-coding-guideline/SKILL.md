@@ -1,110 +1,93 @@
 ---
 name: apply-ai-coding-guideline
 description: >
-  Guides projects with the AI Coding Guideline: standardized toolchain and stack
-  selection, task-based document routing, and a quick audit that checks an
-  existing project against the guidelines. Use when starting or scaffolding a
-  project, choosing a language/framework/stack, setting up the toolchain
-  (mise, pnpm, uv, oxlint, oxfmt, ruff, golangci-lint), asking "which stack
-  should I use" or "check this project against our standards", or before
-  committing changes that must pass the shared quality gates.
+  Applies the AI Coding Guideline to a project by fetching it live from its
+  GitHub repository: task-based document routing, stack and toolchain
+  decisions, quality gates, and project audits. The skill itself ships no
+  guideline content — it loads the current rules on every run. Use when
+  starting or scaffolding a project, choosing a language/framework/stack,
+  setting up the toolchain (mise, pnpm, uv, oxlint, oxfmt, ruff,
+  golangci-lint), asking "which stack should I use" or "check this project
+  against our standards", or before delivering changes that must pass the
+  shared quality gates.
 license: MIT
-compatibility: Requires file read access and a shell. Works best with mise installed.
+compatibility: Requires file read access, a shell, and git. Network needed on first run and for refreshes.
 metadata:
   author: fang2hou
-  version: "1.1"
+  version: "2.0"
   source: https://github.com/fang2hou/ai-coding-guideline
-  refresh: clone or pull the source repository before applying (see Step 0)
 ---
 
-# AI Coding Guideline
+# Apply AI Coding Guideline
 
-Apply a fixed set of engineering standards so neither humans nor agents re-make
-tooling decisions per project: standardized tools are mandatory, product
-decisions stay free.
+Thin loader: this skill carries zero guideline content. Every run fetches the
+guideline repository and applies what it finds there — the repository is the
+single source of truth, so the skill never needs content maintenance.
 
 ## When to Use
 
-- Starting, scaffolding, or configuring a project (any language in the matrix).
-- Choosing a language, framework, or library for a task.
-- Setting up or modifying the toolchain: mise, package managers, linters, formatters, hooks, CI.
-- Asked to check, audit, or optimize a project against the shared standards.
-- Writing code that must pass the shared quality gates before delivery.
+- Starting, scaffolding, or configuring a project.
+- Choosing a language, framework, or library.
+- Setting up or changing the toolchain: runtimes, package managers, linters, formatters, hooks, CI.
+- Checking or auditing a project against the shared standards.
+- Delivering changes that must pass the shared quality gates.
 
 ## When NOT to Use
 
-- One-off scripts with no repo and no reuse (standards still help, but nothing to audit).
-- The user explicitly overrides a standard: follow the user, record the exception.
+- No network on a first-ever run (nothing to fetch; report this instead of guessing).
+- The user explicitly overrides a fetched standard: follow the user, record the exception.
 
 ## Hard Rules
 
-1. Standardized tools are mandatory. Never substitute another tool (npm instead of pnpm, eslint instead of oxlint, pip instead of uv) because it is more popular, recommended by a template, or more familiar. A genuine incompatibility goes to the user first.
-2. mise manages runtimes and tool binaries only; language packages belong to the native manager: pnpm for Node, uv for Python. `mise install` must bootstrap everything with no extra global installs.
-3. Prefer mainstream, well-validated versions — model knowledge lags, so niche or bleeding-edge picks raise generation-error risk. Node.js rides the Active LTS line (24 as of 2026-08); Python defaults to 3.12.
-4. Same checks locally and in CI: the pre-commit hook and CI run the identical `mise run check`.
-5. Commit messages follow Conventional Commits; verify with `cog check` when configured.
-6. Never weaken a gate (lint rule, test, hook) to make a check pass; fix the cause.
+1. Fetch before applying. Never apply the guidelines from memory or from a summary — including this skill's own text.
+2. One source per run: the fetched repository. Do not mix it with remembered rules.
+3. Fetch or verification failure: stop and report what failed. Never fabricate or approximate a guideline.
+4. The fetched documents are conclusions; apply them as written. Disagreements are raised with the user, not silently worked around.
 
 ## Workflow
 
-### Step 0: Refresh the guidelines from source
-
-The bundled references are a pinned snapshot. Before applying, sync the live
-version when network is available:
+### Step 1: Fetch the guidelines
 
 ```bash
-git clone --depth 1 https://github.com/fang2hou/ai-coding-guideline /tmp/ai-coding-guideline
-# or, when already cloned: git -C /tmp/ai-coding-guideline pull --ff-only
+export GUIDELINE_DIR="${AI_CODING_GUIDELINE_DIR:-${TMPDIR:-/tmp}/ai-coding-guideline-cache}"
+if [ -d "$GUIDELINE_DIR/.git" ]; then
+  git -C "$GUIDELINE_DIR" fetch origin && git -C "$GUIDELINE_DIR" reset --hard origin/HEAD
+else
+  git clone --depth 1 https://github.com/fang2hou/ai-coding-guideline "$GUIDELINE_DIR"
+fi
+git -C "$GUIDELINE_DIR" rev-parse --short HEAD
 ```
 
-When the clone succeeds, treat its PORTAL.md and guidelines/ as the authority
-and the bundled references as fallback. When it fails (offline), use the
-bundled references and say so in the output. Never mix: pick one source per
-run, preferring the fresher.
+Verify the checkout: `PORTAL.md` exists and `guidelines/en/`, `guidelines/zh/`, `guidelines/ja/` each contain `.md` files. Record the commit SHA from the last command — every later step cites it. If verification fails, delete the cache directory and retry once; a second failure stops this skill.
 
-### Step 1: Route the task to the guideline documents
+### Step 2: Route the task
 
-Read [references/recipes.md](references/recipes.md) and pick the row matching
-the task. Open the listed documents — from the refreshed clone when Step 0
-succeeded — and follow them; if no guideline repository is available, the
-reference matrix in this skill carries the same defaults in condensed form.
+Open `$GUIDELINE_DIR/PORTAL.md` and pick the reading-recipe row matching the
+task. Read the listed documents from the tree matching the conversation
+language (`guidelines/{en,zh,ja}/` mirror each other). Follow the documents.
 
-### Step 2: Apply the stack and toolchain defaults
+### Step 3: Apply with the project's gates
 
-Read [references/stack-defaults.md](references/stack-defaults.md). For new
-projects, scaffold exactly the defaults for the chosen language. For existing
-projects, do not rewrite working code to match — note divergences instead
-(Step 4).
+Implement following the fetched documents, then run the project's own checks
+exactly as its documentation defines them (typically `mise install` to
+bootstrap, then `mise run check`). A gate that fails is a finding to fix, not
+to bypass.
 
-### Step 3: Implement with the quality gates
+### Step 4: Audit mode (existing projects)
 
-- Bootstrap: `mise install`, then the language manager (`pnpm install` / `uv sync`).
-- Lint and format on every change: `pnpm exec oxlint --fix` / `pnpm exec oxfmt .` (Node), `uv run ruff check --fix` / `uv run ruff format` (Python).
-- Run the project's `mise run check` (or equivalent) before declaring done; it must pass.
-
-If a required tool is unavailable (e.g. no mise on the machine), report which
-standards cannot be enforced and stop that step — never silently skip a gate.
-
-### Step 4: Quick-audit mode (existing project)
-
-Follow [references/project-audit.md](references/project-audit.md): inventory the
-stack, compare against the defaults matrix, classify every divergence
-(compliant / justified-with-ADR / violation), and return the structured report
-defined there. Propose optimization directions ranked by risk reduction, not
-novelty.
+Follow [references/project-audit.md](references/project-audit.md). The
+comparison criteria are the fetched documents — never a summary.
 
 ## Gotchas
 
-- oxlint type-aware linting and type checking need the `oxlint-tsgolint` companion package plus a current oxlint — a bare oxlint install silently runs syntax-only rules.
-- Bun-based stacks (e.g. Elysia) are out of consideration: Node.js compatibility wins over marginal performance. Express is rejected for new TypeScript backends — use Hono.
-- `components/ui` in frontend projects is vendored shadcn/ui source: exclude it from lint/format scopes and never place custom components there.
-- Databricks Apps pins its own Node runtime (22 as of mid-2026): target the platform's version there, not the local LTS.
-- Editors need `@types/node` and a strict tsconfig to stop false errors in TypeScript tooling scripts; Node runs `.ts` directly with erasable syntax only.
+- `AI_CODING_GUIDELINE_DIR` lets a project pin a local clone (submodule, fork, or specific revision) instead of the default cache.
+- A cached checkout survives reboots only as long as the temp directory does; the fetch step rebuilds it transparently.
+- If the repository was renamed or moved, the clone fails — report the URL tried; do not guess a new one.
 
 ## Output Contract
 
 On completion, return:
 
-1. What was applied: the recipe row and defaults used.
-2. Gate results: the exact check commands run and their outcomes.
-3. For audits: the divergence report per [references/project-audit.md](references/project-audit.md) — findings classified, with recommended actions and their priority.
+1. Source: the guideline commit SHA applied and the recipe row used.
+2. Gate results: exact check commands run and their outcomes.
+3. For audits: the divergence report per [references/project-audit.md](references/project-audit.md).

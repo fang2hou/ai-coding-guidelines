@@ -20,10 +20,10 @@ Give your coding agent this guideline as an installable skill:
 npx skills add fang2hou/ai-coding-guideline@apply-ai-coding-guideline
 ```
 
-The skill routes tasks to the right documents, applies the stack and
-toolchain defaults, audits an existing project against them, and refreshes
-the live guidelines from GitHub on each run
-([skills/apply-ai-coding-guideline/](./skills/apply-ai-coding-guideline/)).
+The skill is a thin loader: it ships no guideline content and instead fetches
+this repository live on every run — routing via PORTAL, applying the current
+standards, and auditing projects against the fetched revision — so it never
+needs content maintenance ([skills/apply-ai-coding-guideline/](./skills/apply-ai-coding-guideline/)).
 
 ```bash
 mise install && mise run check
