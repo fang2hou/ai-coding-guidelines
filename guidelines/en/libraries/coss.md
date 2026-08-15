@@ -1,10 +1,10 @@
 ---
 id: libraries/coss
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: b08c5cbc
+digest: fbb43148
 ---
 
 # coss ui
@@ -39,14 +39,14 @@ Secondary — coss ui is the approved second option after [shadcn/ui](shadcn-ui.
 ## Version policy
 
 - Requires Tailwind CSS v4 and Base UI; track the latest registry state.
-- Components update through the shadcn CLI (`npx shadcn@latest add`), not through npm package versions.
+- Components update through the shadcn CLI (`pnpm dlx shadcn@latest add`), not through npm package versions.
 
 ## Usage rules
 
 ### Installation and tooling
 
-- Install components with the shadcn CLI: `npx shadcn@latest add @coss/<component>`; bootstrap a project with `npx shadcn@latest init @coss/style`.
-- Install the agent skill for coss ui work: `npx skills add cosscom/coss`. Project-scoped install is the default; install globally only when the user asks for it.
+- Install components with the shadcn CLI: `pnpm dlx shadcn@latest add @coss/<component>`; bootstrap a project with `pnpm dlx shadcn@latest init @coss/style`.
+- Install the agent skill for coss ui work: `pnpm dlx skills add cosscom/coss`. Project-scoped install is the default; install globally only when the user asks for it.
 - Prefer the shadcn MCP tools or the shadcn CLI over copying files by hand; preview with `--dry-run` or `--diff` when a component might already exist locally.
 - Follow the official coss ui documentation when setting up the project.
 

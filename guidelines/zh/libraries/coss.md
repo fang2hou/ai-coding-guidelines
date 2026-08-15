@@ -1,10 +1,10 @@
 ---
 id: libraries/coss
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 52cd1418
+digest: 9e576826
 ---
 
 # coss ui
@@ -39,14 +39,14 @@ digest: 52cd1418
 ## 版本策略
 
 - 依赖 Tailwind CSS v4 与 Base UI；跟随 registry 的最新状态。
-- 组件通过 shadcn CLI（`npx shadcn@latest add`）更新，而不是通过 npm 包版本。
+- 组件通过 shadcn CLI（`pnpm dlx shadcn@latest add`）更新，而不是通过 npm 包版本。
 
 ## 使用规则
 
 ### 安装与工具链
 
-- 用 shadcn CLI 安装组件：`npx shadcn@latest add @coss/<component>`；项目初始化用 `npx shadcn@latest init @coss/style`。
-- 从事 coss ui 相关工作时安装 agent skill：`npx skills add cosscom/coss`。默认装到项目内；仅当用户要求时才装到全局。
+- 用 shadcn CLI 安装组件：`pnpm dlx shadcn@latest add @coss/<component>`；项目初始化用 `pnpm dlx shadcn@latest init @coss/style`。
+- 从事 coss ui 相关工作时安装 agent skill：`pnpm dlx skills add cosscom/coss`。默认装到项目内；仅当用户要求时才装到全局。
 - 优先使用 shadcn MCP 工具或 shadcn CLI，而不是手工复制文件；本地可能已有同名组件时，先用 `--dry-run` 或 `--diff` 预览。
 - 初始化项目时遵循 coss ui 官方文档。
 
