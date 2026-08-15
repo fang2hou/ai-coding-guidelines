@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 8b850fa5
+digest: d56132fa
 ---
 
 # Git 工作流
@@ -75,6 +75,24 @@ GitHub Actions 必须包含 Conventional Commits 校验检查。
 - 最终仓库历史
 
 CI 工作流标准见 [GitHub Actions](../toolchain/github-actions.md)。
+
+## 仓库属性
+
+GitHub 托管的项目应提交 `.gitattributes` 文件。
+
+用它保持 GitHub 语言统计的真实性：生成文件与附带文件（lockfile、配置、CI 定义）不得淹没项目的核心内容。
+
+优先采用白名单而非黑名单：默认把一切排除在统计之外，再仅放行项目本体。
+
+```gitattributes
+* -linguist-detectable
+src/** linguist-detectable
+pnpm-lock.yaml linguist-generated
+```
+
+Markdown 等文章类语言默认不计入统计，需要显式的 `linguist-detectable` 规则。此后新增的文件在显式放行前不进入统计。
+
+文件本身保持零注释，理由记录在 pull request 或项目文档中。
 
 ## Git 安全
 
