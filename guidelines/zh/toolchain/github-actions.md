@@ -1,17 +1,17 @@
 ---
 id: toolchain/github-actions
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: bde3b8da
+digest: 363fcb99
 ---
 
 # GitHub Actions
 
 ## 标准平台
 
-GitHub Actions 是标准 CI/CD 平台。
+GitHub Actions 是标准 CI/CD 平台；用户没有特别指定流水线系统时，默认使用它。工具无关的流水线规则见 [流水线](../practices/pipeline.md)。
 
 ## Action 升级清单
 
@@ -44,7 +44,7 @@ mise 是 CI 的调用入口，工具安装不在工作流 YAML 里重复；见 [
 
 ## 命名与可读性
 
-这一原则适用于任何 CI 系统，不限于 GitHub Actions：一旦流水线超出寥寥几个 step 的规模，就用所用工具推荐的原语去规整它——stage、job、独立文件——而不是不断堆叠匿名 step。流水线的每一层都必须能仅凭运行记录说清自己在做什么。
+工具无关的原则见 [流水线](../practices/pipeline.md)。
 
 对 GitHub Actions 而言：
 
@@ -78,5 +78,6 @@ jobs:
 
 ## 相关文档
 
+- [流水线](../practices/pipeline.md)——适用于任何 CI 系统的流水线结构与命名规则。
 - [质量门禁](../toolchain/quality-gates.md)——用同一套项目配置运行等价的本地检查。
 - [Git 工作流](../toolchain/git.md)——CI 中的 Conventional Commits 校验，含 squash merge 的 pull request 标题规则。

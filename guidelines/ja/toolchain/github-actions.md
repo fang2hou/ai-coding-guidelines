@@ -1,17 +1,17 @@
 ---
 id: toolchain/github-actions
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: ca76c07a
+digest: b560c99a
 ---
 
 # GitHub Actions
 
 ## 標準プラットフォーム
 
-GitHub Actions は標準の CI/CD プラットフォームである。
+GitHub Actions は標準の CI/CD プラットフォームであり、ユーザーがパイプラインシステムを特に指定していない場合のデフォルトである。ツールに依存しない規則は [パイプライン](../practices/pipeline.md) にある。
 
 ## アクション更新のチェックリスト
 
@@ -44,7 +44,7 @@ mise は CI が呼び出すエントリーポイントであり、ツールの�
 
 ## 命名と可読性
 
-この原則は GitHub Actions に限らず、どの CI システムにも当てはまる。パイプラインがいくつかのステップを超えて大きくなったら、ツールが推奨するプリミティブ——ステージ、ジョブ、独立したファイル——で整理し、無名のステップを積み増してはならない。パイプラインのすべての層が、実行ログだけから説明できる状態を保つ。
+ツールに依存しない原則は [パイプライン](../practices/pipeline.md) を参照。
 
 GitHub Actions では次のように扱う。
 
@@ -78,5 +78,6 @@ jobs:
 
 ## 関連
 
+- [パイプライン](../practices/pipeline.md) — どの CI システムにも当てはまるパイプラインの構造化と命名の規則。
 - [Quality Gates](../toolchain/quality-gates.md) — 同じプロジェクト設定で同等のローカルチェックを実行する。
 - [Git Workflow](../toolchain/git.md) — CI における Conventional Commits 検証。squash merge 時のプルリクエストタイトルの規則を含む。

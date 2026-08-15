@@ -1,17 +1,17 @@
 ---
 id: toolchain/github-actions
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: eee9e7e7
+digest: b60f628b
 ---
 
 # GitHub Actions
 
 ## Standard Platform
 
-GitHub Actions is the standard CI/CD platform.
+GitHub Actions is the standard CI/CD platform and the default choice when the user has not specified a pipeline system. Tool-agnostic pipeline rules live in [Pipeline](../practices/pipeline.md).
 
 ## Action Upgrade Checklist
 
@@ -44,13 +44,9 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
 
 ## Naming and Readability
 
-This principle applies to any CI system, not only GitHub Actions: once a
-pipeline grows beyond a few steps, structure it with the primitives the tool
-recommends — stages, jobs, separate files — instead of accreting anonymous
-steps. Every level of the pipeline must stay explainable from the run log
-alone.
+For the tool-agnostic principle, see [Pipeline](../practices/pipeline.md).
 
-For GitHub Actions:
+GitHub Actions specifics:
 
 - Give the workflow a `name` that states what it does (`CI`, `Release`). Do
   not rely on the filename, and do not repeat a job name as the workflow name.
@@ -95,5 +91,6 @@ jobs:
 
 ## Related
 
+- [Pipeline](../practices/pipeline.md) — tool-agnostic pipeline structure and naming rules.
 - [Quality Gates](../toolchain/quality-gates.md) — run equivalent local checks with the same project configuration.
 - [Git Workflow](../toolchain/git.md) — Conventional Commits validation in CI, including the squash-merge pull-request-title rule.

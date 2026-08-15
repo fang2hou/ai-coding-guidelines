@@ -55,6 +55,8 @@ to this table in the same change.
 | branch protection                  | 分支保护          | ブランチ保護                |
 | status check                       | 状态检查          | ステータスチェック          |
 | script injection                   | 脚本注入          | スクリプトインジェクション  |
+| pipeline                           | 流水线            | パイプライン                |
+| stage                              | 阶段              | ステージ                    |
 
 ## Forbidden renderings
 
