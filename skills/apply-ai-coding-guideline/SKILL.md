@@ -1,5 +1,5 @@
 ---
-name: ai-coding-guideline
+name: apply-ai-coding-guideline
 description: >
   Guides projects with the AI Coding Guideline: standardized toolchain and stack
   selection, task-based document routing, and a quick audit that checks an
@@ -12,8 +12,9 @@ license: MIT
 compatibility: Requires file read access and a shell. Works best with mise installed.
 metadata:
   author: fang2hou
-  version: "1.0"
+  version: "1.1"
   source: https://github.com/fang2hou/ai-coding-guideline
+  refresh: clone or pull the source repository before applying (see Step 0)
 ---
 
 # AI Coding Guideline
@@ -46,12 +47,27 @@ decisions stay free.
 
 ## Workflow
 
+### Step 0: Refresh the guidelines from source
+
+The bundled references are a pinned snapshot. Before applying, sync the live
+version when network is available:
+
+```bash
+git clone --depth 1 https://github.com/fang2hou/ai-coding-guideline /tmp/ai-coding-guideline
+# or, when already cloned: git -C /tmp/ai-coding-guideline pull --ff-only
+```
+
+When the clone succeeds, treat its PORTAL.md and guidelines/ as the authority
+and the bundled references as fallback. When it fails (offline), use the
+bundled references and say so in the output. Never mix: pick one source per
+run, preferring the fresher.
+
 ### Step 1: Route the task to the guideline documents
 
 Read [references/recipes.md](references/recipes.md) and pick the row matching
-the task. If the guideline repository is available locally (cloned or
-submoduled), open the listed documents and follow them; if not, the reference
-matrix in this skill carries the same defaults in condensed form.
+the task. Open the listed documents — from the refreshed clone when Step 0
+succeeded — and follow them; if no guideline repository is available, the
+reference matrix in this skill carries the same defaults in condensed form.
 
 ### Step 2: Apply the stack and toolchain defaults
 

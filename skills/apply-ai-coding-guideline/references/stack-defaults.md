@@ -26,6 +26,8 @@ date-stated as of 2026-08.
 | Format          | oxfmt                                                                                                                | ruff format                         | gofumpt                                                                                                                                       | rustfmt               |
 | TS baseline     | strict, noUncheckedIndexedAccess, verbatimModuleSyntax, isolatedModules, erasableSyntaxOnly, ESM only                | src/ layout, requires-python pinned | —                                                                                                                                             | —                     |
 
+Conditional lint plugins: Playwright E2E projects load `eslint-plugin-playwright` via `jsPlugins` scoped to test files; Tailwind projects load `oxlint-tailwindcss` with `settings.tailwindcss.entryPoint` set, and oxfmt's `sortTailwindcss.stylesheet` must point at the same CSS file — otherwise the two tools disagree on custom `@theme` tokens.
+
 ## Stacks
 
 | Surface                         | Stack                                                                               | Notes                                                                                                                                                                             |
