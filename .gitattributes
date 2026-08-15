@@ -1,0 +1,5 @@
+* -linguist-detectable
+guidelines/** linguist-detectable
+tools/** linguist-detectable
+docs/** -linguist-documentation linguist-detectable
+pnpm-lock.yaml linguist-generated
