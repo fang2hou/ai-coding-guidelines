@@ -51,6 +51,12 @@ to this table in the same change.
 | discriminated union                | 可辨识联合        | 判別可能なユニオン          |
 | barrel file                        | 桶文件            | バレルファイル              |
 | Atomic Design Methodology          | 原子设计方法论    | アトミックデザイン手法      |
+| least privilege                    | 最小权限          | 最小権限                    |
+| branch protection                  | 分支保护          | ブランチ保護                |
+| status check                       | 状态检查          | ステータスチェック          |
+| script injection                   | 脚本注入          | スクリプトインジェクション  |
+| pipeline                           | 流水线            | パイプライン                |
+| stage                              | 阶段              | ステージ                    |
 
 ## Forbidden renderings
 
