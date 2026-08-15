@@ -50,6 +50,8 @@ to this table in the same change.
 | workload                           | 工作负载          | ワークロード                |
 | discriminated union                | 可辨识联合        | 判別可能なユニオン          |
 | barrel file                        | 桶文件            | バレルファイル              |
+| Atomic Design Methodology          | 原子设计方法论    | アトミックデザイン手法      |
+| vendored source                    | 外置源码          | ベンダーソース              |
 
 ## Forbidden renderings
 

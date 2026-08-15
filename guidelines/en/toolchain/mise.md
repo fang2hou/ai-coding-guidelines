@@ -1,10 +1,10 @@
 ---
 id: toolchain/mise
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 49719d43
+digest: f81ef076
 ---
 
 # mise
@@ -36,6 +36,16 @@ Examples of tools managed through mise include:
 Do not introduce a separate general-purpose tool manager when mise can manage the requirement.
 
 This is the toolchain-level application of the central principle in [Core Engineering Principles](../principles/core-principles.md).
+
+## Division of Labor
+
+mise manages runtimes and tool binaries only, such as Node.js, pnpm, uv, and linters.
+
+Language packages and environments belong exclusively to the language's own package manager: pnpm for Node, uv for Python.
+
+Never use mise to install language packages.
+
+The split is deliberate: a single `mise install` bootstraps the whole toolchain with no additional global installs, while each ecosystem keeps its native best-practice package manager.
 
 ## Version Policy
 

@@ -1,10 +1,10 @@
 ---
 id: libraries/typescript-backend
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: ebbe4cc4
+digest: a61306fc
 ---
 
 # TypeScript 后端技术栈
@@ -12,8 +12,6 @@ digest: ebbe4cc4
 ## 结论
 
 优先采用——Hono 是首选的 TypeScript 后端框架。默认运行时是处于 Active LTS 线上的 Node.js；Web 标准 API 让服务可以移植到 Cloudflare Workers 等其他运行时。模型基于训练数据生成代码，主流且经过充分验证的技术栈在 AI 辅助开发中出错更少——这一倾向决定了本文的结论。
-
-Elysia 只是获得论证的例外：它必须运行在 Bun 上，而 Bun 对 Node 生态的兼容性风险使其不可作为默认选项。选用 Elysia 需要用户明确同意并记录理由——项目有 ADR 时写入 ADR。Express 继续予以弃用。
 
 ## 适用场景
 
@@ -26,44 +24,39 @@ Elysia 只是获得论证的例外：它必须运行在 Bun 上，而 Bun 对 No
 
 ## 优势
 
-- Hono：多运行时——同一份代码可运行在 Node.js、Cloudflare Workers、Bun 与 Deno 上。这是决定性优势：一个框架用同一份代码库同时覆盖 Node LTS 默认部署与边缘部署。
+- Hono：多运行时——同一份代码可运行在 Node.js、Cloudflare Workers 与 Deno 上。这是决定性优势：一个框架用同一份代码库同时覆盖 Node LTS 默认部署与边缘部署。
 - Hono：基于 Web 标准 `Request`/`Response`，核心极小，中间件实用。
 - Hono：类型化 RPC 客户端（`hono/client`）让路由契约端到端保持类型化。
-- Elysia：端到端类型推断——路由 schema 经 Eden 流转到客户端。
-- Elysia：在 Bun 的 HTTP 栈上有一流的性能。
-- Elysia：内置 schema 校验（TypeBox），无需另接一层校验。
 
 ## 代价
 
-- Elysia 必须绑定 Bun。Bun 对 Node 生态的兼容性风险是决定性代价：它不能作为默认运行时，每个 Elysia 服务都背负这个例外。
 - Hono 的自带组件比传统框架少，完整的应用需要更多自行组装。
-- 获批的 Elysia 服务会让后端模式随运行时分叉——把这类例外隔离并记录在案，每个服务只用一个框架。
+- 一个服务只用一个框架：不要按运行时分叉后端模式，也不要往 Hono 服务里混入第二个后端框架。
 
 ## 版本策略
 
-- Hono 与 Elysia 一律使用最新稳定主线；没有具体的兼容性理由，不要让服务停留在旧主线上。
+- Hono 一律使用最新稳定主线；没有具体的兼容性理由，不要让服务停留在旧主线上。
 - 运行时通过 mise 锁定在 Node.js Active LTS 线上——截至 2026-08 为 Node.js 24（EOL 2028-04）。绝不把服务跑在 Current 线上。
-- Bun 仅保留给获批的 Elysia 服务，与其他工具一样经 mise 管理并锁定版本。
 
 ## 使用规则
 
 ### 边界处校验
 
-- 在传输边界完成校验：在 Elysia 路由上声明 schema，或挂 Hono 的 validator 中间件；handler 拿到的值已合法且带类型。
+- 在传输边界完成校验：挂上 Hono 的 validator 中间件，handler 拿到的值已合法且带类型。
 - 核心层不复查传输层关注点。
 
 ### handler 保持薄，核心层框架无关
 
-- handler 是薄适配器：在边界处把框架请求转换成纯类型化取值，再调用核心层；核心模块不 import Elysia，也不 import Hono。
+- handler 是薄适配器：在边界处把框架请求转换成纯类型化取值，再调用核心层；核心模块不 import Hono。
 - 这与 [Go API 技术栈](../libraries/go-api-stack.md) 的分层规则同源：核心层只依赖纯类型化输入和 Web 标准 API，绝不依赖 Web 框架。
 
 ### Web 标准 API
 
-- 优先使用 Web 标准 API（`Request`/`Response`、`fetch`、`URL`、streams），而不是各运行时的私有等价物；核心层因此在 Node.js、Workers 与获批的 Bun 例外之间保持可移植。
+- 优先使用 Web 标准 API（`Request`/`Response`、`fetch`、`URL`、streams），而不是各运行时的私有等价物；核心层因此在 Node.js 与 Workers 之间保持可移植。
 
 ### 路由类型端到端贯通
 
-- 路由类型贯通到底：Elysia 配合 Eden 做客户端推断，Hono 用其 RPC 客户端（`hono/client`）。不要把路由契约退化成无类型的 fetch 封装。
+- 路由类型贯通到底：客户端推断用 Hono 的 RPC 客户端（`hono/client`）。不要把路由契约退化成无类型的 fetch 封装。
 
 ### 中间件
 
@@ -81,7 +74,6 @@ Elysia 只是获得论证的例外：它必须运行在 Bun 上，而 Bun 对 No
 ### 内部联动
 
 - Hono + Node.js LTS——TypeScript 服务的默认组合；同一份 Hono 代码也可部署到个人项目的 Cloudflare Workers。
-- Elysia + Bun——仅限获批例外的组合：Elysia 以 Bun 为先，构建于 Bun 的 HTTP、文件系统与热重载 API 之上。
 
 ### 相关指南
 

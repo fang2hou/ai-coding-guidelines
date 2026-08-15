@@ -1,10 +1,10 @@
 ---
 id: libraries/typescript-backend
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: bf8ea483
+digest: e8c3809c
 ---
 
 # TypeScript Backend
@@ -12,8 +12,6 @@ digest: bf8ea483
 ## Verdict
 
 Preferred — Hono is the preferred TypeScript backend framework. The default runtime is Node.js on the Active LTS line; Web-standard APIs keep services portable to Cloudflare Workers and other runtimes. Models generate code from training data, so mainstream, thoroughly validated stacks break less in AI-assisted development — that bias shapes this verdict.
-
-Elysia is a justified exception only: it requires Bun, whose compatibility risk with the Node ecosystem is unacceptable by default. Choosing Elysia requires explicit user approval plus a recorded reason — a project ADR when one exists. Express remains rejected.
 
 ## Use when
 
@@ -26,44 +24,39 @@ Elysia is a justified exception only: it requires Bun, whose compatibility risk 
 
 ## Strengths
 
-- Hono: multi-runtime — the same code runs on Node.js, Cloudflare Workers, Bun, and Deno. This is the decisive strength: one framework covers the Node LTS default and edge deployment with the same codebase.
+- Hono: multi-runtime — the same code runs on Node.js, Cloudflare Workers, and Deno. This is the decisive strength: one framework covers the Node LTS default and edge deployment with the same codebase.
 - Hono: built on Web-standard `Request`/`Response`; tiny core with a good middleware set.
 - Hono: typed RPC client (`hono/client`) keeps route contracts typed end to end.
-- Elysia: end-to-end type inference — route schemas flow to clients through Eden.
-- Elysia: first-class performance on Bun's HTTP stack.
-- Elysia: schema validation built in (TypeBox); no separate validation layer to wire.
 
 ## Tradeoffs
 
-- Elysia requires Bun. Bun's compatibility risk with the Node ecosystem is the decisive tradeoff: it is not an acceptable default runtime, and every Elysia service carries that exception.
 - Hono ships thinner batteries than legacy frameworks; full applications need more assembly.
-- An approved Elysia service forks backend patterns by runtime — keep such exceptions isolated and recorded, one framework per service.
+- Keep one framework per service: do not fork backend patterns by runtime, and do not mix a second backend framework into a Hono service.
 
 ## Version policy
 
-- Use the latest stable majors of Hono and Elysia; do not hold services on old majors without a concrete compatibility reason.
+- Use the latest stable major of Hono; do not hold services on old majors without a concrete compatibility reason.
 - Pin the runtime to the Node.js Active LTS line through mise — Node.js 24 as of 2026-08 (EOL 2028-04). Never run services on the Current line.
-- Bun, reserved for approved Elysia services, is managed and pinned through mise like every other tool.
 
 ## Usage rules
 
 ### Validation at the boundary
 
-- Validate at the transport boundary: declare schemas on Elysia routes, or attach Hono's validator middleware. Handlers receive already-valid, typed values.
+- Validate at the transport boundary: attach Hono's validator middleware so handlers receive already-valid, typed values.
 - The core layer does not re-check transport concerns.
 
 ### Thin handlers, framework-agnostic core
 
-- Handlers are thin adapters: convert the framework request into plain typed values at the boundary, then call the core layer. Core modules import neither Elysia nor Hono.
+- Handlers are thin adapters: convert the framework request into plain typed values at the boundary, then call the core layer. Core modules do not import Hono.
 - This mirrors the Go layering rule in [Go API Stack](../libraries/go-api-stack.md): the core depends on plain typed inputs and Web-standard APIs, never on the web framework.
 
 ### Web-standard APIs
 
-- Prefer Web-standard APIs (`Request`/`Response`, `fetch`, `URL`, streams) over runtime-specific equivalents; they keep the core portable across Node.js, Workers, and the approved Bun exception.
+- Prefer Web-standard APIs (`Request`/`Response`, `fetch`, `URL`, streams) over runtime-specific equivalents; they keep the core portable across Node.js and Workers.
 
 ### Typed routes end to end
 
-- Keep routes typed end to end: Elysia with Eden for client inference, Hono with its RPC client (`hono/client`). Do not degrade route contracts into untyped fetch wrappers.
+- Keep routes typed end to end with Hono's RPC client (`hono/client`) for client-side inference. Do not degrade route contracts into untyped fetch wrappers.
 
 ### Middleware
 
@@ -81,7 +74,6 @@ Elysia is a justified exception only: it requires Bun, whose compatibility risk 
 ### Internal interplay
 
 - Hono + Node.js LTS — the default pairing for TypeScript services; the same Hono code also deploys to Cloudflare Workers for personal projects.
-- Elysia + Bun — the approved-exception pairing only: Elysia is Bun-first, built on Bun's HTTP, file-system, and hot-reload APIs.
 
 ### Related guidelines
 

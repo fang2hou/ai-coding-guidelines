@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 2eb6fc93
+digest: 5c381c23
 ---
 
 # TypeScript Toolchain
@@ -74,6 +74,8 @@ When a rule set or compatibility layer is not supported correctly by oxlint, con
 ### Type-Aware and Type Checking Rules
 
 Use oxlint's officially supported TypeScript type-aware or type-checking capabilities when they are appropriate for the project.
+
+Type-aware linting and type checking need the companion package `oxlint-tsgolint` installed alongside a recent `oxlint`, enabled in the root `.oxlintrc.json` via `options.typeAware` and `options.typeCheck` (`typeCheck` is still experimental). Verified against the official oxc documentation as of 2026-08.
 
 Follow the current official oxlint documentation to configure the required type-aware functionality.
 
@@ -147,7 +149,7 @@ Baseline example:
 ## Works with
 
 - [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md)
-- [TypeScript Backend: Elysia/Hono](../libraries/typescript-backend.md)
+- [TypeScript Backend](../libraries/typescript-backend.md)
 - [Quality Gates](../toolchain/quality-gates.md)
 - [Testing Strategy](../practices/testing.md)
 - [Coding Standards](../practices/coding-standards.md)

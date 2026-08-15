@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 863b1a2a
+digest: 493cd319
 ---
 
 # shadcn/ui
@@ -43,6 +43,27 @@ digest: 863b1a2a
 
 - 初始化项目时遵循 shadcn/ui 官方文档。
 
+### 组件路径与结构
+
+- shadcn/ui 组件安装到 `components/ui` 并留在该目录；该路径归上游所有。
+- 应用自有组件与它并列，放在 `components/` 之下，按 Atomic Design Methodology 组织子目录：`atoms/`、`molecules/`、`organisms/`，应用确有需要时再加 `templates/` 和 `pages/`。
+- 绝不把自定义组件放进 `components/ui`；上游目录与第一方代码保持分离。
+
+示例：
+
+```text
+components/
+  ui/            # shadcn/ui — upstream-owned
+    button.tsx
+    dialog.tsx
+  atoms/
+    price-tag.tsx
+  molecules/
+    search-field.tsx
+  organisms/
+    product-table.tsx
+```
+
 ### 组件复用
 
 - 在合理范围内尽量使用 shadcn/ui 组件。
@@ -60,6 +81,15 @@ digest: 863b1a2a
 
 - 下载的组件确实需要自定义内部改动时，记录改了哪个组件、改了什么、为什么必须改、该改动会带来什么升级风险。
 - 将这些信息保存在仓库内的 Markdown 文档中，以便后续开发者与 AI Agent 在升级 shadcn/ui 时理解这些偏离。
+
+### 将下载组件排除在 Lint 与格式化范围之外
+
+- `components/ui` 是复制进仓库的上游源码，不是第一方代码；将该路径排除出 `oxlint` 与 `oxfmt` 的处理范围，让工具输出聚焦在项目自己的代码上。
+- 把 `components/ui/**` 加到 `ignorePatterns` 里，`.oxlintrc.json` 与 `.oxfmtrc.json` 各加一条。两个工具都推荐用配置文件里的 `ignorePatterns`，而不是单独的 ignore 文件；排除之后，升级的 diff 里也不会混入 Lint 与格式化改动。
+
+```json
+{ "ignorePatterns": ["components/ui/**"] }
+```
 
 ### shadcn MCP
 

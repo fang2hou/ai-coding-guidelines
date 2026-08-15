@@ -1,10 +1,10 @@
 ---
 id: toolchain/python
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: f9083962
+digest: b483a26f
 ---
 
 # Python ツールチェーン
@@ -34,7 +34,7 @@ Python バックエンドを自動的に導入してはならない。TypeScript
 
 ## バージョン方針
 
-既定は Python 3.12 とし、mise で管理する。ML エコシステムとモデルの訓練データが追いつくまで、新しい CPython ラインを採用しない。エコシステムの既定が移った時点で再検討する。
+既定は Python 3.12 とする。mise はインタープリターと uv 本体を提供し、環境と依存関係(`uv.lock` など)は uv が管理する。ML エコシステムとモデルの訓練データが追いつくまで、新しい CPython ラインを採用しない。エコシステムの既定が移った時点で再検討する。
 
 モデルは訓練データに基づいてコードを生成するため、成熟し広く訓練に含まれたバージョンほど AI 支援開発での破綻が少ない。この原則は[中核となるエンジニアリング原則](../principles/core-principles.md)に定める。
 

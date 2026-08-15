@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: zh
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 6fdf2a10
+digest: e7a04176
 ---
 
 # TypeScript 工具链
@@ -74,6 +74,8 @@ TypeScript 是 AI 辅助产品开发的默认语言，其库生态与 agent 生�
 ### Type-Aware 与类型检查规则
 
 在适合项目的情况下，使用 oxlint 官方支持的 TypeScript type-aware 或类型检查能力。
+
+Type-aware Lint 与类型检查需要额外的配套依赖：安装 `oxlint-tsgolint` 包并搭配较新的 `oxlint`，在根配置 `.oxlintrc.json` 里通过 `options.typeAware` 与 `options.typeCheck` 开启（`typeCheck` 仍属实验特性）。截至 2026-08 已对照 oxc 官方文档核实。
 
 按 oxlint 当前官方文档配置所需的 type-aware 功能。
 
@@ -147,7 +149,7 @@ oxlint 已具备所需能力时，不要仅为获得 type-aware Lint 而引入 E
 ## 联动
 
 - [前端框架：Vite 与 Next.js](../libraries/frontend-framework.md)
-- [TypeScript 后端：Elysia/Hono](../libraries/typescript-backend.md)
+- [TypeScript 后端](../libraries/typescript-backend.md)
 - [质量门禁](../toolchain/quality-gates.md)
 - [测试策略](../practices/testing.md)
 - [编码标准](../practices/coding-standards.md)

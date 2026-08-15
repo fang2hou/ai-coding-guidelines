@@ -1,10 +1,10 @@
 ---
 id: toolchain/mise
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 3ff176d1
+digest: 3b29d65d
 ---
 
 # mise
@@ -36,6 +36,16 @@ digest: 3ff176d1
 凡是 mise 能满足的需求，不要再引入单独的通用工具管理器。
 
 这是[核心工程原则](../principles/core-principles.md)那条核心原则在工具链层面的应用。
+
+## 分工
+
+mise 只管理运行时与工具二进制，例如 Node.js、pnpm、uv 和各类 linter。
+
+语言包与环境完全归该语言自身的包管理器所有：Node 用 pnpm，Python 用 uv。
+
+禁止用 mise 安装语言包。
+
+这一分工是刻意的：一条 `mise install` 即可引导整套工具链，无需额外的全局安装，同时各生态保留自己原生的最佳实践包管理器。
 
 ## 版本策略
 

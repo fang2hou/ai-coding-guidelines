@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: ja
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 3e84002b
+digest: bf24173e
 ---
 
 # TypeScript ツールチェーン
@@ -74,6 +74,8 @@ oxlint が公式にサポートしており、プロジェクトに適したル�
 ### 型認識・型チェックルール
 
 プロジェクトに適している場合は、oxlint が公式にサポートする TypeScript の型認識 (type-aware) 機能または型チェック機能を使う。
+
+型認識リントと型チェックには、追加のコンパニオンパッケージが必要である。`oxlint-tsgolint` を比較的新しい `oxlint` と併せてインストールし、ルートの `.oxlintrc.json` で `options.typeAware` と `options.typeCheck` を有効化する（`typeCheck` は 2026-08 時点で実験的である）。名称と設定キーは 2026-08 時点の oxc 公式ドキュメントで確認済みである。
 
 必要な型認識機能の設定は、現在の公式 oxlint ドキュメントに従う。
 
@@ -147,7 +149,7 @@ Prettier を使わない。
 ## 連携
 
 - [フロントエンドフレームワーク：Vite vs Next.js](../libraries/frontend-framework.md)
-- [TypeScript バックエンド：Elysia/Hono](../libraries/typescript-backend.md)
+- [TypeScript バックエンド](../libraries/typescript-backend.md)
 - [品質ゲート](../toolchain/quality-gates.md)
 - [テスト戦略](../practices/testing.md)
 - [コーディング規約](../practices/coding-standards.md)

@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 8a13584d
+digest: b4183ae9
 ---
 
 # shadcn/ui
@@ -43,6 +43,27 @@ Preferred — shadcn/ui is the preferred component system for Tailwind-based app
 
 - Follow the official shadcn/ui documentation when setting up the project.
 
+### Component paths and structure
+
+- shadcn/ui components install to `components/ui` and stay there; that path is upstream-owned.
+- Application components live alongside it under `components/`, organized into subdirectories by Atomic Design Methodology: `atoms/`, `molecules/`, `organisms/`, plus `templates/` and `pages/` when the app warrants them.
+- Never place custom components inside `components/ui`; keep the vendored upstream tree and first-party code separate.
+
+Example:
+
+```text
+components/
+  ui/            # shadcn/ui — upstream-owned
+    button.tsx
+    dialog.tsx
+  atoms/
+    price-tag.tsx
+  molecules/
+    search-field.tsx
+  organisms/
+    product-table.tsx
+```
+
 ### Component reuse
 
 - Use shadcn/ui components as much as reasonably possible.
@@ -60,6 +81,15 @@ Preferred — shadcn/ui is the preferred component system for Tailwind-based app
 
 - If a downloaded component genuinely requires a custom internal modification, document which component was modified, what was changed, why the change was necessary, and what upgrade risk the modification creates.
 - Keep this information in a Markdown document in the repository so future developers and AI agents can understand the divergence when upgrading shadcn/ui.
+
+### Exclude downloaded components from lint and format scope
+
+- `components/ui` is vendored upstream source, not first-party code: exclude the path from `oxlint` and `oxfmt` processing so tool output stays focused on code the project owns.
+- Add `components/ui/**` to `ignorePatterns` in `.oxlintrc.json` and `.oxfmtrc.json`. Both tools recommend `ignorePatterns` in the config file over separate ignore files, and the exclusion keeps lint and format churn out of upgrade diffs.
+
+```json
+{ "ignorePatterns": ["components/ui/**"] }
+```
 
 ### shadcn MCP
 

@@ -1,10 +1,10 @@
 ---
 id: libraries/shadcn-ui
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 5198d008
+digest: 4984286b
 ---
 
 # shadcn/ui
@@ -43,6 +43,27 @@ digest: 5198d008
 
 - プロジェクトのセットアップでは、公式の shadcn/ui ドキュメントに従う。
 
+### コンポーネントのパスと構成
+
+- shadcn/ui コンポーネントは `components/ui` にインストールされ、そのままそこに置く。このパスの所有権はアップストリームにある。
+- アプリケーション独自のコンポーネントは、同じ `components/` 配下に Atomic Design Methodology に沿ったサブディレクトリとして整理する：`atoms/`、`molecules/`、`organisms/`。アプリが求めるなら `templates/` と `pages/` を加える。
+- カスタムコンポーネントを `components/ui` に入れてはならない。アップストリーム由来のディレクトリとファーストパーティのコードを分離しておく。
+
+構成例：
+
+```text
+components/
+  ui/            # shadcn/ui — upstream-owned
+    button.tsx
+    dialog.tsx
+  atoms/
+    price-tag.tsx
+  molecules/
+    search-field.tsx
+  organisms/
+    product-table.tsx
+```
+
 ### コンポーネントの再利用
 
 - shadcn/ui コンポーネントを、合理的な範囲で可能な限り使う。
@@ -60,6 +81,15 @@ digest: 5198d008
 
 - ダウンロードしたコンポーネントに本当に内部の改変が必要な場合は、どのコンポーネントを、何を、なぜ変更したのか、その改変がどのようなアップグレードリスクを生むのかを文書化する。
 - この情報はリポジトリ内の Markdown ドキュメントに残し、将来の開発者と AI エージェントが shadcn/ui のアップグレード時に乖離を把握できるようにする。
+
+### ダウンロードしたコンポーネントをリント・フォーマット対象から除外する
+
+- `components/ui` はリポジトリにコピーされたアップストリームのソースであり、ファーストパーティのコードではない。このパスを `oxlint` と `oxfmt` の処理対象から除外し、ツールの出力をプロジェクト自身のコードに絞る。
+- `components/ui/**` を `ignorePatterns` に追加する。`.oxlintrc.json` と `.oxfmtrc.json` の両方に設定する。どちらのツールも、独立した ignore ファイルではなく設定ファイル内の `ignorePatterns` を推奨している。この除外により、アップグレード時の diff にリントやフォーマットによる変更が紛れ込まなくなる。
+
+```json
+{ "ignorePatterns": ["components/ui/**"] }
+```
 
 ### shadcn MCP
 
