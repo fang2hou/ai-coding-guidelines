@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 77e37cf0
+digest: 8e3a9e8a
 ---
 
 # Required Project Documentation
@@ -15,7 +15,7 @@ Every project must maintain the four documents below. Use the templates under `t
 
 Every project must include `README.md`.
 
-The README is written for both human developers and AI agents.
+The README is written for human readers. Agent-facing rules — engineering standards, the confirmed language policy, project conventions — live in `AGENTS.md` (see `templates/project-agents.template.md`), and the README hands the repository to agents with a copyable instruction.
 
 It must open with an identity block: the project name, a one-sentence
 tagline stating what the project is and for whom, and status badges.
@@ -26,6 +26,7 @@ directory structure. It should contain:
 - Why the project exists, and what it intentionally does not do
 - Setup instructions and the first run
 - Basic usage and the main workflows
+- A copyable instruction that hands the repository to an AI coding agent via `AGENTS.md`
 - A Goal → Read table linking the detail documents below
 - Relevant environment requirements
 
@@ -36,7 +37,7 @@ of duplicating their content.
 
 Keep it current as the project evolves.
 
-The project's confirmed product/UI language policy (see [Language Policy](language-policy.md)) should also be recorded in an appropriate clearly visible project document, preferably the README or DEVELOPMENT document.
+The confirmed product/UI language policy (see [Language Policy](language-policy.md)) is agent-facing: record it in `AGENTS.md`, not in the README.
 
 Template: [README.template.md](../../../templates/README.template.md)
 

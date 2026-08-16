@@ -19,16 +19,20 @@
 
 ## Use it
 
-Requires [mise](https://mise.jdx.dev/).
+**As a human** — requires [mise](https://mise.jdx.dev/):
 
 ```bash
 mise install
 mise run dev
 ```
 
-- Run the application: `mise run dev`
-- List every task: `mise run`
-- {{Other main workflows, e.g. `mise run build`}}
+`mise run` lists every task. {{Other main workflows, e.g. `mise run build`.}}
+
+**With an AI coding agent** — paste this into the agent to hand it the repository:
+
+```text
+Work in this repository. Read AGENTS.md at the repository root first and follow it.
+```
 
 ## What to read next
 
@@ -37,23 +41,13 @@ mise run dev
 | Understand the system | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | Develop and validate  | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
 | Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
 
 ## Environment Requirements
 
 - Runtime versions: managed by mise (see `mise.toml`)
 - Required environment variables: `<list or link to setup guide>`
 - External services: `<list, with local alternatives if any>`
-
-## Language Policy
-
-| Item                 | Value                               |
-| -------------------- | ----------------------------------- |
-| Primary UI language  | `<e.g. Japanese>`                   |
-| Additional languages | `<e.g. none / English>`             |
-| Tone / formality     | `<e.g. polite (です/ます), casual>` |
-
-Code identifiers, comments, and commit messages are always English.
-Do not infer UI language from conversation language.
 
 ## License
 
