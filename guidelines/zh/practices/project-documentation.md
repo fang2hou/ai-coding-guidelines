@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 070603af
+digest: d16a2551
 ---
 
 # 必备项目文档
@@ -15,7 +15,7 @@ digest: 070603af
 
 每个项目必须包含 `README.md`。
 
-README 同时面向人类开发者与 AI Agent。
+README 面向人类读者。面向 Agent 的规则——工程标准、已确认的语言政策、项目约定——写在 `AGENTS.md` 中(见 `templates/project-agents.template.md`)；README 通过一条可复制的指令把仓库交给 Agent。
 
 README 必须以身份块开头：项目名称、一句话标语(说明项目是什么、面向谁)，以及状态徽章。
 
@@ -24,6 +24,7 @@ README 必须以身份块开头：项目名称、一句话标语(说明项目是
 - 项目为何存在，以及明确不做什么
 - 环境搭建说明与首次运行
 - 基本用法与主要工作流
+- 一条可复制的指令，通过 `AGENTS.md` 把仓库交给 AI 编码 Agent
 - 一张"目标 → 阅读"表，链接到下文的详细文档
 - 相关的环境要求
 
@@ -31,7 +32,7 @@ README 必须以身份块开头：项目名称、一句话标语(说明项目是
 
 随项目演进保持更新。
 
-项目已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))也应记录在合适且显眼的项目文档中，首选 README 或 DEVELOPMENT 文档。
+已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))是面向 Agent 的：记录在 `AGENTS.md` 中，不要写进 README。
 
 模板：[README.template.md](../../../templates/README.template.md)
 

@@ -1,24 +1,38 @@
-# <Project Name>
+<div align="center">
 
-> <One-sentence tagline: what the project is and who it is for.>
+# {{Project Name}}
 
-<Badges: CI status, license. Remove lines that do not apply.>
+{{One-sentence tagline: what the project is and who it is for.}}
+
+[![CI](https://github.com/<org>/<repo>/actions/workflows/check.yml/badge.svg)](https://github.com/<org>/<repo>/actions/workflows/check.yml)
+[![License: <SPDX>](https://img.shields.io/badge/License-<SPDX>-green.svg)](./LICENSE)
+
+</div>
 
 ## Why
 
-- The problem being solved
-- Scope boundaries: what this project intentionally does not do
-- Current status: <POC / actively developed / stable>
+{{The problem this project solves — one to three sentences.}}
+
+- In scope: {{what the project does}}
+- Out of scope: {{what this project intentionally does not do}}
+- Status: {{POC / actively developed / stable}}
 
 ## Use it
+
+**As a human** — requires [mise](https://mise.jdx.dev/):
 
 ```bash
 mise install
 mise run dev
 ```
 
-- How to run the application
-- How to run the main workflows (`mise run` lists all tasks)
+`mise run` lists every task. {{Other main workflows, e.g. `mise run build`.}}
+
+**With an AI coding agent** — paste this into the agent to hand it the repository:
+
+```text
+Work in this repository. Read AGENTS.md at the repository root first and follow it.
+```
 
 ## What to read next
 
@@ -27,20 +41,14 @@ mise run dev
 | Understand the system | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | Develop and validate  | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
 | Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-
-## Language Policy
-
-| Item                 | Value                               |
-| -------------------- | ----------------------------------- |
-| Primary UI language  | `<e.g. Japanese>`                   |
-| Additional languages | `<e.g. none / English>`             |
-| Tone / formality     | `<e.g. polite (です/ます), casual>` |
-
-Code identifiers, comments, and commit messages are always English.
-Do not infer UI language from conversation language.
+| Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
 
 ## Environment Requirements
 
 - Runtime versions: managed by mise (see `mise.toml`)
 - Required environment variables: `<list or link to setup guide>`
 - External services: `<list, with local alternatives if any>`
+
+## License
+
+{{SPDX identifier, e.g. MIT}} — see [LICENSE](./LICENSE).
