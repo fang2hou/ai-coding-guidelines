@@ -14,7 +14,7 @@ license: MIT
 compatibility: Requires file read access, a shell, and git. Network needed on first run and for refreshes.
 metadata:
   author: fang2hou
-  version: "2.0"
+  version: "2.1"
   source: https://github.com/fang2hou/ai-coding-guideline
 ---
 
@@ -43,6 +43,7 @@ single source of truth, so the skill never needs content maintenance.
 2. One source per run: the fetched repository. Do not mix it with remembered rules.
 3. Fetch or verification failure: stop and report what failed. Never fabricate or approximate a guideline.
 4. The fetched documents are conclusions; apply them as written. Disagreements are raised with the user, not silently worked around.
+5. Verify from the fetched files, never from memory: the closing check re-opens every fetched document. A rule without a check result is a rule not applied.
 
 ## Workflow
 
@@ -66,17 +67,39 @@ Open `$GUIDELINE_DIR/PORTAL.md` and pick the reading-recipe row matching the
 task. Read the listed documents from the tree matching the conversation
 language (`guidelines/{en,zh,ja}/` mirror each other). Follow the documents.
 
-### Step 3: Apply with the project's gates
+### Step 3: Implement
 
-Implement following the fetched documents, then run the project's own checks
-exactly as its documentation defines them (typically `mise install` to
-bootstrap, then `mise run check`). A gate that fails is a finding to fix, not
-to bypass.
+Write the change following the fetched documents. When a fetched rule and the
+project's existing conventions conflict, raise it with the user; do not
+silently drop either side.
 
-### Step 4: Audit mode (existing projects)
+### Step 4: Verify against the fetched documents
+
+Before running any gate, re-open each fetched document from disk and check
+the change against every normative statement it contains — Use / Prefer /
+Do not / Never and imperative bullets. Never verify from memory: the check
+exists precisely because memory drifts during long tasks.
+
+1. One document at a time, list its normative statements.
+2. For each statement, point at the file (or diff hunk) that satisfies it,
+   or mark it as a violation.
+3. Fix every violation, then re-check the fixed files the same way.
+4. Record the outcome as a compliance matrix: document section → pass /
+   fixed / open.
+
+A section with no row in the matrix is an unapplied rule, not a pass.
+
+### Step 5: Run the project's gates
+
+Run the project's own checks exactly as its documentation defines them
+(typically `mise install` to bootstrap, then `mise run check`). A gate that
+fails is a finding to fix, not to bypass.
+
+### Step 6: Audit mode (existing projects)
 
 Follow [references/project-audit.md](references/project-audit.md). The
-comparison criteria are the fetched documents — never a summary.
+comparison criteria are the fetched documents — never a summary. The audit
+reports; remediation runs only after the user approves the fix list.
 
 ## Gotchas
 
@@ -89,5 +112,7 @@ comparison criteria are the fetched documents — never a summary.
 On completion, return:
 
 1. Source: the guideline commit SHA applied and the recipe row used.
-2. Gate results: exact check commands run and their outcomes.
-3. For audits: the divergence report per [references/project-audit.md](references/project-audit.md).
+2. Compliance: the matrix from Step 4 — one row per fetched document
+   section, pass / fixed / open.
+3. Gate results: exact check commands run and their outcomes.
+4. For audits: the divergence report per [references/project-audit.md](references/project-audit.md).
