@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: d16a2551
+digest: 36df4d67
 ---
 
 # 必备项目文档
@@ -85,6 +85,8 @@ GitHub 的 pull request 模板必须与这些要求保持同步。
 具有实质架构边界的项目应维护 `ARCHITECTURE.md`。
 
 保持简短、可操作。
+
+它应包含简要概览、粗粒度的代码地图(命名模块，不链接文件)，以及架构不变量。
 
 避免把它写成面面俱到的理论架构文档。
 

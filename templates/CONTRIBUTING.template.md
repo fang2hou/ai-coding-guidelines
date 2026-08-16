@@ -1,14 +1,24 @@
 # Contributing
 
-## Contribution Expectations
+Thanks for wanting to contribute. This document covers how changes land.
+Development setup lives in [DEVELOPMENT.md](./DEVELOPMENT.md); rules for AI agents live in [AGENTS.md](./AGENTS.md).
+
+## Ground Rules
 
 - Smallest coherent change that solves the requirement
 - No unrelated cleanup mixed into feature changes
 - No new dependencies without justification (see the guideline's dependency discipline)
 
-## Issue Workflow
+## Reporting a Bug
 
-`<When relevant: how issues are triaged and linked to changes>`
+{{Issue-first / PR-first policy, e.g. open an issue with a reproduction before opening a PR.}}
+
+- Search existing issues first
+- Include a minimal reproduction and what you expected instead
+
+## Proposing a Feature
+
+{{Discuss before implementing, e.g. open an issue and collect feedback before writing code.}}
 
 ## Pull Request Workflow
 
@@ -18,6 +28,8 @@
 4. Open a PR; CI must pass
 5. Review, then merge (squash merge unless otherwise stated)
 
+Expect review within {{e.g. two business days}}.
+
 ## Review Expectations
 
 Reviewers check:
@@ -26,12 +38,6 @@ Reviewers check:
 - No accidental scope creep, files, or dependencies
 - Compatibility with architecture invariants and ADRs
 - No sensitive information
-
-## Required Validation
-
-```bash
-mise run check
-```
 
 ## Commit Conventions
 
@@ -46,12 +52,15 @@ With squash merging, the PR title must follow the same convention (it becomes th
 
 ## AI-Assisted Pull Requests
 
-For AI-generated or AI-assisted PRs, the description must clearly include:
+AI-generated or AI-assisted PRs are welcome under the same standard.
+The description must clearly include:
 
 - **Purpose**: what the change is for
 - **Impact**: what is affected
 - **Context**: relevant background
 - **Risks**: potential concerns
 - **Testing**: validation performed and its results
+
+{{Optional disclosure policy, e.g. label AI-assisted PRs; one AI PR at a time per contributor.}}
 
 Keep the GitHub pull request template synchronized with these five requirements.

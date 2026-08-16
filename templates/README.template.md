@@ -46,8 +46,8 @@ Work in this repository. Read AGENTS.md at the repository root first and follow 
 ## Environment Requirements
 
 - Runtime versions: managed by mise (see `mise.toml`)
-- Required environment variables: `<list or link to setup guide>`
-- External services: `<list, with local alternatives if any>`
+- Required environment variables: {{list or link to setup guide}}
+- External services: {{list, with local alternatives if any}}
 
 ## License
 

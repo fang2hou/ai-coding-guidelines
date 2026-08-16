@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: b9b22969
+digest: d87233f4
 ---
 
 # 必須プロジェクトドキュメント
@@ -85,6 +85,8 @@ GitHub のプルリクエストテンプレートは、これらの要件と同�
 意味のあるアーキテクチャ上の境界を持つプロジェクトは、`ARCHITECTURE.md` を維持すべきである。
 
 短く、運用に即した内容に保つこと。
+
+簡潔な概要、粗い粒度のコードマップ(モジュールを名指しし、ファイルにはリンクしない)、アーキテクチャの不変条件の 3 点を含めること。
 
 網羅的で理論的なアーキテクチャドキュメントにしないこと。
 

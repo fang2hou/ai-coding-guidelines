@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 8e3a9e8a
+digest: e21c5dbc
 ---
 
 # Required Project Documentation
@@ -90,6 +90,8 @@ Template: [CONTRIBUTING.template.md](../../../templates/CONTRIBUTING.template.md
 Projects with meaningful architectural boundaries should maintain `ARCHITECTURE.md`.
 
 Keep it short and operational.
+
+It should contain a brief overview, a coarse codebase map (name modules, do not link files), and the architectural invariants.
 
 Avoid turning it into a comprehensive theoretical architecture document.
 
