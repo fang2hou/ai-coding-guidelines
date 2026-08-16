@@ -1,31 +1,32 @@
 # <Project Name>
 
-> One-sentence description of what this project is and why it exists.
+> <One-sentence tagline: what the project is and who it is for.>
 
-## Overview
+<Badges: CI status, license. Remove lines that do not apply.>
 
-- What the project does
-- Who uses it
-- Current status (POC / actively developed / stable)
+## Why
 
-## Purpose
-
-- Problem being solved
+- The problem being solved
 - Scope boundaries: what this project intentionally does not do
+- Current status: <POC / actively developed / stable>
 
-## Setup
-
-Requires [mise](https://mise.jdx.dev/).
+## Use it
 
 ```bash
 mise install
 mise run dev
 ```
 
-## Usage
-
 - How to run the application
-- How to run the main workflows (`mise run` for the task list)
+- How to run the main workflows (`mise run` lists all tasks)
+
+## What to read next
+
+| Goal                  | Read                                 |
+| --------------------- | ------------------------------------ |
+| Understand the system | [ARCHITECTURE.md](./ARCHITECTURE.md) |
+| Develop and validate  | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
+| Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 
 ## Language Policy
 
@@ -37,12 +38,6 @@ mise run dev
 
 Code identifiers, comments, and commit messages are always English.
 Do not infer UI language from conversation language.
-
-## Architecture & Workflow
-
-- Architecture invariants: see [ARCHITECTURE.md](./ARCHITECTURE.md)
-- Development workflow: see [DEVELOPMENT.md](./DEVELOPMENT.md)
-- Contribution workflow: see [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Environment Requirements
 

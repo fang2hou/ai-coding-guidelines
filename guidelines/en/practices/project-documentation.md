@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: b2e95167
+digest: 77e37cf0
 ---
 
 # Required Project Documentation
@@ -17,14 +17,22 @@ Every project must include `README.md`.
 
 The README is written for both human developers and AI agents.
 
-It should contain the information necessary to understand and use the project, including:
+It must open with an identity block: the project name, a one-sentence
+tagline stating what the project is and for whom, and status badges.
 
-- Project overview
-- Purpose
-- Setup instructions
-- Basic usage
-- Important architecture or workflow references
+The body is organized around reader tasks, not around the repository
+directory structure. It should contain:
+
+- Why the project exists, and what it intentionally does not do
+- Setup instructions and the first run
+- Basic usage and the main workflows
+- A Goal → Read table linking the detail documents below
 - Relevant environment requirements
+
+Keep it scannable: paragraphs of one to three sentences, one idea per
+bullet, copyable commands in code blocks. Present enumerations as lists
+or tables, never as running prose. Route to the detail documents instead
+of duplicating their content.
 
 Keep it current as the project evolves.
 
