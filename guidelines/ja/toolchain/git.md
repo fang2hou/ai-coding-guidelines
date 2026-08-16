@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 615c3eb8
+digest: 7bf53fbe
 ---
 
 # Git ワークフロー
@@ -64,6 +64,8 @@ Cocogitto が必要な検証をすでに提供している場合は、独自の 
 GitHub Actions には、Conventional Commits の検証チェックを含めなければならない。
 
 この検証には Cocogitto を使う。
+
+`cog verify` はコミットを作成しないにもかかわらず author の署名を生成するため、Git のユーザー情報が未設定だと `config value 'user.name' was not found` で失敗する。GitHub Actions のランナーはデフォルトではこの設定を持たない。ジョブ内で `user.name` と `user.email` を設定してから呼び出すこと。`cog check` は既存のコミットを読むだけなので、この設定は不要である。
 
 不正なコミットメッセージを含むプルリクエストでは、該当する検証パイプラインが失敗するようにしなければならない。
 

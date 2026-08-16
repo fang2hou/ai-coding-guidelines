@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: d56132fa
+digest: ab202fb6
 ---
 
 # Git 工作流
@@ -64,6 +64,8 @@ Cocogitto 已提供所需校验时，不要实现自定义的 Conventional Commi
 GitHub Actions 必须包含 Conventional Commits 校验检查。
 
 该校验使用 Cocogitto。
+
+`cog verify` 虽然不创建提交，却要解析 Git 作者签名；未配置身份时会报 `config value 'user.name' was not found` 而失败。GitHub Actions runner 默认没有 Git 身份——在任务中先配置 `user.name` 与 `user.email` 再调用它。`cog check` 只读取既有提交，不需要身份。
 
 包含非法提交信息的 pull request 应让相应的校验流水线失败。
 

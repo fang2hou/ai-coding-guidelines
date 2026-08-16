@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: de58d827
+digest: 9927aac1
 ---
 
 # Git Workflow
@@ -66,6 +66,8 @@ Do not implement a custom Conventional Commits parser when Cocogitto already pro
 GitHub Actions must include a Conventional Commits validation check.
 
 Use Cocogitto for this validation.
+
+`cog verify` resolves a Git author signature even though it creates no commit, and fails with `config value 'user.name' was not found` when no identity is configured. GitHub Actions runners have no Git identity by default — configure `user.name` and `user.email` in the job before invoking it. `cog check` only reads existing commits and needs no identity.
 
 A pull request containing invalid commit messages should fail the relevant validation pipeline.
 
