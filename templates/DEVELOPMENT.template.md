@@ -17,7 +17,7 @@ mise install
 | {{pnpm}}   | Package manager | `mise.toml` |
 | {{oxlint}} | Linter          | `mise.toml` |
 
-Do not substitute tools without explicit approval (see the guideline repository's toolchain standards).
+Do not substitute tools without explicit approval (see the guidelines repository's toolchain standards).
 
 ## Commands
 
@@ -44,7 +44,7 @@ mise run test -- {{filter}} # run a single test file or case
 
 ## Coding Standards
 
-Follow the guideline repository's coding standards. Project-specific rules:
+Follow the guidelines repository's coding standards. Project-specific rules:
 
 - {{project-specific rule}}
 

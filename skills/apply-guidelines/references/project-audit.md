@@ -1,8 +1,8 @@
 # Project Audit Procedure
 
-Check an existing project against the AI Coding Guideline, then — on request —
+Check an existing project against the AI Coding Guidelines, then — on request —
 remediate what was found. The comparison criteria are ALWAYS the fetched
-guideline repository (Step 1 of the skill) — PORTAL.md inventory plus the
+guidelines repository (Step 1 of the skill) — PORTAL.md inventory plus the
 toolchain/, libraries/, and practices/ documents — never a summary or memory.
 
 Two phases, strictly ordered: **audit** (Steps 1–4, read-only, report) and

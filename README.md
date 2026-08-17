@@ -1,10 +1,10 @@
 <div align="center">
 
-# AI Coding Guideline
+# AI Coding Guidelines
 
 Engineering standards for AI-assisted development — maintained once, applied to every project.
 
-[![check](https://github.com/fang2hou/ai-coding-guideline/actions/workflows/check.yml/badge.svg)](https://github.com/fang2hou/ai-coding-guideline/actions/workflows/check.yml)
+[![check](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml/badge.svg)](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
 [English](./guidelines/en/) · [中文](./guidelines/zh/) · [日本語](./guidelines/ja/)
@@ -24,7 +24,7 @@ This repository standardizes everything that does not need to be a project-speci
 **As a coding agent** — install the skill:
 
 ```bash
-pnpm dlx skills add fang2hou/ai-coding-guideline@apply-ai-coding-guideline
+pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 ```
 
 The skill ships no guideline content: on every run it fetches the current guidelines from GitHub, routes the task through PORTAL, and audits existing projects against the fetched revision. Alternatively, point your agent configuration directly at [PORTAL.md](./PORTAL.md).
@@ -68,7 +68,7 @@ Consistency is machine-enforced: sha256 digests catch silent edits, terminology 
 ## Develop this repository
 
 ```bash
-git clone https://github.com/fang2hou/ai-coding-guideline && cd ai-coding-guideline
+git clone https://github.com/fang2hou/ai-coding-guidelines && cd ai-coding-guidelines
 mise install && pnpm install --frozen-lockfile
 mise run check
 ```
