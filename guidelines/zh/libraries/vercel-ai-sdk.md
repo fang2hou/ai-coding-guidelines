@@ -4,14 +4,14 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 3309b440
+digest: 789f04e6
 ---
 
 # Vercel AI SDK
 
 ## 结论
 
-视情况采用——仅当 Vercel AI SDK 能为 Next.js 实现带来实际价值时才使用。
+视情况采用——仅在 Vercel AI SDK 能为 Next.js 实现带来实际价值时使用。
 
 ## 适用场景
 
@@ -20,19 +20,19 @@ digest: 3309b440
 
 ## 不适用场景
 
-- 应用只是包含某个 LLM 功能——这本身永远不构成引入该依赖的正当理由。
-- 向所有 AI 相关项目自动添加该 SDK。
-- 项目中没有可供该 SDK 服务的 Next.js 实现。
+- 应用仅包含 LLM 功能——仅凭这一点，永远不足以引入该依赖。
+- 不要向所有 AI 相关项目自动添加该 SDK。
+- 项目没有可供该 SDK 使用的 Next.js 实现。
 
 ## 优势
 
 - 为 React 与 Next.js 界面提供流式 AI 响应处理。
-- 统一各 LLM 集成中的 provider 访问与工具调用模式。
+- 统一不同 LLM 集成中访问 provider 的方式和工具调用模式。
 
 ## 代价
 
-- 多出一个依赖，其价值取决于实现是否真正用到了它的能力。
-- 在本指南中仅限 Next.js 项目使用。
+- 增加一个依赖，其价值取决于实现是否实际使用 SDK 的能力。
+- 本指南仅将该 SDK 用于 Next.js 项目。
 
 ## 版本策略
 
@@ -41,10 +41,10 @@ digest: 3309b440
 
 ## 使用规则
 
-- 仅当 Vercel AI SDK 能为 Next.js 项目带来实际价值时才使用。
-- 不要向所有 AI 相关项目自动添加。
-- 不要仅因应用包含 LLM 功能就引入。
+- 仅在 Vercel AI SDK 能为 Next.js 项目带来实际价值时使用。
+- 不要对所有 AI 相关项目自动添加该 SDK。
+- 不要仅因应用包含 LLM 功能就引入该 SDK。
 
 ## 联动
 
-- [前端框架：Vite 与 Next.js](frontend-framework.md)——搭配：仅限 Next.js；是否引入该 SDK，只取决于它对 Next.js 实现是否有实际价值。
+- [前端框架：Vite 与 Next.js](frontend-framework.md)——仅与 Next.js 搭配；只有当该 SDK 对 Next.js 实现确有实际价值时才应引入。

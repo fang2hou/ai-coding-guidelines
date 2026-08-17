@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: ab202fb6
+digest: 452a7845
 ---
 
 # Git 工作流
@@ -26,7 +26,7 @@ ci
 chore
 ```
 
-当 scope 有助于提升清晰度时，使用 scope。
+在有助于明确含义时使用 scope。
 
 示例：
 
@@ -38,7 +38,7 @@ test(search): cover empty-result behavior
 ci(commit): validate conventional commits
 ```
 
-对于会进入共享仓库历史的提交，避免如下无意义的提交信息：
+对于将纳入共享仓库历史的提交，避免使用以下无意义的提交信息：
 
 ```text
 update
@@ -53,25 +53,25 @@ wip
 
 Cocogitto 是标准的 Conventional Commits 校验工具。
 
-在各项目间统一使用 Cocogitto，不要每个仓库另选一个提交校验器。
+在各项目中统一使用 Cocogitto，不要为每个仓库另选提交校验器。
 
-在合适的情况下，通过标准化项目工具把 Cocogitto 接入本地提交流程。
+在适当情况下，通过标准化项目工具将 Cocogitto 接入本地提交流程。
 
 Cocogitto 已提供所需校验时，不要实现自定义的 Conventional Commits 解析器。
 
 ## 在 GitHub Actions 中校验
 
-GitHub Actions 必须包含 Conventional Commits 校验检查。
+GitHub Actions 必须包含用于校验 Conventional Commits 的检查。
 
 该校验使用 Cocogitto。
 
-`cog verify` 虽然不创建提交，却要解析 Git 作者签名；未配置身份时会报 `config value 'user.name' was not found` 而失败。GitHub Actions runner 默认没有 Git 身份——在任务中先配置 `user.name` 与 `user.email` 再调用它。`cog check` 只读取既有提交，不需要身份。
+`cog verify` 虽不创建提交，仍会解析 Git 作者身份；未配置身份时会因 `config value 'user.name' was not found` 失败。GitHub Actions runner 默认没有 Git 身份，因此必须在任务中调用它之前配置 `user.name` 和 `user.email`。`cog check` 只读取已有提交，不需要身份。
 
-包含非法提交信息的 pull request 应让相应的校验流水线失败。
+包含非法提交信息的 pull request 应导致相应的校验流水线失败。
 
 若仓库采用 squash merge，且最终提交信息以 pull request 标题为准，则 pull request 标题必须遵循同样的 Conventional Commits 约定。
 
-目标是让两者保持一致：
+目标是保持以下两者一致：
 
 - pull request 校验
 - 最终仓库历史
@@ -82,7 +82,7 @@ CI 工作流标准见 [GitHub Actions](../toolchain/github-actions.md)。
 
 GitHub 托管的项目应提交 `.gitattributes` 文件。
 
-用它保持 GitHub 语言统计的真实性：生成文件与附带文件（lockfile、配置、CI 定义）不得淹没项目的核心内容。
+用它确保 GitHub 的语言统计准确：生成文件和其他附带文件（lockfile、配置、CI 定义）不得淹没项目的核心内容。
 
 优先采用白名单而非黑名单：默认把一切排除在统计之外，再仅放行项目本体。
 
@@ -92,9 +92,9 @@ src/** linguist-detectable
 pnpm-lock.yaml linguist-generated
 ```
 
-Markdown 等文章类语言默认不计入统计，需要显式的 `linguist-detectable` 规则。此后新增的文件在显式放行前不进入统计。
+Markdown 等文档语言默认不计入统计，必须显式添加 `linguist-detectable` 规则。之后新增的文件在显式放行前也不会计入统计。
 
-文件本身保持零注释，理由记录在 pull request 或项目文档中。
+文件本身不要包含注释；将理由记录在 pull request 或项目文档中。
 
 ## Git 安全
 
