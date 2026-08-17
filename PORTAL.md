@@ -1,4 +1,4 @@
-# PORTAL — AI Coding Guideline
+# PORTAL — AI Coding Guidelines
 
 You are applying this repository's engineering standards: mandatory
 toolchains, library selection, practices, and the agent operating protocol.

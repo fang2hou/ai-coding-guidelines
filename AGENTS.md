@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You maintain the AI Coding Guideline repository: trilingual engineering
+You maintain the AI Coding Guidelines repository: trilingual engineering
 standards consumed by AI agents in other projects. Consumers start at
 [PORTAL.md](./PORTAL.md); this file is the maintainer protocol.
 

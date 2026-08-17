@@ -34,6 +34,6 @@ What must remain true about the architecture:
 ## Decisions
 
 Significant decisions are recorded as ADRs in {{docs/adr/}}, using
-[adr.template.md](./adr.template.md) from the guideline repository.
+[adr.template.md](./adr.template.md) from the guidelines repository.
 When a request conflicts with an ADR, do not silently violate it —
-follow the ADR conflict workflow in the guideline's architecture governance.
+follow the ADR conflict workflow in the guidelines' architecture governance.

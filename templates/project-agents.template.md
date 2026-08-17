@@ -22,9 +22,9 @@ mise run check               # full validation — run before every commit
 
 ## Engineering Standards
 
-This project follows the shared engineering guideline:
+This project follows the shared engineering guidelines:
 
-> {{link to the guideline repository's PORTAL.md}}
+> {{link to the guidelines repository's PORTAL.md}}
 
 Read the portal's reading recipes for your task type before starting.
 Repository documentation always takes precedence over remembered summaries.

@@ -1,7 +1,7 @@
 ---
 name: apply-ai-coding-guideline
 description: >
-  Applies the AI Coding Guideline to a project by fetching it live from its
+  Applies the AI Coding Guidelines to a project by fetching them live from the
   GitHub repository: task-based document routing, stack and toolchain
   decisions, quality gates, and project audits. The skill itself ships no
   guideline content — it loads the current rules on every run. Use when
@@ -15,13 +15,13 @@ compatibility: Requires file read access, a shell, and git. Network needed on fi
 metadata:
   author: fang2hou
   version: "2.1"
-  source: https://github.com/fang2hou/ai-coding-guideline
+  source: https://github.com/fang2hou/ai-coding-guidelines
 ---
 
-# Apply AI Coding Guideline
+# Apply AI Coding Guidelines
 
 Thin loader: this skill carries zero guideline content. Every run fetches the
-guideline repository and applies what it finds there — the repository is the
+guidelines repository and applies what it finds there — the repository is the
 single source of truth, so the skill never needs content maintenance.
 
 ## When to Use
@@ -54,7 +54,7 @@ export GUIDELINE_DIR="${AI_CODING_GUIDELINE_DIR:-${TMPDIR:-/tmp}/ai-coding-guide
 if [ -d "$GUIDELINE_DIR/.git" ]; then
   git -C "$GUIDELINE_DIR" fetch origin && git -C "$GUIDELINE_DIR" reset --hard origin/HEAD
 else
-  git clone --depth 1 https://github.com/fang2hou/ai-coding-guideline "$GUIDELINE_DIR"
+  git clone --depth 1 https://github.com/fang2hou/ai-coding-guidelines "$GUIDELINE_DIR"
 fi
 git -C "$GUIDELINE_DIR" rev-parse --short HEAD
 ```
