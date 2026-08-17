@@ -1,5 +1,5 @@
 ---
-name: apply-ai-coding-guideline
+name: apply-guidelines
 description: >
   Applies the AI Coding Guidelines to a project by fetching them live from the
   GitHub repository: task-based document routing, stack and toolchain
@@ -14,7 +14,7 @@ license: MIT
 compatibility: Requires file read access, a shell, and git. Network needed on first run and for refreshes.
 metadata:
   author: fang2hou
-  version: "2.1"
+  version: "3.0"
   source: https://github.com/fang2hou/ai-coding-guidelines
 ---
 

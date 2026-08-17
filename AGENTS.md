@@ -30,19 +30,19 @@ provides only `node` and `pnpm` themselves.
 
 ## Repository map
 
-| Path                                | Content                                                                                                     | Language     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------ |
-| `guidelines/{en,zh,ja}/`            | Guideline content — isomorphic trilingual trees                                                             | en / zh / ja |
-| `guidelines/en/principles/`         | Core engineering principles                                                                                 | trilingual   |
-| `guidelines/en/toolchain/`          | Mandatory tools and platform standards                                                                      | trilingual   |
-| `guidelines/en/libraries/`          | Library/framework selection catalog                                                                         | trilingual   |
-| `guidelines/en/practices/`          | Cross-cutting engineering practices                                                                         | trilingual   |
-| `docs/adr/`                         | ADRs — decisions about this repository                                                                      | English only |
-| `templates/`                        | Copyable templates for consuming projects                                                                   | English only |
-| `skills/apply-ai-coding-guideline/` | Installable agent skill (pnpm dlx skills add) — thin loader that fetches guidelines from GitHub at run time | English only |
-| `tools/check-docs.ts`               | Trilingual consistency validator                                                                            | code         |
-| `PORTAL.md`                         | Task-based reading routes for consumers                                                                     | English only |
-| `GLOSSARY.md`                       | Canonical trilingual terminology                                                                            | English only |
+| Path                        | Content                                                                                                     | Language     |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------ |
+| `guidelines/{en,zh,ja}/`    | Guideline content — isomorphic trilingual trees                                                             | en / zh / ja |
+| `guidelines/en/principles/` | Core engineering principles                                                                                 | trilingual   |
+| `guidelines/en/toolchain/`  | Mandatory tools and platform standards                                                                      | trilingual   |
+| `guidelines/en/libraries/`  | Library/framework selection catalog                                                                         | trilingual   |
+| `guidelines/en/practices/`  | Cross-cutting engineering practices                                                                         | trilingual   |
+| `docs/adr/`                 | ADRs — decisions about this repository                                                                      | English only |
+| `templates/`                | Copyable templates for consuming projects                                                                   | English only |
+| `skills/apply-guidelines/`  | Installable agent skill (pnpm dlx skills add) — thin loader that fetches guidelines from GitHub at run time | English only |
+| `tools/check-docs.ts`       | Trilingual consistency validator                                                                            | code         |
+| `PORTAL.md`                 | Task-based reading routes for consumers                                                                     | English only |
+| `GLOSSARY.md`               | Canonical trilingual terminology                                                                            | English only |
 
 Rule of thumb: guideline content (the product) goes to `guidelines/`;
 repository documentation goes to `docs/` in English. See

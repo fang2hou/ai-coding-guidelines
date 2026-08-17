@@ -24,7 +24,7 @@ This repository standardizes everything that does not need to be a project-speci
 **As a coding agent** — install the skill:
 
 ```bash
-pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-ai-coding-guideline
+pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 ```
 
 The skill ships no guideline content: on every run it fetches the current guidelines from GitHub, routes the task through PORTAL, and audits existing projects against the fetched revision. Alternatively, point your agent configuration directly at [PORTAL.md](./PORTAL.md).
