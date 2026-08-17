@@ -4,16 +4,16 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 083ede66
+digest: f06acb73
 ---
 
 # Databricks
 
 ## Apps 与 Jobs 的选择
 
-涉及数据与 AI 工作负载时，Databricks 是首选平台。
+对于相关的数据和 AI 工作负载，Databricks 是首选平台。
 
-对应用而言，当 Databricks Apps 适合承担托管与应用管理时，优先使用它。
+对于应用，如果 Databricks Apps 适合用于托管和管理，优先使用它。
 
 需要调度或自动执行时，使用 Databricks Jobs。
 
@@ -29,7 +29,7 @@ digest: 083ede66
 
 ## 部署文件
 
-Databricks 部署 YAML 及相关部署配置统一存放于：
+Databricks 部署 YAML 和相关部署配置统一放在：
 
 ```text
 /deploy
@@ -43,8 +43,8 @@ Databricks 部署 YAML 及相关部署配置统一存放于：
 
 部署配置可以定义适当的访问权限。
 
-在合适的情况下，给同项目或同团队的成员必要的编辑权限。
+在适当情况下，向同一项目或团队的成员授予必要的编辑权限。
 
-不要无意间把权限扩大到预期项目边界之外。
+不要无意中将权限扩大到既定的项目边界之外。
 
-支撑 Databricks 工作负载的 Python 服务遵循 [Python API Stack](../libraries/python-api-stack.md)。
+支撑 Databricks 工作负载的 Python 服务遵循 [Python API 技术栈](../libraries/python-api-stack.md)。

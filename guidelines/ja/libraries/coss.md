@@ -4,71 +4,71 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 1d22dd03
+digest: 6072a6ea
 ---
 
 # coss ui
 
 ## 判定
 
-代替候補 — coss ui は [shadcn/ui](shadcn-ui.md) に次ぐ、認められた第二選択肢である。新規プロジェクトのデフォルトとして選んではならない。
+第二候補 — coss ui は [shadcn/ui](shadcn-ui.md) に次ぐ承認済みの選択肢である。新規プロジェクトでデフォルトとして選んではならない。
 
 ## 使用する場面
 
-- ユーザーがプロジェクトのコンポーネントシステムとして coss ui を明示的に選択した場合。
+- ユーザーがプロジェクトのコンポーネントシステムとして coss ui を明示的に選んだ場合。
 - プロジェクトがすでに coss ui を使っている場合。
 
 ## 避けるべき場面
 
-- coss ui への明示的な要求がない新規プロジェクト。shadcn/ui を使う。
-- プロジェクトがすでに shadcn/ui を使っており、ユーザーが移行を要求していない場合。
+- coss ui を明示的に要求していない新規プロジェクト。shadcn/ui を使う。
+- プロジェクトがすでに shadcn/ui を使っており、ユーザーが移行を求めていない場合。
 
 ## 長所
 
-- shadcn/ui と同じ配布モデルとツールチェーン。コンポーネントはソースとしてリポジトリにコピーされ、shadcn CLI（`@coss` レジストリ）でインストールされる。shadcn MCP ツールがそのまま使える。
-- Base UI を基盤としてネイティブに構築されており（shadcn/ui が現在デフォルトとする層と同じ）、Tailwind CSS v4 でスタイリングされる。
-- 精選された particle カタログ。すべてのプリミティブに本番に近い組み合わせ例がある。
-- Radix/shadcn からの移行ガイドが公式に提供され、コンポーネントごとの API 差異が説明されている。
+- shadcn/ui と同じ配布モデルとツールチェーンを採用する。コンポーネントはソースとしてリポジトリにコピーされ、shadcn CLI（`@coss` レジストリ）でインストールされる。shadcn MCP ツールからも直接操作できる。
+- Base UI を基盤としてネイティブに構築されている。Base UI は shadcn/ui が現在デフォルトとするプリミティブ層であり、coss ui は Tailwind CSS v4 でスタイルを適用する。
+- 厳選された particle のカタログがあり、すべてのプリミティブに本番を想定した構成例を提供する。
+- Radix/shadcn からの公式移行ガイドがあり、コンポーネントごとの API の違いを説明している。
 
 ## トレードオフ
 
-- shadcn/ui に比べ、エコシステムと普及度が小さい。
-- API は shadcn/Radix と 1:1 ではない（トリガーの合成、Select の items、Slider の値など）。既存の shadcn コードは import の書き換えでは済まず、移行が必要である。
-- 本ガイドラインではインストール済みコンポーネントの編集を全面的に禁止するため、カスタマイズは最初から合成・ラッパー・テーマとして計画する必要がある。
+- shadcn/ui と比べて、エコシステムも普及度も小さい。
+- API は shadcn/Radix と 1:1 で対応しない（トリガーのコンポジション、Select の items、Slider の値など）。既存の shadcn コードは import の書き換えだけでは済まず、移行が必要である。
+- 本ガイドラインでは、インストール済みコンポーネントの編集を一切禁止している。そのため、カスタマイズは最初からコンポジション、ラッパーコンポーネント、テーマ設定のいずれかとして計画する必要がある。
 
 ## バージョン方針
 
-- Tailwind CSS v4 と Base UI が必須。レジストリの最新状態に追従する。
-- コンポーネントの更新は npm パッケージのバージョンではなく、shadcn CLI（`pnpm dlx shadcn@latest add`）で行う。
+- Tailwind CSS v4 と Base UI が必須である。レジストリの最新状態に追従する。
+- コンポーネントは npm パッケージのバージョンではなく、shadcn CLI（`pnpm dlx shadcn@latest add`）で更新する。
 
 ## 利用ルール
 
 ### インストールとツール連携
 
-- コンポーネントのインストールは shadcn CLI で行う：`pnpm dlx shadcn@latest add @coss/<component>`。プロジェクトの初期化は `pnpm dlx shadcn@latest init @coss/style`。
-- coss ui の作業では agent スキルをインストールする：`pnpm dlx skills add cosscom/coss`。既定はプロジェクトスコープ。グローバルインストールはユーザーから要求された場合のみ。
-- 手作業でのファイルコピーよりも、shadcn MCP ツールまたは shadcn CLI を優先する。ローカルに同名のコンポーネントが既にある可能性がある場合は、まず `--dry-run` か `--diff` で確認する。
-- プロジェクトのセットアップでは coss ui の公式ドキュメントに従う。
+- コンポーネントは shadcn CLI でインストールする：`pnpm dlx shadcn@latest add @coss/<component>`。プロジェクトは `pnpm dlx shadcn@latest init @coss/style` で初期化する。
+- coss ui の作業では、エージェントスキルをインストールする：`pnpm dlx skills add cosscom/coss`。既定はプロジェクトスコープであり、グローバルインストールはユーザーが要求した場合に限る。
+- ファイルを手作業でコピーするより、shadcn MCP ツールまたは shadcn CLI を優先する。コンポーネントがローカルにすでに存在する可能性がある場合は、`--dry-run` または `--diff` でプレビューする。
+- プロジェクトのセットアップでは、coss ui の公式ドキュメントに従う。
 
-### インストール済みコンポーネントは決して改変しない
+### インストール済みコンポーネントの改変禁止
 
-- インストール済みの coss ui コンポーネントファイルを編集してはならない。shadcn/ui と違い、文書化された例外の経路はない。`components/ui` はレジストリがインストールした状態のまま保つ。
-- カスタマイズは合成、ラッパーコンポーネント、テーマ変数とデザイントークン、またはカスタム合成用の公式 `*Primitive` エクスポートで実装する。
-- shadcn/Radix のパターンをそのまま持ち込まない。公式の移行ガイドに従う（`asChild` は `render` へ、`onSelect` は `onClick` へ、Select は items ファースト、ToggleGroup は `multiple`、Slider はスカラー値）。
+- インストール済みの coss ui コンポーネントファイルを編集してはならない。shadcn/ui と異なり、文書化された例外はない。`components/ui` はレジストリがインストールした状態のままにする。
+- カスタマイズは、コンポジション、ラッパーコンポーネント、テーマ変数、デザイントークン、またはカスタムコンポジション用の公式 `*Primitive` エクスポートで実装する。
+- shadcn/Radix のパターンをそのまま移植してはならない。公式の移行ガイドに従う（`asChild` は `render` に、`onSelect` は `onClick` に置き換える。Select は items を先に指定する方式であり、ToggleGroup は `multiple` を使い、Slider はスカラー値を受け取る）。
 
 ### コンポーネントのパスと構成
 
-- coss ui コンポーネントは `components/ui` にインストールされ、そのままそこに置く。このパスの所有権はアップストリームにある。
-- アプリケーション独自のコンポーネントは同じ `components/` 配下に Atomic Design Methodology に沿ったサブディレクトリとして整理する：`atoms/`、`molecules/`、`organisms/`。アプリが求めるなら `templates/` と `pages/` を加える。[shadcn/ui](shadcn-ui.md) と同じ構成である。
-- shadcn/ui と同様に、`components/ui/**` を `.oxlintrc.json` と `.oxfmtrc.json` の `ignorePatterns` に追加し、`oxlint` と `oxfmt` の対象から除外する。
+- coss ui のコンポーネントは `components/ui` にインストールし、そのままそこに置く。このパスはアップストリームが所有する。
+- アプリケーション独自のコンポーネントは、同じ `components/` 配下で Atomic Design Methodology に沿ってサブディレクトリに整理する：`atoms/`、`molecules/`、`organisms/`。アプリに必要なら `templates/` と `pages/` も加える。[shadcn/ui](shadcn-ui.md) と同じ構成である。
+- shadcn/ui と同様に、`.oxlintrc.json` と `.oxfmtrc.json` の `ignorePatterns` に `components/ui/**` を追加し、`oxlint` と `oxfmt` の対象から除外する。
 
 ### コンポーネントの再利用
 
-- カスタムマークアップを書く前に、コンポーネントカタログと particle サンプルを確認する。
-- coss ui コンポーネントを合理的な範囲で可能な限り使う。アプリ固有の UI はそれらの合成として組み立てる。
+- カスタムマークアップを書く前に、コンポーネントカタログと particle のサンプルを確認する。
+- 合理的な範囲で coss ui コンポーネントを使い、アプリ固有の UI はそれらのコンポジションとして構築する。
 
 ## 連携
 
-- [Tailwind CSS](tailwindcss.md) — requires: coss ui は Tailwind CSS v4 でスタイリングされる。
-- [shadcn/ui](shadcn-ui.md) — alternative: 同じレジストリモデルとツールチェーンを共有し、乗り換え可能である。shadcn/ui がデフォルト、coss ui が第二選択肢。
-- [フロントエンドフレームワーク：Vite vs Next.js](frontend-framework.md) — works-with: プロジェクトが Vite と Next.js のどちらであっても、coss ui は適用できる。
+- [Tailwind CSS](tailwindcss.md) — 必須条件：coss ui は Tailwind CSS v4 でスタイルを適用する。
+- [shadcn/ui](shadcn-ui.md) — 代替：同じレジストリモデルとツールチェーンを使い、相互に切り替えられる。shadcn/ui をデフォルトとし、coss ui を第二候補とする。
+- [フロントエンドフレームワーク：Vite vs Next.js](frontend-framework.md) — 連携：Vite と Next.js のどちらを使うプロジェクトにも coss ui を適用できる。

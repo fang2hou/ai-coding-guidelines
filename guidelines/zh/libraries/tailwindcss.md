@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 2b6b6b36
+digest: 974d34bb
 ---
 
 # Tailwind CSS
@@ -15,8 +15,8 @@ digest: 2b6b6b36
 
 ## 适用场景
 
-- 默认用于任何前端项目的样式开发。
-- 构建 Tailwind 应用，且组件系统采用 [shadcn/ui](shadcn-ui.md)。
+- 默认用于所有前端项目的样式开发。
+- 构建以 [shadcn/ui](shadcn-ui.md) 为组件系统的 Tailwind 应用。
 
 ## 不适用场景
 
@@ -25,14 +25,14 @@ digest: 2b6b6b36
 
 ## 优势
 
-- 工具类优先(utility-first)的写法让样式与标记放在一起，避免自定义样式表越积越大。
+- 工具类优先（utility-first）的写法让样式与标记共置，避免自定义样式表不断膨胀。
 - 在 React 生态中应用广泛，也是 shadcn/ui 的样式基础。
-- 主题与设计令牌在每个大版本内集中于一处配置。
+- 每个大版本都可以在一处配置主题和设计令牌。
 
 ## 代价
 
 - 工具类写在标记里显得冗长，组件内部容易杂乱。
-- 各大版本的约定与配置模型互不兼容；混用会导致漂移。
+- 不同大版本的约定和配置模型彼此不兼容；混用会导致配置和实现逐渐偏离。
 
 ## 版本策略
 
@@ -43,16 +43,16 @@ digest: 2b6b6b36
 ## 使用规则
 
 - 前端项目默认使用 Tailwind CSS 作为 CSS 框架。
-- 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时，以用户要求为准。
+- 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时，遵循用户要求。
 - 遵循所选 Tailwind 版本的约定与配置模型。
-- 不要混用来自互不兼容大版本的模式。
+- 不要混用不兼容的 Tailwind 大版本模式。
 
-### 类名 Lint 与排序互操作
+### 类名 Lint 与排序工具互操作
 
 - 将 `oxlint-tailwindcss` 安装为开发依赖，并通过 `.oxlintrc.json` 的 `jsPlugins` 数组加载。
-- 将 `settings.tailwindcss.entryPoint` 指向项目的 Tailwind v4 CSS 入口——即引入 `tailwindcss` 并声明 `@theme` 设计令牌的文件。该设置必填且必须显式指定；插件不做文件系统自动探测。
-- 启用 `oxlint-tailwindcss/enforce-sort-order`，其排序结果与官方 Tailwind 类顺序一致。
-- 把 `.oxfmtrc.json` 中 oxfmt 的 `sortTailwindcss.stylesheet` 指向同一个 CSS 文件，让 Lint 工具和 oxfmt 基于同一套设计系统。否则 oxfmt 读取的是 `tailwindcss` 包内置的 `theme.css`，在自定义 `@theme` 令牌的排序上与 Lint 工具不一致。
+- 将 `settings.tailwindcss.entryPoint` 指向项目的 Tailwind v4 CSS 入口，即引入 `tailwindcss` 并声明 `@theme` 设计令牌的文件。该设置为必填项，且必须显式指定；插件不会自动探测文件系统。
+- 启用 `oxlint-tailwindcss/enforce-sort-order`，以采用 Tailwind 官方的类名排序顺序。
+- 将 `.oxfmtrc.json` 中 oxfmt 的 `sortTailwindcss.stylesheet` 指向同一个 CSS 文件，使 Lint 工具和 oxfmt 使用同一设计系统。否则，oxfmt 会读取 `tailwindcss` 包内置的 `theme.css`，在自定义 `@theme` 令牌的排序上与 Lint 工具产生不一致。
 
 ```jsonc
 // .oxlintrc.json
@@ -78,4 +78,4 @@ digest: 2b6b6b36
 
 ## 联动
 
-- [shadcn/ui](shadcn-ui.md)——搭配：shadcn/ui 是 Tailwind 应用的首选组件系统，且依赖 Tailwind。
+- [shadcn/ui](shadcn-ui.md)——搭配：shadcn/ui 是 Tailwind 应用的首选组件系统，并且依赖 Tailwind。

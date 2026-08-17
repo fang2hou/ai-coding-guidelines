@@ -4,20 +4,20 @@ lang: zh
 version: 5
 source-lang: en
 status: active
-digest: 04bd066f
+digest: 1385dba6
 ---
 
 # 必备项目文档
 
-每个项目必须维护 `AGENTS.md`、`README.md`、`DEVELOPMENT.md` 与 `CONTRIBUTING.md`。项目一旦具有实质的架构边界，`ARCHITECTURE.md` 也成为必备。以 `templates/` 下的模板为起点。
+每个项目必须维护 `AGENTS.md`、`README.md`、`DEVELOPMENT.md` 与 `CONTRIBUTING.md`。项目一旦形成有实际意义的架构边界，`ARCHITECTURE.md` 也成为必备文档。以 `templates/` 下的模板为起点。
 
 ## AGENTS.md
 
 每个项目必须在仓库根目录包含 `AGENTS.md`。
 
-它是面向 Agent 的入口：命令、工程标准、代码地图、边界、已确认的语言政策与项目约定。
+它是面向 Agent 的入口文档：命令、工程标准、仓库结构、边界、已确认的语言政策与项目约定。
 
-编写规则——载体选择、章节顺序、体积、嵌套文件——见[编写 AGENTS.md](agents-file.md)。
+编写规则——载体选择、章节顺序、篇幅、嵌套文件——见[编写 AGENTS.md](agents-file.md)。
 
 模板：[project-agents.template.md](../../../templates/project-agents.template.md)
 
@@ -25,24 +25,24 @@ digest: 04bd066f
 
 每个项目必须包含 `README.md`。
 
-README 面向人类读者。面向 Agent 的规则——工程标准、已确认的语言政策、项目约定——写在 `AGENTS.md` 中(见 `templates/project-agents.template.md`)；README 通过一条可复制的指令把仓库交给 Agent。
+README 面向人类读者。面向 Agent 的规则——工程标准、已确认的语言政策、项目约定——写在 `AGENTS.md` 中（参见 `templates/project-agents.template.md`）；README 通过一条可复制的指令把仓库交给 Agent。
 
-README 必须以身份块开头：项目名称、一句话标语(说明项目是什么、面向谁)，以及状态徽章。
+README 必须以身份块开头：项目名称、一句话标语（说明项目是什么、面向谁），以及状态徽章。
 
-正文按读者任务组织，而不是按仓库目录结构组织。它应包含：
+正文应围绕读者任务组织，而不是围绕仓库目录结构展开。它应包含：
 
 - 项目为何存在，以及明确不做什么
 - 环境搭建说明与首次运行
 - 基本用法与主要工作流
 - 一条可复制的指令，通过 `AGENTS.md` 把仓库交给 AI 编码 Agent
-- 一张"目标 → 阅读"表，链接到下文的详细文档
+- 一张“目标 → 阅读”表，链接到下文的详细文档
 - 相关的环境要求
 
-保持可扫读：段落一到三句、一个要点只讲一件事、可复制的命令放进代码块。枚举信息用列表或表格呈现，绝不写成连排散文。链接到详细文档，不要复制其内容。
+保持便于扫读：每个段落一至三句，每个要点只讲一件事，可复制的命令放在代码块中。枚举内容应使用列表或表格呈现，不要写成连续的散文。应链接到详细文档，而不是重复其中内容。
 
-随项目演进保持更新。
+随项目演进及时更新。
 
-已确认的产品/UI 语言政策(参见[语言政策](language-policy.md))是面向 Agent 的：记录在 `AGENTS.md` 中，不要写进 README。
+已确认的产品/UI 语言政策（参见[语言政策](language-policy.md)）面向 Agent：应记录在 `AGENTS.md` 中，不要写入 README。
 
 模板：[README.template.md](../../../templates/README.template.md)
 
@@ -59,9 +59,9 @@ README 必须以身份块开头：项目名称、一句话标语(说明项目是
 - 测试工作流
 - 本地环境搭建
 - 校验工作流
-- 部署工作流(如适用)
+- 部署工作流（如适用）
 
-它应让人类和 AI Agent 都能据此理解开发如何进行。
+它应让人类和 AI Agent 都能据此了解应如何进行开发。
 
 模板：[DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 
@@ -72,13 +72,13 @@ README 必须以身份块开头：项目名称、一句话标语(说明项目是
 它应记录：
 
 - 贡献要求
-- issue 工作流(如适用)
+- issue 工作流（如适用）
 - pull request 工作流
 - 评审要求
 - 必须执行的校验
 - 提交规范
 
-对于 AI 生成或 AI 辅助的 pull request，描述中应明确包含：
+对于 AI 生成或 AI 辅助的 pull request，其描述应明确包含：
 
 - 变更目的
 - 变更影响
@@ -92,15 +92,15 @@ GitHub 的 pull request 模板必须与这些要求保持同步。
 
 ## ARCHITECTURE.md
 
-具有实质架构边界的项目应维护 `ARCHITECTURE.md`。
+项目一旦形成有实际意义的架构边界，就应维护 `ARCHITECTURE.md`。
 
-保持简短、可操作。
+保持简短，便于执行。
 
-它应包含简要概览、粗粒度的代码地图(命名模块，不链接文件)，以及架构不变量。
+它应包含简要概览、粗粒度的代码地图（列出模块名称，不要链接文件）以及架构不变量。
 
-避免把它写成面面俱到的理论架构文档。
+不要把它写成面面俱到的理论架构文档。
 
-它的首要目的是防止架构无意间漂移。
+它的首要目的是防止架构在无意中发生漂移。
 
 不变量与 ADR 实践见[架构治理](architecture-governance.md)。
 
