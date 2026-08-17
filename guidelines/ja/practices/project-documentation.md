@@ -1,15 +1,25 @@
 ---
 id: practices/project-documentation
 lang: ja
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: d87233f4
+digest: c9dd0057
 ---
 
 # 必須プロジェクトドキュメント
 
-すべてのプロジェクトは、次の 4 つのドキュメントを維持しなければならない。出発点として、`templates/` 配下のテンプレートを使用すること。
+すべてのプロジェクトは、`AGENTS.md`、`README.md`、`DEVELOPMENT.md`、`CONTRIBUTING.md` を維持しなければならない。意味のあるアーキテクチャ上の境界を持つ時点から、`ARCHITECTURE.md` も必須になる。出発点として、`templates/` 配下のテンプレートを使用すること。
+
+## AGENTS.md
+
+すべてのプロジェクトは、リポジトリのルートに `AGENTS.md` を置かなければならない。
+
+これはエージェント向けの入口である。コマンド、エンジニアリング標準、コードマップ、境界、確定した言語ポリシー、プロジェクト固有の取り決めを記述する。
+
+書き方のルール(記述先の選択、節の順序、サイズ、ネストしたファイル)は、[AGENTS.md の書き方](agents-file.md)で定義される。
+
+テンプレート：[project-agents.template.md](../../../templates/project-agents.template.md)
 
 ## README.md
 
