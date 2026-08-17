@@ -1,10 +1,10 @@
 ---
 id: toolchain/github-actions
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: b60f628b
+digest: 6df0a361
 ---
 
 # GitHub Actions
@@ -41,6 +41,27 @@ GitHub Actions
 rather than duplicating project logic directly inside workflow YAML.
 
 mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML. See [mise](../toolchain/mise.md).
+
+## Event scoping
+
+- Scope each workflow file to one trigger audience. A project-validation
+  workflow runs on `push` (default branch) and `pull_request`; rules that
+  exist only for pull requests — for example, PR title rules — live in their
+  own workflow triggered by `pull_request` alone.
+- Never emulate that split with `if: github.event_name == 'pull_request'` on a
+  job inside a multi-trigger workflow: on `push` runs the job reports skipped
+  and the run reads as a partial failure. See
+  [Pipeline](../practices/pipeline.md) for the tool-agnostic rule.
+- `pull_request` defaults to `opened`, `synchronize`, and `reopened` — the
+  right set for validating code. List `types:` only to go beyond the default:
+  a workflow that validates PR metadata an edit can change (the title) must
+  add `edited`, so retitled pull requests re-verify. Never list activity types
+  that cannot change the outcome; every listed type is another trigger.
+- A required status check is satisfied even by a skipped job — the merge gate
+  will not enforce this rule. Apply it for readable run lists, and guard the
+  real hazard: a required check whose workflow does not run on `pull_request`,
+  or whose job is filtered out entirely, never reports and stays pending.
+  Every context that requires a check must produce a report for it.
 
 ## Naming and Readability
 
@@ -88,6 +109,9 @@ jobs:
   interpolation — direct interpolation enables script injection.
 - Pin actions to major version tags from verified creators at minimum;
   prefer full commit SHAs for third-party actions.
+- Never use `pull_request_target` to check out and run pull-request code; it
+  executes the base workflow definition with repository secrets. Use
+  `pull_request`.
 
 ## Related
 

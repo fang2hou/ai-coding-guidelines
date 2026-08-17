@@ -1,10 +1,10 @@
 ---
 id: toolchain/github-actions
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 66dd9918
+digest: 889fbf89
 ---
 
 # GitHub Actions
@@ -42,6 +42,13 @@ GitHub Actions
 
 mise 是 CI 调用的入口；不要在工作流 YAML 中重复设置工具。见 [mise](../toolchain/mise.md)。
 
+## 事件作用域
+
+- 每个工作流文件只面向一种触发受众。项目校验工作流在 `push`（默认分支）和 `pull_request` 上运行；只对 pull request 成立的规则——例如 pull request 标题规则——放在仅由 `pull_request` 触发的独立工作流中。
+- 绝不要在多触发工作流里给某个 job 加 `if: github.event_name == 'pull_request'` 来模拟这种拆分：在 `push` 触发的运行中，该 job 显示为 skipped，整个运行看起来像部分失败。工具无关的规则见 [流水线](../practices/pipeline.md)。
+- `pull_request` 默认由 `opened`、`synchronize`、`reopened` 触发——这正是校验代码所需的集合。只有在超出默认范围时才列出 `types:`：校验可能因编辑而改变的 pull request 元数据（标题）的工作流必须加上 `edited`，让改过标题的 pull request 重新接受校验。绝不要列出无法改变结果的 activity type；每多列一个 type，就多一个触发入口。
+- 必需状态检查即使被 skipped 的 job 也能满足——合并门禁不会强制这条规则。遵守它是为了得到可读的运行列表；真正要防的是：工作流不在 `pull_request` 上运行，或 job 被过滤器整个排除的必需检查，从不报告、一直 pending。每个要求某项检查的上下文，都必须为它产出报告。
+
 ## 命名与可读性
 
 工具无关原则见 [流水线](../practices/pipeline.md)。
@@ -75,6 +82,7 @@ jobs:
 - 使用启用 `cancel-in-progress` 的 `concurrency`，让同一 ref 上已被取代的运行直接取消，而不是继续排队。
 - 将不可信输入（pull request 标题、分支名、issue 文本）传给 `run:` 脚本时，必须通过环境变量传递，绝不要直接插入 `${{ }}`——直接插值会导致脚本注入。
 - action 至少应固定到已验证创建者发布的主版本 tag；第三方 action 优先固定到完整 commit SHA。
+- 绝不要用 `pull_request_target` 检出并运行 pull request 的代码；它会以仓库敏感凭据执行基础分支上的工作流定义。应使用 `pull_request`。
 
 ## 相关文档
 
