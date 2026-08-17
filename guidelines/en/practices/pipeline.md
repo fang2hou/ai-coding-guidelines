@@ -1,10 +1,10 @@
 ---
 id: practices/pipeline
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: d9336d24
+digest: 3c65b370
 ---
 
 # Pipeline
@@ -32,6 +32,23 @@ jobs, separate files — instead of accreting anonymous steps.
 - Prefer several small pipeline files over one growing file.
 - Invoke the project's own tasks instead of duplicating project logic in
   pipeline YAML (see [mise](../toolchain/mise.md)).
+
+## Complete check reporting
+
+- Never put a unit that only runs for one trigger inside a pipeline that runs
+  for several, gated by a condition. Give it its own pipeline file scoped to
+  that trigger.
+- A conditionally skipped unit still appears in the run as skipped, so the run
+  reads as a partial pass that looks like a failure and forces the reader to
+  reconstruct which trigger fired.
+- Judge pass or fail from the run list alone: every unit listed for a pipeline
+  must execute whenever that pipeline runs.
+- A skipped result satisfies a required check, so the merge gate never forces
+  this rule — apply it for readability, and guard the real hazard: a required
+  check that never reports at all, because the workflow did not trigger or its
+  filters excluded the job, stays pending and blocks the context expecting it.
+  Restructure until every context that requires a check produces a report for
+  it.
 
 ## Naming and Readability
 
