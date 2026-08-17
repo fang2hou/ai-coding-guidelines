@@ -1,15 +1,25 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: e21c5dbc
+digest: 061f5585
 ---
 
 # Required Project Documentation
 
-Every project must maintain the four documents below. Use the templates under `templates/` as the starting point.
+Every project must maintain `AGENTS.md`, `README.md`, `DEVELOPMENT.md`, and `CONTRIBUTING.md`. `ARCHITECTURE.md` becomes required once the project has meaningful architectural boundaries. Use the templates under `templates/` as the starting point.
+
+## AGENTS.md
+
+Every project must include `AGENTS.md` at the repository root.
+
+It is the agent-facing entry point: commands, engineering standards, repository layout, boundaries, the confirmed language policy, and project conventions.
+
+Authoring rules — surface selection, section order, size, nested files — are defined in [Authoring AGENTS.md](agents-file.md).
+
+Template: [project-agents.template.md](../../../templates/project-agents.template.md)
 
 ## README.md
 

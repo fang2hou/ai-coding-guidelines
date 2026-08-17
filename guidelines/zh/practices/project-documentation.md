@@ -1,15 +1,25 @@
 ---
 id: practices/project-documentation
 lang: zh
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 36df4d67
+digest: 04bd066f
 ---
 
 # 必备项目文档
 
-每个项目必须维护以下四份文档。以 `templates/` 下的模板为起点。
+每个项目必须维护 `AGENTS.md`、`README.md`、`DEVELOPMENT.md` 与 `CONTRIBUTING.md`。项目一旦具有实质的架构边界，`ARCHITECTURE.md` 也成为必备。以 `templates/` 下的模板为起点。
+
+## AGENTS.md
+
+每个项目必须在仓库根目录包含 `AGENTS.md`。
+
+它是面向 Agent 的入口：命令、工程标准、代码地图、边界、已确认的语言政策与项目约定。
+
+编写规则——载体选择、章节顺序、体积、嵌套文件——见[编写 AGENTS.md](agents-file.md)。
+
+模板：[project-agents.template.md](../../../templates/project-agents.template.md)
 
 ## README.md
 
