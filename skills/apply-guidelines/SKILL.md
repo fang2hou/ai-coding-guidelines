@@ -14,7 +14,7 @@ license: MIT
 compatibility: Requires file read access, a shell, and git. Network needed on first run and for refreshes.
 metadata:
   author: fang2hou
-  version: "3.0"
+  version: "4.0"
   source: https://github.com/fang2hou/ai-coding-guidelines
 ---
 
@@ -71,9 +71,25 @@ language (`guidelines/{en,zh,ja}/` mirror each other). Follow the documents.
 
 Write the change following the fetched documents. When a fetched rule and the
 project's existing conventions conflict, raise it with the user; do not
-silently drop either side.
+silently drop either side. The result is a draft — Step 4 reworks it against
+the fetched rules.
 
-### Step 4: Verify against the fetched documents
+### Step 4: Apply the rules to the draft
+
+Re-read every file created or modified in this change — the full diff, not the
+memory of writing it — against the normative statements of each fetched
+document, and rewrite the code until it satisfies them. This pass edits code;
+it produces no report rows.
+
+- Rules that constrain the shape of code are satisfied by refactoring —
+  rename, extract, restructure, delete. Never by rewording a comment around
+  the violation, and never by leaving the violation for the matrix to excuse.
+- Depth bar: a rule is applied when the code now carries it by construction,
+  not when an explanation of the rule sits next to code that breaks it.
+- Rules govern code written or substantially modified in this change;
+  violations noticed in untouched code are reported, not mass-reformatted.
+
+### Step 5: Verify against the fetched documents
 
 Before running any gate, re-open each fetched document from disk and check
 the change against every normative statement it contains — Use / Prefer /
@@ -81,21 +97,21 @@ Do not / Never and imperative bullets. Never verify from memory: the check
 exists precisely because memory drifts during long tasks.
 
 1. One document at a time, list its normative statements.
-2. For each statement, point at the file (or diff hunk) that satisfies it,
-   or mark it as a violation.
+2. For each statement, cite the file and the lines (or diff hunks) that
+   satisfy it, re-opened from disk in this step, or mark it as a violation.
 3. Fix every violation, then re-check the fixed files the same way.
 4. Record the outcome as a compliance matrix: document section → pass /
-   fixed / open.
+   fixed / open — every row citing its evidence.
 
 A section with no row in the matrix is an unapplied rule, not a pass.
 
-### Step 5: Run the project's gates
+### Step 6: Run the project's gates
 
 Run the project's own checks exactly as its documentation defines them
 (typically `mise install` to bootstrap, then `mise run check`). A gate that
 fails is a finding to fix, not to bypass.
 
-### Step 6: Audit mode (existing projects)
+### Step 7: Audit mode (existing projects)
 
 Follow [references/project-audit.md](references/project-audit.md). The
 comparison criteria are the fetched documents — never a summary. The audit
@@ -112,7 +128,9 @@ reports; remediation runs only after the user approves the fix list.
 On completion, return:
 
 1. Source: the guideline commit SHA applied and the recipe row used.
-2. Compliance: the matrix from Step 4 — one row per fetched document
+2. Compliance: the matrix from Step 5 — one row per fetched document
    section, pass / fixed / open.
-3. Gate results: exact check commands run and their outcomes.
-4. For audits: the divergence report per [references/project-audit.md](references/project-audit.md).
+3. Application: the shape rules applied in Step 4 and what was refactored
+   for each.
+4. Gate results: exact check commands run and their outcomes.
+5. For audits: the divergence report per [references/project-audit.md](references/project-audit.md).
