@@ -14,7 +14,8 @@ followed its own rule in
 `jdx/mise-action` to `3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518 # v4.2.5` while
 `actions/checkout` stayed on `@v7`.
 
-The pin bought supply-chain immutability and cost currency. A SHA never picks
+The pin bought supply-chain immutability at the cost of staying current. A SHA
+never picks
 up a fix, a runner-image adaptation, or a feature; the workflow no longer
 states which version it runs; and every upgrade becomes a manual lookup that a
 reviewer cannot read in the diff. CI is exactly the place that must keep
