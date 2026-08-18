@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: cb9cde0b
+digest: 6605bb0c
 ---
 
 # Agent Operating Protocol
@@ -85,3 +85,4 @@ The following behaviors are prohibited. Each item links to the document that def
 24. Commit secrets or sensitive information. ([security](../practices/security.md))
 25. Force push shared history without appropriate approval. ([git](../toolchain/git.md))
 26. Treat passing CI as a substitute for understanding whether the implementation is correct. ([change-discipline](../practices/change-discipline.md))
+27. Pin GitHub Actions to commit SHAs instead of current major version tags without a stated supply-chain policy. ([github-actions](../toolchain/github-actions.md))

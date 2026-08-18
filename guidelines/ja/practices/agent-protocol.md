@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 4dbf61a7
+digest: 2ee134c8
 ---
 
 # エージェント運用プロトコル
@@ -85,3 +85,4 @@ digest: 4dbf61a7
 24. シークレットや機密情報をコミットしてはならない（[セキュリティ](../practices/security.md)）。
 25. 適切な承認を得ずに、共有履歴へ force push してはならない（[Git ワークフロー](../toolchain/git.md)）。
 26. CI が通ったことだけを根拠に、実装が正しいかどうかを確認せずに済ませてはならない（[変更の規律](../practices/change-discipline.md)）。
+27. 明示的なサプライチェーンポリシーがない限り、GitHub Actions を現在のメジャーバージョンタグではなくコミット SHA に固定してはならない（[GitHub Actions](../toolchain/github-actions.md)）。

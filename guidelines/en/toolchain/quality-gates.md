@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 86cf5833
+digest: 83acef94
 ---
 
 # Quality Gates
@@ -83,7 +83,7 @@ mise run check && mise run test
 
 ```yaml
 # .github/workflows/ci.yml - steps section
-- uses: jdx/mise-action@v2 # installs the mise-managed toolchain
+- uses: jdx/mise-action@v4 # installs the mise-managed toolchain
 - run: mise run check
 - run: mise run test
 ```

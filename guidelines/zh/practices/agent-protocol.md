@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 24c8e8ec
+digest: 2af6794b
 ---
 
 # Agent 操作协议
@@ -85,3 +85,4 @@ Agent 不要仅因偏好另一种风格，就重写正常工作的代码。
 24. 提交敏感凭据或敏感信息。([security](../practices/security.md))
 25. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
 26. 把 CI 通过当作判断实现是否正确的替代品。([change-discipline](../practices/change-discipline.md))
+27. 在没有明确供应链策略的情况下，将 GitHub Actions 固定到 commit SHA，而不是当前主版本 tag。([github-actions](../toolchain/github-actions.md))

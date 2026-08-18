@@ -1,10 +1,10 @@
 ---
 id: toolchain/github-actions
 lang: en
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 6df0a361
+digest: 43e36442
 ---
 
 # GitHub Actions
@@ -23,7 +23,10 @@ When creating or modifying a GitHub Actions workflow:
 4. Check whether required inputs, permissions, runtime versions, or behavior have changed.
 5. Prefer moving to the current supported version when migration is safe.
 
-Do not blindly update an action version number without checking migration requirements.
+Do not blindly update an action version number without checking migration
+requirements. A major version tag picks up patch and minor releases on its
+own; this checklist governs the moves it cannot make for you — crossing a
+major boundary.
 
 ## CI Layering
 
@@ -62,6 +65,17 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
   real hazard: a required check whose workflow does not run on `pull_request`,
   or whose job is filtered out entirely, never reports and stays pending.
   Every context that requires a check must produce a report for it.
+
+## Checkout Depth
+
+- `actions/checkout` fetches a single commit by default. Keep that default:
+  most jobs only need the tree they validate.
+- Set `fetch-depth: 0` only in a job that reads history — `cog check`,
+  changelog generation, `git describe`, diff-against-base logic.
+- When one responsibility needs full history and the rest do not, split it
+  into its own job rather than deepening the shared checkout. History-reading
+  work is one responsibility per [Pipeline](../practices/pipeline.md) anyway,
+  and the split keeps the validation job's checkout shallow.
 
 ## Naming and Readability
 
@@ -107,8 +121,19 @@ jobs:
 - Pass untrusted input (PR titles, branch names, issue text) into `run:`
   scripts through environment variables, never via direct `${{ }}`
   interpolation — direct interpolation enables script injection.
-- Pin actions to major version tags from verified creators at minimum;
-  prefer full commit SHAs for third-party actions.
+- Reference actions by the current major version tag from a trusted publisher
+  (`actions/checkout@v7`, `jdx/mise-action@v4`). The tag keeps receiving
+  fixes, runtime updates, and new features inside that major, and an upgrade
+  stays a one-token diff a reviewer can read.
+- Prefer the tag over a full commit SHA. A SHA freezes the action at one
+  revision: fixes never arrive, the workflow stops stating which version it
+  runs, and every upgrade becomes a manual SHA lookup. Pin a SHA only under a
+  stated immutable-build or supply-chain policy, and record the resolved
+  version in a trailing comment. Never leave an action on a bare branch name
+  or an unversioned tag.
+- A floating major tag trusts the publisher: pair it with the least-privilege
+  defaults above, and never expose secrets to a workflow that runs
+  pull-request code.
 - Never use `pull_request_target` to check out and run pull-request code; it
   executes the base workflow definition with repository secrets. Use
   `pull_request`.
