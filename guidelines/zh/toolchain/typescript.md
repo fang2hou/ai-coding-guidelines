@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: zh
-version: 6
+version: 7
 source-lang: en
 status: active
-digest: 50bd819c
+digest: 2bbe6860
 ---
 
 # TypeScript 工具链
@@ -23,13 +23,13 @@ TypeScript 是 AI 辅助产品开发的默认语言；在现有语言中，它�
 
 ## 版本策略
 
-使用 mise 管理最新稳定版 TypeScript 和 Active LTS 线上的最新稳定版 Node.js。
+使用最新稳定版 TypeScript 和 Active LTS 线上的最新稳定版 Node.js。
 
 截至 2026-08，Active LTS 版本线为 Node.js 24（EOL 2028-04）；Node.js 22 处于维护期（EOL 2027-04），Node.js 26 在 2026-10 之前仍是 Current 线。绝不以 Current 线为目标；只有新的 LTS 版本线稳定后，才升级 Node 主版本。
 
 模型根据训练数据生成代码，因此主流且经过充分验证的版本在 AI 辅助开发中出错更少；应优先选择这些版本，而不是追求边际收益。该原则见 [核心工程原则](../principles/core-principles.md)。
 
-在项目的 mise 配置中固定 Node.js 与 TypeScript 的版本，不要依赖全局安装的版本。
+在项目的 mise 配置中固定 Node.js 的版本；TypeScript 的版本通过 pnpm lockfile 固定，两者都不依赖全局安装的版本。
 
 ## pnpm
 

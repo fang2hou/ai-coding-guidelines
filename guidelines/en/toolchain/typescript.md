@@ -1,10 +1,10 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 6
+version: 7
 source-lang: en
 status: active
-digest: 746df516
+digest: ccfca4f6
 ---
 
 # TypeScript Toolchain
@@ -23,13 +23,13 @@ For framework selection, see [Frontend Framework: Vite vs Next.js](../libraries/
 
 ## Version Policy
 
-Use the latest stable TypeScript and Node.js on the Active LTS line, both managed by mise.
+Use the latest stable TypeScript and Node.js on the Active LTS line.
 
 As of 2026-08, the Active LTS line is Node.js 24 (EOL 2028-04); Node.js 22 is in maintenance (EOL 2027-04), and Node.js 26 is the Current line until 2026-10. Never target the Current line; upgrade the Node major only after the new LTS line has settled.
 
 Models generate code from training data, so mainstream, thoroughly validated versions break less in AI-assisted development — prefer them over marginal gains. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
 
-Pin both the Node.js and TypeScript versions in the project's mise configuration instead of relying on globally installed versions.
+Pin the Node.js version in the project's mise configuration; pin the TypeScript version through the pnpm lockfile — never rely on globally installed versions of either.
 
 ## pnpm
 
