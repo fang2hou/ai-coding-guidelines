@@ -4,12 +4,14 @@ lang: en
 version: 6
 source-lang: en
 status: active
-digest: e62ee2e1
+digest: ffcf7cf9
 ---
 
 # Required Project Documentation
 
 Every project must maintain `AGENTS.md`, `README.md`, `DEVELOPMENT.md`, and `CONTRIBUTING.md`. `ARCHITECTURE.md` becomes required once the project has meaningful architectural boundaries. Use the templates under `templates/` as the starting point.
+
+Documentation modes follow [Diátaxis](https://diataxis.fr/): the README orients and routes; `DEVELOPMENT.md` and `CONTRIBUTING.md` carry how-to guidance and reference; `ARCHITECTURE.md` is explanation; `AGENTS.md` is reference for agents. Keep one mode per document — when a document needs another mode, link to the document that owns it instead of mixing it in.
 
 ## AGENTS.md
 
@@ -25,14 +27,14 @@ Template: [project-agents.template.md](../../../templates/project-agents.templat
 
 Every project must include `README.md`.
 
-The README is the project's front door, written for human readers in a
-hurry: within the first screen it must say what the project is, what need
-it solves, and how to get it running. Readers want to try the project,
-not study it — give them the fastest path to a working copy before any
-explanation. Agent-facing rules — engineering standards, the confirmed
-language policy, project conventions — live in `AGENTS.md` (see
-`templates/project-agents.template.md`), and the README hands the
-repository to agents with a copyable instruction.
+The README is the project's front door, written for readers who skim:
+the first screen states what the project is, what need it solves, and
+how to get it running. It orients and routes; it does not teach,
+document the machinery, or explain the background — those belong to the
+detail documents and their modes. Agent-facing rules — engineering
+standards, the confirmed language policy, project conventions — live in
+`AGENTS.md` (see `templates/project-agents.template.md`), and the README
+hands the repository to agents with a copyable instruction.
 
 The body is organized around reader tasks, not around the repository
 directory structure. Do not write a separate Why section; follow this
@@ -41,7 +43,7 @@ order:
 - An identity block: the project name, a one-sentence tagline stating what the project is and for whom, and status badges — followed by one to three plain sentences on the need the project solves. Mention what the project intentionally is not, and its status, only when that saves the reader time.
 - When the project has a visual surface — a UI, CLI output, generated artifacts — a screenshot or a short GIF immediately after the opening.
 - One get-it-running section: `Quick Start` for projects that need a developer, `Usage` for end-user products, `Usage / Quick Start` when both apply. The AI path comes first — the copyable instruction that hands the repository to an AI coding agent via `AGENTS.md` — and the manual steps follow: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses as examples with their expected output.
-- Core concepts and features: the few ideas a reader must grasp, and why this project over the alternatives — one line per item, placed after the get-it-running section.
+- Concepts and features: the few ideas a reader needs, and how the project differs from the alternatives — one line per item, placed after the get-it-running section.
 - A Goal → Read table linking the detail documents below.
 - The license, stated explicitly.
 
@@ -51,10 +53,12 @@ Fold long auxiliary content — platform-specific setup, environment variable ta
 
 Keep it scannable: paragraphs of one to three sentences, one idea per
 bullet, copyable commands in code blocks. Present enumerations as lists
-or tables, never as running prose. Route to the detail documents instead
-of duplicating their content — but never shrink the README to a bare
-"see the docs" pointer: it must stand alone as the entry point. Add a
-table of contents once it grows beyond a few screens.
+or tables, never as running prose. Route to the detail documents
+instead of duplicating their content — teaching, reference, and
+explanation are their modes, not the README's — but never shrink the
+README to a bare "see the docs" pointer: it must stand alone as the
+entry point. Add a table of contents once it grows beyond a few
+screens.
 
 An outdated README is worse than none, because it actively misleads.
 Update it in the same change that alters setup, usage, or scope, and
@@ -67,6 +71,8 @@ Template: [README.template.md](../../../templates/README.template.md)
 ## DEVELOPMENT.md
 
 Every project must include `DEVELOPMENT.md`.
+
+It is the project's how-to and reference layer: step-by-step workflow first, command and configuration reference after.
 
 It should describe:
 
@@ -86,6 +92,8 @@ Template: [DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 ## CONTRIBUTING.md
 
 Every project must include `CONTRIBUTING.md`.
+
+It is a how-to guide: ordered steps for landing a change, not background essays.
 
 It should document:
 
@@ -115,6 +123,8 @@ Projects with meaningful architectural boundaries should maintain `ARCHITECTURE.
 Keep it short and operational.
 
 It should contain a brief overview, a coarse codebase map (name modules, do not link files), and the architectural invariants.
+
+Its mode is explanation — the reasons behind the boundaries — not exhaustive reference.
 
 Avoid turning it into a comprehensive theoretical architecture document.
 

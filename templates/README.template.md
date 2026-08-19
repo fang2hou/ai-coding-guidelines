@@ -9,13 +9,13 @@
 
 </div>
 
-{{What the project does and the need it solves — one to three plain sentences right here, no separate Why section. Mention what it intentionally is not, or its status, only when that saves the reader time.}}
+{{What the project does and the need it solves — one to three plain sentences. Mention what it intentionally is not, or its status, only when that saves the reader time.}}
 
-{{Optional — only when the project has a visual surface (UI, CLI output, generated artifacts): a screenshot or short GIF here. Three seconds of proof beats three paragraphs of prose.}}
+{{Optional — a screenshot or short GIF when the project has a visual surface (UI, CLI output, artifacts).}}
 
 ## 🚀 Quick Start
 
-{{For end-user products, name this section Usage and put the product's install/run commands here as examples with their expected output; when both audiences apply, Usage / Quick Start.}}
+{{End-user products: name this section Usage and show install/run examples with their expected output; both audiences: Usage / Quick Start.}}
 
 **With an AI coding agent** — paste this into the agent to hand it the repository:
 
@@ -36,15 +36,13 @@ mise run dev
 <details>
 <summary>Advanced setup</summary>
 
-{{Optional — fold long auxiliary content into collapsible blocks like this one: platform-specific setup, environment variables, extended examples, troubleshooting. Delete the block when unused.}}
+{{Optional — platform-specific setup, environment variables, extended examples, troubleshooting. Delete the block when unused.}}
 
 </details>
 
 ## ✨ Concepts & Features
 
-Why pick this project:
-
-- **{{Concept}}** — {{the one idea a reader must grasp to use the project well}}
+- **{{Concept}}** — {{the one idea a reader needs in order to use the project well}}
 - **{{Feature}}** — {{what it does and why it matters}}
 - {{Optional: nearest alternative and what differs — one line}}
 
