@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 747502c7
+digest: 41ab0d86
 ---
 
 # 质量门禁
@@ -51,8 +51,10 @@ repos:
 ```text
 lint         -> oxlint / ruff check
 format check -> oxfmt --check / ruff format --check
-typecheck    -> tsc --noEmit
+typecheck    -> 开启 typeCheck 的 oxlint（tsgolint）/ tsc --noEmit
 ```
+
+oxlint 的 `options.typeCheck`（通过 `oxlint-tsgolint`）会报出 TypeScript 诊断并以非零退出码失败，因此可以独立承担 typecheck 检查；未配置类型感知 lint 时，改用独立命令 `tsc --noEmit`。
 
 ## 检查应保持快速
 
