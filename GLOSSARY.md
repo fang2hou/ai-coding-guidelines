@@ -66,11 +66,11 @@ to this table in the same change.
 | license                            | 许可证            | ライセンス                  |
 | feature                            | 特性              | 機能                        |
 | concept                            | 概念              | 概念                        |
-| how-to guide                       | 操作指南          | ハウツーガイド              |
-| reference                          | 参考              | リファレンス                |
+| how-to guide                       | 操作指南          | 利用方法                    |
+| reference                          | 参考              | 参考資料                    |
 | explanation                        | 解释              | 解説                        |
 | performance                        | 性能              | 性能                        |
-| experience                         | 体验              | 体験                        |
+| experiments                        | 实验              | 実験                        |
 
 ## Forbidden renderings
 

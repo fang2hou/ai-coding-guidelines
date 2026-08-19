@@ -40,7 +40,7 @@ mise run dev
 
 </details>
 
-{{Compose this region from the blocks the project needs, in the order that serves it best — 💡 Concepts, ✨ Features, ⚡ Performance, 🎬 Experience. Drop unused blocks.}}
+{{Compose this region from the blocks the project needs, in the order that serves it best — 💡 Concepts, ✨ Features, ⚡ Performance, 🧪 Experiments. Drop unused blocks.}}
 
 ## 💡 Concepts
 
