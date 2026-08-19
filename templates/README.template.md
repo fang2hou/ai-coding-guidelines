@@ -9,24 +9,37 @@
 
 </div>
 
+{{Optional — only when the project has a visual surface (UI, CLI output, generated artifacts): put a screenshot or short GIF here. Three seconds of proof beats three paragraphs of prose.}}
+
 ## Why
 
 {{The problem this project solves — one to three sentences.}}
 
 - In scope: {{what the project does}}
 - Out of scope: {{what this project intentionally does not do}}
-- Status: {{POC / actively developed / stable}}
+- Alternatives: {{nearest existing option and what differs — one line; omit when there is none}}
+- Status: {{POC / actively developed / stable / no longer maintained}}
 
-## Use it
+## Quick start
 
-**As a human** — requires [mise](https://mise.jdx.dev/):
+Requires [mise](https://mise.jdx.dev/) on {{supported platforms, e.g. macOS and Linux}}.
+Runtime versions are pinned in `mise.toml`; {{required environment variables and external services, with local alternatives if any}}.
 
 ```bash
 mise install
 mise run dev
 ```
 
-`mise run` lists every task. {{Other main workflows, e.g. `mise run build`.}}
+{{Expected result, e.g. the dev server on http://localhost:5173.}}
+
+## Usage
+
+`mise run` lists every task. Common ones:
+
+```bash
+mise run build # {{what it produces}}
+mise run test  # {{what it covers}}
+```
 
 **With an AI coding agent** — paste this into the agent to hand it the repository:
 
@@ -43,11 +56,9 @@ Work in this repository. Read AGENTS.md at the repository root first and follow 
 | Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 | Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
 
-## Environment Requirements
+## Support
 
-- Runtime versions: managed by mise (see `mise.toml`)
-- Required environment variables: {{list or link to setup guide}}
-- External services: {{list, with local alternatives if any}}
+{{Where to get help: the issue tracker, team channel, or contact — one line.}}
 
 ## License
 

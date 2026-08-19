@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: 061f5585
+digest: 903d2161
 ---
 
 # Required Project Documentation
@@ -25,27 +25,39 @@ Template: [project-agents.template.md](../../../templates/project-agents.templat
 
 Every project must include `README.md`.
 
-The README is written for human readers. Agent-facing rules — engineering standards, the confirmed language policy, project conventions — live in `AGENTS.md` (see `templates/project-agents.template.md`), and the README hands the repository to agents with a copyable instruction.
+The README is the project's front door, written for human readers: within the
+first screen it must answer what the project is, why it exists, and how to
+start using it. Agent-facing rules — engineering standards, the confirmed
+language policy, project conventions — live in `AGENTS.md` (see
+`templates/project-agents.template.md`), and the README hands the repository
+to agents with a copyable instruction.
 
 It must open with an identity block: the project name, a one-sentence
-tagline stating what the project is and for whom, and status badges.
+tagline stating what the project is and for whom, and status badges. When
+the project has a visual surface — a UI, CLI output, generated artifacts —
+place a screenshot or a short GIF immediately after the identity block.
 
 The body is organized around reader tasks, not around the repository
 directory structure. It should contain:
 
-- Why the project exists, and what it intentionally does not do
-- Setup instructions and the first run
-- Basic usage and the main workflows
+- Why the project exists, what it intentionally does not do, and the project status; when alternatives are obvious, one line on how it differs
+- A quick start: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands for the first run, and the expected result
+- Basic usage and the main workflows, shown as examples with their expected output
 - A copyable instruction that hands the repository to an AI coding agent via `AGENTS.md`
 - A Goal → Read table linking the detail documents below
-- Relevant environment requirements
+- Where to get help: the issue tracker, team channel, or contact
+- The license, stated explicitly
 
 Keep it scannable: paragraphs of one to three sentences, one idea per
 bullet, copyable commands in code blocks. Present enumerations as lists
 or tables, never as running prose. Route to the detail documents instead
-of duplicating their content.
+of duplicating their content — but never shrink the README to a bare
+"see the docs" pointer: it must stand alone as the entry point. Add a
+table of contents once it grows beyond a few screens.
 
-Keep it current as the project evolves.
+An outdated README is worse than none, because it actively misleads.
+Update it in the same change that alters setup, usage, or scope, and
+state at the top when development has slowed or stopped.
 
 The confirmed product/UI language policy (see [Language Policy](language-policy.md)) is agent-facing: record it in `AGENTS.md`, not in the README.
 
