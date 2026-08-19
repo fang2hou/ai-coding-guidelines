@@ -4,7 +4,7 @@ lang: en
 version: 6
 source-lang: en
 status: active
-digest: 903d2161
+digest: dcf30fa9
 ---
 
 # Required Project Documentation
@@ -25,28 +25,25 @@ Template: [project-agents.template.md](../../../templates/project-agents.templat
 
 Every project must include `README.md`.
 
-The README is the project's front door, written for human readers: within the
-first screen it must answer what the project is, why it exists, and how to
-start using it. Agent-facing rules — engineering standards, the confirmed
+The README is the project's front door, written for human readers in a
+hurry: within the first screen it must say what the project is, what need
+it solves, and how to get it running. Readers want to try the project,
+not study it — give them the fastest path to a working copy before any
+explanation. Agent-facing rules — engineering standards, the confirmed
 language policy, project conventions — live in `AGENTS.md` (see
-`templates/project-agents.template.md`), and the README hands the repository
-to agents with a copyable instruction.
-
-It must open with an identity block: the project name, a one-sentence
-tagline stating what the project is and for whom, and status badges. When
-the project has a visual surface — a UI, CLI output, generated artifacts —
-place a screenshot or a short GIF immediately after the identity block.
+`templates/project-agents.template.md`), and the README hands the
+repository to agents with a copyable instruction.
 
 The body is organized around reader tasks, not around the repository
-directory structure. It should contain:
+directory structure. Do not write a separate Why section; follow this
+order:
 
-- Why the project exists, what it intentionally does not do, and the project status; when alternatives are obvious, one line on how it differs
-- A quick start: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands for the first run, and the expected result
-- Basic usage and the main workflows, shown as examples with their expected output
-- A copyable instruction that hands the repository to an AI coding agent via `AGENTS.md`
-- A Goal → Read table linking the detail documents below
-- Where to get help: the issue tracker, team channel, or contact
-- The license, stated explicitly
+- An identity block: the project name, a one-sentence tagline stating what the project is and for whom, and status badges — followed by one to three plain sentences on the need the project solves. Mention what the project intentionally is not, and its status, only when that saves the reader time.
+- When the project has a visual surface — a UI, CLI output, generated artifacts — a screenshot or a short GIF immediately after the opening.
+- One get-it-running section: `Quick Start` for projects that need a developer, `Usage` for end-user products, `Usage / Quick Start` when both apply. The AI path comes first — the copyable instruction that hands the repository to an AI coding agent via `AGENTS.md` — and the manual steps follow: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses as examples with their expected output.
+- Core concepts and features: the few ideas a reader must grasp, and why this project over the alternatives — one line per item, placed after the get-it-running section.
+- A Goal → Read table linking the detail documents below.
+- The license, stated explicitly.
 
 Keep it scannable: paragraphs of one to three sentences, one idea per
 bullet, copyable commands in code blocks. Present enumerations as lists

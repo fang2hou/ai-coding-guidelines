@@ -64,6 +64,8 @@ to this table in the same change.
 | tagline                            | 标语              | タグライン                  |
 | table of contents                  | 目录              | 目次                        |
 | license                            | 许可证            | ライセンス                  |
+| feature                            | 特性              | 機能                        |
+| concept                            | 概念              | 概念                        |
 
 ## Forbidden renderings
 

@@ -9,20 +9,21 @@
 
 </div>
 
-{{Optional — only when the project has a visual surface (UI, CLI output, generated artifacts): put a screenshot or short GIF here. Three seconds of proof beats three paragraphs of prose.}}
+{{What the project does and the need it solves — one to three plain sentences right here, no separate Why section. Mention what it intentionally is not, or its status, only when that saves the reader time.}}
 
-## Why
+{{Optional — only when the project has a visual surface (UI, CLI output, generated artifacts): a screenshot or short GIF here. Three seconds of proof beats three paragraphs of prose.}}
 
-{{The problem this project solves — one to three sentences.}}
+## Quick Start
 
-- In scope: {{what the project does}}
-- Out of scope: {{what this project intentionally does not do}}
-- Alternatives: {{nearest existing option and what differs — one line; omit when there is none}}
-- Status: {{POC / actively developed / stable / no longer maintained}}
+{{For end-user products, name this section Usage and put the product's install/run commands here as examples with their expected output; when both audiences apply, Usage / Quick Start.}}
 
-## Quick start
+**With an AI coding agent** — paste this into the agent to hand it the repository:
 
-Requires [mise](https://mise.jdx.dev/) on {{supported platforms, e.g. macOS and Linux}}.
+```text
+Work in this repository. Read AGENTS.md at the repository root first and follow it.
+```
+
+**As a human** — requires [mise](https://mise.jdx.dev/) on {{supported platforms, e.g. macOS and Linux}}.
 Runtime versions are pinned in `mise.toml`; {{required environment variables and external services, with local alternatives if any}}.
 
 ```bash
@@ -30,22 +31,15 @@ mise install
 mise run dev
 ```
 
-{{Expected result, e.g. the dev server on http://localhost:5173.}}
+{{Expected result, e.g. the dev server on http://localhost:5173.}} `mise run` lists every other task ({{e.g. `build`, `test`}}).
 
-## Usage
+## Core concepts & features
 
-`mise run` lists every task. Common ones:
+Why pick this project:
 
-```bash
-mise run build # {{what it produces}}
-mise run test  # {{what it covers}}
-```
-
-**With an AI coding agent** — paste this into the agent to hand it the repository:
-
-```text
-Work in this repository. Read AGENTS.md at the repository root first and follow it.
-```
+- **{{Concept}}** — {{the one idea a reader must grasp to use the project well}}
+- **{{Feature}}** — {{what it does and why it matters}}
+- {{Optional: nearest alternative and what differs — one line}}
 
 ## What to read next
 
@@ -55,10 +49,6 @@ Work in this repository. Read AGENTS.md at the repository root first and follow 
 | Develop and validate  | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
 | Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 | Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
-
-## Support
-
-{{Where to get help: the issue tracker, team channel, or contact — one line.}}
 
 ## License
 
