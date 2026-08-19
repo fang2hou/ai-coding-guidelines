@@ -66,6 +66,9 @@ to this table in the same change.
 | license                            | 许可证            | ライセンス                  |
 | feature                            | 特性              | 機能                        |
 | concept                            | 概念              | 概念                        |
+| how-to guide                       | 操作指南          | ハウツーガイド              |
+| reference                          | 参考              | リファレンス                |
+| explanation                        | 解释              | 解説                        |
 
 ## Forbidden renderings
 
