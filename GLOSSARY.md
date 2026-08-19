@@ -58,6 +58,19 @@ to this table in the same change.
 | pipeline                           | 流水线            | パイプライン                |
 | stage                              | 阶段              | ステージ                    |
 | whitelist                          | 白名单            | ホワイトリスト              |
+| quick start                        | 快速开始          | クイックスタート            |
+| screenshot                         | 截图              | スクリーンショット          |
+| badge                              | 徽章              | バッジ                      |
+| tagline                            | 标语              | タグライン                  |
+| table of contents                  | 目录              | 目次                        |
+| license                            | 许可证            | ライセンス                  |
+| feature                            | 特性              | 機能                        |
+| concept                            | 概念              | 概念                        |
+| how-to guide                       | 操作指南          | 利用方法                    |
+| reference                          | 参考              | 参考資料                    |
+| explanation                        | 解释              | 解説                        |
+| performance                        | 性能              | 性能                        |
+| experiments                        | 实验              | 実験                        |
 
 ## Forbidden renderings
 
