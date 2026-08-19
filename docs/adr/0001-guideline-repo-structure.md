@@ -1,6 +1,6 @@
 # ADR-0001: Guideline Repository Structure and i18n Model
 
-- **Status**: accepted (revised 2026-08-15: guideline content moved from `docs/` to `guidelines/`; ADRs de-trilingualized into `docs/adr/`)
+- **Status**: accepted (revised 2026-08-15: guideline content moved from `docs/` to `guidelines/`; ADRs de-trilingualized into `docs/adr/`; revised 2026-08-20: the repository maintains the standard root documentation set — `DEVELOPMENT.md`, `CONTRIBUTING.md`, `ARCHITECTURE.md` — per `practices/project-documentation`, with `AGENTS.md` slimmed to agent-facing rules per `practices/agents-file`)
 - **Date**: 2026-08-15
 
 ## Context
@@ -19,8 +19,9 @@ project documentation.
 - **Guideline content (the product) lives in `guidelines/{en,zh,ja}/**`\*\* —
   three isomorphic language trees. Each document is a small, single-concern
   file (body limited to 300 lines).
-- **This repository's own documentation is English-only and lives under
-  `docs/`** — currently `docs/adr/` for architecture decision records. ADRs
+- **This repository's own documentation is English-only** — the standard
+  root set (`AGENTS.md`, `README.md`, `DEVELOPMENT.md`, `CONTRIBUTING.md`,
+  `ARCHITECTURE.md`) plus `docs/adr/` for architecture decision records. ADRs
   are never trilingual; they record repository decisions, not product
   content.
 - Machine-facing root files (`AGENTS.md`, `PORTAL.md`, `GLOSSARY.md`,
