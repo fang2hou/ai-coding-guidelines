@@ -50,7 +50,7 @@ With squash merging, the PR title must follow the same convention.
 ## AI-Assisted Pull Requests
 
 AI-generated or AI-assisted PRs are welcome under the same standard.
-The description must clearly include:
+The description must include:
 
 - **Purpose**: what the change is for
 - **Impact**: what is affected

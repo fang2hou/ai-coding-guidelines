@@ -20,7 +20,7 @@ pnpm install --frozen-lockfile
 | cocogitto | Commit validation | `mise.toml` |
 | gitleaks  | Secret scanning   | `mise.toml` |
 
-Do not substitute tools without explicit approval — this repository defines the toolchain standard it must follow.
+Do not substitute tools without explicit approval — this repository must follow the toolchain standard it publishes.
 
 ## Commands
 
@@ -48,7 +48,7 @@ Structural changes — add/remove/rename a document, reverse a standing recommen
 ## Translation rules
 
 - Native rewrite, zero translationese. zh: Simplified Chinese, direct technical register, no honorifics. ja: technical-document register (常体 / である調).
-- Terminology must match [GLOSSARY.md](./GLOSSARY.md); add missing recurring terms in the same change. The glossary's "Forbidden renderings" table is machine-enforced; when fixing a recurring mistranslation, add it there.
+- Terminology must match [GLOSSARY.md](./GLOSSARY.md); put new recurring terms there in the same change. The glossary's "Forbidden renderings" table is machine-enforced; when fixing a repeated mistranslation, add it there.
 - Punctuation: zh prose uses full-width ，；：; ja prose uses 、。：. Half-width `,;:` stays only inside code spans, paths, and pure-latin clusters. `mise run fix` auto-corrects violations.
 - Code blocks, commands, identifiers: verbatim. Translate only `lang` in front matter; `digest` is recomputed by `mise run fix`.
 - Follow the cross-language quality clauses in `guidelines/en/practices/language-policy.md`.

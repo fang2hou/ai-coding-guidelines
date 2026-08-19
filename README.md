@@ -11,7 +11,7 @@ Engineering standards for AI-assisted development — maintained once, applied t
 
 </div>
 
-Every project re-answers the same questions: which package manager, which linter, how to write commits, how to structure CI — and AI agents re-answer them again, per session, inconsistently. This repository standardizes everything that does not need to be a project-specific decision, so humans and agents stop re-choosing tools and product decisions stay free.
+Every project re-answers the same questions: which package manager, which linter, how to write commits, how to structure CI — and AI agents re-answer them again, per session, inconsistently. This repository standardizes everything that does not need to be a project-specific decision. Humans and agents stop re-choosing tools and conventions; product and architecture decisions stay free.
 
 ## 🚀 Usage / Quick Start
 

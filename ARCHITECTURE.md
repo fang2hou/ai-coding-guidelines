@@ -26,7 +26,7 @@ everything else exists to keep the three trees identical and current.
 
 - **Product vs repository documentation**: guideline content lives only in `guidelines/{en,zh,ja}`; repository documentation is English-only at the root and under `docs/` (ADR-0001)
 - **Trilingual isomorphism**: every id exists in all three trees; heading level sequences, `version`, `source-lang`, and `status` are identical across the trio; a change to one language lands in all three in the same change
-- **No canonical language**: any tree may be edited first; `source-lang` records which authored the current version
+- **No canonical language**: any tree may be edited first; `source-lang` records which language authored the current version
 - **Digest integrity**: `digest` is the sha256 of the normalized body, written only by `mise run fix` — never hand-edited
 - **Document shape**: one concern per document, `#`/`##` headings, body capped at 300 lines, conclusions-only tone
 - **Portal coverage**: every en-tree document is linked from PORTAL.md
