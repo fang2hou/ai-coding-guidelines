@@ -3,10 +3,16 @@ node = "24"
 pnpm = "latest"
 prek = "latest"
 cocogitto = "latest"
+gitleaks = "8"
 
 [tasks.check]
-description = "Validate trilingual docs, lint and format-check"
-run = ["node tools/check-docs.ts", "pnpm exec oxlint tools", "pnpm exec oxfmt --check ."]
+description = "Validate trilingual docs, lint (incl. type check), secret-scan, format-check"
+run = [
+  "node tools/check-docs.ts",
+  "pnpm exec oxlint tools",
+  "gitleaks dir . --redact",
+  "pnpm exec oxfmt --check .",
+]
 
 [tasks.fix]
 description = "Fix punctuation and digests, then format markdown and tools/"

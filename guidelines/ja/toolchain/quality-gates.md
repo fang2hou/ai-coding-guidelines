@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 93cb5799
+digest: 068274a0
 ---
 
 # 品質ゲート
@@ -51,8 +51,10 @@ repos:
 ```text
 lint         -> oxlint / ruff check
 format check -> oxfmt --check / ruff format --check
-typecheck    -> tsc --noEmit
+typecheck    -> typeCheck を有効にした oxlint（tsgolint）/ tsc --noEmit
 ```
+
+oxlint の `options.typeCheck`（`oxlint-tsgolint` 経由）は TypeScript の診断を報告し、非ゼロの終了コードで失敗する。そのため、typecheck をこの 1 コマンドで担える。型を考慮したリントを設定していない場合は、単体の `tsc --noEmit` を使う。
 
 ## チェックを高速に保つ
 

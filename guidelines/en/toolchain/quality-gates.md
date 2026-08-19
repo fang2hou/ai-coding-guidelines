@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 83acef94
+digest: ad6b7021
 ---
 
 # Quality Gates
@@ -51,8 +51,13 @@ Concretely, with this toolchain that maps to:
 ```text
 lint         -> oxlint / ruff check
 format check -> oxfmt --check / ruff format --check
-typecheck    -> tsc --noEmit
+typecheck    -> oxlint with typeCheck enabled (tsgolint) / tsc --noEmit
 ```
+
+oxlint's `options.typeCheck` (via `oxlint-tsgolint`) surfaces TypeScript
+diagnostics and fails the run, so it carries the typecheck gate on its own;
+use `tsc --noEmit` as the stand-alone form when type-aware linting is not
+configured.
 
 ## Keep Checks Fast
 
