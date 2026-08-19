@@ -1,6 +1,6 @@
 <div align="center">
 
-# {{Project Name}}
+# {{Project Name}} {{emoji}}
 
 {{One-sentence tagline: what the project is and who it is for.}}
 
@@ -13,7 +13,7 @@
 
 {{Optional — only when the project has a visual surface (UI, CLI output, generated artifacts): a screenshot or short GIF here. Three seconds of proof beats three paragraphs of prose.}}
 
-## Quick Start
+## 🚀 Quick Start
 
 {{For end-user products, name this section Usage and put the product's install/run commands here as examples with their expected output; when both audiences apply, Usage / Quick Start.}}
 
@@ -33,7 +33,14 @@ mise run dev
 
 {{Expected result, e.g. the dev server on http://localhost:5173.}} `mise run` lists every other task ({{e.g. `build`, `test`}}).
 
-## Core concepts & features
+<details>
+<summary>Advanced setup</summary>
+
+{{Optional — fold long auxiliary content into collapsible blocks like this one: platform-specific setup, environment variables, extended examples, troubleshooting. Delete the block when unused.}}
+
+</details>
+
+## ✨ Concepts & Features
 
 Why pick this project:
 
@@ -41,7 +48,7 @@ Why pick this project:
 - **{{Feature}}** — {{what it does and why it matters}}
 - {{Optional: nearest alternative and what differs — one line}}
 
-## What to read next
+## 📚 Learn More
 
 | Goal                  | Read                                 |
 | --------------------- | ------------------------------------ |
@@ -50,6 +57,6 @@ Why pick this project:
 | Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 | Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
 
-## License
+## 📄 License
 
 {{SPDX identifier, e.g. MIT}} — see [LICENSE](./LICENSE).
