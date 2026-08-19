@@ -11,49 +11,47 @@ Engineering standards for AI-assisted development — maintained once, applied t
 
 </div>
 
-## Why
+Every project re-answers the same questions: which package manager, which linter, how to write commits, how to structure CI — and AI agents re-answer them again, per session, inconsistently. This repository standardizes everything that does not need to be a project-specific decision, so humans and agents stop re-choosing tools and product decisions stay free.
 
-Every project re-answers the same questions: which package manager, which linter, how to write commits, how to structure CI. AI agents re-answer them again — per project, per session, inconsistently.
+## 🚀 Usage / Quick Start
 
-This repository standardizes everything that does not need to be a project-specific decision. Humans and agents stop re-choosing tools and conventions; product and architecture decisions stay free.
-
-## Use it
-
-**As a human** — pick a recipe in [PORTAL.md](./PORTAL.md) ("Start a TypeScript project", "Write tests", "Add a dependency"), or browse [guidelines/en/](./guidelines/en/) and follow links from there.
-
-**As a coding agent** — install the skill:
+**With an AI coding agent** — install the skill once per project:
 
 ```bash
 pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 ```
 
-The skill ships no guideline content: on every run it fetches the current guidelines from GitHub, routes the task through PORTAL, and audits existing projects against the fetched revision. Alternatively, point your agent configuration directly at [PORTAL.md](./PORTAL.md).
+The skill ships no guideline content: every run fetches the current guidelines from GitHub, routes the task through PORTAL, and audits existing projects against the fetched revision.
 
-## Find what to read
+Or hand the repository over directly:
 
-[PORTAL.md](./PORTAL.md) maps tasks to reading recipes. The most common:
+```text
+Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for this task.
+Start at PORTAL.md and follow its reading recipes.
+```
 
-| Goal                                  | Read in order                                                                   |
-| ------------------------------------- | ------------------------------------------------------------------------------- |
-| Baseline for any task                 | core-principles → agent-protocol                                                |
-| Start a TypeScript / frontend project | Baseline + mise → typescript → frontend-framework → tailwindcss → shadcn-ui → … |
-| Build a backend service               | Baseline + mise → typescript → typescript-backend, or python → python-api-stack |
-| Add a dependency                      | dependencies + the matching libraries entry                                     |
-| Write tests                           | testing → coding-standards                                                      |
-| Commit / open a PR                    | git → change-discipline                                                         |
+**As a human** — pick a recipe in [PORTAL.md](./PORTAL.md) ("Start a TypeScript project", "Write tests", "Add a dependency"), or browse [guidelines/en/](./guidelines/en/) and follow links from there.
 
-## What's inside
+**To develop this repository** — requires [mise](https://mise.jdx.dev/); runtime versions are pinned in `mise.toml`:
 
-29 documents × 3 languages (identical structure) in four categories:
+```bash
+git clone https://github.com/fang2hou/ai-coding-guidelines && cd ai-coding-guidelines
+mise install && pnpm install --frozen-lockfile
+mise run check
+```
 
-- **[principles](./guidelines/en/principles/)** — why: validation speed, choice reduction, root cause
-- **[toolchain](./guidelines/en/toolchain/)** — the mandatory toolchain: mise, TypeScript, Python, quality gates, git, CI; Go and Rust baselines
-- **[libraries](./guidelines/en/libraries/)** — selection catalog with verdicts: frameworks, styling, API stacks, AI SDK
-- **[practices](./guidelines/en/practices/)** — process standards: coding, testing, dependencies, security, change discipline
+Expected result: `OK: 93 documents, 31 ids x 3 languages`. The full workflow lives in [DEVELOPMENT.md](./DEVELOPMENT.md).
 
-Consistency is machine-enforced: sha256 digests catch silent edits, terminology and zh/ja punctuation are validated, bodies are capped at 300 lines, and `mise run check` runs the same validation locally, at commit time, and in CI.
+## 💡 Concepts
 
-## Standards at a glance
+- **Single source of truth** — one corpus fetched at run time; agents apply the fetched documents, never remembered summaries
+- **Trilingual isomorphism** — 31 documents × 3 languages (27 active, 4 draft), identical structure, natively rewritten per language
+- **Machine-enforced consistency** — sha256 digests catch silent edits; terminology and zh/ja punctuation are validated; bodies are capped at 300 lines
+- **Task-routed reading** — PORTAL recipes load only what the task needs
+
+## ✨ Features
+
+What the corpus standardizes today:
 
 | Area               | Standard                                    |
 | ------------------ | ------------------------------------------- |
@@ -65,22 +63,17 @@ Consistency is machine-enforced: sha256 digests catch silent edits, terminology 
 | Frontend           | Vite or Next.js + Tailwind CSS + shadcn/ui  |
 | Validation         | Identical locally, in pre-commit, and in CI |
 
-## Develop this repository
+## 📚 Learn More
 
-```bash
-git clone https://github.com/fang2hou/ai-coding-guidelines && cd ai-coding-guidelines
-mise install && pnpm install --frozen-lockfile
-mise run check
-```
+| Goal                          | Read                                 |
+| ----------------------------- | ------------------------------------ |
+| Pick what to read for a task  | [PORTAL.md](./PORTAL.md)             |
+| Develop and validate the repo | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
+| Contribute a change           | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| Understand the design         | [ARCHITECTURE.md](./ARCHITECTURE.md) |
+| Give the repo to an agent     | [AGENTS.md](./AGENTS.md)             |
+| Repository decisions          | [docs/adr/](./docs/adr/)             |
 
-| Command          | Effect                                             |
-| ---------------- | -------------------------------------------------- |
-| `mise run check` | Full validation (what CI runs)                     |
-| `mise run fix`   | Fix zh/ja punctuation + digests; format everything |
-| `mise run test`  | Validator test suite                               |
-
-All changes — including agent-made ones — land through pull requests. Editing rules, the trilingual model, and the commit protocol live in [AGENTS.md](./AGENTS.md); repository decisions are recorded as ADRs in [docs/adr/](./docs/adr/).
-
-## License
+## 📄 License
 
 MIT — see [LICENSE](./LICENSE). The guideline texts may be reused and adapted in your own projects.
