@@ -4,7 +4,7 @@ lang: zh
 version: 6
 source-lang: en
 status: active
-digest: 55680649
+digest: 40f38db5
 ---
 
 # 必备项目文档
@@ -38,7 +38,7 @@ README 是项目的门面，写给以扫读为主的读者：首屏之内说清�
 - 一张“目标 → 阅读”表，链接到下文的详细文档。
 - 明确声明的许可证。
 
-章节标题保持标准、简短、一眼可辨——`Quick Start`、`Usage`、`Concepts`、`Features`、`Performance`、`Experience`、`Learn More`、`License`——并为每个标题前缀一个语义稳定的 emoji：上手章节用 🚀，概念用 💡，特性用 ✨，性能用 ⚡，体验用 🎬，延伸阅读用 📚，许可证用 📄。项目标题至多携带一个辨识性 emoji。emoji 集合保持小而一致，正文文字绝不使用 emoji。
+章节标题保持标准、简短、一眼可辨——`Quick Start`、`Usage`、`Concepts`、`Features`、`Performance`、`Experience`、`Learn More`、`License`——并为每个标题前缀一个语义稳定的 emoji：上手章节用 🚀，概念用 💡，特性用 ✨，性能用 ⚡，体验用 🎬，延伸阅读用 📚，许可证用 📄。emoji 集合保持小而一致；项目标题与正文文字不使用 emoji。
 
 过长的辅助内容——平台专属搭建、环境变量表、扩展示例、故障排查——折叠进 `<details>` 块，`<summary>` 用几个词点明内容。`<summary>` 之后保留一个空行以保证 Markdown 正常渲染；主路径永不折叠：开篇、上手命令和许可证始终保持展开。
 

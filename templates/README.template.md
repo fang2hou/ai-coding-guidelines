@@ -1,6 +1,6 @@
 <div align="center">
 
-# {{Project Name}} {{emoji}}
+# {{Project Name}}
 
 {{One-sentence tagline: what the project is and who it is for.}}
 

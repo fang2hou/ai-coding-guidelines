@@ -4,7 +4,7 @@ lang: en
 version: 6
 source-lang: en
 status: active
-digest: 326bc204
+digest: 8c6883d5
 ---
 
 # Required Project Documentation
@@ -47,7 +47,7 @@ order:
 - A Goal → Read table linking the detail documents below.
 - The license, stated explicitly.
 
-Keep section titles standard, short, and instantly recognizable — `Quick Start`, `Usage`, `Concepts`, `Features`, `Performance`, `Experience`, `Learn More`, `License` — and prefix each with one semantically stable emoji: 🚀 for the get-it-running section, 💡 for concepts, ✨ for features, ⚡ for performance, 🎬 for experience, 📚 for further reading, 📄 for the license. The project title may carry at most one identifying emoji. Keep the emoji set small and consistent, and never decorate body text with emoji.
+Keep section titles standard, short, and instantly recognizable — `Quick Start`, `Usage`, `Concepts`, `Features`, `Performance`, `Experience`, `Learn More`, `License` — and prefix each with one semantically stable emoji: 🚀 for the get-it-running section, 💡 for concepts, ✨ for features, ⚡ for performance, 🎬 for experience, 📚 for further reading, 📄 for the license. Keep the emoji set small and consistent; the project title and body text carry no emoji.
 
 Fold long auxiliary content — platform-specific setup, environment variable tables, extended examples, troubleshooting — into `<details>` blocks whose `<summary>` names the content in a few words. Keep one blank line after `<summary>` so Markdown renders, and never collapse the primary path: the opening, the get-it-running commands, and the license stay expanded.
 
