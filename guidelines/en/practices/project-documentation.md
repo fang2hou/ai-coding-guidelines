@@ -4,7 +4,7 @@ lang: en
 version: 6
 source-lang: en
 status: active
-digest: ffcf7cf9
+digest: 326bc204
 ---
 
 # Required Project Documentation
@@ -43,11 +43,11 @@ order:
 - An identity block: the project name, a one-sentence tagline stating what the project is and for whom, and status badges — followed by one to three plain sentences on the need the project solves. Mention what the project intentionally is not, and its status, only when that saves the reader time.
 - When the project has a visual surface — a UI, CLI output, generated artifacts — a screenshot or a short GIF immediately after the opening.
 - One get-it-running section: `Quick Start` for projects that need a developer, `Usage` for end-user products, `Usage / Quick Start` when both apply. The AI path comes first — the copyable instruction that hands the repository to an AI coding agent via `AGENTS.md` — and the manual steps follow: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses as examples with their expected output.
-- Concepts and features: the few ideas a reader needs, and how the project differs from the alternatives — one line per item, placed after the get-it-running section.
+- A flexible showcase between the get-it-running section and the reading map, composed only of the blocks the project needs: `Concepts` — the few ideas a reader needs; `Features` — what it does, why it matters, how it differs from the alternatives; `Performance` — a claim in one sentence plus the chart or table that proves it, the measurement environment, and a methodology link, never a claim without numbers; `Experience` — what it feels like to use, as demos or recordings. Order the blocks by what the project must prove first, and give each block a standard title and emoji.
 - A Goal → Read table linking the detail documents below.
 - The license, stated explicitly.
 
-Keep section titles standard, short, and instantly recognizable — `Quick Start`, `Usage`, `Concepts & Features`, `Learn More`, `License` — and prefix each with one semantically stable emoji: 🚀 for the get-it-running section, ✨ for concepts and features, 📚 for further reading, 📄 for the license. The project title may carry at most one identifying emoji. Keep the emoji set small and consistent, and never decorate body text with emoji.
+Keep section titles standard, short, and instantly recognizable — `Quick Start`, `Usage`, `Concepts`, `Features`, `Performance`, `Experience`, `Learn More`, `License` — and prefix each with one semantically stable emoji: 🚀 for the get-it-running section, 💡 for concepts, ✨ for features, ⚡ for performance, 🎬 for experience, 📚 for further reading, 📄 for the license. The project title may carry at most one identifying emoji. Keep the emoji set small and consistent, and never decorate body text with emoji.
 
 Fold long auxiliary content — platform-specific setup, environment variable tables, extended examples, troubleshooting — into `<details>` blocks whose `<summary>` names the content in a few words. Keep one blank line after `<summary>` so Markdown renders, and never collapse the primary path: the opening, the get-it-running commands, and the license stay expanded.
 

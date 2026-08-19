@@ -40,11 +40,24 @@ mise run dev
 
 </details>
 
-## ✨ Concepts & Features
+{{Compose this region from the blocks the project needs, in the order that serves it best — 💡 Concepts, ✨ Features, ⚡ Performance, 🎬 Experience. Drop unused blocks.}}
+
+## 💡 Concepts
 
 - **{{Concept}}** — {{the one idea a reader needs in order to use the project well}}
+
+## ✨ Features
+
 - **{{Feature}}** — {{what it does and why it matters}}
 - {{Optional: nearest alternative and what differs — one line}}
+
+## ⚡ Performance
+
+{{The claim in one sentence, then the evidence that proves it.}}
+
+![{{Benchmark: project vs. alternatives}}]({{static/benchmark.png}})
+
+{{Environment: hardware, runtime versions, date.}} Methodology: {{link to the reproduction steps}}.
 
 ## 📚 Learn More
 

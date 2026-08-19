@@ -69,6 +69,8 @@ to this table in the same change.
 | how-to guide                       | 操作指南          | ハウツーガイド              |
 | reference                          | 参考              | リファレンス                |
 | explanation                        | 解释              | 解説                        |
+| performance                        | 性能              | 性能                        |
+| experience                         | 体验              | 体験                        |
 
 ## Forbidden renderings
 
