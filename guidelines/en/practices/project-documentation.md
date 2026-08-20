@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: en
-version: 6
+version: 7
 source-lang: en
 status: active
-digest: a0b98f31
+digest: 43f4e37b
 ---
 
 # Required Project Documentation
@@ -104,7 +104,7 @@ It should document:
 - Required validation
 - Commit conventions
 
-For AI-generated or AI-assisted pull requests, the pull request description should clearly include:
+Every pull request description should clearly include:
 
 - Purpose of the change
 - Impact of the change

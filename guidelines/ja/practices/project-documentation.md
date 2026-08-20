@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: ja
-version: 6
+version: 7
 source-lang: en
 status: active
-digest: 2169c5c7
+digest: 84646e49
 ---
 
 # 必須のプロジェクトドキュメント
@@ -86,7 +86,7 @@ README はプロジェクトの表玄関であり、読者がまず流し読み�
 - 必須の検証
 - コミット規約
 
-AI が生成した、または AI の支援を受けたプルリクエストでは、説明文に次の内容を明確に含めること。
+すべてのプルリクエストの説明文には、次の内容を明確に含めること。
 
 - 変更の目的
 - 変更の影響

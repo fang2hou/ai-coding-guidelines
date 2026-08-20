@@ -1,10 +1,10 @@
 ---
 id: practices/project-documentation
 lang: zh
-version: 6
+version: 7
 source-lang: en
 status: active
-digest: bde7fb10
+digest: 0248d033
 ---
 
 # 必备项目文档
@@ -86,7 +86,7 @@ README 是项目的门面，读者多半只是扫读：首屏之内要说清项�
 - 必须执行的校验
 - 提交规范
 
-对于 AI 生成或 AI 辅助的 pull request，其描述应明确包含：
+每个 pull request 的描述都应明确包含：
 
 - 变更目的
 - 变更影响

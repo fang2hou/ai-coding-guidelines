@@ -47,10 +47,9 @@ ci(github-actions): split PR-title workflow
 
 With squash merging, the PR title must follow the same convention.
 
-## AI-Assisted Pull Requests
+## Pull Request Descriptions
 
-AI-generated or AI-assisted PRs are welcome under the same standard.
-The description must include:
+Every pull request description must include:
 
 - **Purpose**: what the change is for
 - **Impact**: what is affected
