@@ -50,17 +50,14 @@ fix(auth): handle expired sessions
 
 With squash merging, the PR title must follow the same convention (it becomes the commit message).
 
-## AI-Assisted Pull Requests
+## Pull Request Descriptions
 
-AI-generated or AI-assisted PRs are welcome under the same standard.
-The description must clearly include:
+Every pull request description must clearly include:
 
 - **Purpose**: what the change is for
 - **Impact**: what is affected
 - **Context**: relevant background
 - **Risks**: potential concerns
 - **Testing**: validation performed and its results
-
-{{Optional disclosure policy, e.g. label AI-assisted PRs; one AI PR at a time per contributor.}}
 
 Keep the GitHub pull request template synchronized with these five requirements.
