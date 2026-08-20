@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 452a7845
+digest: f8f4d6bb
 ---
 
 # Git 工作流
@@ -82,17 +82,21 @@ CI 工作流标准见 [GitHub Actions](../toolchain/github-actions.md)。
 
 GitHub 托管的项目应提交 `.gitattributes` 文件。
 
-用它确保 GitHub 的语言统计准确：生成文件和其他附带文件（lockfile、配置、CI 定义）不得淹没项目的核心内容。
+用它确保 GitHub 的语言统计准确：工具链文件（lockfile、配置、CI 定义）和数据文件（测试数据、快照）不得淹没项目的核心内容。
 
 优先采用白名单而非黑名单：默认把一切排除在统计之外，再仅放行项目本体。
 
 ```gitattributes
 * -linguist-detectable
 src/** linguist-detectable
+*.json -linguist-detectable
+*.yaml -linguist-detectable
 pnpm-lock.yaml linguist-generated
 ```
 
 Markdown 等文档语言默认不计入统计，必须显式添加 `linguist-detectable` 规则。之后新增的文件在显式放行前也不会计入统计。
+
+按目录放行时，目录下的数据文件和工具链文件也会一并计入统计。属性规则以最后一条匹配为准，因此要在放行规则之后补上排除模式：数据文件按扩展名（`*.json`、`*.yaml`、`*.toml`），lockfile 等生成文件用 `linguist-generated`。
 
 文件本身不要包含注释；将理由记录在 pull request 或项目文档中。
 

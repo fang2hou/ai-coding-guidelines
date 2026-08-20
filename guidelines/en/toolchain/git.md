@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 9927aac1
+digest: 64e123a3
 ---
 
 # Git Workflow
@@ -86,17 +86,21 @@ See [GitHub Actions](../toolchain/github-actions.md) for CI workflow standards.
 
 GitHub-hosted projects should commit a `.gitattributes` file.
 
-Use it to keep GitHub's language statistics honest: generated and incidental files (lockfiles, configs, CI definitions) must not drown out the project's core content.
+Use it to keep GitHub's language statistics honest: toolchain files (lockfiles, configs, CI definitions) and data files (fixtures, snapshots) must not drown out the project's core content.
 
 Prefer a whitelist over a blacklist: exclude everything from the statistics by default and re-include only what the project is.
 
 ```gitattributes
 * -linguist-detectable
 src/** linguist-detectable
+*.json -linguist-detectable
+*.yaml -linguist-detectable
 pnpm-lock.yaml linguist-generated
 ```
 
 Prose languages such as Markdown are not counted by default; they need an explicit `linguist-detectable` rule. Files added later stay out of the statistics until they are opted in.
+
+A directory opt-in re-includes everything beneath it — data files and toolchain files that merely live there count as well. Attribute rules resolve by last match, so place re-exclusion patterns after the opt-in rules: data files by extension (`*.json`, `*.yaml`, `*.toml`), lockfiles and other generated files with `linguist-generated`.
 
 Keep the file itself comment-free; record the rationale in the pull request or the project documentation.
 

@@ -1,10 +1,10 @@
 ---
 id: toolchain/git
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 1ab9d3a3
+digest: 8d63afaf
 ---
 
 # Git ワークフロー
@@ -82,17 +82,21 @@ CI ワークフローの標準については [GitHub Actions](../toolchain/gith
 
 GitHub 上でホストされるプロジェクトは、`.gitattributes` ファイルをコミットすること。
 
-GitHub の言語統計を正確に保つために使う。生成ファイルや付随ファイル（ロックファイル、設定、CI 定義）によって、プロジェクトの中核となる内容を埋もれさせてはならない。
+GitHub の言語統計を正確に保つために使う。ツールチェーンファイル（ロックファイル、設定、CI 定義）やデータファイル（フィクスチャ、スナップショット）によって、プロジェクトの中核となる内容を埋もれさせてはならない。
 
 ブラックリストではなくホワイトリストを優先する。デフォルトですべてを統計から除外し、プロジェクト本体だけを統計対象に戻す。
 
 ```gitattributes
 * -linguist-detectable
 src/** linguist-detectable
+*.json -linguist-detectable
+*.yaml -linguist-detectable
 pnpm-lock.yaml linguist-generated
 ```
 
 Markdown などの文書向け言語はデフォルトでは統計に含まれないため、明示的な `linguist-detectable` ルールを指定する必要がある。後から追加したファイルは、明示的に有効化するまで統計対象外のままである。
+
+ディレクトリ単位で統計対象に戻すと、その配下のデータファイルやツールチェーンファイルも一緒に統計へ含まれてしまう。属性ルールは最後にマッチしたものが優先されるため、許可ルールの後に除外パターンを追加する。データファイルは拡張子で（`*.json`、`*.yaml`、`*.toml`）、ロックファイルなどの生成ファイルには `linguist-generated` を指定する。
 
 ファイル自体にはコメントを入れず、その理由をプルリクエストまたはプロジェクトのドキュメントに記録する。
 
