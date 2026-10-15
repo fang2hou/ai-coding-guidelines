@@ -2,9 +2,9 @@
 
 Canonical terminology across the three language trees. Translations of
 `guidelines/**` must use these equivalents. Product names (mise, pnpm, oxlint,
-oxfmt, uv, ruff, prek, Cocogitto, Vite, Next.js, Tailwind CSS, shadcn/ui,
+oxfmt, uv, ruff, prek, Cocogitto, Vite, Next.js, Tailwind CSS,
 FastAPI, Pydantic, Uvicorn, Databricks, GitHub Actions, Go, Rust, ...) and
-industry-standard terms (Conventional Commits, monorepo, ...) stay in
+industry-standard terms (Conventional Commits, monorepo, squircle, ...) stay in
 English in all languages.
 
 When a translation introduces a recurring term not listed here, add a row
@@ -85,6 +85,8 @@ to this table in the same change.
 | inspector                          | 检查器            | インスペクター              |
 | morphing                           | 变形              | モーフィング                |
 | tint                               | 着色              | ティント                    |
+| corner radius                      | 圆角              | 角丸                        |
+| continuous corner                  | 连续圆角          | 連続角丸                    |
 
 ## Forbidden renderings
 

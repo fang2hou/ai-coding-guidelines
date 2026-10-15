@@ -1,10 +1,10 @@
 ---
 id: libraries/svelte
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: d07cd22b
+digest: f85cf94b
 ---
 
 # Svelte (Svelte 5 + SvelteKit)
@@ -25,7 +25,7 @@ default: production frontends stay on the React stacks selected in
 
 - Team or client production work where AI throughput and ecosystem breadth
   matter.
-- The project needs the breadth of the React and shadcn/ui ecosystem.
+- The project needs the breadth of the React ecosystem.
 
 ## Strengths
 
@@ -41,7 +41,7 @@ default: production frontends stay on the React stacks selected in
 - LLM training coverage is thinner than React's; hallucinated Svelte 4
   patterns are the main risk. Mitigate with the official AI tooling, never
   with memory.
-- Smaller component ecosystem; UI work goes through DaisyUI or shadcn-svelte.
+- Smaller component ecosystem; UI work goes through DaisyUI or hand-written components.
 - Fast-moving: SvelteKit 3.0 is in pre-release. Stay on the stable line
   unless exploring the new major is the point of the project.
 
@@ -50,8 +50,8 @@ default: production frontends stay on the React stacks selected in
 - Svelte 5 latest stable. Component-level `await` expressions require
   `experimental.async` (Svelte ≥ 5.36) — experimental, not a default.
 - SvelteKit ≥ 2.70 stable line; do not adopt 3.0 pre-releases by default.
-- DaisyUI 5 (Tailwind CSS v4 plugin model) or shadcn-svelte latest
-  (runes-native, Tailwind v4).
+- DaisyUI 5 (Tailwind CSS v4 plugin model) when a class-based kit is wanted,
+  or hand-written native CSS components.
 
 ## Usage rules
 
@@ -77,17 +77,17 @@ default: production frontends stay on the React stacks selected in
 - Prefer `<svelte:window>` / `<svelte:document>` over `onMount` or `$effect`
   listeners; sync external libraries with `{@attach}` rather than `$effect`;
   typed `createContext` over shared-module state.
-- Pick one UI kit per project:
+- Pick one UI approach per project:
+  - Hand-written components with native CSS — the default; no kit dependency,
+    full control.
   - DaisyUI 5 — Tailwind plugin (`@plugin "daisyui";`), semantic theme
     classes, no copied-in components. Prefer for small apps and speed.
-  - shadcn-svelte — CLI-copied, runes-native components on Tailwind v4.
-    Prefer when deep customization or shadcn-style composition matters.
 - Style child components through CSS custom properties
   (`<Child --color="red" />`); use `:global` only for third-party components.
 
 ## Works with
 
-- [Tailwind CSS](tailwindcss.md) — pairs-with: DaisyUI and shadcn-svelte are
-  both Tailwind v4 based; apply its class-sort interop rules.
+- [Tailwind CSS](tailwindcss.md) — pairs-with: DaisyUI 5 is Tailwind v4
+  based; apply its class-sort interop rules when used.
 - [Frontend Framework](frontend-framework.md) — context: default framework
   selection stays React-first; this document governs the Svelte exception.

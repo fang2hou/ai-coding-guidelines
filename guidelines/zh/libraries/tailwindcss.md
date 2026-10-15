@@ -1,32 +1,32 @@
 ---
 id: libraries/tailwindcss
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 974d34bb
+digest: b495f24e
 ---
 
 # Tailwind CSS
 
 ## 结论
 
-优先采用——Tailwind CSS 是前端项目的首选 CSS 框架。
+视情况采用——项目已在用 Tailwind，或组件套件依赖 Tailwind 时才使用。新的样式开发默认使用原生 CSS。
 
 ## 适用场景
 
-- 默认用于所有前端项目的样式开发。
-- 构建以 [shadcn/ui](shadcn-ui.md) 为组件系统的 Tailwind 应用。
+- 项目已在使用 Tailwind CSS。
+- 所选组件套件依赖 Tailwind（coss ui、DaisyUI），或用户明确要求使用。
 
 ## 不适用场景
 
-- 用户明确要求使用其他 CSS 框架——以用户要求为准。
-- 用户明确要求采用项目特有的样式架构——以用户要求为准。
+- 新的 UI 工作没有 Tailwind 需求——用原生 CSS 完成样式：自定义属性、嵌套、`:has()`、容器查询、`light-dark()`。
+- 用户明确要求使用其他 CSS 框架或项目特有的样式架构——以用户要求为准。
 
 ## 优势
 
 - 工具类优先（utility-first）的写法让样式与标记共置，避免自定义样式表不断膨胀。
-- 在 React 生态中应用广泛，也是 shadcn/ui 的样式基础。
+- 在 React 生态中应用广泛。
 - 每个大版本都可以在一处配置主题和设计令牌。
 
 ## 代价
@@ -42,7 +42,7 @@ digest: 974d34bb
 
 ## 使用规则
 
-- 前端项目默认使用 Tailwind CSS 作为 CSS 框架。
+- 没有明确需求时，不向尚未使用 Tailwind 的项目引入 Tailwind；默认方案是原生 CSS。
 - 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时，遵循用户要求。
 - 遵循所选 Tailwind 版本的约定与配置模型。
 - 不要混用不兼容的 Tailwind 大版本模式。
@@ -78,4 +78,5 @@ digest: 974d34bb
 
 ## 联动
 
-- [shadcn/ui](shadcn-ui.md)——搭配：shadcn/ui 是 Tailwind 应用的首选组件系统，并且依赖 Tailwind。
+- [coss ui](coss.md)——依赖：coss ui 用 Tailwind CSS v4 完成样式。
+- [圆角](../practices/corner-radius.md)——通用：使用 Tailwind 时，把圆角令牌 scale 表达为 Tailwind 主题令牌。

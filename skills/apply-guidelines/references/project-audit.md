@@ -18,7 +18,7 @@ Collect, without modifying anything:
 4. Stack markers: framework dependencies in `package.json` / `pyproject.toml`, `components/ui` presence, `app.yaml` (Databricks), `wrangler.toml` (Workers).
 5. Gates: `prek.toml` or `.pre-commit-config.yaml`, CI jobs, mise tasks.
 6. CI/CD: every workflow file under `.github/workflows/` (or the project's CI config): triggers, action pins (`uses:` lines), workflow/job/step names, `permissions`, `timeout-minutes`, `concurrency`, and any `${{ }}` interpolation of untrusted input into `run:` scripts.
-7. Frontend structure: where shadcn components and custom components live.
+7. Frontend structure: where kit or copy-in components and custom components live.
 8. Code quality sample: naming, comments, and module structure across a bounded sample — the most recently changed files, not the whole repository.
 
 ## Step 2: Compare against the fetched guidelines
@@ -35,7 +35,7 @@ an unrun audit.
 | Gates (hooks, CI jobs, mise tasks)                | toolchain/quality-gates                                                              |
 | CI/CD                                             | practices/pipeline, toolchain/github-actions, toolchain/quality-gates, toolchain/git |
 | Stack markers                                     | the libraries/ document for each detected stack                                      |
-| Frontend structure                                | libraries/shadcn-ui, libraries/coss (when present)                                   |
+| Frontend structure                                | libraries/tailwindcss, libraries/coss (when present)                                 |
 | Code quality sample                               | practices/coding-standards, practices/language-policy                                |
 | Project docs (README, CONTRIBUTING, ARCHITECTURE) | practices/project-documentation                                                      |
 

@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 6605bb0c
+digest: 513de087
 ---
 
 # Agent Operating Protocol
@@ -78,11 +78,9 @@ The following behaviors are prohibited. Each item links to the document that def
 17. Use Japanese romaji or Chinese pinyin as code identifiers. ([language-policy](../practices/language-policy.md))
 18. Infer UI language from conversation language. ([language-policy](../practices/language-policy.md))
 19. Produce low-quality literal translations in cross-language UI work. ([language-policy](../practices/language-policy.md))
-20. Modify shadcn/ui component internals unnecessarily. ([shadcn-ui](../libraries/shadcn-ui.md))
-21. Leave undocumented required shadcn/ui component modifications. ([shadcn-ui](../libraries/shadcn-ui.md))
-22. Edit installed coss ui component files instead of composing, wrapping, or theming. ([coss](../libraries/coss.md))
-23. Blindly upgrade GitHub Actions without reviewing compatibility. ([github-actions](../toolchain/github-actions.md))
-24. Commit secrets or sensitive information. ([security](../practices/security.md))
-25. Force push shared history without appropriate approval. ([git](../toolchain/git.md))
-26. Treat passing CI as a substitute for understanding whether the implementation is correct. ([change-discipline](../practices/change-discipline.md))
-27. Pin GitHub Actions to commit SHAs instead of current major version tags without a stated supply-chain policy. ([github-actions](../toolchain/github-actions.md))
+20. Edit installed coss ui component files instead of composing, wrapping, or theming. ([coss](../libraries/coss.md))
+21. Blindly upgrade GitHub Actions without reviewing compatibility. ([github-actions](../toolchain/github-actions.md))
+22. Commit secrets or sensitive information. ([security](../practices/security.md))
+23. Force push shared history without appropriate approval. ([git](../toolchain/git.md))
+24. Treat passing CI as a substitute for understanding whether the implementation is correct. ([change-discipline](../practices/change-discipline.md))
+25. Pin GitHub Actions to commit SHAs instead of current major version tags without a stated supply-chain policy. ([github-actions](../toolchain/github-actions.md))
