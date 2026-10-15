@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: zh
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 41ab0d86
+digest: 3f2d59df
 ---
 
 # 质量门禁
@@ -15,17 +15,17 @@ digest: 41ab0d86
 
 除非用户明确批准例外，否则不要引入其他预提交框架。
 
+钩子配置使用 prek 的原生格式 `prek.toml`。仅在需要兼容 pre-commit 时才使用 `.pre-commit-config.yaml`。
+
 将钩子指向所有环节共用的入口：
 
-```yaml
-# .pre-commit-config.yaml - the hook runs the shared entry point
-repos:
-  - repo: local
-    hooks:
-      - id: check
-        entry: mise run check
-        language: system
-        pass_filenames: false
+```toml
+# prek.toml - the hook runs the shared entry point
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+]
 ```
 
 ### 不采用的替代方案

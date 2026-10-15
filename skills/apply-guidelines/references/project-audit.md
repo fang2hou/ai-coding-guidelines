@@ -16,7 +16,7 @@ Collect, without modifying anything:
 2. Package managers: `pnpm-lock.yaml`, `uv.lock`, `package-lock.json`, `yarn.lock`, `requirements.txt`, `Pipfile`, `poetry.lock`.
 3. Lint/format configs: `.oxlintrc.json`, oxfmt config, `pyproject.toml` `[tool.ruff]`, `.golangci.yml`, `rustfmt.toml`, and any banned-tool configs (`.eslintrc*`, `biome.json`, `.prettierrc*`).
 4. Stack markers: framework dependencies in `package.json` / `pyproject.toml`, `components/ui` presence, `app.yaml` (Databricks), `wrangler.toml` (Workers).
-5. Gates: `.pre-commit-config.yaml`, CI jobs, mise tasks.
+5. Gates: `prek.toml` or `.pre-commit-config.yaml`, CI jobs, mise tasks.
 6. CI/CD: every workflow file under `.github/workflows/` (or the project's CI config): triggers, action pins (`uses:` lines), workflow/job/step names, `permissions`, `timeout-minutes`, `concurrency`, and any `${{ }}` interpolation of untrusted input into `run:` scripts.
 7. Frontend structure: where shadcn components and custom components live.
 8. Code quality sample: naming, comments, and module structure across a bounded sample — the most recently changed files, not the whole repository.
