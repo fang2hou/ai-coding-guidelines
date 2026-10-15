@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 2af6794b
+digest: 46d72314
 ---
 
 # Agent 操作协议
@@ -78,11 +78,9 @@ Agent 不要仅因偏好另一种风格，就重写正常工作的代码。
 17. 将日语罗马字或汉语拼音用作代码标识符。([language-policy](../practices/language-policy.md))
 18. 由对话语言推断 UI 语言。([language-policy](../practices/language-policy.md))
 19. 在跨语言 UI 工作中使用低质量的直译。([language-policy](../practices/language-policy.md))
-20. 不必要地修改 shadcn/ui 组件内部实现。([shadcn-ui](../libraries/shadcn-ui.md))
-21. 不记录对 shadcn/ui 组件的必要修改。([shadcn-ui](../libraries/shadcn-ui.md))
-22. 直接编辑已安装的 coss ui 组件文件，而不通过组合、包装或主题定制来实现。([coss](../libraries/coss.md))
-23. 不审查兼容性就盲目升级 GitHub Actions。([github-actions](../toolchain/github-actions.md))
-24. 提交敏感凭据或敏感信息。([security](../practices/security.md))
-25. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
-26. 把 CI 通过当作判断实现是否正确的替代品。([change-discipline](../practices/change-discipline.md))
-27. 在没有明确供应链策略的情况下，将 GitHub Actions 固定到 commit SHA，而不是当前主版本 tag。([github-actions](../toolchain/github-actions.md))
+20. 直接编辑已安装的 coss ui 组件文件，而不通过组合、包装或主题定制来实现。([coss](../libraries/coss.md))
+21. 不审查兼容性就盲目升级 GitHub Actions。([github-actions](../toolchain/github-actions.md))
+22. 提交敏感凭据或敏感信息。([security](../practices/security.md))
+23. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
+24. 把 CI 通过当作判断实现是否正确的替代品。([change-discipline](../practices/change-discipline.md))
+25. 在没有明确供应链策略的情况下，将 GitHub Actions 固定到 commit SHA，而不是当前主版本 tag。([github-actions](../toolchain/github-actions.md))

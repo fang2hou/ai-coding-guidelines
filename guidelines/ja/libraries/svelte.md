@@ -1,10 +1,10 @@
 ---
 id: libraries/svelte
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: f941971d
+digest: 02844dd7
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -21,7 +21,7 @@ digest: f941971d
 ## 避けるべき場面
 
 - AI の作業スループットとエコシステムの広さが重要になる、チーム向け・顧客向けの本番作業。
-- React と shadcn/ui のエコシステムの広さが必要なプロジェクト。
+- React エコシステムの広さが必要なプロジェクト。
 
 ## 長所
 
@@ -33,14 +33,14 @@ digest: f941971d
 ## トレードオフ
 
 - LLM の学習カバレッジは React より薄く、最大のリスクは Svelte 4 のパターンの幻覚である。緩和には公式 AI ツールを使い、決して記憶に頼らない。
-- コンポーネントのエコシステムは小さい。UI 作業は DaisyUI か shadcn-svelte 経由になる。
+- コンポーネントのエコシステムは小さい。UI 作業は DaisyUI か手書きコンポーネントで行う。
 - 動きが速い。SvelteKit 3.0 はプレリリース段階であり、新しいメジャーの探索自体がプロジェクトの目的でない限り、安定版ラインを維持する。
 
 ## バージョン方針
 
 - Svelte 5 の最新安定版。コンポーネントレベルの `await` 式には `experimental.async` が必要（Svelte ≥ 5.36）— 実験的機能であり、デフォルトではない。
 - SvelteKit は ≥ 2.70 の安定版ライン。3.0 のプレリリースはデフォルトでは採用しない。
-- DaisyUI 5（Tailwind CSS v4 プラグインモデル）または shadcn-svelte の最新版（runes ネイティブ、Tailwind v4）。
+- クラスベースのキットが必要な場合は DaisyUI 5（Tailwind CSS v4 プラグインモデル）を使い、それ以外はネイティブ CSS の手書きコンポーネントとする。
 
 ## 利用ルール
 
@@ -53,12 +53,12 @@ digest: f941971d
   - イベントは `onclick={...}` 属性（`on:click` は禁止）。`createEventDispatcher` の代わりにコールバック props を使う。
   - スロットの代わりに `{#snippet}` + `{@render}`。`{#each}` はキー付きにする（インデックスをキーにしない）。`class:` ディレクティブの代わりに配列・オブジェクトの `class` 値を使う。
 - `onMount` や `$effect` のリスナーより `<svelte:window>` / `<svelte:document>` を優先する。外部ライブラリとの同期は `$effect` ではなく `{@attach}` で行う。共有モジュールの状態より、型付きの `createContext` を使う。
-- UI キットはプロジェクトごとに 1 つ選ぶ：
+- UI アプローチはプロジェクトごとに 1 つ選ぶ：
+  - ネイティブ CSS による手書きコンポーネント — デフォルト。キットへの依存がなく、完全に制御できる。
   - DaisyUI 5 — Tailwind プラグイン（`@plugin "daisyui";`）。セマンティックなテーマクラスを持ち、コピーされるコンポーネントはない。小さなアプリと速度重視ならこちら。
-  - shadcn-svelte — CLI でコピーする runes ネイティブのコンポーネント（Tailwind v4 ベース）。深いカスタマイズや shadcn 流の合成が必要ならこちら。
 - 子コンポーネントのスタイルは CSS カスタムプロパティで渡す（`<Child --color="red" />`）。`:global` はサードパーティコンポーネント専用とする。
 
 ## 連携
 
-- [Tailwind CSS](tailwindcss.md) — 併用：DaisyUI と shadcn-svelte はどちらも Tailwind v4 ベースであり、クラス並べ替えの相互運用ルールを適用する。
+- [Tailwind CSS](tailwindcss.md) — 併用：DaisyUI 5 は Tailwind v4 ベースであり、使う場合はクラス並べ替えの相互運用ルールを適用する。
 - [フロントエンドフレームワーク](frontend-framework.md) — 文脈：デフォルトのフレームワーク選定は React 優先のまま。この文書は Svelte という例外を定める。

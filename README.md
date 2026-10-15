@@ -40,12 +40,12 @@ mise install && pnpm install --frozen-lockfile
 mise run check
 ```
 
-Expected result: `OK: 93 documents, 31 ids x 3 languages`. The full workflow lives in [DEVELOPMENT.md](./DEVELOPMENT.md).
+Expected result: `OK: 102 documents, 34 ids x 3 languages`. The full workflow lives in [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## 💡 Concepts
 
 - **Single source of truth** — one corpus fetched at run time; agents apply the fetched documents, never remembered summaries
-- **Trilingual isomorphism** — 31 documents × 3 languages (27 active, 4 draft), identical structure, natively rewritten per language
+- **Trilingual isomorphism** — 34 documents × 3 languages (30 active, 4 draft), identical structure, natively rewritten per language
 - **Machine-enforced consistency** — sha256 digests catch silent edits; terminology and zh/ja punctuation are validated; bodies are capped at 300 lines
 - **Task-routed reading** — PORTAL recipes load only what the task needs
 
@@ -53,15 +53,15 @@ Expected result: `OK: 93 documents, 31 ids x 3 languages`. The full workflow liv
 
 What the corpus standardizes today:
 
-| Area               | Standard                                    |
-| ------------------ | ------------------------------------------- |
-| Node.js            | pnpm + oxlint + oxfmt on the LTS            |
-| Python             | uv + ruff on 3.12                           |
-| Go / Rust          | Only with recorded justification            |
-| TypeScript backend | Hono (Express rejected)                     |
-| Go backend         | Echo with a framework-agnostic core         |
-| Frontend           | Vite or Next.js + Tailwind CSS + shadcn/ui  |
-| Validation         | Identical locally, in pre-commit, and in CI |
+| Area               | Standard                                                 |
+| ------------------ | -------------------------------------------------------- |
+| Node.js            | pnpm + oxlint + oxfmt on the LTS                         |
+| Python             | uv + ruff on 3.12                                        |
+| Go / Rust          | Only with recorded justification                         |
+| TypeScript backend | Hono (Express rejected)                                  |
+| Go backend         | Echo with a framework-agnostic core                      |
+| Frontend           | Vite or Next.js, native CSS first (Tailwind situational) |
+| Validation         | Identical locally, in pre-commit, and in CI              |
 
 ## 📚 Learn More
 

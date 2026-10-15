@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 2ee134c8
+digest: 800b895d
 ---
 
 # エージェント運用プロトコル
@@ -78,11 +78,9 @@ digest: 2ee134c8
 17. 日本語のローマ字（romaji）や中国語のピンイン（pinyin）を、コード識別子として使用してはならない（[言語ポリシー](../practices/language-policy.md)）。
 18. 会話言語から UI 言語を推測してはならない（[言語ポリシー](../practices/language-policy.md)）。
 19. 複数の言語にまたがる UI 作業で、品質の低い直訳を作ってはならない（[言語ポリシー](../practices/language-policy.md)）。
-20. shadcn/ui コンポーネントの内部を不必要に変更してはならない（[shadcn/ui](../libraries/shadcn-ui.md)）。
-21. 必要な shadcn/ui コンポーネントの変更を文書化せずに放置してはならない（[shadcn/ui](../libraries/shadcn-ui.md)）。
-22. インストール済みの coss ui コンポーネントファイルを直接編集せず、合成・ラッピング・テーマ設定で対応すること（[coss](../libraries/coss.md)）。
-23. 互換性を確認せず、GitHub Actions を安易にアップグレードしてはならない（[GitHub Actions](../toolchain/github-actions.md)）。
-24. シークレットや機密情報をコミットしてはならない（[セキュリティ](../practices/security.md)）。
-25. 適切な承認を得ずに、共有履歴へ force push してはならない（[Git ワークフロー](../toolchain/git.md)）。
-26. CI が通ったことだけを根拠に、実装が正しいかどうかを確認せずに済ませてはならない（[変更の規律](../practices/change-discipline.md)）。
-27. 明示的なサプライチェーンポリシーがない限り、GitHub Actions を現在のメジャーバージョンタグではなくコミット SHA に固定してはならない（[GitHub Actions](../toolchain/github-actions.md)）。
+20. インストール済みの coss ui コンポーネントファイルを直接編集せず、合成・ラッピング・テーマ設定で対応すること（[coss](../libraries/coss.md)）。
+21. 互換性を確認せず、GitHub Actions を安易にアップグレードしてはならない（[GitHub Actions](../toolchain/github-actions.md)）。
+22. シークレットや機密情報をコミットしてはならない（[セキュリティ](../practices/security.md)）。
+23. 適切な承認を得ずに、共有履歴へ force push してはならない（[Git ワークフロー](../toolchain/git.md)）。
+24. CI が通ったことだけを根拠に、実装が正しいかどうかを確認せずに済ませてはならない（[変更の規律](../practices/change-discipline.md)）。
+25. 明示的なサプライチェーンポリシーがない限り、GitHub Actions を現在のメジャーバージョンタグではなくコミット SHA に固定してはならない（[GitHub Actions](../toolchain/github-actions.md)）。
