@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: en
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: ad6b7021
+digest: 3e5d378d
 ---
 
 # Quality Gates
@@ -15,17 +15,17 @@ Use `prek` as the standard pre-commit framework.
 
 Do not introduce another pre-commit framework unless the user explicitly approves an exception.
 
+Configure hooks in `prek.toml`, prek's native format. Use `.pre-commit-config.yaml` only when pre-commit compatibility is required.
+
 Point the hook at the same entry point everything else uses:
 
-```yaml
-# .pre-commit-config.yaml - the hook runs the shared entry point
-repos:
-  - repo: local
-    hooks:
-      - id: check
-        entry: mise run check
-        language: system
-        pass_filenames: false
+```toml
+# prek.toml - the hook runs the shared entry point
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+]
 ```
 
 ### Rejected Alternatives

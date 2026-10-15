@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: ja
-version: 4
+version: 5
 source-lang: en
 status: active
-digest: 068274a0
+digest: d55f83d9
 ---
 
 # 品質ゲート
@@ -15,17 +15,17 @@ digest: 068274a0
 
 ユーザーが明示的に例外を承認した場合を除き、別のプリコミットフレームワークを導入しない。
 
+フック設定には prek のネイティブ形式 `prek.toml` を使う。pre-commit との互換性が必要な場合に限り `.pre-commit-config.yaml` を使う。
+
 フックは、他の処理で使うものと同じエントリーポイントを指すこと。
 
-```yaml
-# .pre-commit-config.yaml - the hook runs the shared entry point
-repos:
-  - repo: local
-    hooks:
-      - id: check
-        entry: mise run check
-        language: system
-        pass_filenames: false
+```toml
+# prek.toml - the hook runs the shared entry point
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+]
 ```
 
 ### 採用しない代替案
