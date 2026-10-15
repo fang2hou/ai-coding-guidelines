@@ -1,10 +1,10 @@
 ---
 id: practices/corner-radius
 lang: zh
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 36a7f57c
+digest: 1aa2c55d
 ---
 
 # 圆角
@@ -64,6 +64,7 @@ digest: 36a7f57c
 - 内缩距离等于表面内边距：用同一组令牌以 `calc()` 计算。
 - 控件外侧的焦点环：用 `outline` 或 `box-shadow`——两者都会自动跟随外层半径。
 - 宽度为 `w` 的边框画在圆角盒子上：内边缘已经按 `R − w` 绘制；不要再额外加圆角。
+- 嵌套在设置了 `corner-shape` 的表面内部的层：用 `corner-shape: inherit` 在内层设置相同形状——该属性默认不继承；外层 squircle 配内层普通圆角会破坏同心观感。
 
 ```css
 .button {
@@ -78,12 +79,15 @@ digest: 36a7f57c
 }
 
 .card {
+  --card-inset: 12px;
   border-radius: var(--radius-xl);
-  padding: 12px;
+  corner-shape: squircle;
+  padding: var(--card-inset);
 }
 .card .media {
-  /* 20 - 12 = 8: same center of curvature as the card */
-  border-radius: calc(var(--radius-xl) - 12px);
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
 }
 ```
 
@@ -94,6 +98,7 @@ digest: 36a7f57c
 - diff 中的每个圆角都来自令牌档位。
 - 控件使用中等档位；全圆只出现在 chip、标签和身份元素上。
 - 每个嵌套层要么满足 `r = R − p`，要么继承半径，要么使用 `outline` / `box-shadow`。
+- 位于设置了 `corner-shape` 的表面内部的层使用相同的角形状（`corner-shape: inherit`）。
 - ≥ `--radius-l` 的表面设置了 `corner-shape: squircle`；没有为它引入 polyfill。
 
 ## 联动
