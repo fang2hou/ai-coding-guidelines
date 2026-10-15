@@ -1,10 +1,10 @@
 ---
 id: practices/corner-radius
 lang: en
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: 841255f4
+digest: 48366e17
 ---
 
 # Corner Radius
@@ -64,6 +64,7 @@ digest: 841255f4
 - Layer inset by the surface padding: compute with `calc()` from the same tokens.
 - Focus ring outside the control: use `outline` or `box-shadow` — both track the outer radius automatically.
 - Border of width `w` on a rounded box: the inner edge is already drawn at `R − w`; never re-round it.
+- Layer nested inside a surface with `corner-shape`: set the same shape on the inner layer with `corner-shape: inherit` — the property does not inherit by default, and a plain round inner corner against a squircle outer corner breaks the concentric reading.
 
 ```css
 .button {
@@ -78,12 +79,15 @@ digest: 841255f4
 }
 
 .card {
+  --card-inset: 12px;
   border-radius: var(--radius-xl);
-  padding: 12px;
+  corner-shape: squircle;
+  padding: var(--card-inset);
 }
 .card .media {
-  /* 20 - 12 = 8: same center of curvature as the card */
-  border-radius: calc(var(--radius-xl) - 12px);
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
 }
 ```
 
@@ -94,6 +98,7 @@ digest: 841255f4
 - Every radius in the diff comes from the token scale.
 - Controls use the medium token; pill radii appear only on chips, tags, and identity elements.
 - Every nested layer satisfies `r = R − p`, inherits its radius, or uses `outline` / `box-shadow`.
+- Layers nested inside a `corner-shape` surface use the same corner shape (`corner-shape: inherit`).
 - `corner-shape: squircle` is set on ≥ `--radius-l` surfaces; no polyfills shipped for it.
 
 ## Works with

@@ -1,10 +1,10 @@
 ---
 id: practices/corner-radius
 lang: ja
-version: 1
+version: 2
 source-lang: en
 status: active
-digest: a8d78371
+digest: c5f969dd
 ---
 
 # 角丸
@@ -64,6 +64,7 @@ digest: a8d78371
 - 表面のパディング分だけ内側に入る層：同じトークンから `calc()` で計算する。
 - コントロールの外側のフォーカスリング：`outline` か `box-shadow` を使う。どちらも外側の半径に自動的に追従する。
 - 幅 `w` のボーダーを角丸のボックスに引く場合：内側の縁はすでに `R − w` で描かれる。追加の角丸を設定しない。
+- `corner-shape` を設定したサーフェスの内側に入る層：`corner-shape: inherit` で内側にも同じ形状を設定する。このプロパティは既定では継承されない。外側が squircle で内側が通常の角丸では、同心の見え方が壊れる。
 
 ```css
 .button {
@@ -78,12 +79,15 @@ digest: a8d78371
 }
 
 .card {
+  --card-inset: 12px;
   border-radius: var(--radius-xl);
-  padding: 12px;
+  corner-shape: squircle;
+  padding: var(--card-inset);
 }
 .card .media {
-  /* 20 - 12 = 8: same center of curvature as the card */
-  border-radius: calc(var(--radius-xl) - 12px);
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
 }
 ```
 
@@ -94,6 +98,7 @@ digest: a8d78371
 - diff 内のすべての角丸がトークンスケールから取られている。
 - コントロールは中程度のトークンを使い、完全な円はチップ、タグ、アイデンティティ要素にしか現れない。
 - すべてのネストされた層は `r = R − p` を満たすか、半径を継承するか、`outline` / `box-shadow` を使っている。
+- `corner-shape` を設定したサーフェスの内側の層は、同じ角の形状を使っている（`corner-shape: inherit`）。
 - ≥ `--radius-l` のサーフェスに `corner-shape: squircle` が設定されている。ポリフィルは導入していない。
 
 ## 連携
