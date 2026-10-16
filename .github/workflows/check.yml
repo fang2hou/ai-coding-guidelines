@@ -28,6 +28,8 @@ jobs:
         run: mise run check
       - name: Run validator tests (mise run test)
         run: mise run test
+      - name: Build site against the real corpus (mise run build-site)
+        run: mise run build-site
 
   validate-commit-history:
     name: Validate commit history
