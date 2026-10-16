@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: d8fcfa6f
+digest: a0f60c4a
 ---
 
 # Liquid Glass design (Apple platforms)
@@ -18,7 +18,7 @@ The 27 SDK behavior was verified on 2026-09-06 against the available beta. Reche
 ## Separate controls from content
 
 - Use Liquid Glass for navigation and controls above content: bars, sidebars, menus, system presentations, and custom floating controls. Let the system choose materials for standard components and their interaction states.
-- Keep backgrounds, article text, lists, tables, and content cards in the content layer. Use opaque surfaces or standard materials there. A control embedded in content may acquire glass temporarily during interaction.
+- Keep backgrounds, article text, lists, tables, and content cards in the content layer. Use opaque surfaces or standard materials there. A control embedded in content may show a glass effect temporarily during interaction.
 - Do not stack independent glass surfaces. Controls on an existing glass surface should use the system’s foreground treatment, fills, or vibrancy.
 - Glass adapts to its backdrop through refraction, luminosity, tint, and shadow. Preserve content beneath floating controls; do not add empty glass panels as decoration.
 
@@ -53,7 +53,7 @@ The 27 SDK behavior was verified on 2026-09-06 against the available beta. Reche
 - Test Reduce Transparency, Increase Contrast, Reduce Motion, and Dynamic Type. System materials adapt, but custom foreground colors, animations, and layouts remain the app’s responsibility.
 - Check text contrast against the actual background in light and dark appearances. Apple’s HIG specifies 4.5:1 for text up to 17 pt, and 3:1 for larger or bold text. Do not use this threshold as a reason to shrink text or make every label bold.
 - Use semantic controls with accessible names and adequate hit areas. Verify VoiceOver order, keyboard access, and the platform’s pointer or focus behavior. A visual glass reaction does not create button semantics.
-- Reduce custom morphing and spring motion when Reduce Motion is enabled; a nonanimated state change is a valid fallback.
+- Reduce custom morphing and spring motion when Reduce Motion is enabled; switching states without animation is a fine fallback.
 - Validate bright, dark, busy, and moving backdrops; small windows; large text; and inactive windows. Profile scrolling and transitions with representative content on target hardware.
 
 ## System behavior in iOS 27 and macOS 27

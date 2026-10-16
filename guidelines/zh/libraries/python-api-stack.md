@@ -4,14 +4,14 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 7b05bdb6
+digest: be235580
 ---
 
 # Python API 技术栈
 
 ## 结论
 
-优先采用——FastAPI + Pydantic + Uvicorn 构成首选的 Python API 基线；三者应作为一个整体技术栈采用，而不是分别选择。
+首选——FastAPI + Pydantic + Uvicorn 是标准的 Python API 技术栈；三者应作为一个整体采用，而不是分别挑选。
 
 ## 适用场景
 
@@ -32,7 +32,7 @@ digest: 7b05bdb6
 
 ## 代价
 
-- 引入该技术栈会增加一个 Python 服务，也需要单独管理其依赖和部署。
+- 会多出一个需要单独管理依赖和部署的 Python 服务。
 - Pydantic 模型必须与所校验的数据保持同步。
 
 ## 版本策略

@@ -4,14 +4,14 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 496bd691
+digest: 26f6bae5
 ---
 
 # Coding Standards
 
 ## Follow ecosystem best practices
 
-Follow the established conventions of the selected language and framework; do not substitute a private variant of them.
+Follow the standard conventions of the language and framework you are using; do not invent custom variants.
 
 This covers:
 
@@ -36,7 +36,7 @@ if (order === null || !order.isPaid) return;
 ship(order);
 ```
 
-Adopt a design pattern only when it names a problem that actually exists in the codebase, not because a catalog lists it.
+Use a design pattern only when it solves a problem that already exists in the code, not because a catalog lists it.
 
 ## Avoid over-engineering
 
@@ -102,7 +102,7 @@ Follow the code-language rules in [Language Policy](language-policy.md).
 
 ## Comments
 
-Write code that needs few comments. Naming, structure, and decomposition carry the meaning; a comment covers only what they cannot express.
+Write code that needs few comments. Let clear names and small functions show what the code does; use comments only for what the code itself cannot express.
 
 - Comment the why, never restate the what.
 - Do not narrate logic step by step; if a passage needs a running commentary, restructure it first.
@@ -133,8 +133,8 @@ Write modular code where modularity improves:
 
 Do not create artificial modules merely to satisfy an abstract idea of modularity.
 
-Decision test: a helper used by exactly one screen stays in that screen's file; it moves to a shared module when a second consumer imports it.
-Write for the reader who arrives later: group functions by concern, separate levels of logic, and let file order tell the story — the main flow first, its helpers below.
+Rule of thumb: keep a helper used by one screen in that screen's file, and move it to a shared module only when a second caller imports it.
+Order each file for the next reader: group related functions, separate levels of detail, and put the main flow above its helpers.
 
 ## New files and modules
 
@@ -162,7 +162,7 @@ Correctness and readability come first; do not trade structure for speed you hav
 
 ## Responsive frontend
 
-Frontend applications must provide complete responsive behavior: usable across desktop, tablet, and mobile sizes, built with modern responsive layout techniques.
+Frontend applications must be fully responsive: usable at desktop, tablet, and mobile sizes, built with modern responsive layout techniques.
 
 ```tsx
 // bad

@@ -4,7 +4,7 @@ lang: en
 version: 7
 source-lang: en
 status: active
-digest: 43f4e37b
+digest: f2715e8a
 ---
 
 # Required Project Documentation
@@ -19,7 +19,7 @@ Every project must include `AGENTS.md` at the repository root.
 
 It is the agent-facing entry point: commands, engineering standards, repository layout, boundaries, the confirmed language policy, and project conventions.
 
-Authoring rules — surface selection, section order, size, nested files — are defined in [Authoring AGENTS.md](agents-file.md).
+See [Authoring AGENTS.md](agents-file.md) for what belongs in `AGENTS.md`, section order, length limits, and nested files.
 
 Template: [project-agents.template.md](../../../templates/project-agents.template.md)
 
@@ -27,14 +27,13 @@ Template: [project-agents.template.md](../../../templates/project-agents.templat
 
 Every project must include `README.md`.
 
-The README is the project's front door, written for readers who skim:
-the first screen states what the project is, what need it solves, and
-how to get it running. It orients and routes; it does not teach,
-document the machinery, or explain the background — those belong to the
-detail documents and their modes. Agent-facing rules — engineering
-standards, the confirmed language policy, project conventions — live in
-`AGENTS.md` (see `templates/project-agents.template.md`), and the README
-hands the repository to agents with a copyable instruction.
+The README is the project's front door, written for readers who skim.
+The first screen states what the project is, what problem it solves, and
+how to run it. It points readers to the right detail documents instead of
+teaching, listing internals, or writing long background essays. Agent-facing
+rules — engineering standards, language policy, project conventions — belong in
+`AGENTS.md` (see `templates/project-agents.template.md`), and the README gives a
+copyable prompt that points agents there.
 
 The body is organized around reader tasks, not around the repository
 directory structure. Do not write a separate Why section; follow this
@@ -85,7 +84,7 @@ It should describe:
 - Validation workflow
 - Deployment workflow when relevant
 
-It should make it possible for both humans and AI agents to understand how development should be performed.
+Both humans and AI agents should be able to read it and know how development is done.
 
 Template: [DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 
@@ -118,18 +117,12 @@ Template: [CONTRIBUTING.template.md](../../../templates/CONTRIBUTING.template.md
 
 ## ARCHITECTURE.md
 
-Projects with meaningful architectural boundaries should maintain `ARCHITECTURE.md`.
+Projects with meaningful architectural boundaries must maintain `ARCHITECTURE.md`.
 
-Keep it short and operational.
+Keep it short and practical: a brief overview, a high-level codebase map (name modules, do not link files), and the architectural invariants.
 
-It should contain a brief overview, a coarse codebase map (name modules, do not link files), and the architectural invariants.
+Its job is to explain why the boundaries exist and keep the architecture from drifting — not to be a theoretical essay or a complete file list.
 
-Its mode is explanation — the reasons behind the boundaries — not exhaustive reference.
-
-Avoid turning it into a comprehensive theoretical architecture document.
-
-Its primary purpose is to prevent accidental architecture drift.
-
-Invariants and ADR practice are defined in [Architecture Governance](architecture-governance.md).
+Invariants and ADR rules are defined in [Architecture Governance](architecture-governance.md).
 
 Template: [ARCHITECTURE.template.md](../../../templates/ARCHITECTURE.template.md)

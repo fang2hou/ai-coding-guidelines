@@ -4,7 +4,7 @@ lang: zh
 version: 7
 source-lang: en
 status: active
-digest: 0248d033
+digest: adfa9d85
 ---
 
 # 必备项目文档
@@ -19,7 +19,7 @@ digest: 0248d033
 
 它是面向 Agent 的入口文档：命令、工程标准、仓库结构、边界、已确认的语言政策与项目约定。
 
-编写规则——载体选择、章节顺序、篇幅、嵌套文件——见[编写 AGENTS.md](agents-file.md)。
+编写规则（内容归属、章节顺序、篇幅限制和嵌套文件）见[编写 AGENTS.md](agents-file.md)。
 
 模板：[project-agents.template.md](../../../templates/project-agents.template.md)
 
@@ -67,7 +67,7 @@ README 是项目的门面，读者多半只是扫读：首屏之内要说清项�
 - 校验工作流
 - 部署工作流（如适用）
 
-它应让人类和 AI Agent 都能据此了解应如何进行开发。
+人类和 AI Agent 读完都能明白开发应当如何进行。
 
 模板：[DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 
@@ -100,18 +100,12 @@ GitHub 的 pull request 模板必须与这些要求保持同步。
 
 ## ARCHITECTURE.md
 
-项目一旦形成有实际意义的架构边界，就应维护 `ARCHITECTURE.md`。
+项目一旦形成有实际意义的架构边界，就必须维护 `ARCHITECTURE.md`。
 
-保持简短，便于执行。
+保持简短实用：包含简要概览、高层代码地图（只列模块名，不链具体文件）以及架构不变量。
 
-它的定位是解释——讲清边界背后的原因——而不是面面俱到的参考。
+它的职责是讲清边界背后的原因，防止架构在不知不觉中走样，而不是写成面面俱到的参考手册或空泛的理论长文。
 
-它应包含简要概览、粗粒度的代码地图（列出模块名称，不要链接文件）以及架构不变量。
-
-不要把它写成面面俱到的理论架构文档。
-
-它的首要目的是防止架构在无意中发生漂移。
-
-不变量与 ADR 实践见[架构治理](architecture-governance.md)。
+不变量与 ADR 规则见[架构治理](architecture-governance.md)。
 
 模板：[ARCHITECTURE.template.md](../../../templates/ARCHITECTURE.template.md)

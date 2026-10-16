@@ -5,7 +5,7 @@ Development setup lives in [DEVELOPMENT.md](./DEVELOPMENT.md); rules for AI agen
 
 ## Ground Rules
 
-- Smallest coherent change that solves the requirement
+- Smallest complete change that solves the requirement
 - No unrelated cleanup mixed into feature changes
 - No new dependencies without justification (see the guideline's dependency discipline)
 

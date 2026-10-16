@@ -4,14 +4,14 @@ lang: en
 version: 1
 source-lang: en
 status: draft
-digest: 5a64b0e1
+digest: a9ae0632
 ---
 
 # Go API Stack
 
 ## Verdict
 
-Preferred — Echo is the preferred Go web framework, with `github.com/go-playground/validator/v10` for request validation. This stack applies only after Go itself has been justified under [Go Toolchain](../toolchain/go.md).
+Preferred — Use Echo as the Go web framework, with `github.com/go-playground/validator/v10` for request validation. This stack applies only after Go itself has been justified under [Go Toolchain](../toolchain/go.md).
 
 ## Use when
 
@@ -23,7 +23,7 @@ Preferred — Echo is the preferred Go web framework, with `github.com/go-playgr
 
 ## Strengths
 
-- Echo: mature routing and middleware with a small API surface; batteries included without hiding `net/http`.
+- Echo: mature routing and middleware with a small API that does not hide `net/http`.
 - Echo: performance and low allocation overhead, matching the performance-sensitive services that justify Go.
 - Echo: active maintenance — the v5 line is current, and v4 keeps receiving security and bug fixes until 2026-12-31.
 - validator: the de facto Go struct validation library; integrates with Echo's request binding.

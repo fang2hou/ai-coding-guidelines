@@ -11,7 +11,7 @@ Engineering standards for AI-assisted development — maintained once, applied t
 
 </div>
 
-Every project re-answers the same questions: which package manager, which linter, how to write commits, how to structure CI — and AI agents re-answer them again, per session, inconsistently. This repository standardizes everything that does not need to be a project-specific decision. Humans and agents stop re-choosing tools and conventions; product and architecture decisions stay free.
+Every project ends up answering the same questions — which package manager, which linter, how to write commits, how to set up CI — and AI agents answer them differently each session. This repository standardizes every choice that does not depend on the product. Humans and agents stop re-picking tools and conventions, leaving product and architecture decisions open.
 
 ## 🚀 Usage / Quick Start
 
@@ -21,7 +21,7 @@ Every project re-answers the same questions: which package manager, which linter
 pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 ```
 
-The skill ships no guideline content: every run fetches the current guidelines from GitHub, routes the task through PORTAL, and audits existing projects against the fetched revision.
+The skill carries no guideline text of its own. Each run pulls the latest guidelines from GitHub, picks the right documents via [PORTAL.md](./PORTAL.md), and checks the project against them.
 
 Or hand the repository over directly:
 
@@ -30,7 +30,7 @@ Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for t
 Start at PORTAL.md and follow its reading recipes.
 ```
 
-**As a human** — pick a recipe in [PORTAL.md](./PORTAL.md) ("Start a TypeScript project", "Write tests", "Add a dependency"), or browse [guidelines/en/](./guidelines/en/) and follow links from there.
+**As a human** — pick a recipe in [PORTAL.md](./PORTAL.md) ("Start a TypeScript project", "Write tests", "Add a dependency"), or browse [guidelines/en/](./guidelines/en/) ([中文](./guidelines/zh/) · [日本語](./guidelines/ja/)).
 
 **To develop this repository** — requires [mise](https://mise.jdx.dev/); runtime versions are pinned in `mise.toml`:
 
@@ -40,28 +40,28 @@ mise install && pnpm install --frozen-lockfile
 mise run check
 ```
 
-Expected result: `OK: 102 documents, 34 ids x 3 languages`. The full workflow lives in [DEVELOPMENT.md](./DEVELOPMENT.md).
+Expected result: `OK: 99 documents, 33 ids x 3 languages`. The full workflow lives in [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## 💡 Concepts
 
-- **Single source of truth** — one corpus fetched at run time; agents apply the fetched documents, never remembered summaries
-- **Trilingual isomorphism** — 34 documents × 3 languages (30 active, 4 draft), identical structure, natively rewritten per language
-- **Machine-enforced consistency** — sha256 digests catch silent edits; terminology and zh/ja punctuation are validated; bodies are capped at 300 lines
-- **Task-routed reading** — PORTAL recipes load only what the task needs
+- **Single source of truth** — agents fetch the live guidelines at run time instead of relying on memory or summaries
+- **Three languages, one structure** — 33 documents in English, Chinese, and Japanese (29 active, 4 draft), with matching headings and natural wording in each language
+- **Automated checks** — CI verifies sha256 digests, terminology, Chinese and Japanese punctuation, cross-links, and the 300-line limit per document
+- **Task-based reading** — [PORTAL.md](./PORTAL.md) lists only the documents needed for each task
 
 ## ✨ Features
 
-What the corpus standardizes today:
+What these guidelines standardize:
 
-| Area               | Standard                                                 |
-| ------------------ | -------------------------------------------------------- |
-| Node.js            | pnpm + oxlint + oxfmt on the LTS                         |
-| Python             | uv + ruff on 3.12                                        |
-| Go / Rust          | Only with recorded justification                         |
-| TypeScript backend | Hono (Express rejected)                                  |
-| Go backend         | Echo with a framework-agnostic core                      |
-| Frontend           | Vite or Next.js, native CSS first (Tailwind situational) |
-| Validation         | Identical locally, in pre-commit, and in CI              |
+| Area               | Standard                                                          |
+| ------------------ | ----------------------------------------------------------------- |
+| Node.js            | pnpm + oxlint + oxfmt on Active LTS                               |
+| Python             | uv + ruff on Python 3.12                                          |
+| Go / Rust          | Only with a recorded reason; golangci-lint + gofumpt, clippy      |
+| TypeScript backend | Hono (never Express)                                              |
+| Go backend         | Echo with a framework-independent core                            |
+| Frontend           | Vite or Next.js; native CSS by default (Tailwind CSS when needed) |
+| Validation         | Same checks locally, in pre-commit hooks, and in CI               |
 
 ## 📚 Learn More
 

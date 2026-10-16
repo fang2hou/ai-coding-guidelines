@@ -4,18 +4,14 @@ lang: zh
 version: 1
 source-lang: en
 status: draft
-digest: 5290a035
+digest: 9883942e
 ---
 
 # Rust 工具链
 
 ## 强制要求
 
-TypeScript 与 Python 是 AI 辅助开发的默认语言，因为它们在库生态和 AI Agent 生态方面获得的支持最强。
-
-Rust 不是默认选项。
-
-仅当项目确实需要以下能力时才选择 Rust：
+TypeScript 与 Python 是 AI 辅助开发的默认语言。Rust 不是默认选项，仅当项目确实需要以下能力时才选择 Rust：
 
 - 兼具内存安全和极致性能
 - 系统级组件
@@ -28,11 +24,7 @@ Rust 不是默认选项。
 
 ## 适用范围
 
-本文档是 Rust 项目的基线规范。
-
-它不能替代项目级评估。
-
-采用 Rust 前确认两点：需求确实属于上述场景之一；TypeScript、Python 或 Go 无法以可接受的成本满足该需求。
+本文档是 Rust 项目的基线标准，不能替代项目级评估。采用 Rust 前须确认两点：需求属于上述场景之一，且 TypeScript、Python 或 Go 无法以合理成本满足。
 
 ## 版本策略
 
@@ -90,7 +82,7 @@ CI 中运行 `cargo test`。
 
 ## 联动
 
-- [mise](../toolchain/mise.md) —— 版本管理：Rust 工具链及相关工具由 mise 管理，并通过 mise task 提供。
-- [质量门禁](../toolchain/quality-gates.md) —— 同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。
-- [Git 工作流](../toolchain/git.md) —— 提交纪律：Rust 变更遵循标准的提交和 pull request 规则。
-- [测试策略](../practices/testing.md) —— 测试重点：测什么，在哪一层测。
+- [mise](../toolchain/mise.md)——版本管理：Rust 工具链及相关工具由 mise 管理，并通过 mise task 提供。
+- [质量门禁](../toolchain/quality-gates.md)——同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。
+- [Git 工作流](../toolchain/git.md)——提交纪律：Rust 变更遵循标准的提交和 pull request 规则。
+- [测试策略](../practices/testing.md)——测试重点：测什么，在哪一层测。

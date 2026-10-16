@@ -4,14 +4,14 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 1064db61
+digest: bb60f4de
 ---
 
 # Python API Stack
 
 ## Verdict
 
-Preferred — FastAPI + Pydantic + Uvicorn is the preferred Python API baseline; adopt the three as one stack, not as independent picks.
+Preferred — FastAPI + Pydantic + Uvicorn is the standard Python API stack; adopt all three together, not as separate picks.
 
 ## Use when
 
@@ -32,7 +32,7 @@ Preferred — FastAPI + Pydantic + Uvicorn is the preferred Python API baseline;
 
 ## Tradeoffs
 
-- Introducing the stack adds a Python service with its own dependency and deployment surface.
+- Adds a separate Python service to manage and deploy.
 - Pydantic models must be kept in sync with the data they validate.
 
 ## Version policy

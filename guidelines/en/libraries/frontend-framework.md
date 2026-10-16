@@ -4,51 +4,50 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 7c2bc70b
+digest: 7bed6bb2
 ---
 
 # Frontend Framework: Vite vs Next.js
 
 ## Verdict
 
-Preferred — Vite is the default frontend framework; choose Next.js only when its full-stack capabilities are genuinely required.
+Preferred — Vite is the default frontend framework; choose Next.js only when the project genuinely needs full-stack React capabilities.
 
 Decision rule:
 
 - Default to Vite.
-- Use Next.js only when the project requires a full-stack React application or capabilities that justify Next.js.
-- Never choose Next.js merely because it is more capable than Vite.
-- Choose Vite whenever the additional complexity of Next.js does not provide value.
+- Use Next.js only when the project needs a full-stack React application.
+- Never choose Next.js just because it has more features than Vite.
+- Choose Vite whenever Next.js's extra complexity adds no value.
 
 ## Use when
 
 ### Vite
 
-- The application is a simple, fast frontend where a full-stack framework is unnecessary.
-- Server-side rendering and full-stack capabilities are not required.
+- Building a client-side or single-page frontend where a full-stack framework is unnecessary.
+- Server-side rendering and framework-managed server routes are not needed.
 
 ### Next.js
 
-- The project requires a full-stack React application.
-- The project requires capabilities that genuinely justify Next.js.
+- The project needs a full-stack React application with server-side rendering, server routes, or integrated data fetching.
 
 ## Avoid when
 
 ### Vite
 
-- The project requires full-stack capabilities that justify Next.js.
+- The project needs server-side rendering or integrated full-stack React features.
 
 ### Next.js
 
-- The only argument is that Next.js is more capable than Vite.
-- The additional complexity of Next.js does not provide value — use Vite instead.
+- The only reason is that Next.js has more features than Vite.
+- Next.js's extra complexity adds no value to the project — use Vite instead.
 
 ## Strengths
 
 ### Vite
 
 - Minimal configuration and a fast development server.
-- A small conceptual surface with few framework-imposed constraints.
+- Few concepts to learn and minimal framework lock-in.
 
 ### Next.js
 
@@ -64,7 +63,7 @@ Decision rule:
 
 ### Next.js
 
-- Additional complexity over Vite in architecture, conventions, and operational surface.
+- More complex architecture, conventions, and deployment than Vite.
 - Major-version upgrades require compatibility review of related plugins and integrations.
 
 ## Version policy
@@ -84,10 +83,8 @@ Decision rule:
 
 ## Usage rules
 
-- Use Vite for simple, fast frontend applications where a full-stack framework is unnecessary.
-- Use Next.js when the project requires a full-stack React application or capabilities that justify Next.js.
-- Do not use Next.js merely because it is more capable than Vite.
-- Choose Vite when the additional complexity of Next.js does not provide value.
+- Default to Vite for frontend applications.
+- Use Next.js only when the project needs its full-stack React features; never pick it just because it is larger or more capable.
 
 ## Works with
 

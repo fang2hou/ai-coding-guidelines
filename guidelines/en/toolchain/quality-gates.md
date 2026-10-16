@@ -4,7 +4,7 @@ lang: en
 version: 5
 source-lang: en
 status: active
-digest: 3e5d378d
+digest: 87171829
 ---
 
 # Quality Gates
@@ -35,9 +35,7 @@ hooks = [
 
 ## Default Check Set
 
-The repository's prek configuration should include the relevant fast checks for the project.
-
-By default, this should include:
+Include the project's fast checks in `prek.toml`:
 
 - Linting
 - Formatting checks
@@ -61,11 +59,7 @@ configured.
 
 ## Keep Checks Fast
 
-Keep pre-commit checks meaningful and fast.
-
-Do not add expensive checks merely to make the hook configuration appear comprehensive.
-
-Checks intended to run on every commit should remain fast enough for frequent use by both humans and AI agents.
+Keep pre-commit checks fast enough for humans and AI agents to run on every commit. Do not add slow checks just to make the hook file look thorough.
 
 ```text
 # good - fast enough for every commit
@@ -77,9 +71,7 @@ full E2E suite, dependency audit against live registries
 
 ## Local / CI Consistency
 
-For repositories hosted on GitHub, GitHub Actions should run equivalent checks using the same project configuration so local and CI validation do not diverge.
-
-The invariant: the exact commands that gate a change locally are the exact commands CI runs.
+In GitHub repositories, run the exact same check commands in GitHub Actions as locally so the two environments never drift:
 
 ```bash
 # local
@@ -99,15 +91,11 @@ See [GitHub Actions](../toolchain/github-actions.md) for the CI layering model a
 
 ## Validation Entry Point
 
-Whenever practical, expose the relevant quality workflow through a mise task.
-
-For example:
+Where practical, expose the main validation workflow as `mise run check`:
 
 ```bash
 mise run check
 ```
-
-The task above is the predictable entry point for the project's main validation workflow.
 
 Chain `test` after `check` so tests never run on unvalidated code:
 

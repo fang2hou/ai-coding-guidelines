@@ -4,18 +4,14 @@ lang: en
 version: 1
 source-lang: en
 status: draft
-digest: 154c8f5a
+digest: 1b786cf7
 ---
 
 # Rust Toolchain
 
 ## Mandate
 
-TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
-
-Rust is not a default choice.
-
-Choose Rust only when the project genuinely needs:
+TypeScript and Python are the default languages for AI-assisted development. Rust is not a default choice — use it only when the project genuinely needs:
 
 - Maximum performance with memory safety
 - Systems components
@@ -28,11 +24,7 @@ Familiarity with Rust is not a justification on its own.
 
 ## Scope
 
-This document is a baseline standard for Rust projects.
-
-It does not replace project-level evaluation.
-
-Before adopting Rust, confirm both points: the requirement matches one of the scenarios above, and TypeScript, Python, or Go cannot satisfy it at acceptable cost.
+This document sets the baseline standard for Rust projects; it does not replace project-level evaluation. Before choosing Rust, confirm two things: the project matches one of the cases above, and TypeScript, Python, or Go cannot meet the requirement at reasonable cost.
 
 ## Version Policy
 

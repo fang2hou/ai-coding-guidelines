@@ -4,7 +4,7 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: 7e49f8f0
+digest: 7d55f927
 ---
 
 # Liquid Glass API リファレンス
@@ -13,7 +13,7 @@ digest: 7e49f8f0
 
 Xcode 27 でビルドし、最低対応 OS をそれぞれ 27.0 に設定した iOS 27 とネイティブ macOS 27 のアプリを対象とする。2026-09-06 に Apple の文書と Xcode 27 ベータ版のビルド `27A5252f`（`iPhoneOS27.0.sdk`、`MacOSX27.sdk`）で確認した。SDK の宣言はプラットフォーム上の可用性を、実行中の OS は描画と操作の挙動を決める。ベータ版の宣言は今後変わる可能性がある。
 
-以下の表はこの二つのプラットフォームでの対応状況を示し、過去の導入バージョンは扱わない。iOS には UIKit、ネイティブ macOS には AppKit を使う。プラットフォーム専用の API は `#if os(iOS)`／`#if os(macOS)` または専用ファイルで分離する。
+以下の表はこの 2 つのプラットフォームでの対応状況を示し、過去の導入バージョンは扱わない。iOS には UIKit、ネイティブ macOS には AppKit を使う。プラットフォーム専用の API は `#if os(iOS)`／`#if os(macOS)` または専用ファイルで分離する。
 
 ## SwiftUI のガラス API
 

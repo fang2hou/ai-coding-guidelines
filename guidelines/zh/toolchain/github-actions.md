@@ -4,7 +4,7 @@ lang: zh
 version: 5
 source-lang: en
 status: active
-digest: 3797ab64
+digest: 7ab14c91
 ---
 
 # GitHub Actions
@@ -23,7 +23,7 @@ GitHub Actions 是标准 CI/CD 平台；用户未指定流水线系统时，默�
 4. 检查所需的输入、权限、运行时版本或行为是否发生变化。
 5. 确认迁移可以安全进行后，优先升级到当前受支持的版本。
 
-未核查迁移要求前，不要盲目更新 action 版本号。主版本 tag 会自行获取补丁和次版本更新；这份清单约束的是它无法替你完成的迁移——跨越主版本边界。
+未查看升级说明前，不要盲目修改 action 版本号。主版本 tag（如 `@v4`）会自动接收次版本和补丁更新；本清单针对的是跨主版本升级。
 
 ## CI 分层
 
@@ -47,7 +47,7 @@ mise 是 CI 调用的入口；不要在工作流 YAML 中重复设置工具。�
 - 每个工作流文件只面向一种触发受众。项目校验工作流在 `push`（默认分支）和 `pull_request` 上运行；只对 pull request 成立的规则——例如 pull request 标题规则——放在仅由 `pull_request` 触发的独立工作流中。
 - 绝不要在多触发工作流里给某个 job 加 `if: github.event_name == 'pull_request'` 来模拟这种拆分：在 `push` 触发的运行中，该 job 显示为 skipped，整个运行看起来像部分失败。工具无关的规则见 [流水线](../practices/pipeline.md)。
 - `pull_request` 默认由 `opened`、`synchronize`、`reopened` 触发——这正是校验代码所需的集合。只有在超出默认范围时才列出 `types:`：校验可能因编辑而改变的 pull request 元数据（标题）的工作流必须加上 `edited`，让改过标题的 pull request 重新接受校验。绝不要列出无法改变结果的 activity type；每多列一个 type，就多一个触发入口。
-- 必需状态检查即使被 skipped 的 job 也能满足——合并门禁不会强制这条规则。遵守它是为了得到可读的运行列表；真正要防的是：工作流不在 `pull_request` 上运行，或 job 被过滤器整个排除的必需检查，从不报告、一直 pending。每个要求某项检查的上下文，都必须为它产出报告。
+- 合并门禁会把 skipped 的必需检查视为通过，因此这条规则主要是为了让运行列表清晰可读。真正会卡住合并的是从不上报结果的必需检查：如果工作流不在 `pull_request` 上触发，或对应 job 被过滤条件完全排除，该检查就会一直停在 `pending`。务必确保每项必需检查在需要它的场景下都会实际运行并上报结果。
 
 ## 检出深度
 

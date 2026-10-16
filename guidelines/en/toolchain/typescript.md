@@ -1,23 +1,23 @@
 ---
 id: toolchain/typescript
 lang: en
-version: 7
+version: 8
 source-lang: en
 status: active
-digest: ccfca4f6
+digest: d1479726
 ---
 
 # TypeScript Toolchain
 
 ## Mandate
 
-TypeScript is the default language for AI-assisted product development. Its library and agent ecosystem support is the strongest of the available languages.
+TypeScript and Python are the default languages for AI-assisted development because they have the strongest library and agent ecosystem support.
 
 Language priority:
 
-- TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
-- Python is used for the justified cases listed in [Python Toolchain](../toolchain/python.md).
-- Go or Rust are reserved for performance-critical or systems scenarios; they require explicit justification plus user approval, recorded in a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
+- Default to TypeScript for product and full-stack development.
+- Use Python for the cases listed in [Python Toolchain](../toolchain/python.md).
+- Reserve Go and Rust for performance-critical or systems work; both require a clear reason, user approval, and a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
 
 For framework selection, see [Frontend Framework: Vite vs Next.js](../libraries/frontend-framework.md).
 
@@ -33,9 +33,9 @@ Pin the Node.js version in the project's mise configuration; pin the TypeScript 
 
 ## pnpm
 
-Use `pnpm`.
+Use `pnpm`. This applies to both standard Node.js projects and monorepos.
 
-This applies to normal Node.js projects and monorepos.
+When pinning `pnpm` in `mise.toml`, use the latest version and check it via mise (`mise latest pnpm`). Note that `pnpm` `latest` in npm is 11, but the actual latest version is 12.
 
 When external documentation provides npm or yarn commands, adapt them to pnpm rather than introducing another package manager.
 
@@ -63,32 +63,17 @@ Use the latest stable oxlint version unless a concrete compatibility issue requi
 
 ### Rule Configuration
 
-Configure oxlint intentionally.
+Configure oxlint deliberately: enable the rules and plugins that match where the code runs, not just the defaults. Do not leave useful checks off just because a starter template omitted them.
 
-Enable the rules and recommended rule sets that are appropriate and officially supported by oxlint.
-
-Do not leave useful recommended checks disabled simply because the generated project configuration does not enable them.
-
-When a rule set or compatibility layer is not supported correctly by oxlint, configure it explicitly rather than attempting to force incompatible ESLint behavior into the project.
-
-Load the plugins the code actually runs on, not only the defaults: for code
-that runs on Node.js, enable the `node` plugin in `.oxlintrc.json` and turn on
-its rules deliberately — including the CommonJS-era pattern guards — while
-skipping restriction rules that conflict with the project's intent (for
-example, keep `no-sync` off for CLIs whose synchronous file access is
-intentional).
+For Node.js code, enable the `node` plugin in `.oxlintrc.json` and turn on its rules — including guards against legacy CommonJS patterns — while skipping rules that conflict with the project's purpose (for example, keep `no-sync` off in CLIs that intentionally read files synchronously).
 
 ### Type-Aware and Type Checking Rules
 
-Use oxlint's officially supported TypeScript type-aware or type-checking capabilities when they are appropriate for the project.
+Enable oxlint's TypeScript type-aware linting and type checking when appropriate.
 
-Type-aware linting and type checking need the companion package `oxlint-tsgolint` installed alongside a recent `oxlint`, enabled in the root `.oxlintrc.json` via `options.typeAware` and `options.typeCheck` (`typeCheck` is still experimental). Verified against the official oxc documentation as of 2026-08.
+Install `oxlint-tsgolint` alongside a current `oxlint` and enable `options.typeAware` and `options.typeCheck` in the root `.oxlintrc.json` (`typeCheck` is experimental as of 2026-08).
 
-Follow the current official oxlint documentation to configure the required type-aware functionality.
-
-Do not introduce ESLint solely to obtain type-aware linting if oxlint provides the required capability.
-
-The exact configuration may evolve with oxlint, so prefer the current official oxlint mechanism rather than copying obsolete configuration from older projects.
+Follow the current official oxlint docs rather than copying old configs, and do not add ESLint just for type-aware rules when oxlint covers them.
 
 ### Rejected Alternatives
 

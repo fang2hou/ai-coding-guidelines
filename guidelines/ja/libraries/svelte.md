@@ -4,7 +4,7 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 02844dd7
+digest: 73f0e71c
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -15,7 +15,7 @@ digest: 02844dd7
 
 ## 使用する場面
 
-- 個人プロジェクト、プロトタイプ、玩具プロジェクト — 楽しむこと自体が正当な目標である場合。
+- 個人プロジェクト、プロトタイプ、小規模な実験プロジェクト — 開発を楽しむこと自体が目標として成り立つ場合。
 - ユーザーが明示的に Svelte を要求した場合。
 
 ## 避けるべき場面
@@ -45,7 +45,7 @@ digest: 02844dd7
 ## 利用ルール
 
 - `npx sv create` でスキャフォールドし、続けて `npx sv add ai-tools` を実行する — Svelte MCP ツール向けの公式 AGENTS.md インストラクションをプロジェクトに書き込むコマンドである。
-- 公式 MCP サーバー（`npx -y @sveltejs/mcp`）を登録する。構文が不確かなときは `list-sections` から `get-documentation` — 記憶から推測してはならない。作成・編集したすべてのコンポーネントに `svelte-autofixer` を、指摘がゼロになるまで実行する。
+- 公式 MCP サーバー（`npx -y @sveltejs/mcp`）を登録する。構文が曖昧なときは記憶に頼らず、`list-sections` に続けて `get-documentation` を呼ぶ。作成・編集したすべてのコンポーネントに `svelte-autofixer` を実行し、指摘がゼロになるまで修正する。
 - runes モードのみを使い、レガシー構文は決して出力しない。特に：
   - 算出値には `$derived`（または `$derived.by`）を使う — 状態への代入を `$effect` で行ってはならない。`$effect` は本物の副作用のための抜け道である。
   - `$state` はリアクティブにすべき値に限定する。API レスポンスのような、丸ごと再代入される大きなオブジェクトには `$state.raw` を使う。

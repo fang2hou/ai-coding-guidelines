@@ -4,14 +4,14 @@ lang: zh
 version: 1
 source-lang: en
 status: draft
-digest: d4cc51e7
+digest: b9395659
 ---
 
 # Go API 技术栈
 
 ## 结论
 
-优先采用——Echo 是首选的 Go Web 框架，请求校验使用 `github.com/go-playground/validator/v10`。只有依据 [Go 工具链](../toolchain/go.md) 的标准完成 Go 本身的选型论证后，才适用本技术栈。
+首选——Go Web 框架使用 Echo，请求校验使用 `github.com/go-playground/validator/v10`。只有依据 [Go 工具链](../toolchain/go.md) 的标准完成 Go 本身的选型论证后，才适用本技术栈。
 
 ## 适用场景
 
@@ -81,9 +81,9 @@ func (h *Handler) CreateUser(c echo.Context) error {
 
 ### 相关指南
 
-- [Go 工具链](../toolchain/go.md) ——本技术栈沿用其中的 Lint、格式化、context 和错误处理规则。
-- [测试策略](../practices/testing.md) ——框架无关的核心层使用表驱动 Go 测试；HTTP 关注点由薄适配器测试覆盖。
-- [质量门禁](../toolchain/quality-gates.md) ——同一套检查：prek 与 CI 运行相同的 Lint 和格式化配置。
+- [Go 工具链](../toolchain/go.md)——本技术栈沿用其中的 Lint、格式化、context 和错误处理规则。
+- [测试策略](../practices/testing.md)——框架无关的核心层使用表驱动 Go 测试；HTTP 关注点由轻量适配器测试覆盖。
+- [质量门禁](../toolchain/quality-gates.md)——同一套检查：prek 与 CI 运行相同的 Lint 和格式化配置。
 
 ## 不采用的替代方案
 

@@ -4,7 +4,7 @@ lang: zh
 version: 4
 source-lang: en
 status: active
-digest: f8f4d6bb
+digest: 5fb5b4bc
 ---
 
 # Git 工作流
@@ -51,40 +51,25 @@ wip
 
 ## Cocogitto
 
-Cocogitto 是标准的 Conventional Commits 校验工具。
-
-在各项目中统一使用 Cocogitto，不要为每个仓库另选提交校验器。
-
-在适当情况下，通过标准化项目工具将 Cocogitto 接入本地提交流程。
-
-Cocogitto 已提供所需校验时，不要实现自定义的 Conventional Commits 解析器。
+所有项目统一使用 Cocogitto 校验 Conventional Commits，并通过标准工具接入本地提交流程。不要每个仓库换一个提交校验器，也不要自己写解析器。
 
 ## 在 GitHub Actions 中校验
 
-GitHub Actions 必须包含用于校验 Conventional Commits 的检查。
-
-该校验使用 Cocogitto。
+在 GitHub Actions 中使用 Cocogitto 校验 Conventional Commits。
 
 `cog verify` 虽不创建提交，仍会解析 Git 作者身份；未配置身份时会因 `config value 'user.name' was not found` 失败。GitHub Actions runner 默认没有 Git 身份，因此必须在任务中调用它之前配置 `user.name` 和 `user.email`。`cog check` 只读取已有提交，不需要身份。
 
-包含非法提交信息的 pull request 应导致相应的校验流水线失败。
+包含不合规提交信息的 pull request 应使校验流水线失败。
 
-若仓库采用 squash merge，且最终提交信息以 pull request 标题为准，则 pull request 标题必须遵循同样的 Conventional Commits 约定。
-
-目标是保持以下两者一致：
-
-- pull request 校验
-- 最终仓库历史
+如果仓库采用 squash merge 且最终提交信息取自 pull request 标题，则 pull request 标题也必须遵循相同的 Conventional Commits 规则，以保证 PR 检查与最终提交历史一致。
 
 CI 工作流标准见 [GitHub Actions](../toolchain/github-actions.md)。
 
 ## 仓库属性
 
-GitHub 托管的项目应提交 `.gitattributes` 文件。
+GitHub 托管的项目应提交 `.gitattributes` 文件，防止 lockfile、配置文件和测试数据干扰 GitHub 的语言统计。
 
-用它确保 GitHub 的语言统计准确：工具链文件（lockfile、配置、CI 定义）和数据文件（测试数据、快照）不得淹没项目的核心内容。
-
-优先采用白名单而非黑名单：默认把一切排除在统计之外，再仅放行项目本体。
+采用白名单方式：默认排除所有文件，只把项目真正的核心代码或文档重新纳入统计。
 
 ```gitattributes
 * -linguist-detectable
@@ -102,10 +87,4 @@ Markdown 等文档语言默认不计入统计，必须显式添加 `linguist-det
 
 ## Git 安全
 
-未经适当的评审与批准，不要对共享仓库历史执行 force push。
-
-遵循既有的评审流程。
-
-不要仅为图省事而改写共享历史。
-
-AI Agent 不得随意执行破坏性 Git 操作。
+未经评审和批准，切勿对共享分支执行 force push 或改写历史。AI Agent 不得擅自执行破坏性的 Git 操作。

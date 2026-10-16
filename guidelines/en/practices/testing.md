@@ -4,16 +4,14 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 81ee8d03
+digest: 9aa044e5
 ---
 
 # Testing Strategy
 
-Testing should validate meaningful behavior.
+Write tests to verify real behavior, not to pad coverage numbers.
 
-Do not write tests merely to increase coverage.
-
-Before adding a test, understand which failure mode the test is intended to detect.
+Before adding a test, know what failure it is meant to catch.
 
 Prioritize:
 
@@ -25,13 +23,11 @@ Prioritize:
 - Exceptional conditions
 - Integration boundaries
 
-Coverage metrics may provide information, but coverage percentage is not the objective.
-
-The objective is confidence that important behavior works correctly.
+Coverage numbers are a useful signal, not the goal; the goal is confidence that important behavior works.
 
 ## Frontend E2E tests
 
-Frontend projects should include E2E tests whenever reasonably practical.
+Frontend projects should include E2E tests where practical.
 
 E2E tests should focus on:
 
@@ -39,15 +35,9 @@ E2E tests should focus on:
 - Critical product behavior
 - Important integration behavior
 
-Prefer realistic test data.
+Use realistic test data. When production-like data helps, anonymize or sanitize it first — never put real production secrets or personal data in test fixtures.
 
-When real production-like data is useful, use properly anonymized or sanitized data.
-
-Never expose sensitive production information in test fixtures.
-
-Keep E2E execution time under control.
-
-Do not build a huge E2E suite that significantly slows the rapid validation workflow (see [Quality Gates](../toolchain/quality-gates.md)) without providing corresponding confidence.
+Keep E2E suites fast. Do not build a sprawling E2E suite that slows down [Quality Gates](../toolchain/quality-gates.md) without adding matching confidence.
 
 For projects using Playwright, load `eslint-plugin-playwright` into oxlint via the `jsPlugins` array. The plugin is officially conformance-tested with oxlint; oxlint's JS plugin support is currently in alpha.
 
@@ -71,9 +61,7 @@ Scope the rules to Playwright test files with an `overrides` entry so they do no
 
 ## Frontend unit tests
 
-Frontend projects should include unit tests for important components and logic whenever reasonably practical.
-
-Use realistic sanitized data where it improves test quality.
+Frontend projects should include unit tests for important components and logic where practical, using realistic sanitized data when it improves the test.
 
 Prioritize:
 

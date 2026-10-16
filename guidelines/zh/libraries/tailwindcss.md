@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: b495f24e
+digest: 49c6f5b7
 ---
 
 # Tailwind CSS
@@ -16,7 +16,7 @@ digest: b495f24e
 ## 适用场景
 
 - 项目已在使用 Tailwind CSS。
-- 所选组件套件依赖 Tailwind（coss ui、DaisyUI），或用户明确要求使用。
+- 所选组件套件依赖 Tailwind（如 DaisyUI），或用户明确要求使用。
 
 ## 不适用场景
 
@@ -25,7 +25,7 @@ digest: b495f24e
 
 ## 优势
 
-- 工具类优先（utility-first）的写法让样式与标记共置，避免自定义样式表不断膨胀。
+- 工具类（utility class）让样式直接写在标记旁，避免自定义样式表不断膨胀。
 - 在 React 生态中应用广泛。
 - 每个大版本都可以在一处配置主题和设计令牌。
 
@@ -42,10 +42,8 @@ digest: b495f24e
 
 ## 使用规则
 
-- 没有明确需求时，不向尚未使用 Tailwind 的项目引入 Tailwind；默认方案是原生 CSS。
-- 用户明确要求使用其他 Tailwind 版本、其他 CSS 框架或项目特有样式架构时，遵循用户要求。
-- 遵循所选 Tailwind 版本的约定与配置模型。
-- 不要混用不兼容的 Tailwind 大版本模式。
+- 默认使用原生 CSS；没有明确需求时，不要在尚未使用 Tailwind 的项目中引入它。
+- 遵循项目所用 Tailwind 大版本的约定与配置模型，切勿混用不同大版本的写法。
 
 ### 类名 Lint 与排序工具互操作
 
@@ -78,5 +76,4 @@ digest: b495f24e
 
 ## 联动
 
-- [coss ui](coss.md)——依赖：coss ui 用 Tailwind CSS v4 完成样式。
-- [圆角](../practices/corner-radius.md)——通用：使用 Tailwind 时，把圆角令牌 scale 表达为 Tailwind 主题令牌。
+- [圆角](../practices/corner-radius.md)——通用：使用 Tailwind 时，把圆角档位定义为 Tailwind 主题令牌。

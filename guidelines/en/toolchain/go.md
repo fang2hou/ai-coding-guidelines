@@ -4,18 +4,14 @@ lang: en
 version: 2
 source-lang: en
 status: draft
-digest: 138c749f
+digest: 75b0a301
 ---
 
 # Go Toolchain
 
 ## Mandate
 
-TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
-
-Go is not a default choice.
-
-Choose Go only when the project genuinely needs:
+TypeScript and Python are the default languages for AI-assisted development. Go is not a default choice — use it only when the project genuinely needs:
 
 - Performance-sensitive network services
 - Command-line tools distributed as standalone binaries
@@ -28,11 +24,7 @@ Familiarity with Go is not a justification on its own.
 
 ## Scope
 
-This document is a baseline standard for Go projects.
-
-It does not replace project-level evaluation.
-
-Before adopting Go, confirm both points: the requirement matches one of the scenarios above, and TypeScript or Python cannot satisfy it at acceptable cost.
+This document sets the baseline standard for Go projects; it does not replace project-level evaluation. Before choosing Go, confirm two things: the project matches one of the cases above, and TypeScript or Python cannot meet the requirement at reasonable cost.
 
 ## Version Policy
 

@@ -4,23 +4,22 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: e5278f17
+digest: b8e71184
 ---
 
 # Python Toolchain
 
 ## Mandate
 
-Python is a default language for AI-assisted development, alongside TypeScript. Both are defaults because their library and agent ecosystem support is the strongest of the available languages.
+Python and TypeScript are the default languages for AI-assisted development because they have the strongest library and agent ecosystem support.
 
 Language priority:
 
-- TypeScript and Python are the default languages for AI-assisted development because their library and agent ecosystem support is strongest.
-- Go or Rust are reserved for performance-critical or systems scenarios; they require explicit justification plus user approval, recorded in a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
+- Prefer a TypeScript-only stack when it is enough; see [TypeScript Toolchain](../toolchain/typescript.md).
+- Add a Python backend only when the project genuinely benefits from Python (criteria below).
+- Reserve Go and Rust for performance-critical or systems work; both require a clear reason, user approval, and a project ADR. See [Go](../toolchain/go.md) and [Rust](../toolchain/rust.md).
 
-A Python backend should not be introduced automatically. Prefer a TypeScript-only architecture when it is sufficient; see [TypeScript Toolchain](../toolchain/typescript.md).
-
-Introduce a Python backend when the project has requirements that genuinely benefit from Python, especially when:
+A Python backend is justified especially when:
 
 - Backend logic is sufficiently complex
 - Python-specific libraries provide meaningful value
@@ -44,9 +43,7 @@ Commit `uv.lock` so every environment resolves the same dependency versions.
 
 ## uv
 
-Use `uv` for Python environment and dependency management.
-
-Avoid introducing a second Python environment-management system.
+Use `uv` for Python environments and dependencies; do not add a second environment or package manager.
 
 Standard workflow:
 
@@ -80,11 +77,7 @@ Do not use:
 
 ## ruff
 
-Use `ruff` for Python linting and formatting.
-
-Avoid maintaining separate tools when ruff covers the required workflow.
-
-Run `ruff check` to lint and `ruff format` to format; wire both into the project's quality gates. Configure ruff in `pyproject.toml`. Baseline rule selection:
+Use `ruff` for both linting (`ruff check`) and formatting (`ruff format`), wired into the project's quality gates and configured in `pyproject.toml`. Baseline rules:
 
 ```toml
 [tool.ruff.lint]

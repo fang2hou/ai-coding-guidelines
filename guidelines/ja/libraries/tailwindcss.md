@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: 557bda58
+digest: cdb5fbae
 ---
 
 # Tailwind CSS
@@ -16,7 +16,7 @@ digest: 557bda58
 ## 使用する場面
 
 - プロジェクトがすでに Tailwind CSS を使っている場合。
-- 選択したコンポーネントキット（coss ui、DaisyUI）が Tailwind を必要とする場合、またはユーザーが明示的に要求した場合。
+- 選択したコンポーネントキット（DaisyUI など）が Tailwind を必要とする場合、またはユーザーが明示的に要求した場合。
 
 ## 避けるべき場面
 
@@ -42,10 +42,8 @@ digest: 557bda58
 
 ## 利用ルール
 
-- 明示的な要件なしに、まだ Tailwind を使っていないプロジェクトへ Tailwind を導入してはならない。デフォルトはネイティブ CSS である。
-- ユーザーが別の Tailwind バージョン、別の CSS フレームワーク、またはプロジェクト固有のスタイル設計を明示的に要求した場合は、その要求に従う。
-- 選択した Tailwind バージョンの規約と設定モデルに従う。
-- 互換性のない Tailwind のメジャーバージョンのパターンを混在させてはならない。
+- デフォルトはネイティブ CSS とし、明示的な要件がない限り、Tailwind を使っていないプロジェクトに新しく導入しない。
+- 使用する Tailwind メジャーバージョンの規約と設定モデルに従い、異なるメジャーバージョンの書き方を混在させない。
 
 ### クラスのリントとソートの相互運用
 
@@ -78,5 +76,4 @@ digest: 557bda58
 
 ## 連携
 
-- [coss ui](coss.md) — 必須条件：coss ui は Tailwind CSS v4 でスタイルを適用する。
 - [角丸](../practices/corner-radius.md) — 共通：Tailwind を使うプロジェクトでは、角丸のトークンスケールを Tailwind のテーマトークンとして表現する。

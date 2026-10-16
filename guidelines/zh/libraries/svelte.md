@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 4f45a80f
+digest: c0b75bee
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -15,7 +15,7 @@ digest: 4f45a80f
 
 ## 适用场景
 
-- 项目是个人项目、原型或玩具项目——把乐趣当作目标是正当的。
+- 个人项目、原型或小型实验项目——把开发乐趣当作目标是合理的。
 - 用户明确要求使用 Svelte。
 
 ## 不适用场景
@@ -45,7 +45,7 @@ digest: 4f45a80f
 ## 使用规则
 
 - 用 `npx sv create` 搭建项目，然后运行 `npx sv add ai-tools`——它会把 Svelte MCP 工具的官方 AGENTS.md 指令写入项目。
-- 注册官方 MCP 服务器（`npx -y @sveltejs/mcp`）。语法不确定时，先 `list-sections` 再 `get-documentation`——绝不凭记忆猜测。每写完或改完一个组件，都运行 `svelte-autofixer`，直到没有任何发现。
+- 注册官方 MCP 服务器（`npx -y @sveltejs/mcp`）。拿不准语法时，先调 `list-sections` 再调 `get-documentation`，绝不凭记忆猜测。每编写或修改一个组件，都要运行 `svelte-autofixer`，直到不再报错。
 - 只用 runes 模式；绝不输出旧语法。具体要求：
   - 计算值用 `$derived`（或 `$derived.by`）——绝不用给状态赋值的 `$effect`；`$effect` 只作为处理真正副作用的兜底。
   - `$state` 只用于必须响应式的值；频繁整体重赋值的大对象（如 API 响应）用 `$state.raw`。

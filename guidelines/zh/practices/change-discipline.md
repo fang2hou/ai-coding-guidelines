@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: a8c56487
+digest: 9e13ed25
 ---
 
 # 变更纪律
@@ -41,7 +41,7 @@ digest: a8c56487
 mise run test e2e/login.spec.ts   # 20 consecutive runs, 20/20 green
 ```
 
-运行静态门禁，查看检查报告：
+运行静态检查：
 
 ```text
 $ mise run check
@@ -67,7 +67,7 @@ $ git diff --stat
  1 file changed
 ```
 
-只改动了一个文件：没有新增依赖、没有新增文件，也不影响架构。测试中新增的注释遵循[语言政策](language-policy.md)，使用英文；用户可见字符串没有变化，因此不影响产品语言合规性；凭据保留在测试夹具中，不会出现在 diff 里（[安全](security.md)）。
+只改了一个文件：没有新增依赖或文件，也不影响架构。测试里新增的注释按[语言政策](language-policy.md)使用英文；没有改动用户界面文案；测试凭据留在测试夹具中，未出现在 diff 里（[安全](security.md)）。
 
 提交。prek 会对暂存区再次运行同样的检查，提交信息遵循 [Conventional Commits](../toolchain/git.md)：
 

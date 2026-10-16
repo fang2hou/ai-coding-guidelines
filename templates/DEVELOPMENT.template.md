@@ -33,14 +33,14 @@ mise run test -- {{filter}} # run a single test file or case
 ## Workflow
 
 1. Branch from `main` ({{issue reference, when relevant}})
-2. Implement the smallest coherent change
+2. Make the smallest complete change
 3. `mise run check` must pass
 4. Commit with Conventional Commits (validated by Cocogitto)
 5. Open a PR following [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Layout
 
-{{One line per top-level directory — a map, not an atlas. Name key modules; do not link files.}}
+{{One line per top-level directory. Name key modules and what they own; do not list individual files.}}
 
 ## Coding Standards
 

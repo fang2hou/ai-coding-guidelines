@@ -4,14 +4,14 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 073cf484
+digest: 337aaf69
 ---
 
 # Python API スタック
 
 ## 判定
 
-推奨 — FastAPI + Pydantic + Uvicorn を Python API の標準スタックとする。3 つを個別に選ぶのではなく、1 つのスタックとして採用する。
+推奨 — FastAPI + Pydantic + Uvicorn を標準の Python API スタックとする。3 つを別々に選ぶのではなく、1 つのスタックとして採用する。
 
 ## 使用する場面
 
@@ -32,7 +32,7 @@ digest: 073cf484
 
 ## トレードオフ
 
-- このスタックを導入すると、独自の依存関係とデプロイ対象を持つ Python サービスが増える。
+- 依存関係とデプロイを別管理する Python サービスが 1 つ増える。
 - Pydantic モデルは、検証対象のデータとの同期を保たなければならない。
 
 ## バージョン方針

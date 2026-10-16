@@ -99,25 +99,15 @@ the fetched rules.
 
 ### Step 4: Apply the rules to the draft
 
-Re-read every file created or modified in this change — the full diff, not the
-memory of writing it — against the normative statements of each fetched
-document, and rewrite the code until it satisfies them. This pass edits code;
-it produces no report rows.
+Re-read every file created or modified in this change — the actual diff on disk, not your memory of writing it — against the rules in each fetched document, and edit the code until it follows them. This step changes code; it produces no report rows.
 
-- Rules that constrain the shape of code are satisfied by refactoring —
-  rename, extract, restructure, delete. Never by rewording a comment around
-  the violation, and never by leaving the violation for the matrix to excuse.
-- Depth bar: a rule is applied when the code now carries it by construction,
-  not when an explanation of the rule sits next to code that breaks it.
-- Rules govern code written or substantially modified in this change;
-  violations noticed in untouched code are reported, not mass-reformatted.
+- Satisfy code-shape rules by refactoring — rename, extract, simplify, or delete. Never work around a violation by explaining it in a comment or leaving it for the final table to excuse.
+- A rule is applied only when the code itself follows it.
+- Apply rules to code written or modified in this change. Report violations noticed in untouched files instead of mass-reformatting them.
 
 ### Step 5: Verify against the fetched documents
 
-Before running any gate, re-open each fetched document from disk and check
-the change against every normative statement it contains — Use / Prefer /
-Do not / Never and imperative bullets. Never verify from memory: the check
-exists precisely because memory drifts during long tasks.
+Before running project checks, re-open each fetched document from disk and check the change against every rule it states (`Use`, `Prefer`, `Do not`, `Never`, and imperative bullets). Never verify from memory — memory drifts during long tasks.
 
 1. One document at a time, list its normative statements.
 2. For each statement, cite the file and the lines (or diff hunks) that
