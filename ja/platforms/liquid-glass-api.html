@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Liquid Glass API リファレンス · AI コーディングガイドライン</title>
+<meta name="description" content="Xcode 27 でビルドし、最低対応 OS をそれぞれ 27.0 に設定した iOS 27 とネイティブ macOS 27 のアプリを対象とする。2026-09-06 に Apple の文書と Xcode 27 ベータ版のビルド 27A…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-api.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Liquid Glass API リファレンス · AI コーディングガイドライン">
+<meta property="og:description" content="Xcode 27 でビルドし、最低対応 OS をそれぞれ 27.0 に設定した iOS 27 とネイティブ macOS 27 のアプリを対象とする。2026-09-06 に Apple の文書と Xcode 27 ベータ版のビルド 27A…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-api.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/platforms/liquid-glass-api.html">English</a><a lang="zh" href="../../zh/platforms/liquid-glass-api.html">中文</a><a lang="ja" href="liquid-glass-api.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="liquid-glass-api.html" aria-current="page"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">プラットフォーム</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="liquid-glass-api-リファレンス">Liquid Glass API リファレンス<a href="#liquid-glass-api-リファレンス" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="対象範囲と検証">対象範囲と検証<a href="#対象範囲と検証" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Xcode 27 でビルドし、最低対応 OS をそれぞれ 27.0 に設定した iOS 27 とネイティブ macOS 27 のアプリを対象とする。2026-09-06 に Apple の文書と Xcode 27 ベータ版のビルド <code>27A5252f</code>（<code>iPhoneOS27.0.sdk</code>、<code>MacOSX27.sdk</code>）で確認した。SDK の宣言はプラットフォーム上の可用性を、実行中の OS は描画と操作の挙動を決める。ベータ版の宣言は今後変わる可能性がある。</p>
+<p>以下の表はこの 2 つのプラットフォームでの対応状況を示し、過去の導入バージョンは扱わない。iOS には UIKit、ネイティブ macOS には AppKit を使う。プラットフォーム専用の API は <code>#if os(iOS)</code>／<code>#if os(macOS)</code> または専用ファイルで分離する。</p>
+<h2 id="swiftui-のガラス-api">SwiftUI のガラス API<a href="#swiftui-のガラス-api" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>この節の効果とスタイルは iOS 27 と macOS 27 の両方で利用できる。<code>SwiftUI</code> をインポートする。一部の宣言は依存先の <code>SwiftUICore</code> にある。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>シンボル</th>
+<th>可用性と用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>glassEffect(_:in:)</code></td>
+<td>内容の背後にガラスを描画。標準は <code>.regular</code> のカプセル形状</td>
+</tr>
+<tr>
+<td><code>Glass.regular</code> / <code>.clear</code> / <code>.identity</code></td>
+<td>自動調整／クリア／効果なし</td>
+</tr>
+<tr>
+<td><code>Glass.tint(_:)</code> / <code>.interactive(_:)</code></td>
+<td>ティントと操作への反応を設定。macOS のマウス操作にも対応</td>
+</tr>
+<tr>
+<td><code>GlassEffectContainer(spacing:content:)</code></td>
+<td>関連する効果をまとめて描画。spacing で融合する距離を指定</td>
+</tr>
+<tr>
+<td><code>glassEffectID(_:in:)</code></td>
+<td>名前空間内でモーフィングする要素の安定した ID</td>
+</tr>
+<tr>
+<td><code>glassEffectUnion(id:namespace:)</code></td>
+<td>同じ名前空間と結合 ID の形状・バリアントが一致する効果を結合</td>
+</tr>
+<tr>
+<td><code>glassEffectTransition(_:)</code></td>
+<td><code>.matchedGeometry</code>、<code>.materialize</code>、<code>.identity</code></td>
+</tr>
+<tr>
+<td><code>.buttonStyle(.glass)</code> / <code>.glassProminent</code> / <code>.glass(.clear)</code></td>
+<td>システムのガラスボタンスタイル。操作の意味とロールを維持</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="swiftui-のナビゲーションとレイアウト">SwiftUI のナビゲーションとレイアウト<a href="#swiftui-のナビゲーションとレイアウト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>シンボル</th>
+<th>可用性と用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tabBarMinimizeBehavior(_:)</code></td>
+<td>iOS：スクロール中に iPhone のタブバーを最小化</td>
+</tr>
+<tr>
+<td><code>ToolbarSpacer(_:placement:)</code> / <code>sharedBackgroundVisibility(_:)</code></td>
+<td>両方：ツールバーのグループ分けと背景の制御</td>
+</tr>
+<tr>
+<td><code>scrollEdgeEffectStyle(_:for:)</code> / <code>scrollEdgeEffectHidden(_:for:)</code></td>
+<td>両方：スクロール端ごとにスタイルと表示を設定</td>
+</tr>
+<tr>
+<td><code>backgroundExtensionEffect()</code></td>
+<td>両方：隣接する UI の背後へ背景を延長</td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(content:)</code> / <code>tabViewBottomAccessoryPlacement</code></td>
+<td>iOS：アクセサリを <code>.inline</code>／<code>.expanded</code>／<code>nil</code> に合わせる</td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(isEnabled:content:)</code></td>
+<td>iOS：アクセサリを動的に表示・非表示にする</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="uikit-と-appkit">UIKit と AppKit<a href="#uikit-と-appkit" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>シンボル</th>
+<th>可用性と用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UIGlassEffect(style:)</code> / <code>UIGlassContainerEffect</code></td>
+<td>iOS：<code>UIVisualEffectView</code> 内の単独・複数の効果。<code>tintColor</code> と <code>isInteractive</code> を設定</td>
+</tr>
+<tr>
+<td><code>UIButton.Configuration.glass()</code> / <code>.prominentGlass()</code> / <code>.clearGlass()</code> / <code>.prominentClearGlass()</code></td>
+<td>iOS：システムのボタン設定</td>
+</tr>
+<tr>
+<td><code>UIScrollView.topEdgeEffect</code> / <code>.bottomEdgeEffect</code></td>
+<td>iOS：各辺の効果を <code>style</code> と <code>isHidden</code> で設定</td>
+</tr>
+<tr>
+<td><code>UIScrollEdgeElementContainerInteraction</code> / <code>UIBackgroundExtensionView</code></td>
+<td>iOS：独自のオーバーレイの登録／背景の延長</td>
+</tr>
+<tr>
+<td><code>UIBarButtonItem.hidesSharedBackground</code> / <code>.isHidden</code></td>
+<td>iOS：共有背景／項目自体を非表示にする</td>
+</tr>
+<tr>
+<td><code>UITabBarController.tabBarMinimizeBehavior</code></td>
+<td>iOS：UIKit のタブバーの最小化</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView</code> / <code>NSGlassEffectContainerView</code></td>
+<td>macOS：<code>contentView</code> と <code>spacing</code> でカスタムのガラスとグループを設定</td>
+</tr>
+<tr>
+<td><code>NSButton.BezelStyle.glass</code> / <code>NSBackgroundExtensionView</code></td>
+<td>macOS：ガラスのボタン／背景の延長</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView.effectIsInteractive</code></td>
+<td>macOS：マウス操作への反応</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="適応的なナビゲーションとウィンドウ動作">適応的なナビゲーションとウィンドウ動作<a href="#適応的なナビゲーションとウィンドウ動作" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>シンボル</th>
+<th>可用性と用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>toolbarMinimizationBehavior(_:for:)</code></td>
+<td>iOS のナビゲーションバー：最小化方針。ベータ版の旧名 <code>toolbarMinimizeBehavior</code> ではなく現行名を使う</td>
+</tr>
+<tr>
+<td><code>toolbarMinimizationSafeAreaAdjustment(_:for:)</code> / <code>toolbarMinimizationRestoration(_:for:)</code></td>
+<td>iOS のナビゲーションバー：セーフエリア調整と復元方針</td>
+</tr>
+<tr>
+<td><code>UINavigationItem.navigationBarMinimization</code></td>
+<td>iOS：<code>UIBarMinimization</code> 値で <code>minimizationBehavior</code>、<code>safeAreaAdjustment</code>、<code>restorationBehavior</code> を指定</td>
+</tr>
+<tr>
+<td><code>TabRole.prominent</code> / <code>UITabBarController.prominentTabIdentifier</code></td>
+<td>iOS：目立たせるタブを指定</td>
+</tr>
+<tr>
+<td><code>UITabBarController.Sidebar.preferredPlacement</code></td>
+<td>iOS：空間がある場合にサイドバー表示を選択。<code>isAvailable</code> を確認</td>
+</tr>
+<tr>
+<td><code>ToolbarContent.visibilityPriority(_:)</code></td>
+<td>両方：ツールバーのオーバーフロー優先順位</td>
+</tr>
+<tr>
+<td><code>ToolbarOverflowMenu</code> / <code>.topBarPinnedTrailing</code></td>
+<td>iOS 専用。ネイティブ macOS では利用不可</td>
+</tr>
+<tr>
+<td><code>toolbarColorScheme(_:for:)</code> / <code>toolbarVisibility(_:for:)</code> with <code>.statusBar</code></td>
+<td>iOS：ステータスバーの外観と表示制御</td>
+</tr>
+<tr>
+<td><code>appearsActive</code></td>
+<td>両方：ウィンドウの活動状態に独自の内容を合わせる</td>
+</tr>
+<tr>
+<td><code>UIMenuElement.preferredImageVisibility</code></td>
+<td>iOS：必要に応じてメニューアイコンの標準の表示設定を変更</td>
+</tr>
+</tbody>
+</table>
+</div><p>外観スライダー、非アクティブ表示、スクロール端を UI の検証に含める。UIKit アプリはシーンのライフサイクルを使い、起動画面を用意する。iPhone のウィンドウサイズが変わっても主要な操作を利用できるように配置する。</p>
+<h2 id="実装時の確認">実装時の確認<a href="#実装時の確認" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>iOS 27 と macOS 27 向けにそれぞれビルドし、型チェックを通す。共有の SwiftUI コードでも、ナビゲーション、ツールバー、各フレームワーク固有のビューはプラットフォーム別に分離する。</li>
+<li>外観のモディファイアは <code>glassEffect</code> の前に、識別・結合・遷移のモディファイアは後に置く。関連する効果にはコンテナーを使い、実際の描画コストを測定する。</li>
+<li>操作には適切な意味を持つボタンを使う。<code>ToolbarItem</code> に <code>isHidden</code> プロパティはない。SwiftUI では条件分岐で項目自体を追加・削除する。</li>
+<li>アクセシビリティ設定を変え、独自のラベル、動き、セーフエリア、背景を検証する。システムのマテリアルが適応しても、アプリの内容まで検証されたことにはならない。</li>
+<li>ベータ版の名称は使用する SDK で再確認する。WWDC のサンプルには古い名称が残る場合がある。</li>
+</ul>
+<h2 id="公式ドキュメント">公式ドキュメント<a href="#公式ドキュメント" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/glass">Glass</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/glasseffectcontainer">GlassEffectContainer</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views">Applying Liquid Glass to custom views</a></li>
+<li><a href="https://developer.apple.com/documentation/uikit/uiglasseffect">UIGlassEffect</a></li>
+<li><a href="https://developer.apple.com/documentation/appkit/nsglasseffectview">NSGlassEffectView</a></li>
+<li><a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-27-release-notes">iOS and iPadOS 27 release notes</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/278/">Modernize your UIKit app — WWDC26</a></li>
+</ul>
+<p>設計は <a href="liquid-glass-design.html">Liquid Glass の設計</a>、実装は <a href="liquid-glass-patterns.html">Liquid Glass 実装パターン</a>を参照。</p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-design.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass 実装パターン</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-design.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass 実装パターン</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="../libraries/vercel-ai-sdk.html"><span>前へ · ライブラリ</span><strong>Vercel AI SDK</strong></a>
+<a class="page-nav-next" href="liquid-glass-design.html"><span>次へ · プラットフォーム</span><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/platforms/liquid-glass-api.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#対象範囲と検証">対象範囲と検証</a></li>
+<li><a href="#swiftui-のガラス-api">SwiftUI のガラス API</a></li>
+<li><a href="#swiftui-のナビゲーションとレイアウト">SwiftUI のナビゲーションとレイアウト</a></li>
+<li><a href="#uikit-と-appkit">UIKit と AppKit</a></li>
+<li><a href="#適応的なナビゲーションとウィンドウ動作">適応的なナビゲーションとウィンドウ動作</a></li>
+<li><a href="#実装時の確認">実装時の確認</a></li>
+<li><a href="#公式ドキュメント">公式ドキュメント</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

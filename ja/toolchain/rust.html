@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Rust ツールチェーン · AI コーディングガイドライン</title>
+<meta name="description" content="AI 支援開発のデフォルト言語は TypeScript と Python である。Rust はデフォルトではなく、次の要件が実際に必要な場合に限って選ぶ。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/rust.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Rust ツールチェーン · AI コーディングガイドライン">
+<meta property="og:description" content="AI 支援開発のデフォルト言語は TypeScript と Python である。Rust はデフォルトではなく、次の要件が実際に必要な場合に限って選ぶ。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/rust.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/toolchain/rust.html">English</a><a lang="zh" href="../../zh/toolchain/rust.html">中文</a><a lang="ja" href="rust.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="rust.html" aria-current="page"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">ツールチェーン</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+<span class="badge badge-draft">ドラフト</span>
+</div>
+<h1 id="rust-ツールチェーン">Rust ツールチェーン<a href="#rust-ツールチェーン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="適用義務">適用義務<a href="#適用義務" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>AI 支援開発のデフォルト言語は TypeScript と Python である。Rust はデフォルトではなく、次の要件が実際に必要な場合に限って選ぶ。</p>
+<ul>
+<li>メモリ安全性と最大性能の両立</li>
+<li>システムコンポーネント</li>
+<li>他言語向けのネイティブ拡張</li>
+<li>WebAssembly ターゲット</li>
+</ul>
+<p>Rust の採用には明確な根拠とユーザーの承認が必要であり、その内容をプロジェクトの ADR に記録する。</p>
+<p>Rust に慣れていること自体は、採用の根拠にならない。</p>
+<h2 id="適用範囲">適用範囲<a href="#適用範囲" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>本文書は Rust プロジェクトのベースライン標準であり、プロジェクト単位の評価に代わるものではない。Rust を採用する前に、要件が上記のいずれかに当てはまり、かつ TypeScript、Python、Go のいずれでも妥当なコストで満たせないことを確認する。</p>
+<h2 id="バージョン方針">バージョン方針<a href="#バージョン方針" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>stable ツールチェーンを mise または rustup でインストールして使う。</p>
+<p><code>Cargo.toml</code> では edition 2024 を指定する。</p>
+<p>nightly の機能はデフォルトで有効にしない。nightly が必要な場合は、明示的な決定として記録する。</p>
+<h2 id="利用ルール">利用ルール<a href="#利用ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="ビルドとパッケージング">ビルドとパッケージング<a href="#ビルドとパッケージング" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>ビルドとパッケージングには <code>cargo</code> だけを使う。</p>
+<p>標準の cargo コマンドを独自のビルドスクリプトでラップしてはならない。</p>
+<h3 id="フォーマット">フォーマット<a href="#フォーマット" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>フォーマットには <code>rustfmt</code> を使う。</p>
+<p><code>cargo fmt</code> を mise タスクとして公開する。</p>
+<h3 id="リント">リント<a href="#リント" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>リントには <code>cargo clippy</code> を使う。</p>
+<p>CI では警告をエラーとして扱う：</p>
+<pre><code class="language-bash">cargo clippy --all-targets -- -D warnings
+</code></pre>
+<h3 id="unsafe-ブロック">unsafe ブロック<a href="#unsafe-ブロック" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>すべての <code>unsafe</code> ブロックには <code>// SAFETY:</code> コメントを付け、そのブロックの安全性を保証する不変条件を説明する。</p>
+<p>借用チェッカーを回避する目的で <code>unsafe</code> を使わない。</p>
+<h3 id="エラー処理">エラー処理<a href="#エラー処理" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>ライブラリのエラー型には <code>thiserror</code> を使う。</p>
+<p><code>anyhow</code> はバイナリの境界でのみ使う。ライブラリの公開 API に漏らしてはならない。</p>
+<h3 id="ワークスペース構成">ワークスペース構成<a href="#ワークスペース構成" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>複数クレートからなるプロジェクトでは cargo ワークスペースを使う。</p>
+<p>依存関係のバージョンは、ワークスペースレベルで同期する。</p>
+<h3 id="テスト">テスト<a href="#テスト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>CI では <code>cargo test</code> を実行する。</p>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="mise.html">mise</a> — バージョン管理：Rust ツールチェーンと関連ツールを mise で管理し、mise タスクとして利用できるようにする。</li>
+<li><a href="quality-gates.html">品質ゲート</a> — 同じチェック：prek と CI で同じリント・フォーマット設定を使う。</li>
+<li><a href="git.html">Git ワークフロー</a> — コミット規律：Rust の変更も標準のコミットとプルリクエストのルールに従う。</li>
+<li><a href="../practices/testing.html">テスト戦略</a> — テストの焦点：何をどのレベルで検証するか。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="mise.html"><span class="related-cat">ツールチェーン</span><strong>mise</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">ツールチェーン</span><strong>品質ゲート</strong></a></li>
+<li><a class="related-chip" href="git.html"><span class="related-cat">ツールチェーン</span><strong>Git ワークフロー</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">プラクティス</span><strong>テスト戦略</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="python.html"><span class="related-cat">ツールチェーン</span><strong>Python ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="quality-gates.html"><span>前へ · ツールチェーン</span><strong>品質ゲート</strong></a>
+<a class="page-nav-next" href="typescript.html"><span>次へ · ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/toolchain/rust.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#適用義務">適用義務</a></li>
+<li><a href="#適用範囲">適用範囲</a></li>
+<li><a href="#バージョン方針">バージョン方針</a></li>
+<li><a href="#利用ルール">利用ルール</a></li>
+<li><a href="#連携">連携</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Corner Radius · AI Coding Guidelines</title>
+<meta name="description" content="Corner radius is a system, not a per-element value: define a small token scale once per project and take every radius f…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/corner-radius.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Corner Radius · AI Coding Guidelines">
+<meta property="og:description" content="Corner radius is a system, not a per-element value: define a small token scale once per project and take every radius f…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/practices/corner-radius.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="corner-radius.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/practices/corner-radius.html">中文</a><a lang="ja" href="../../ja/practices/corner-radius.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="corner-radius.html" aria-current="page"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">Practices</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="corner-radius">Corner Radius<a href="#corner-radius" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="principles">Principles<a href="#principles" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Corner radius is a system, not a per-element value: define a small token scale once per project and take every radius from it.</li>
+<li>Two rules cover all cases: continuous curvature on single surfaces, concentric curvature on nested surfaces.</li>
+<li>Apply both rules consistently. One corner rarely looks wrong on its own; mismatched corners next to each other are what look sloppy.</li>
+</ul>
+<h2 id="token-scale">Token scale<a href="#token-scale" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<pre><code class="language-css">:root {
+  --radius-s: 6px;       /* dense rows, chips */
+  --radius-m: 8px;       /* buttons, inputs — the default control radius */
+  --radius-l: 12px;      /* popovers, menus */
+  --radius-xl: 20px;     /* cards, sheets, dialogs */
+  --radius-full: 9999px; /* circles, pills */
+}
+</code></pre>
+<ul>
+<li>Every radius in the project comes from this scale. One-off values (<code>13px</code>) cannot participate in nesting arithmetic and drift immediately.</li>
+<li>Adjacent steps must stay distinguishable (≥ 2px apart at these sizes).</li>
+</ul>
+<h2 id="single-surfaces-continuous-corners">Single surfaces: continuous corners<a href="#single-surfaces-continuous-corners" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><code>border-radius</code> alone joins straight edges to a circular arc; the sudden curvature change is what makes plain web corners read harder than Apple's continuous corners.</li>
+<li>Pair <code>corner-shape</code> with the existing <code>border-radius</code>: <code>border-radius</code> keeps setting the corner size, <code>corner-shape</code> only changes the curve. Backgrounds, borders, outlines, shadows, <code>overflow: hidden</code>, and <code>backdrop-filter</code> all follow the resulting shape — no <code>clip-path</code>, no SVG masks.</li>
+<li>Use <code>squircle</code> (= <code>superellipse(2)</code>) as the single project-wide value. The corner shape is part of the token system; do not vary it per element.</li>
+<li>Apply where the corner is a visible design decision: cards, sheets, dialogs, tiles, media, app-level surfaces (≥ <code>--radius-l</code>). Below ~6px the difference from <code>round</code> is invisible — do not set it there.</li>
+<li>Progressive enhancement only: as of late 2026, only Chromium-based browsers (139+) render <code>corner-shape</code>; Safari and Firefox ignore it and fall back to ordinary round corners. That fallback is acceptable. Never ship a JS or SVG polyfill for it.</li>
+<li><code>corner-shape</code> has no effect when <code>border-radius</code> resolves to <code>0</code>.</li>
+</ul>
+<pre><code class="language-css">.card {
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+}
+</code></pre>
+<h2 id="buttons-and-controls-medium-radius">Buttons and controls: medium radius<a href="#buttons-and-controls-medium-radius" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Buttons, inputs, and selects default to the medium token (<code>--radius-m</code>, about 8px on a 36–40px control). Shallow (<code>--radius-s</code>) is the acceptable lower bound for dense layouts.</li>
+<li>A medium radius keeps straight edge segments that align text and neighboring controls, and leaves room for hover and pressed states inside the control to stay concentric.</li>
+<li>Reserve fully round (<code>--radius-full</code>) buttons for chips, tags, and identity elements (avatars, toggles). Do not use them for action buttons.</li>
+</ul>
+<h2 id="nested-surfaces-the-concentric-rule">Nested surfaces: the concentric rule<a href="#nested-surfaces-the-concentric-rule" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>When a layer sits <code>p</code> px inside a surface with outer radius <code>R</code>, its radius must be <code>r = R − p</code> (clamped at 0). Both corners then share one center of curvature, so the inner layer reads as the same surface lifted — not as a sticker on top.</li>
+<li>The rule applies to hover and pressed overlays (<code>::before</code> / <code>::after</code>), focus rings, badges on cards, media and controls inside padded surfaces, segmented controls, and tooltips.</li>
+<li>Mismatched nesting — equal inner and outer radii, or arbitrary inner values — is what makes hover states and badges look like disjoint foreign layers.</li>
+</ul>
+<h3 id="common-cases">Common cases<a href="#common-cases" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>Overlay at <code>inset: 0</code>: <code>border-radius: inherit</code>.</li>
+<li>Layer inset by the surface padding: compute with <code>calc()</code> from the same tokens.</li>
+<li>Focus ring outside the control: use <code>outline</code> or <code>box-shadow</code> — both track the outer radius automatically.</li>
+<li>Border of width <code>w</code> on a rounded box: the inner edge is already drawn at <code>R − w</code>; never re-round it.</li>
+<li>Layer nested inside a surface with <code>corner-shape</code>: set the same shape on the inner layer with <code>corner-shape: inherit</code> — the property does not inherit by default, and a plain round inner corner against a squircle outer corner breaks the concentric reading.</li>
+</ul>
+<pre><code class="language-css">.button {
+  border-radius: var(--radius-m);
+}
+.button::before {
+  /* hover fill */
+  content: &quot;&quot;;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* concentric by construction */
+}
+
+.card {
+  --card-inset: 12px;
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+  padding: var(--card-inset);
+}
+.card .media {
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
+}
+</code></pre>
+<ul>
+<li>When an exact match is impossible (arbitrary artwork, raster edges), err tighter: keep <code>r ≤ R − p</code>. A slightly tight inner corner reads deliberate; a loose one reads broken.</li>
+</ul>
+<h2 id="checks">Checks<a href="#checks" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Every radius in the diff comes from the token scale.</li>
+<li>Controls use the medium token; pill radii appear only on chips, tags, and identity elements.</li>
+<li>Every nested layer satisfies <code>r = R − p</code>, inherits its radius, or uses <code>outline</code> / <code>box-shadow</code>.</li>
+<li>Layers nested inside a <code>corner-shape</code> surface use the same corner shape (<code>corner-shape: inherit</code>).</li>
+<li><code>corner-shape: squircle</code> is set on ≥ <code>--radius-l</code> surfaces; no polyfills shipped for it.</li>
+</ul>
+<h2 id="works-with">Works with<a href="#works-with" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="coding-standards.html">Coding Standards</a> — context: the token scale is an instance of the no-magic-values rule.</li>
+<li><a href="../libraries/tailwindcss.html">Tailwind CSS</a> — pairs-with (situational): when Tailwind is in use, express the scale as theme tokens; the concentric rule is unchanged.</li>
+<li><a href="../platforms/liquid-glass-design.html">Liquid Glass Design</a> — context: on Apple platforms, use the system's continuous-corner APIs instead of web approximations.</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">Practices</span><strong>Coding Standards</strong></a></li>
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">Libraries</span><strong>Tailwind CSS</strong></a></li>
+<li><a class="related-chip" href="../platforms/liquid-glass-design.html"><span class="related-cat">Platforms</span><strong>Liquid Glass design (Apple platforms)</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">Libraries</span><strong>Tailwind CSS</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="coding-standards.html"><span>Previous · Practices</span><strong>Coding Standards</strong></a>
+<a class="page-nav-next" href="dependencies.html"><span>Next · Practices</span><strong>Dependency Discipline</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/practices/corner-radius.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#principles">Principles</a></li>
+<li><a href="#token-scale">Token scale</a></li>
+<li><a href="#single-surfaces-continuous-corners">Single surfaces: continuous corners</a></li>
+<li><a href="#buttons-and-controls-medium-radius">Buttons and controls: medium radius</a></li>
+<li><a href="#nested-surfaces-the-concentric-rule">Nested surfaces: the concentric rule</a></li>
+<li><a href="#checks">Checks</a></li>
+<li><a href="#works-with">Works with</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

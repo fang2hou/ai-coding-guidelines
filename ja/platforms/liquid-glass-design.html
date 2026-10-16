@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Liquid Glass の設計（Apple プラットフォーム） · AI コーディングガイドライン</title>
+<meta name="description" content="iOS 27 とネイティブの macOS 27 向けの新規アプリでは、システムのナビゲーションとコントロールを優先して Liquid Glass を採用する。標準コンポーネントで必要な操作を実現できない場合に限り、カスタムのガラス効果を追…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-design.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Liquid Glass の設計（Apple プラットフォーム） · AI コーディングガイドライン">
+<meta property="og:description" content="iOS 27 とネイティブの macOS 27 向けの新規アプリでは、システムのナビゲーションとコントロールを優先して Liquid Glass を採用する。標準コンポーネントで必要な操作を実現できない場合に限り、カスタムのガラス効果を追…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-design.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/platforms/liquid-glass-design.html">English</a><a lang="zh" href="../../zh/platforms/liquid-glass-design.html">中文</a><a lang="ja" href="liquid-glass-design.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="liquid-glass-design.html" aria-current="page"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">プラットフォーム</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="liquid-glass-の設計-apple-プラットフォーム">Liquid Glass の設計（Apple プラットフォーム）<a href="#liquid-glass-の設計-apple-プラットフォーム" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="採用方針と対象範囲">採用方針と対象範囲<a href="#採用方針と対象範囲" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>iOS 27 とネイティブの macOS 27 向けの新規アプリでは、システムのナビゲーションとコントロールを優先して Liquid Glass を採用する。標準コンポーネントで必要な操作を実現できない場合に限り、カスタムのガラス効果を追加する。最低対応 OS を iOS 27.0 または macOS 27.0 に設定し、Xcode 27 でビルドする。本ガイドラインはこの 2 つのプラットフォームを対象とする。</p>
+<p>27 SDK の挙動は、2026-09-06 に入手可能なベータ版で確認した。正式版 SDK や後続の更新を採用する際は、Apple の HIG、リリースノート、SDK の宣言を再確認する。</p>
+<h2 id="操作領域とコンテンツを分ける">操作領域とコンテンツを分ける<a href="#操作領域とコンテンツを分ける" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Liquid Glass はコンテンツの手前にあるナビゲーションと操作領域に使う。各種バー、サイドバー、メニュー、シートやポップオーバーなどのシステム表示、カスタムのフローティングコントロールが対象となる。標準コンポーネントと操作中の状態に使うマテリアルはシステムに任せる。</li>
+<li>背景、本文、リスト、表、コンテンツカードには、不透明な面または標準マテリアルを使う。コンテンツ内のコントロールには、操作中に一時的なガラス効果が現れる場合がある。</li>
+<li>独立したガラス面を重ねない。既存のガラス面に置くコントロールには、システムの前景表現、塗りつぶし、ビブランシーを使う。</li>
+<li>ガラスは屈折、明るさ、色、影によって背景に適応する。フローティングコントロールの背後にもコンテンツを配置し、装飾だけを目的とした空のガラスパネルは追加しない。</li>
+</ul>
+<h2 id="regular-と-clear-の選択">regular と clear の選択<a href="#regular-と-clear-の選択" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>通常は <code>.regular</code> を使う。文字やコントロールが多い領域に適しており、背景のぼかしと明るさを調整して読みやすさを保つ。</li>
+<li><code>.clear</code> は写真や動画を中心としたコンテンツの上で使う。背景を暗くしても支障がなく、前景の文字やシンボルが太く明るいことを条件とする。regular のような可読性の自動調整は行われない。</li>
+<li>明るい背景に対し、HIG は不透明度約 35% の黒いレイヤーを例示している。SwiftUI の <code>Glass.clear</code> の例では 30% を使う。いずれも調整の出発点であり、コントラストを保証する値ではない。実際の前景と動く背景を組み合わせて検証する。</li>
+<li>関連する要素では同じバリアントを使い、1 つのコントロール群で regular と clear を混在させない。</li>
+</ul>
+<h2 id="ティントと前景色">ティントと前景色<a href="#ティントと前景色" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>ガラスのティントは主要な操作や意味のある状態の強調に使い、補助的な操作は中立色に保つ。ブランドカラーや表現のための色は主にコンテンツに使う。</li>
+<li>セマンティックカラーとシステムのボタンスタイルを優先する。小さなガラスコントロールは背景に合わせて前景の明暗が変わるため、黒や白に固定したラベルはその適応を妨げる場合がある。</li>
+<li>選択状態、処理の状態、破壊的な操作は、色に加えてラベル、シンボル、ボタンのロールでも示す。ティントだけで伝えない。</li>
+</ul>
+<h2 id="形状と同心性">形状と同心性<a href="#形状と同心性" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>システムのコントロール形状を優先する。独立したコントロールにはカプセル形状が適している。入れ子の角丸面では、外側のコンテナーとの同心性を保つ。</li>
+<li>対応 API がある場合は、同心形状の計算をシステムに任せる。再利用する形状には、角丸コンテナーの外でも使えるよう代替の半径を指定する。</li>
+<li>デバイスの角丸半径をそのまま写さず、画面とウィンドウの余白を守る。パディング、Dynamic Type、ウィンドウサイズが変わったら、内外の角丸を再確認する。macOS 27 ではウィンドウの角丸も変更される。</li>
+</ul>
+<h2 id="レイアウトとスクロール端">レイアウトとスクロール端<a href="#レイアウトとスクロール端" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>背景や画像はウィンドウの端まで広げ、本文とコントロールは適切なセーフエリア内に収める。背景を全面に表示するためだけに、操作可能なビュー階層全体へ <code>ignoresSafeArea</code> を適用しない。</li>
+<li>スクロールエッジエフェクトで、スクロールするコンテンツとフローティングバーを区別する。通常は自動スタイルを維持し、必要な場合だけ soft または hard を指定する。同じ辺に効果を重ねず、隣接するペインでは高さをそろえる。</li>
+<li>背景の延長は、サイドバーやインスペクターの背後に見せたい画像やメインコンテンツに適用する。延長される画像に文字やコントロールを含めない。</li>
+<li>ビューの利用可能なサイズとサイズクラスに基づいて配置する。ウィンドウが狭くなる場合、キーボードが表示される場合、文字が大きくなる場合も、主要な操作を利用できるようにする。</li>
+</ul>
+<h2 id="アクセシビリティと検証">アクセシビリティと検証<a href="#アクセシビリティと検証" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>「透明度を下げる」「コントラストを上げる」「視差効果を減らす」と Dynamic Type をテストする。システムのマテリアルは設定に適応するが、独自の前景色、アニメーション、レイアウトはアプリ側で対応する。</li>
+<li>ライトとダークの両方で、実際の背景に対する文字のコントラストを確認する。Apple の HIG は 17 pt 以下の文字に 4.5:1、それより大きい文字または太字に 3:1 を求めている。この基準を理由に文字を小さくしたり、すべてのラベルを太字にしたりしない。</li>
+<li>適切な意味を持つコントロールを使い、アクセシビリティ名と十分な操作領域を設ける。VoiceOver の読み上げ順、キーボード操作、各プラットフォームのポインターやフォーカス動作を確認する。ガラスの視覚的な反応だけではボタンの意味は付かない。</li>
+<li>「視差効果を減らす」が有効な場合は、独自のモーフィングやスプリングアニメーションを抑える。アニメーションなしの状態切り替えも選択肢となる。</li>
+<li>明るい背景、暗い背景、複雑な背景、動く背景に加え、小さなウィンドウ、大きな文字、非アクティブなウィンドウで確認する。実際の利用に近いコンテンツを使い、対象デバイスでスクロールと遷移の性能を測定する。</li>
+</ul>
+<h2 id="ios-27-と-macos-27-のシステム動作">iOS 27 と macOS 27 のシステム動作<a href="#ios-27-と-macos-27-のシステム動作" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Liquid Glass の拡散、縁、ハイライトが調整される。システムの外観スライダーはマテリアルのティントを変えるため、独自の UI も調整範囲全体で読みやすさを保つ。</li>
+<li>iPad と Mac のサイドバーは端まで広がり、非アクティブなウィンドウを見分けやすくなる。ウィンドウの活動状態に連動する独自の要素には <code>appearsActive</code> を使う。</li>
+<li>メニューに標準で表示されるアイコンが減る。重要な操作の識別に役立つ場合だけ表示する。</li>
+<li>iPhone アプリは iPhone Mirroring と iPad 上でウィンドウをリサイズできる。標準のバーは自動で適応する。独自のレイアウトでは、サイズ変更やツールバーのオーバーフロー後も操作への経路を残す。</li>
+<li>ランタイムの変更と SDK の変更では適用条件が異なる。<a href="liquid-glass-api.html">API リファレンス</a>で、シンボルの可用性と新しい実行時の挙動を区別する。</li>
+</ul>
+<h2 id="公式資料">公式資料<a href="#公式資料" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/materials">HIG: Materials</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/color">HIG: Color</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/layout">HIG: Layout</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/accessibility">HIG: Accessibility</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/glass/clear">Glass.clear</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2025/219/">Meet Liquid Glass — WWDC25</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2025/356/">Get to know the new design system — WWDC25</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/102/">Platforms State of the Union — WWDC26</a></li>
+</ul>
+<p>実装は <a href="liquid-glass-patterns.html">Liquid Glass 実装パターン</a>、可用性は <a href="liquid-glass-api.html">Liquid Glass API リファレンス</a>を参照。</p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-api.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass API リファレンス</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass 実装パターン</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/corner-radius.html"><span class="related-cat">プラクティス</span><strong>角丸</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-api.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass API リファレンス</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass 実装パターン</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="liquid-glass-api.html"><span>前へ · プラットフォーム</span><strong>Liquid Glass API リファレンス</strong></a>
+<a class="page-nav-next" href="liquid-glass-patterns.html"><span>次へ · プラットフォーム</span><strong>Liquid Glass 実装パターン</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/platforms/liquid-glass-design.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#採用方針と対象範囲">採用方針と対象範囲</a></li>
+<li><a href="#操作領域とコンテンツを分ける">操作領域とコンテンツを分ける</a></li>
+<li><a href="#regular-と-clear-の選択">regular と clear の選択</a></li>
+<li><a href="#ティントと前景色">ティントと前景色</a></li>
+<li><a href="#形状と同心性">形状と同心性</a></li>
+<li><a href="#レイアウトとスクロール端">レイアウトとスクロール端</a></li>
+<li><a href="#アクセシビリティと検証">アクセシビリティと検証</a></li>
+<li><a href="#ios-27-と-macos-27-のシステム動作">iOS 27 と macOS 27 のシステム動作</a></li>
+<li><a href="#公式資料">公式資料</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>TypeScript 后端技术栈 · AI 编码指南</title>
+<meta name="description" content="首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/libraries/typescript-backend.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="TypeScript 后端技术栈 · AI 编码指南">
+<meta property="og:description" content="首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/libraries/typescript-backend.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/libraries/typescript-backend.html">English</a><a lang="zh" href="typescript-backend.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/libraries/typescript-backend.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="typescript-backend.html" aria-current="page"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-libraries">库与框架</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="typescript-后端技术栈">TypeScript 后端技术栈<a href="#typescript-后端技术栈" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="结论">结论<a href="#结论" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经过充分验证的技术栈在 AI 辅助开发中更少出错；这一倾向决定了本文的选型。</p>
+<h2 id="适用场景">适用场景<a href="#适用场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>构建 TypeScript API 或后端服务。</li>
+</ul>
+<h2 id="不适用场景">不适用场景<a href="#不适用场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>服务达到采用 Python 的必要性标准——改用 <a href="python-api-stack.html">Python API 技术栈</a>。</li>
+<li>交付物是纯前端——框架选型见 <a href="frontend-framework.html">前端框架：Vite 与 Next.js</a>。</li>
+</ul>
+<h2 id="优势">优势<a href="#优势" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Hono：支持多运行时——同一份代码可在 Node.js、Cloudflare Workers 和 Deno 上运行。这是关键优势：同一框架用一个代码库同时覆盖 Node LTS 默认部署和边缘部署。</li>
+<li>Hono：基于 Web 标准的 <code>Request</code>/<code>Response</code>；核心精简，中间件集合实用。</li>
+<li>Hono：类型化 RPC 客户端（<code>hono/client</code>）使路由契约端到端保持类型安全。</li>
+</ul>
+<h2 id="代价">代价<a href="#代价" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Hono 的内置能力不如传统框架齐全；完整应用需要自行组装更多功能。</li>
+<li>一个服务只用一个框架：不要按运行时拆分后端模式，也不要在 Hono 服务中混用第二个后端框架。</li>
+</ul>
+<h2 id="版本策略">版本策略<a href="#版本策略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>使用 Hono 最新的稳定主版本；没有具体的兼容性理由，不要让服务停留在旧主版本。</li>
+<li>通过 mise 将运行时固定在 Node.js Active LTS 版本线上——截至 2026-08 为 Node.js 24（EOL 2028-04）。绝不要在服务中使用 Current 线。</li>
+</ul>
+<h2 id="使用规则">使用规则<a href="#使用规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="边界处校验">边界处校验<a href="#边界处校验" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>在传输边界完成校验：挂载 Hono 的 validator 中间件，让 handler 接收的值都已通过校验并带有类型。</li>
+<li>核心层不重复校验传输层关注的问题。</li>
+</ul>
+<h3 id="handler-保持轻量-核心层框架无关">handler 保持轻量，核心层框架无关<a href="#handler-保持轻量-核心层框架无关" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>handler 是轻量适配器：在边界处把框架请求转换为带类型的普通值，再调用核心层；核心模块不 import Hono。</li>
+<li>这与 <a href="go-api-stack.html">Go API 技术栈</a> 的分层规则一致：核心层只依赖带类型的普通输入和 Web 标准 API，绝不依赖 Web 框架。</li>
+</ul>
+<h3 id="web-标准-api">Web 标准 API<a href="#web-标准-api" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>优先使用 Web 标准 API（<code>Request</code>/<code>Response</code>、<code>fetch</code>、<code>URL</code>、streams），而不是各运行时专用的等价 API，这样核心层就能在 Node.js 与 Workers 之间移植。</li>
+</ul>
+<h3 id="路由端到端类型安全">路由端到端类型安全<a href="#路由端到端类型安全" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>让路由端到端保持类型安全，客户端推断使用 Hono 的 RPC 客户端（<code>hono/client</code>）。不要把路由契约降级为无类型的 fetch 封装。</li>
+</ul>
+<h3 id="中间件">中间件<a href="#中间件" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>中间件只存在于传输层；核心层不感知中间件的存在。</li>
+</ul>
+<h3 id="部署默认值">部署默认值<a href="#部署默认值" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>个人项目部署到 Cloudflare Workers：Hono 对 Workers 提供一流支持，核心层只使用 Web 标准 API，因此同一服务也能在本地 Node.js 上运行。</li>
+<li>工作项目部署到 Databricks Apps；遵循 <a href="../toolchain/databricks.html">Databricks</a>。截至 2026-08，已确认 Databricks Apps 可托管由 Python、Node.js 或二者构建的应用；Node 依赖从 <code>package.json</code> 安装（存在 <code>pnpm-lock.yaml</code> 时会执行 <code>pnpm install --frozen-lockfile</code>），并运行 <code>app.yaml</code> 中声明的命令。托管 Node 运行时由平台固定——2026 年中为 Node 22，早于当前 Active LTS 线——平台文档列出的 Node 框架为 React、Angular、Svelte 和 Express。</li>
+<li>在 Databricks 上，Node 版本由平台而不是项目决定：让服务与平台运行时兼容，不要假设本地 LTS。Hono 通过 <code>@hono/node-server</code> 部署为普通 Node.js 应用；即使平台文档列出了 Express，也不改变不采用 Express 的结论。</li>
+<li>数据和 AI 密集型 Databricks 工作负载仍属于 <a href="python-api-stack.html">Python API 技术栈</a> 的适用范围；只有在 Node 服务确实有明确价值时，才在这类工作负载中增加 Node 服务。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="内部联动">内部联动<a href="#内部联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>Hono + Node.js LTS——TypeScript 服务的默认组合；同一份 Hono 代码也可部署到个人项目的 Cloudflare Workers。</li>
+</ul>
+<h3 id="相关指南">相关指南<a href="#相关指南" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li><a href="../toolchain/typescript.html">TypeScript 工具链</a>——搭配 pnpm、oxlint 和 oxfmt；严格 tsconfig 基线对后端服务同样适用。</li>
+<li><a href="../toolchain/databricks.html">Databricks</a>——工作项目的部署目标：选择 Apps 还是 Jobs、工作时间窗与部署文件。</li>
+<li><a href="../practices/testing.html">测试策略</a>——框架无关的核心层使用普通单元测试；HTTP 关注点由轻量适配器测试覆盖。</li>
+<li><a href="../toolchain/quality-gates.html">质量门禁</a>——同一套检查：prek 与 CI 运行相同的 Lint 和格式化配置。</li>
+</ul>
+<h2 id="不采用的替代方案">不采用的替代方案<a href="#不采用的替代方案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Express：回调时代的 API、薄弱的 TypeScript 类型推断和停滞的中间件模型。即使模板或托管平台默认使用它，也不要用它搭建新服务。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="python-api-stack.html"><span class="related-cat">库与框架</span><strong>Python API 技术栈</strong></a></li>
+<li><a class="related-chip" href="frontend-framework.html"><span class="related-cat">库与框架</span><strong>前端框架：Vite 与 Next.js</strong></a></li>
+<li><a class="related-chip" href="go-api-stack.html"><span class="related-cat">库与框架</span><strong>Go API 技术栈</strong></a></li>
+<li><a class="related-chip" href="../toolchain/databricks.html"><span class="related-cat">工具链</span><strong>Databricks</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">工程实践</span><strong>测试策略</strong></a></li>
+<li><a class="related-chip" href="../toolchain/quality-gates.html"><span class="related-cat">工具链</span><strong>质量门禁</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="go-api-stack.html"><span class="related-cat">库与框架</span><strong>Go API 技术栈</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="tailwindcss.html"><span>上一篇 · 库与框架</span><strong>Tailwind CSS</strong></a>
+<a class="page-nav-next" href="vercel-ai-sdk.html"><span>下一篇 · 库与框架</span><strong>Vercel AI SDK</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/libraries/typescript-backend.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#结论">结论</a></li>
+<li><a href="#适用场景">适用场景</a></li>
+<li><a href="#不适用场景">不适用场景</a></li>
+<li><a href="#优势">优势</a></li>
+<li><a href="#代价">代价</a></li>
+<li><a href="#版本策略">版本策略</a></li>
+<li><a href="#使用规则">使用规则</a></li>
+<li><a href="#联动">联动</a></li>
+<li><a href="#不采用的替代方案">不采用的替代方案</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

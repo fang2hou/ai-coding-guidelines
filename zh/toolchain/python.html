@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Python 工具链 · AI 编码指南</title>
+<meta name="description" content="Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/python.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="Python 工具链 · AI 编码指南">
+<meta property="og:description" content="Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/python.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/toolchain/python.html">English</a><a lang="zh" href="python.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/toolchain/python.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html" aria-current="page"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">工具链</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v4</span>
+
+</div>
+<h1 id="python-工具链">Python 工具链<a href="#python-工具链" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="强制要求">强制要求<a href="#强制要求" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</p>
+<p>语言优先级：</p>
+<ul>
+<li>纯 TypeScript 架构足够时，优先只用 TypeScript；详见 <a href="typescript.html">TypeScript 工具链</a>。</li>
+<li>仅当项目确实能从 Python 获益时，才引入 Python 后端（判断标准见下）。</li>
+<li>Go 与 Rust 仅用于性能关键或系统级场景；采用前必须说明理由、征得用户批准，并记录在项目 ADR 中。详见 <a href="go.html">Go</a> 与 <a href="rust.html">Rust</a>。</li>
+</ul>
+<p>以下情况尤其适合引入 Python 后端：</p>
+<ul>
+<li>后端逻辑足够复杂</li>
+<li>Python 特有的库能带来实质价值</li>
+<li>部分实现由其他团队负责</li>
+<li>数据科学工程师需要修改部分工作流</li>
+<li>AI Agent 或数据处理逻辑需要单独委派</li>
+</ul>
+<p>例如，AI Agent 工作流的一部分预计由数据科学团队维护时，采用 Python 服务是合理的。</p>
+<p>标准的 API 框架、校验和服务器技术栈见 <a href="../libraries/python-api-stack.html">Python API 技术栈</a>。</p>
+<h2 id="版本策略">版本策略<a href="#版本策略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>默认使用 Python 3.12。mise 提供解释器和 uv 工具；环境与依赖（<code>uv.lock</code> 等）由 uv 管理。在 ML 生态和模型训练数据跟上之前，不要采用更新的 CPython 版本线；等生态的默认版本发生变化后再重新评估。</p>
+<p>模型根据训练数据生成代码，因此成熟且在训练数据中覆盖广泛的版本在 AI 辅助开发中出错更少。该原则见 <a href="../principles/core-principles.html">核心工程原则</a>。</p>
+<p>在项目 mise 配置中固定 Python 的确切版本。</p>
+<p>提交 <code>uv.lock</code>，保证各环境解析出相同的依赖版本。</p>
+<h2 id="uv">uv<a href="#uv" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用 <code>uv</code> 管理 Python 环境与依赖，不要引入第二套环境或包管理工具。</p>
+<p>标准工作流：</p>
+<ul>
+<li><code>uv init</code>——初始化项目。</li>
+<li><code>uv add &lt;package&gt;</code>——添加运行时依赖并更新 lockfile。</li>
+<li><code>uv add --dev &lt;package&gt;</code>——添加仅用于开发的依赖，例如 Lint 或测试工具。</li>
+<li><code>uv remove &lt;package&gt;</code>——移除依赖。</li>
+<li><code>uv lock --upgrade</code>——升级 lockfile 中的依赖版本。</li>
+<li><code>uv sync</code>——按 lockfile 安装环境。</li>
+<li><code>uv run &lt;command&gt;</code>——在项目环境中执行命令。</li>
+</ul>
+<p>禁止直接运行 <code>python</code> 或 <code>pip</code>：二者都会绕过项目环境和 lockfile。改用 <code>uv run python</code> 和 <code>uv add</code> / <code>uv sync</code>。</p>
+<p>依赖声明写在 <code>pyproject.toml</code> 中；<code>uv.lock</code> 是生成文件，禁止手工编辑。</p>
+<p>独立脚本用 PEP 723 内联脚本元数据声明依赖，并以 <code>uv run script.py</code> 运行：</p>
+<pre><code class="language-python"># /// script
+# requires-python = &quot;&gt;=3.12&quot;
+# dependencies = [&quot;httpx&quot;]
+# ///
+</code></pre>
+<h3 id="不采用的替代方案">不采用的替代方案<a href="#不采用的替代方案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>禁止使用：</p>
+<ul>
+<li>Pipenv</li>
+<li>Poetry</li>
+</ul>
+<h2 id="ruff">ruff<a href="#ruff" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用 <code>ruff</code> 完成代码检查（<code>ruff check</code>）和格式化（<code>ruff format</code>），接入项目质量门禁并在 <code>pyproject.toml</code> 中统一配置。基线规则：</p>
+<pre><code class="language-toml">[tool.ruff.lint]
+select = [&quot;E&quot;, &quot;F&quot;, &quot;I&quot;, &quot;B&quot;, &quot;UP&quot;, &quot;SIM&quot;]
+</code></pre>
+<p>E 和 F 检查语法与正确性问题；I 负责导入排序；B 检查常见 bug 模式；UP 更新语法；SIM 标记可简化的代码。项目需要时在此基础上扩展，不要悄悄缩减这套规则。</p>
+<h3 id="不采用的替代方案-1">不采用的替代方案<a href="#不采用的替代方案-1" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>禁止使用：</p>
+<ul>
+<li>flake8</li>
+<li>black</li>
+</ul>
+<h2 id="语言使用规则">语言使用规则<a href="#语言使用规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>所有公开函数必须加类型注解，参数与返回值都要标注。</li>
+<li>文件系统路径用 <code>pathlib</code>，不用 <code>os.path</code>。</li>
+<li>构建字符串使用 f-string；新代码不要使用 <code>%</code> 格式化或 <code>str.format</code>。</li>
+<li>禁止使用可变默认参数（<code>def f(items=[])</code>）。默认值设为 <code>None</code>，并在函数内创建集合。</li>
+<li>文件、socket、session、client 等资源使用上下文管理器（<code>with</code>）管理。</li>
+<li>重新抛出异常时保留原因：<code>raise NewError(...) from err</code>。</li>
+<li>内部数据结构使用 <code>dataclasses</code>；Pydantic 只用于校验边界，详见 <a href="../libraries/python-api-stack.html">Python API 技术栈</a>。</li>
+</ul>
+<h2 id="项目布局">项目布局<a href="#项目布局" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>将包放在 <code>src/</code> 下（<code>src/&lt;package&gt;/</code>），并将 <code>tests/</code> 放在项目根目录，与 <code>src/</code> 并列。</li>
+<li>这种布局可防止未安装包时直接导入该包。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../libraries/python-api-stack.html">Python API 技术栈</a></li>
+<li><a href="quality-gates.html">质量门禁</a></li>
+<li><a href="../practices/testing.html">测试策略</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="go.html"><span class="related-cat">工具链</span><strong>Go 工具链</strong></a></li>
+<li><a class="related-chip" href="rust.html"><span class="related-cat">工具链</span><strong>Rust 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/python-api-stack.html"><span class="related-cat">库与框架</span><strong>Python API 技术栈</strong></a></li>
+<li><a class="related-chip" href="../principles/core-principles.html"><span class="related-cat">核心原则</span><strong>核心工程原则</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">工具链</span><strong>质量门禁</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">工程实践</span><strong>测试策略</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="../practices/dependencies.html"><span class="related-cat">工程实践</span><strong>依赖管理规范</strong></a></li>
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/python-api-stack.html"><span class="related-cat">库与框架</span><strong>Python API 技术栈</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="mise.html"><span>上一篇 · 工具链</span><strong>mise</strong></a>
+<a class="page-nav-next" href="quality-gates.html"><span>下一篇 · 工具链</span><strong>质量门禁</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/toolchain/python.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#强制要求">强制要求</a></li>
+<li><a href="#版本策略">版本策略</a></li>
+<li><a href="#uv">uv</a></li>
+<li><a href="#ruff">ruff</a></li>
+<li><a href="#语言使用规则">语言使用规则</a></li>
+<li><a href="#项目布局">项目布局</a></li>
+<li><a href="#联动">联动</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

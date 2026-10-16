@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>圆角 · AI 编码指南</title>
+<meta name="description" content="圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/corner-radius.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="圆角 · AI 编码指南">
+<meta property="og:description" content="圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/corner-radius.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/corner-radius.html">English</a><a lang="zh" href="corner-radius.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/corner-radius.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html" aria-current="page"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="圆角">圆角<a href="#圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="原则">原则<a href="#原则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。</li>
+<li>两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。</li>
+<li>严格执行这两条规则。单个圆角孤立看很少出错，但错误地组合在一起就会显得粗糙、割裂。</li>
+</ul>
+<h2 id="圆角档位">圆角档位<a href="#圆角档位" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<pre><code class="language-css">:root {
+  --radius-s: 6px;       /* dense rows, chips */
+  --radius-m: 8px;       /* buttons, inputs — the default control radius */
+  --radius-l: 12px;      /* popovers, menus */
+  --radius-xl: 20px;     /* cards, sheets, dialogs */
+  --radius-full: 9999px; /* circles, pills */
+}
+</code></pre>
+<ul>
+<li>项目中的所有圆角都取自这组档位。随手写的字面值（如 <code>13px</code>）无法参与嵌套计算，很快就会让样式失控。</li>
+<li>相邻档位必须拉开可辨识的差距（在这个尺寸下 ≥ 2px）。</li>
+</ul>
+<h2 id="单个表面-连续圆角">单个表面：连续圆角<a href="#单个表面-连续圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>只用 <code>border-radius</code> 时，直边与圆弧相接，曲率突变正是普通网页圆角比苹果连续圆角显得生硬的原因。</li>
+<li>把 <code>corner-shape</code> 与现有的 <code>border-radius</code> 配对使用：<code>border-radius</code> 继续决定圆角大小，<code>corner-shape</code> 只改变曲线形状。背景、边框、outline、阴影、<code>overflow: hidden</code> 和 <code>backdrop-filter</code> 都会跟随最终形状——不需要 <code>clip-path</code>，也不需要 SVG 遮罩。</li>
+<li>全项目统一使用 <code>squircle</code>（= <code>superellipse(2)</code>）这一个值。圆角形状属于令牌体系的一部分，不要逐元素改变。</li>
+<li>用在圆角本身构成设计决策的地方：卡片、浮层、对话框、磁贴、媒体、应用级表面（≥ <code>--radius-l</code>）。低于约 6px 时与 <code>round</code> 的差异不可见——不要在那里设置。</li>
+<li>只做渐进增强：截至 2026 年末，只有基于 Chromium 的浏览器（139+）会渲染 <code>corner-shape</code>；Safari 和 Firefox 会忽略它并回退到普通圆角。这种回退可以接受。绝不为此引入 JS 或 SVG polyfill。</li>
+<li><code>border-radius</code> 为 <code>0</code> 时，<code>corner-shape</code> 不产生任何效果。</li>
+</ul>
+<pre><code class="language-css">.card {
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+}
+</code></pre>
+<h2 id="按钮与控件-中等圆角">按钮与控件：中等圆角<a href="#按钮与控件-中等圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>按钮、输入框、下拉框默认使用中等档位（<code>--radius-m</code>，在 36–40px 控件高度上约为 8px）。紧凑布局可以使用浅档（<code>--radius-s</code>）作为下限。</li>
+<li>中等圆角保留了一段平直边缘，让文字和相邻控件对齐，也为控件内部的 hover 和按压状态留出保持同心的空间。</li>
+<li>全圆（<code>--radius-full</code>）按钮只用于 chip、标签和身份元素（头像、开关）。不要用于操作按钮。</li>
+</ul>
+<h2 id="嵌套表面-同心规则">嵌套表面：同心规则<a href="#嵌套表面-同心规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>当内层元素距离外层表面（半径 <code>R</code>）边缘的间距为 <code>p</code> px 时，内层半径应为 <code>r = R − p</code>（最小为 0）。这样内外圆角共享同一个圆心，内层看起来是自然嵌入表面的，而不像生硬贴上去的贴纸。</li>
+<li>该规则适用于 hover 与按压浮层（<code>::before</code> / <code>::after</code>）、焦点环、卡片上的徽章、带内边距容器中的媒体和控件、分段控件以及 tooltip。</li>
+<li>内外半径相等或内层随意取值，都会破坏同心关系，让 hover 状态和徽章显得像生硬叠上去的外来层。</li>
+</ul>
+<h3 id="常见场景">常见场景<a href="#常见场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>覆盖层位于 <code>inset: 0</code>：用 <code>border-radius: inherit</code>。</li>
+<li>内缩距离等于表面内边距：用同一组令牌以 <code>calc()</code> 计算。</li>
+<li>控件外侧的焦点环：用 <code>outline</code> 或 <code>box-shadow</code>——两者都会自动跟随外层半径。</li>
+<li>宽度为 <code>w</code> 的边框画在圆角盒子上：内边缘已经按 <code>R − w</code> 绘制；不要再额外加圆角。</li>
+<li>嵌套在设置了 <code>corner-shape</code> 的表面内部的层：用 <code>corner-shape: inherit</code> 在内层设置相同形状——该属性默认不继承；外层 squircle 配内层普通圆角会破坏同心观感。</li>
+</ul>
+<pre><code class="language-css">.button {
+  border-radius: var(--radius-m);
+}
+.button::before {
+  /* hover fill */
+  content: &quot;&quot;;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* concentric by construction */
+}
+
+.card {
+  --card-inset: 12px;
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+  padding: var(--card-inset);
+}
+.card .media {
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
+}
+</code></pre>
+<ul>
+<li>遇到位图边缘或特殊图形、无法精确对齐时，宁小勿大：保持 <code>r ≤ R − p</code>。内层圆角稍微收紧一点显得利落，偏大则会显得错位。</li>
+</ul>
+<h2 id="检查清单">检查清单<a href="#检查清单" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>diff 中的每个圆角都来自令牌档位。</li>
+<li>控件使用中等档位；全圆只出现在 chip、标签和身份元素上。</li>
+<li>每个嵌套层要么满足 <code>r = R − p</code>，要么继承半径，要么使用 <code>outline</code> / <code>box-shadow</code>。</li>
+<li>位于设置了 <code>corner-shape</code> 的表面内部的层使用相同的角形状（<code>corner-shape: inherit</code>）。</li>
+<li>≥ <code>--radius-l</code> 的表面设置了 <code>corner-shape: squircle</code>；没有为它引入 polyfill。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="coding-standards.html">编码标准</a>——背景：圆角档位是“禁止魔法值”规则的一个实例。</li>
+<li><a href="../libraries/tailwindcss.html">Tailwind CSS</a>——搭配（视情况）：使用 Tailwind 的项目把档位表达为主题令牌；同心规则不变。</li>
+<li><a href="../platforms/liquid-glass-design.html">Liquid Glass 设计</a>——背景：在苹果平台上使用系统自带的连续圆角 API，而不是网页近似方案。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">工程实践</span><strong>编码标准</strong></a></li>
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">库与框架</span><strong>Tailwind CSS</strong></a></li>
+<li><a class="related-chip" href="../platforms/liquid-glass-design.html"><span class="related-cat">平台规范</span><strong>Liquid Glass 设计（Apple 平台）</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">库与框架</span><strong>Tailwind CSS</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="coding-standards.html"><span>上一篇 · 工程实践</span><strong>编码标准</strong></a>
+<a class="page-nav-next" href="dependencies.html"><span>下一篇 · 工程实践</span><strong>依赖管理规范</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/corner-radius.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#原则">原则</a></li>
+<li><a href="#圆角档位">圆角档位</a></li>
+<li><a href="#单个表面-连续圆角">单个表面：连续圆角</a></li>
+<li><a href="#按钮与控件-中等圆角">按钮与控件：中等圆角</a></li>
+<li><a href="#嵌套表面-同心规则">嵌套表面：同心规则</a></li>
+<li><a href="#检查清单">检查清单</a></li>
+<li><a href="#联动">联动</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

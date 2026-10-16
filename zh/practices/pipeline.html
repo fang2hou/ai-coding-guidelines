@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>流水线 · AI 编码指南</title>
+<meta name="description" content="这些规则适用于任何系统中的 CI/CD 流水线——GitHub Actions、GitLab CI、CircleCI、Jenkins 或其他系统。所选系统的专属规则见对应的工具链文档。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/pipeline.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="流水线 · AI 编码指南">
+<meta property="og:description" content="这些规则适用于任何系统中的 CI/CD 流水线——GitHub Actions、GitLab CI、CircleCI、Jenkins 或其他系统。所选系统的专属规则见对应的工具链文档。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/pipeline.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/pipeline.html">English</a><a lang="zh" href="pipeline.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/pipeline.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html" aria-current="page"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="流水线">流水线<a href="#流水线" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="适用范围">适用范围<a href="#适用范围" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>这些规则适用于任何系统中的 CI/CD 流水线——GitHub Actions、GitLab CI、CircleCI、Jenkins 或其他系统。所选系统的专属规则见对应的工具链文档。</p>
+<h2 id="默认选择">默认选择<a href="#默认选择" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>用户未指定流水线系统时，默认使用 GitHub Actions。平台专属规则见 <a href="../toolchain/github-actions.html">GitHub Actions</a>。</p>
+<h2 id="复杂度增加时的结构调整">复杂度增加时的结构调整<a href="#复杂度增加时的结构调整" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>平铺命令的流水线一旦变长就会难以阅读。应使用工具提供的阶段（stage）、任务（job）和独立文件来组织结构，不要不断堆砌未命名的 step。</p>
+<ul>
+<li>每个流水线单元只承载一个关注点：一个流水线文件对应一个触发条件或受众，一个 job 对应一项职责，一个 step 对应一条命令。</li>
+<li>优先使用多个较小的流水线文件，不要让单个文件不断膨胀。</li>
+<li>调用项目自身的任务，而不是把项目逻辑复制进流水线 YAML（见 <a href="../toolchain/mise.html">mise</a>）。</li>
+</ul>
+<h2 id="完整上报每项检查">完整上报每项检查<a href="#完整上报每项检查" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>只在单一触发条件下运行的任务，不要放进多触发条件的流水线里再用条件判断跳过；应为它单独建一个只绑定该触发条件的流水线文件。</li>
+<li>被条件跳过的单元仍会在运行列表中显示为 skipped，让原本正常的运行看起来像只过了一半，读者还得自己去反推当时触发了哪个条件。</li>
+<li>单看运行列表就应能一眼判断通过还是失败：流水线里的每个单元，在该流水线每次触发时都应实际执行。</li>
+<li>合并门禁会把 skipped 的必需检查视为通过，因此上述规则主要是为了可读性。真正会卡住合并的隐患是从不上报结果的必需检查：如果工作流根本没触发，或过滤条件排除了对应 job，该检查就会一直停在 pending 状态。合理拆分流水线，确保每个必需检查在任何需要它的场景下都会上报结果。</li>
+</ul>
+<h2 id="命名与可读性">命名与可读性<a href="#命名与可读性" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>只看运行日志，就能说清流水线每一层在做什么。</p>
+<ul>
+<li>给流水线、每个 job、每个 step 都命名。</li>
+<li>名称表达职责，而不是工具调用：使用 <code>Validate</code>，而不是 <code>cog</code>。</li>
+<li>step 名称应使用简短的祈使短语，说明该 step 执行或校验的内容。在运行日志中显示为原始命令的 step，实际上等同于未命名 step；命令不是文档。</li>
+</ul>
+<h2 id="相关文档">相关文档<a href="#相关文档" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../toolchain/github-actions.html">GitHub Actions</a>——默认平台；工作流命名与加固规则。</li>
+<li><a href="../toolchain/quality-gates.html">质量门禁</a>——本地与 CI 运行同一套检查。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/github-actions.html"><span class="related-cat">工具链</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="../toolchain/mise.html"><span class="related-cat">工具链</span><strong>mise</strong></a></li>
+<li><a class="related-chip" href="../toolchain/quality-gates.html"><span class="related-cat">工具链</span><strong>质量门禁</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/github-actions.html"><span class="related-cat">工具链</span><strong>GitHub Actions</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="language-policy.html"><span>上一篇 · 工程实践</span><strong>语言政策</strong></a>
+<a class="page-nav-next" href="project-documentation.html"><span>下一篇 · 工程实践</span><strong>必备项目文档</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/pipeline.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#适用范围">适用范围</a></li>
+<li><a href="#默认选择">默认选择</a></li>
+<li><a href="#复杂度增加时的结构调整">复杂度增加时的结构调整</a></li>
+<li><a href="#完整上报每项检查">完整上报每项检查</a></li>
+<li><a href="#命名与可读性">命名与可读性</a></li>
+<li><a href="#相关文档">相关文档</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

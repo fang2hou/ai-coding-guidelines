@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>架构治理 · AI 编码指南</title>
+<meta name="description" content="在 ARCHITECTURE.md 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/architecture-governance.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="架构治理 · AI 编码指南">
+<meta property="og:description" content="在 ARCHITECTURE.md 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/architecture-governance.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/architecture-governance.html">English</a><a lang="zh" href="architecture-governance.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/architecture-governance.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html" aria-current="page"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="架构治理">架构治理<a href="#架构治理" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="架构不变量">架构不变量<a href="#架构不变量" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>在 <code>ARCHITECTURE.md</code> 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。</p>
+<p>常见内容包括：</p>
+<ul>
+<li>领域逻辑属于哪一层</li>
+<li>哪些模块可以调用外部 API</li>
+<li>认证边界</li>
+<li>状态管理边界</li>
+<li>Databricks 访问边界</li>
+<li>前后端职责划分</li>
+<li>依赖方向</li>
+<li>集成边界</li>
+</ul>
+<p><code>ARCHITECTURE.md</code> 应保持简短，专注回答一个问题：</p>
+<blockquote>
+<p><strong>当前架构有哪些事实必须始终成立？</strong></p>
+</blockquote>
+<p>何时必须编写该文档，见<a href="project-documentation.html">必备项目文档</a>。</p>
+<h2 id="架构决策记录">架构决策记录<a href="#架构决策记录" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>每项重大架构决策都应使用共享的 <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/adr.template.md">ADR 模板</a> 单独记录。</p>
+<p>一篇 ADR 应包含：</p>
+<ul>
+<li>背景</li>
+<li>决策</li>
+<li>考虑过的替代方案</li>
+<li>理由</li>
+<li>后果</li>
+</ul>
+<p>ADR 是架构护栏，而非不可更改的铁律；它的作用是防止贡献者和 AI Agent 在无意间改动架构。</p>
+<p>当用户请求与某项 ADR 冲突时：</p>
+<ol>
+<li>理解用户的真实意图。</li>
+<li>弄清该 ADR 存在的原因。</li>
+<li>评估修改该决策的影响。</li>
+<li>在合理的情况下，优先选择与既有架构兼容的方案。</li>
+<li>如果架构确实需要变更，说明其影响。</li>
+<li>明确更新或废止该 ADR。</li>
+</ol>
+<p>禁止悄悄违反 ADR。</p>
+<p>当用户不确定架构是否应当改动时，先帮助用户分析后果，再实施变更。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">工程实践</span><strong>必备项目文档</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">工程实践</span><strong>必备项目文档</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="agents-file.html"><span>上一篇 · 工程实践</span><strong>编写 AGENTS.md</strong></a>
+<a class="page-nav-next" href="change-discipline.html"><span>下一篇 · 工程实践</span><strong>变更纪律</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/architecture-governance.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#架构不变量">架构不变量</a></li>
+<li><a href="#架构决策记录">架构决策记录</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

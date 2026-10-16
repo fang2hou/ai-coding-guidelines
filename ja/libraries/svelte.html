@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Svelte（Svelte 5 + SvelteKit） · AI コーディングガイドライン</title>
+<meta name="description" content="条件付き — Svelte 5 + SvelteKit は、開発の楽しさも目標のひとつである小規模な個人プロジェクトと実験プロジェクトでの採用を認める。デフォルトではない。本番のフロントエンドはフロントエンドフレームワークで選定した Re…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/libraries/svelte.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Svelte（Svelte 5 + SvelteKit） · AI コーディングガイドライン">
+<meta property="og:description" content="条件付き — Svelte 5 + SvelteKit は、開発の楽しさも目標のひとつである小規模な個人プロジェクトと実験プロジェクトでの採用を認める。デフォルトではない。本番のフロントエンドはフロントエンドフレームワークで選定した Re…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/libraries/svelte.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/libraries/svelte.html">English</a><a lang="zh" href="../../zh/libraries/svelte.html">中文</a><a lang="ja" href="svelte.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="svelte.html" aria-current="page"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-libraries">ライブラリ</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="svelte-svelte-5-sveltekit">Svelte（Svelte 5 + SvelteKit）<a href="#svelte-svelte-5-sveltekit" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="判定">判定<a href="#判定" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>条件付き — Svelte 5 + SvelteKit は、開発の楽しさも目標のひとつである小規模な個人プロジェクトと実験プロジェクトでの採用を認める。デフォルトではない。本番のフロントエンドは<a href="frontend-framework.html">フロントエンドフレームワーク</a>で選定した React スタックのままにする。</p>
+<h2 id="使用する場面">使用する場面<a href="#使用する場面" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>個人プロジェクト、プロトタイプ、小規模な実験プロジェクト — 開発を楽しむこと自体が目標として成り立つ場合。</li>
+<li>ユーザーが明示的に Svelte を要求した場合。</li>
+</ul>
+<h2 id="避けるべき場面">避けるべき場面<a href="#避けるべき場面" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>AI の作業スループットとエコシステムの広さが重要になる、チーム向け・顧客向けの本番作業。</li>
+<li>React エコシステムの広さが必要なプロジェクト。</li>
+</ul>
+<h2 id="長所">長所<a href="#長所" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>主要なコンポーネントフレームワークの中でボイラープレートが最も少ない。コンパイル結果は細粒度のリアクティビティを備え、バンドルも小さい。</li>
+<li>runes によりリアクティブな状態が明示的になり、静的解析できる。</li>
+<li>SvelteKit は Vite 上にアプリケーション層一式（ルーティング、SSR、フォームアクション）を提供する。</li>
+<li>公式の AI ツール群（MCP サーバー、skills、<code>sv add ai-tools</code>）が、React より薄い LLM 学習カバレッジを補う。</li>
+</ul>
+<h2 id="トレードオフ">トレードオフ<a href="#トレードオフ" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>LLM の学習カバレッジは React より薄く、最大のリスクは Svelte 4 のパターンの幻覚である。緩和には公式 AI ツールを使い、決して記憶に頼らない。</li>
+<li>コンポーネントのエコシステムは小さい。UI 作業は DaisyUI か手書きコンポーネントで行う。</li>
+<li>動きが速い。SvelteKit 3.0 はプレリリース段階であり、新しいメジャーの探索自体がプロジェクトの目的でない限り、安定版ラインを維持する。</li>
+</ul>
+<h2 id="バージョン方針">バージョン方針<a href="#バージョン方針" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Svelte 5 の最新安定版。コンポーネントレベルの <code>await</code> 式には <code>experimental.async</code> が必要（Svelte ≥ 5.36）— 実験的機能であり、デフォルトではない。</li>
+<li>SvelteKit は ≥ 2.70 の安定版ライン。3.0 のプレリリースはデフォルトでは採用しない。</li>
+<li>クラスベースのキットが必要な場合は DaisyUI 5（Tailwind CSS v4 プラグインモデル）を使い、それ以外はネイティブ CSS の手書きコンポーネントとする。</li>
+</ul>
+<h2 id="利用ルール">利用ルール<a href="#利用ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><code>npx sv create</code> でスキャフォールドし、続けて <code>npx sv add ai-tools</code> を実行する — Svelte MCP ツール向けの公式 AGENTS.md インストラクションをプロジェクトに書き込むコマンドである。</li>
+<li>公式 MCP サーバー（<code>npx -y @sveltejs/mcp</code>）を登録する。構文が曖昧なときは記憶に頼らず、<code>list-sections</code> に続けて <code>get-documentation</code> を呼ぶ。作成・編集したすべてのコンポーネントに <code>svelte-autofixer</code> を実行し、指摘がゼロになるまで修正する。</li>
+<li>runes モードのみを使い、レガシー構文は決して出力しない。特に：
+<ul>
+<li>算出値には <code>$derived</code>（または <code>$derived.by</code>）を使う — 状態への代入を <code>$effect</code> で行ってはならない。<code>$effect</code> は本物の副作用のための抜け道である。</li>
+<li><code>$state</code> はリアクティブにすべき値に限定する。API レスポンスのような、丸ごと再代入される大きなオブジェクトには <code>$state.raw</code> を使う。</li>
+<li>props は変わりうるものとして扱う。通常の <code>let</code> にコピーせず、<code>$derived</code> で派生させる。</li>
+<li>イベントは <code>onclick={...}</code> 属性（<code>on:click</code> は禁止）。<code>createEventDispatcher</code> の代わりにコールバック props を使う。</li>
+<li>スロットの代わりに <code>{#snippet}</code> + <code>{@render}</code>。<code>{#each}</code> はキー付きにする（インデックスをキーにしない）。<code>class:</code> ディレクティブの代わりに配列・オブジェクトの <code>class</code> 値を使う。</li>
+</ul>
+</li>
+<li><code>onMount</code> や <code>$effect</code> のリスナーより <code>&lt;svelte:window&gt;</code> / <code>&lt;svelte:document&gt;</code> を優先する。外部ライブラリとの同期は <code>$effect</code> ではなく <code>{@attach}</code> で行う。共有モジュールの状態より、型付きの <code>createContext</code> を使う。</li>
+<li>UI アプローチはプロジェクトごとに 1 つ選ぶ：
+<ul>
+<li>ネイティブ CSS による手書きコンポーネント — デフォルト。キットへの依存がなく、完全に制御できる。</li>
+<li>DaisyUI 5 — Tailwind プラグイン（<code>@plugin &quot;daisyui&quot;;</code>）。セマンティックなテーマクラスを持ち、コピーされるコンポーネントはない。小さなアプリと速度重視ならこちら。</li>
+</ul>
+</li>
+<li>子コンポーネントのスタイルは CSS カスタムプロパティで渡す（<code>&lt;Child --color=&quot;red&quot; /&gt;</code>）。<code>:global</code> はサードパーティコンポーネント専用とする。</li>
+</ul>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="tailwindcss.html">Tailwind CSS</a> — 併用：DaisyUI 5 は Tailwind v4 ベースであり、使う場合はクラス並べ替えの相互運用ルールを適用する。</li>
+<li><a href="frontend-framework.html">フロントエンドフレームワーク</a> — 文脈：デフォルトのフレームワーク選定は React 優先のまま。この文書は Svelte という例外を定める。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="frontend-framework.html"><span class="related-cat">ライブラリ</span><strong>フロントエンドフレームワーク：Vite vs Next.js</strong></a></li>
+<li><a class="related-chip" href="tailwindcss.html"><span class="related-cat">ライブラリ</span><strong>Tailwind CSS</strong></a></li>
+</ul>
+</div>
+
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="python-api-stack.html"><span>前へ · ライブラリ</span><strong>Python API スタック</strong></a>
+<a class="page-nav-next" href="tailwindcss.html"><span>次へ · ライブラリ</span><strong>Tailwind CSS</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/libraries/svelte.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#判定">判定</a></li>
+<li><a href="#使用する場面">使用する場面</a></li>
+<li><a href="#避けるべき場面">避けるべき場面</a></li>
+<li><a href="#長所">長所</a></li>
+<li><a href="#トレードオフ">トレードオフ</a></li>
+<li><a href="#バージョン方針">バージョン方針</a></li>
+<li><a href="#利用ルール">利用ルール</a></li>
+<li><a href="#連携">連携</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

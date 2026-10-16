@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>エージェント運用プロトコル · AI コーディングガイドライン</title>
+<meta name="description" content="自明でない変更を行う前に、AI エージェントは次の手順を踏むこと。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/agent-protocol.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="エージェント運用プロトコル · AI コーディングガイドライン">
+<meta property="og:description" content="自明でない変更を行う前に、AI エージェントは次の手順を踏むこと。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/agent-protocol.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/practices/agent-protocol.html">English</a><a lang="zh" href="../../zh/practices/agent-protocol.html">中文</a><a lang="ja" href="agent-protocol.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html" aria-current="page"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v5</span>
+
+</div>
+<h1 id="エージェント運用プロトコル">エージェント運用プロトコル<a href="#エージェント運用プロトコル" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="運用プロトコル">運用プロトコル<a href="#運用プロトコル" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>自明でない変更を行う前に、AI エージェントは次の手順を踏むこと。</p>
+<ol>
+<li>ユーザーの本来の意図を理解する。</li>
+<li>既存の実装を調査する。</li>
+<li>関連するプロジェクトドキュメントを読む。</li>
+<li>アーキテクチャの不変条件と関連する ADR を確認する（<a href="architecture-governance.html">アーキテクチャガバナンス</a>）。</li>
+<li>既存のツールチェーンとプロジェクトの規約を確認する。</li>
+<li>既存の依存関係とパターンを優先して使う。</li>
+<li>要件を満たす、最小限で完結した変更を行う。</li>
+<li>無関係なクリーンアップは行わない。</li>
+<li>関連する検証を実行する。</li>
+<li>変更後の diff をレビューする。</li>
+<li>意図せず追加されたファイルや無関係な変更がないことを確認する。</li>
+<li>アーキテクチャ、依存関係、セキュリティ、振る舞いに関わる重要な変更を説明する。</li>
+</ol>
+<p>自分の好みのスタイルというだけで、動作しているコードを書き直してはならない。</p>
+<p>似たコードが 2 か所に現れただけで抽象化を導入してはならない。保守性、正しさ、アーキテクチャの実際の問題を解決するときに限って導入する。</p>
+<h2 id="メモリの扱い">メモリの扱い<a href="#メモリの扱い" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>永続メモリを持つ AI エージェントは、このプロジェクトが本ガイドラインを採用していることを記憶しておくこと。</p>
+<p>メモリは手がかりにすぎず、信頼できる唯一の情報源ではない。リポジトリ内のガイドラインとプロジェクトドキュメントが、常に記憶より優先される。</p>
+<p>大きな作業の間は、現在のガイドラインを随時読み返すこと。特に次の場面では関連する節を確認する。</p>
+<ul>
+<li>重要なプロジェクト作業を始めるとき</li>
+<li>アーキテクチャを変更する前</li>
+<li>依存関係を追加または置き換える前</li>
+<li>CI/CD を変更する前</li>
+<li>ツールチェーンの設定を変更する前</li>
+<li>UI 言語の動作を変更する前</li>
+<li>既存のプロジェクト規約が不明確なとき</li>
+<li>記憶とリポジトリの内容が食い違うとき</li>
+</ul>
+<p>リポジトリに現在の規則があるのに、記憶した要約に頼ってはならない。</p>
+<h2 id="ハードルール早見表">ハードルール早見表<a href="#ハードルール早見表" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>次の行為は禁止である。各項目には、規則を定義するドキュメントへのリンクを付けている。規則を変更したときは、このリストも必ず更新すること。</p>
+<ol>
+<li>ユーザーの明示的な承諾なしに、必須の標準ツールを置き換える（<a href="../principles/core-principles.html">エンジニアリング基本原則</a>）。</li>
+<li>pnpm の代わりに npm や yarn を使用する（<a href="../toolchain/typescript.html">TypeScript ツールチェーン</a>）。</li>
+<li>標準のプロジェクトリンターとして、oxlint の代わりに ESLint を使用する（<a href="../toolchain/typescript.html">TypeScript ツールチェーン</a>）。</li>
+<li>oxfmt の代わりに Prettier を使用する（<a href="../toolchain/typescript.html">TypeScript ツールチェーン</a>）。</li>
+<li>uv の代わりに Pipenv や Poetry を使用する（<a href="../toolchain/python.html">Python ツールチェーン</a>）。</li>
+<li>ruff の代わりに flake8 や black を使用する（<a href="../toolchain/python.html">Python ツールチェーン</a>）。</li>
+<li>prek の代わりに pre-commit や Lefthook を使用する（<a href="../toolchain/quality-gates.html">品質ゲート</a>）。</li>
+<li>正当な理由と承諾なしに、Cocogitto を別の Conventional Commits バリデーターに置き換える（<a href="../toolchain/git.html">Git ワークフロー</a>）。</li>
+<li>内容を理解しないまま、lint や検証の問題を無視する（<a href="../principles/core-principles.html">エンジニアリング基本原則</a>）。</li>
+<li>チェックを通すためだけに、有用なルールを無効化する（<a href="../principles/core-principles.html">エンジニアリング基本原則</a>）。</li>
+<li>迅速な検証が求められるプロジェクトを過剰に設計する（<a href="../principles/core-principles.html">エンジニアリング基本原則</a>）。</li>
+<li>不要な依存関係を導入する（<a href="dependencies.html">依存関係の規律</a>）。</li>
+<li>冗長なファイルやモジュールを作成する（<a href="coding-standards.html">コーディング規約</a>）。</li>
+<li>ADR を黙って破る（<a href="architecture-governance.html">アーキテクチャガバナンス</a>）。</li>
+<li>アーキテクチャの不変条件を誤って変更する（<a href="architecture-governance.html">アーキテクチャガバナンス</a>）。</li>
+<li>ソースコードに英語以外の識別子やコメントを使用する（<a href="language-policy.html">言語ポリシー</a>）。</li>
+<li>ローマ字（romaji）やピンイン（pinyin）をコード識別子として使用する（<a href="language-policy.html">言語ポリシー</a>）。</li>
+<li>会話言語から UI 言語を推測する（<a href="language-policy.html">言語ポリシー</a>）。</li>
+<li>複数言語にまたがる UI 作業で、品質の低い直訳を作る（<a href="language-policy.html">言語ポリシー</a>）。</li>
+<li>互換性を確認せずに GitHub Actions を安易にアップグレードする（<a href="../toolchain/github-actions.html">GitHub Actions</a>）。</li>
+<li>シークレットや機密情報をコミットする（<a href="security.html">セキュリティ</a>）。</li>
+<li>適切な承認を得ずに、共有履歴へ force push する（<a href="../toolchain/git.html">Git ワークフロー</a>）。</li>
+<li>CI が緑だからといって、実装の正しさの確認を怠る（<a href="change-discipline.html">変更の規律</a>）。</li>
+<li>明示的なサプライチェーンポリシーがないのに、GitHub Actions を現在のメジャーバージョンタグではなくコミット SHA に固定する（<a href="../toolchain/github-actions.html">GitHub Actions</a>）。</li>
+</ol>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="architecture-governance.html"><span class="related-cat">プラクティス</span><strong>アーキテクチャガバナンス</strong></a></li>
+<li><a class="related-chip" href="../principles/core-principles.html"><span class="related-cat">原則</span><strong>中核となるエンジニアリング原則</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/python.html"><span class="related-cat">ツールチェーン</span><strong>Python ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/quality-gates.html"><span class="related-cat">ツールチェーン</span><strong>品質ゲート</strong></a></li>
+<li><a class="related-chip" href="../toolchain/git.html"><span class="related-cat">ツールチェーン</span><strong>Git ワークフロー</strong></a></li>
+<li><a class="related-chip" href="dependencies.html"><span class="related-cat">プラクティス</span><strong>依存関係の管理方針</strong></a></li>
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">プラクティス</span><strong>コーディング規約</strong></a></li>
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">プラクティス</span><strong>言語ポリシー</strong></a></li>
+<li><a class="related-chip" href="../toolchain/github-actions.html"><span class="related-cat">ツールチェーン</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="security.html"><span class="related-cat">プラクティス</span><strong>セキュリティ</strong></a></li>
+<li><a class="related-chip" href="change-discipline.html"><span class="related-cat">プラクティス</span><strong>変更の規律</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="change-discipline.html"><span class="related-cat">プラクティス</span><strong>変更の規律</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="../principles/core-principles.html"><span>前へ · 原則</span><strong>中核となるエンジニアリング原則</strong></a>
+<a class="page-nav-next" href="agents-file.html"><span>次へ · プラクティス</span><strong>AGENTS.md の執筆</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/practices/agent-protocol.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#運用プロトコル">運用プロトコル</a></li>
+<li><a href="#メモリの扱い">メモリの扱い</a></li>
+<li><a href="#ハードルール早見表">ハードルール早見表</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

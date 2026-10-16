@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>中核となるエンジニアリング原則 · AI コーディングガイドライン</title>
+<meta name="description" content="本ガイドラインは、AI 支援によるアイデアの迅速な検証と POC 開発におけるエンジニアリング標準を定める。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/principles/core-principles.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="中核となるエンジニアリング原則 · AI コーディングガイドライン">
+<meta property="og:description" content="本ガイドラインは、AI 支援によるアイデアの迅速な検証と POC 開発におけるエンジニアリング標準を定める。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/principles/core-principles.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/principles/core-principles.html">English</a><a lang="zh" href="../../zh/principles/core-principles.html">中文</a><a lang="ja" href="core-principles.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="core-principles.html" aria-current="page"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-principles">原則</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="中核となるエンジニアリング原則">中核となるエンジニアリング原則<a href="#中核となるエンジニアリング原則" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="目的">目的<a href="#目的" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>本ガイドラインは、AI 支援によるアイデアの迅速な検証と POC 開発におけるエンジニアリング標準を定める。</p>
+<p>目標は、プロジェクトを次の状態に保ちながら、速く進めることである。</p>
+<ul>
+<li>シンプルである</li>
+<li>一貫している</li>
+<li>再現できる</li>
+<li>理解しやすい</li>
+<li>人間にも AI エージェントにも保守しやすい</li>
+<li>アーキテクチャが意図せず崩れにくい</li>
+<li>リポジトリ間で揃っている</li>
+</ul>
+<p>中心原則は次のとおりである。</p>
+<blockquote>
+<p><strong>プロジェクト固有の判断を必要としないものは、すべて標準化する。</strong></p>
+</blockquote>
+<p>パッケージマネージャー、フォーマッター、リンター、タスクランナー、コミット規約、プリコミットフックといったエンジニアリング基盤を、プロジェクトごとに何度も選び直してはならない。</p>
+<p>プロダクトの判断やアーキテクチャはプロジェクトごとに変わってよいが、エンジニアリングのツールチェーンは統一する。</p>
+<h2 id="検証速度の最適化">検証速度の最適化<a href="#検証速度の最適化" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>こうしたプロジェクトは、何よりもまずアイデアを速く検証するためのものである。</p>
+<p>次のものは、本当に必要になってから導入する。</p>
+<ul>
+<li>抽象化</li>
+<li>レイヤー</li>
+<li>フレームワーク</li>
+<li>サービス</li>
+<li>インフラ</li>
+<li>ドキュメント</li>
+<li>プロセス</li>
+<li>汎用の拡張性</li>
+</ul>
+<p>現在の問題を正しく解決する、最もシンプルな実装を選ぶ。</p>
+<p>速く開発することは、雑に作ることではない。将来の混乱を招く近道や、AI 支援開発を不安定にする判断は避ける。</p>
+<h2 id="不要な選択を減らす">不要な選択を減らす<a href="#不要な選択を減らす" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すでに標準化された事柄を、何度も判断し直してはならない。</p>
+<p>本ガイドラインがツールを指定している場合、ユーザーが明示的に例外を認めない限り、そのツールは必須である。</p>
+<p>次の理由だけでは、標準化されたツールを置き換えない。</p>
+<ul>
+<li>他のツールのほうが人気がある</li>
+<li>フレームワークが別のツールを推奨している</li>
+<li>生成されたテンプレートが別のツールを使っている</li>
+<li>AI エージェントが別のツールに慣れている</li>
+<li>インターネット上の他のプロジェクトが別のものを使っている</li>
+</ul>
+<p>真に技術的な非互換があるときは、標準ツールチェーンを変更する前にユーザーへ説明する。</p>
+<p>ツールを黙って差し替えてはならない。</p>
+<h2 id="実績のある主流の選択肢を優先する">実績のある主流の選択肢を優先する<a href="#実績のある主流の選択肢を優先する" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>AI エージェントは、最新のドキュメントではなく学習データに基づいてコードを生成する。</p>
+<p>出たばかりのバージョンやニッチな技術スタックは学習データに少ないため、幻覚によるクラッシュ、誤った API 呼び出し、挙動の不一致が起きやすい。</p>
+<p>そのため、主流で実績のある選択肢をデフォルトとする。</p>
+<ul>
+<li>ランタイムは LTS または成熟した系列を使う。デフォルトは Node.js Active LTS、機械学習では Python 3.12 とする。</li>
+<li>ライブラリは、出たばかりのものやマイナーな代替案ではなく、主流でドキュメントが充実したものを選ぶ。</li>
+<li>出たばかりのメジャーバージョン、ニッチなフレームワーク、ニッチなランタイム（Bun ベースの技術スタックなど）を使うには、ユーザーの明示的な承認と理由の記録が必要である。</li>
+<li>デフォルトの選定では、わずかな性能差よりも互換性と安定性を優先する。</li>
+</ul>
+<p>モデルがその技術をどれだけ知っているかも、ベンチマークや機能一覧と並ぶ選定基準とする。</p>
+<h2 id="対症療法ではなく根本原因を扱う">対症療法ではなく根本原因を扱う<a href="#対症療法ではなく根本原因を扱う" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>警告、リントエラー、テスト失敗、型エラーなど、検証で問題が発生した場合は、次の手順で対処する。</p>
+<ol>
+<li>そのルールやチェックが何を守っているのかを理解する。</li>
+<li>実際の根本原因を特定する。</li>
+<li>合理的な範囲で、根本の問題を修正する。</li>
+<li>影響を理解してから、設定変更を検討する。</li>
+</ol>
+<p>次のことをしてはならない。</p>
+<ul>
+<li>警告が消えるまでコードをむやみに書き換える</li>
+<li>CI を緑にするためにだけルールを無効化する</li>
+<li>問題を理解しないまま ignore コメントを追加する</li>
+<li>テストを通すためにテストの要求水準を下げる</li>
+<li>解決せずに失敗を隠す</li>
+</ul>
+<p>ルールがプロジェクトに本当に適さない場合に限り、設定を変更してよい。ただし、その変更は意図的かつ技術的に正当なものでなければならない。</p>
+<h2 id="最終原則">最終原則<a href="#最終原則" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>本ガイドラインの目的はプロセスを増やすことではない。人間と AI エージェントが、同じツールやワークフローを毎回選び直さずに速く進められる、予測可能なエンジニアリング環境を作ることにある。</p>
+<p>選択がプロダクトに依存しない場合は：</p>
+<blockquote>
+<p><strong>標準化する。</strong></p>
+</blockquote>
+<p>バージョンや技術スタックの成熟度に差がある場合は：</p>
+<blockquote>
+<p><strong>実績のあるものを選ぶ。</strong></p>
+</blockquote>
+<p>変更がアーキテクチャに影響する場合は：</p>
+<blockquote>
+<p><strong>明示する。</strong></p>
+</blockquote>
+<p>検証チェックが失敗した場合は：</p>
+<blockquote>
+<p><strong>原因を理解する。</strong></p>
+</blockquote>
+<p>言語が異なる場合は：</p>
+<blockquote>
+<p><strong>境界を明示する。</strong></p>
+</blockquote>
+<p>AI エージェントがプロジェクトで作業する場合は：</p>
+<blockquote>
+<p><strong>不要な意思決定の余地を減らし、正しいアクションをデフォルトにする。</strong></p>
+</blockquote>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">プラクティス</span><strong>エージェント運用プロトコル</strong></a></li>
+<li><a class="related-chip" href="../practices/dependencies.html"><span class="related-cat">プラクティス</span><strong>依存関係の管理方針</strong></a></li>
+<li><a class="related-chip" href="../toolchain/mise.html"><span class="related-cat">ツールチェーン</span><strong>mise</strong></a></li>
+<li><a class="related-chip" href="../toolchain/python.html"><span class="related-cat">ツールチェーン</span><strong>Python ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="../index.html"><span>前へ</span><strong>概要</strong></a>
+<a class="page-nav-next" href="../practices/agent-protocol.html"><span>次へ · プラクティス</span><strong>エージェント運用プロトコル</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/principles/core-principles.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#目的">目的</a></li>
+<li><a href="#検証速度の最適化">検証速度の最適化</a></li>
+<li><a href="#不要な選択を減らす">不要な選択を減らす</a></li>
+<li><a href="#実績のある主流の選択肢を優先する">実績のある主流の選択肢を優先する</a></li>
+<li><a href="#対症療法ではなく根本原因を扱う">対症療法ではなく根本原因を扱う</a></li>
+<li><a href="#最終原則">最終原則</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

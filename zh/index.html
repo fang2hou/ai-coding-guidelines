@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AI 编码指南</title>
+<meta name="description" content="面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范，英、中、日三语同步维护。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="AI 编码指南">
+<meta property="og:description" content="面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范，英、中、日三语同步维护。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../en/index.html">English</a><a lang="zh" href="index.html" aria-current="true" class="current">中文</a><a lang="ja" href="../ja/index.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="index.html" aria-current="page">总览</a>
+<a class="side-home" href="glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc index-doc">
+<header class="index-hero">
+<p class="eyebrow">三语工程规范库 · 33 篇</p>
+<h1>AI 编码指南</h1>
+<p class="intro">给 AI Agent 和代码评审者看的工程指南，涵盖工具链、工程实践、技术选型与平台规范。英、中、日三版结构一致，均按各自语言的母语习惯编写。</p>
+</header>
+<section class="start-here">
+<div class="section-head"><h2>必读基础</h2><p>开始任何任务前，先读这两篇。</p></div>
+<div class="cards">
+<a class="card card-featured" href="principles/core-principles.html"><span class="card-step">01 · 核心原则</span><strong>核心工程原则</strong><span>整套指南为什么存在，以及所有规则背后的五条基本原则。</span></a>
+<a class="card card-featured" href="practices/agent-protocol.html"><span class="card-step">02 · 工程实践</span><strong>Agent 操作协议</strong><span>AI Agent 在动手修改代码前必须执行的 12 步操作协议。</span></a>
+</div></section>
+<section class="recipes-section">
+<div class="section-head"><h2>按任务选读</h2><p>根据手头的任务，按顺序阅读对应的指南链。</p></div>
+<div class="recipe-grid">
+<div class="recipe-card"><h3>新建 TypeScript / 前端项目</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/typescript.html">TypeScript 工具链</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/frontend-framework.html">前端框架：Vite 与 Next.js</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">编码标准</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">质量门禁</a></div></div>
+<div class="recipe-card"><h3>构建 TypeScript 后端服务</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/typescript.html">TypeScript 工具链</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/typescript-backend.html">TypeScript 后端技术栈</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">编码标准</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">质量门禁</a></div></div>
+<div class="recipe-card"><h3>开发 Python API 服务</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/python.html">Python 工具链</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/python-api-stack.html">Python API 技术栈</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">编码标准</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">质量门禁</a></div></div>
+<div class="recipe-card"><h3>UI 样式与圆角细节</h3><div class="recipe-chain"><a class="recipe-pill" href="practices/corner-radius.html">圆角</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">编码标准</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/language-policy.html">语言政策</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/tailwindcss.html">Tailwind CSS</a></div></div>
+<div class="recipe-card"><h3>iOS 27 / macOS 27 Liquid Glass 应用</h3><div class="recipe-chain"><a class="recipe-pill" href="platforms/liquid-glass-design.html">Liquid Glass 设计（Apple 平台）</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="platforms/liquid-glass-patterns.html">Liquid Glass 实现模式</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="platforms/liquid-glass-api.html">Liquid Glass API 参考</a></div></div>
+<div class="recipe-card"><h3>测试、Git 提交与 CI/CD</h3><div class="recipe-chain"><a class="recipe-pill" href="practices/testing.html">测试策略</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/git.html">Git 工作流</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/change-discipline.html">变更纪律</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/pipeline.html">流水线</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/github-actions.html">GitHub Actions</a></div></div>
+</div></section>
+<div class="section-head categories-head"><h2>按分类浏览</h2></div>
+<section class="cat-section" id="cat-principles">
+<div class="cat-header"><h3>核心原则</h3><span class="cat-count">1 篇</span></div>
+<p>整套指南立身的基本原则：快速校验、收敛选择、解决根本原因。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="principles/core-principles.html"><div class="doc-card-head"><strong>核心工程原则</strong></div><p>本指南规定 AI 辅助快速验证想法、开发 POC 时遵循的工程标准。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-practices">
+<div class="cat-header"><h3>工程实践</h3><span class="cat-count">12 篇</span></div>
+<p>日常工程实践：编码规范、测试、项目文档、依赖管理、流水线与安全。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="practices/agent-protocol.html"><div class="doc-card-head"><strong>Agent 操作协议</strong></div><p>开始实质性变更前，AI Agent 应：</p></a></li>
+<li><a class="doc-card" href="practices/agents-file.html"><div class="doc-card-head"><strong>编写 AGENTS.md</strong></div><p>AGENTS.md 是仓库中 AI Agent 的入口文件。Agent 工具在每次会话开始时都会加载它，且上下文空间有限，因此每一行都必须言之有物。</p></a></li>
+<li><a class="doc-card" href="practices/architecture-governance.html"><div class="doc-card-head"><strong>架构治理</strong></div><p>在 ARCHITECTURE.md 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。</p></a></li>
+<li><a class="doc-card" href="practices/change-discipline.html"><div class="doc-card-head"><strong>变更纪律</strong></div><p>对每项实质性变更，在交付评审前都要检查这份清单；同时参照操作协议。</p></a></li>
+<li><a class="doc-card" href="practices/coding-standards.html"><div class="doc-card-head"><strong>编码标准</strong></div><p>遵循所用语言和框架的通行惯例，不要另搞一套私有写法。</p></a></li>
+<li><a class="doc-card" href="practices/corner-radius.html"><div class="doc-card-head"><strong>圆角</strong></div><p>圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。</p></a></li>
+<li><a class="doc-card" href="practices/dependencies.html"><div class="doc-card-head"><strong>依赖管理规范</strong></div><p>添加依赖之前，按顺序回答以下五个问题：</p></a></li>
+<li><a class="doc-card" href="practices/language-policy.html"><div class="doc-card-head"><strong>语言政策</strong></div><p>语言边界是明确的项目约束。以下三种语言彼此独立，切勿从其中一种推断另一种：</p></a></li>
+<li><a class="doc-card" href="practices/pipeline.html"><div class="doc-card-head"><strong>流水线</strong></div><p>这些规则适用于任何系统中的 CI/CD 流水线——GitHub Actions、GitLab CI、CircleCI、Jenkins 或其他系统。所选系统的专属规则见对应的工具链文档。</p></a></li>
+<li><a class="doc-card" href="practices/project-documentation.html"><div class="doc-card-head"><strong>必备项目文档</strong></div><p>每个项目必须维护 AGENTS.md、README.md、DEVELOPMENT.md 与 CONTRIBUTING.md。项目一旦形成有实际意义的架构边界，ARCHITECTURE.md 也成为必备文档。以 templates/ 下的模…</p></a></li>
+<li><a class="doc-card" href="practices/security.html"><div class="doc-card-head"><strong>安全</strong></div><p>严禁向仓库提交任何敏感信息，包括但不限于：</p></a></li>
+<li><a class="doc-card" href="practices/testing.html"><div class="doc-card-head"><strong>测试策略</strong></div><p>编写测试是为了验证有实际意义的行为，而不是凑覆盖率数字。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-toolchain">
+<div class="cat-header"><h3>工具链</h3><span class="cat-count">9 篇</span></div>
+<p>各语言生态的统一工具链，本地开发与 CI 环境保持完全一致。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="toolchain/databricks.html"><div class="doc-card-head"><strong>Databricks</strong></div><p>对于数据和 AI 工作负载，优先选用 Databricks：用 Databricks Apps 托管和管理应用，用 Databricks Jobs 执行定时或自动任务。</p></a></li>
+<li><a class="doc-card" href="toolchain/git.html"><div class="doc-card-head"><strong>Git 工作流</strong></div><p>所有项目提交必须遵循 Conventional Commits 规范。</p></a></li>
+<li><a class="doc-card" href="toolchain/github-actions.html"><div class="doc-card-head"><strong>GitHub Actions</strong></div><p>GitHub Actions 是标准 CI/CD 平台；用户未指定流水线系统时，默认选择 GitHub Actions。与工具无关的流水线规则见 流水线。</p></a></li>
+<li><a class="doc-card" href="toolchain/go.html"><div class="doc-card-head"><strong>Go 工具链</strong><span class="badge badge-draft">草稿</span></div><p>TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：</p></a></li>
+<li><a class="doc-card" href="toolchain/mise.html"><div class="doc-card-head"><strong>mise</strong></div><p>每个项目必须使用 mise。</p></a></li>
+<li><a class="doc-card" href="toolchain/python.html"><div class="doc-card-head"><strong>Python 工具链</strong></div><p>Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</p></a></li>
+<li><a class="doc-card" href="toolchain/quality-gates.html"><div class="doc-card-head"><strong>质量门禁</strong></div><p>使用 prek 作为标准的预提交框架。</p></a></li>
+<li><a class="doc-card" href="toolchain/rust.html"><div class="doc-card-head"><strong>Rust 工具链</strong><span class="badge badge-draft">草稿</span></div><p>TypeScript 与 Python 是 AI 辅助开发的默认语言。Rust 不是默认选项，仅当项目确实需要以下能力时才选择 Rust：</p></a></li>
+<li><a class="doc-card" href="toolchain/typescript.html"><div class="doc-card-head"><strong>TypeScript 工具链</strong></div><p>TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-libraries">
+<div class="cat-header"><h3>库与框架</h3><span class="cat-count">8 篇</span></div>
+<p>前后端、样式与 AI 应用的默认技术栈与选型边界。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="libraries/agentation.html"><div class="doc-card-head"><strong>Agentation</strong><span class="badge badge-draft">草稿</span></div><p>视情况采用——在前端迭代和测试期间启用 Agentation，将视觉反馈转换为 AI 编码 Agent 可直接使用的结构化上下文。</p></a></li>
+<li><a class="doc-card" href="libraries/frontend-framework.html"><div class="doc-card-head"><strong>前端框架：Vite 与 Next.js</strong></div><p>首选——Vite 是默认前端框架；只有项目确实需要全栈 React 能力时才选择 Next.js。</p></a></li>
+<li><a class="doc-card" href="libraries/go-api-stack.html"><div class="doc-card-head"><strong>Go API 技术栈</strong><span class="badge badge-draft">草稿</span></div><p>首选——Go Web 框架使用 Echo，请求校验使用 github.com/go-playground/validator/v10。只有依据 Go 工具链 的标准完成 Go 本身的选型论证后，才适用本技术栈。</p></a></li>
+<li><a class="doc-card" href="libraries/python-api-stack.html"><div class="doc-card-head"><strong>Python API 技术栈</strong></div><p>首选——FastAPI + Pydantic + Uvicorn 是标准的 Python API 技术栈；三者应作为一个整体采用，而不是分别挑选。</p></a></li>
+<li><a class="doc-card" href="libraries/svelte.html"><div class="doc-card-head"><strong>Svelte（Svelte 5 + SvelteKit）</strong></div><p>视情况采用——Svelte 5 加 SvelteKit 允许用于以开发乐趣为目标的小型个人项目和实验项目。它不是默认选择：生产前端仍使用前端框架中选定的 React 技术栈。</p></a></li>
+<li><a class="doc-card" href="libraries/tailwindcss.html"><div class="doc-card-head"><strong>Tailwind CSS</strong></div><p>视情况采用——项目已在用 Tailwind，或组件套件依赖 Tailwind 时才使用。新的样式开发默认使用原生 CSS。</p></a></li>
+<li><a class="doc-card" href="libraries/typescript-backend.html"><div class="doc-card-head"><strong>TypeScript 后端技术栈</strong></div><p>首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经…</p></a></li>
+<li><a class="doc-card" href="libraries/vercel-ai-sdk.html"><div class="doc-card-head"><strong>Vercel AI SDK</strong></div><p>视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-platforms">
+<div class="cat-header"><h3>平台规范</h3><span class="cat-count">3 篇</span></div>
+<p>Apple 平台（iOS / macOS 27 Liquid Glass）的设计与实现规范。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="platforms/liquid-glass-api.html"><div class="doc-card-head"><strong>Liquid Glass API 参考</strong></div><p>面向使用 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，最低系统版本均设为 27.0。核验日期为 2026-09-06，依据 Apple 文档和 Xcode 27 Beta 构建 27A5252f（iPhoneO…</p></a></li>
+<li><a class="doc-card" href="platforms/liquid-glass-design.html"><div class="doc-card-head"><strong>Liquid Glass 设计（Apple 平台）</strong></div><p>面向 iOS 27 与原生 macOS 27 的新应用，优先通过系统导航和控件采用 Liquid Glass。只有标准组件无法满足交互需求时，才添加自定义玻璃效果。最低系统版本设为 iOS 27.0 或 macOS 27.0，使用 Xco…</p></a></li>
+<li><a class="doc-card" href="platforms/liquid-glass-patterns.html"><div class="doc-card-head"><strong>Liquid Glass 实现模式</strong></div><p>这些模式用于通过 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，对应最低系统版本设为 27.0。优先采用 SwiftUI；自定义集成在 iOS 使用 UIKit，在 macOS 使用 AppKit。共享代码须隔离…</p></a></li>
+</ul></section>
+</article>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<span class="page-nav-empty"></span>
+<a class="page-nav-next" href="principles/core-principles.html"><span>下一篇 · 核心原则</span><strong>核心工程原则</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/tree/main/guidelines/zh" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+
+</div>
+</body>
+</html>

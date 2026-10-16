@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>言語ポリシー · AI コーディングガイドライン</title>
+<meta name="description" content="言語の境界はプロジェクトの明確な制約である。次の 3 つの言語はそれぞれ独立しており、1 つから別を推測してはならない。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/language-policy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="言語ポリシー · AI コーディングガイドライン">
+<meta property="og:description" content="言語の境界はプロジェクトの明確な制約である。次の 3 つの言語はそれぞれ独立しており、1 つから別を推測してはならない。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/language-policy.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/practices/language-policy.html">English</a><a lang="zh" href="../../zh/practices/language-policy.html">中文</a><a lang="ja" href="language-policy.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html" aria-current="page"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="言語ポリシー">言語ポリシー<a href="#言語ポリシー" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p>言語の境界はプロジェクトの明確な制約である。次の 3 つの言語はそれぞれ独立しており、1 つから別を推測してはならない。</p>
+<ol>
+<li>会話言語</li>
+<li>ソースコードの言語</li>
+<li>プロダクト / UI 言語</li>
+</ol>
+<p>例えば次のような構成も成立する。</p>
+<pre><code class="language-text">Conversation: Chinese
+UI: Japanese
+Code: English
+</code></pre>
+<p>これらの言語は混同せず、それぞれ自然な表現にすること。</p>
+<h2 id="コードの言語">コードの言語<a href="#コードの言語" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>意図的に他言語を含むリテラル値を除き、ソースコードはすべて標準的な英語で記述すること。</p>
+<p>次の要素は英語で記述すること。</p>
+<ul>
+<li>変数名</li>
+<li>関数名</li>
+<li>メソッド名</li>
+<li>クラス名</li>
+<li>型名</li>
+<li>インターフェース名</li>
+<li>列挙型名</li>
+<li>モジュール名</li>
+<li>ファイル名</li>
+<li>ディレクトリ名</li>
+<li>コードコメント</li>
+<li>ドキュメント文字列</li>
+<li>設定の識別子</li>
+<li>内部のシンボル識別子</li>
+</ul>
+<p>コードの識別子やコメントに英語以外の言語を使用しないこと。</p>
+<p>特に次を使用してはならない。</p>
+<ul>
+<li>日本語のかな文字</li>
+<li>日本語による識別子</li>
+<li>中国語による識別子</li>
+<li>ピンイン（pinyin）による識別子</li>
+<li>日本語ローマ字（romaji）による識別子</li>
+</ul>
+<p>禁止される識別子と、標準的な英語への置き換え例を示す。</p>
+<pre><code class="language-text">kokyakuName   -&gt; customerName
+shinseiStatus -&gt; applicationStatus
+kehuName      -&gt; customerName
+yonghuId      -&gt; userId
+</code></pre>
+<p>ASCII に収めるためだけに、英語以外の単語をラテン文字へ音訳してはならない。求められるのは単なる ASCII ではなく、<strong>標準的な英語</strong>である。</p>
+<h3 id="リテラル値">リテラル値<a href="#リテラル値" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>他言語のテキストをリテラル値の一部として意図的に含めることは認められる。該当例は次のとおりである。</p>
+<ul>
+<li>UI の表示文言</li>
+<li>ローカライズリソース</li>
+<li>ユーザー向けのエラーメッセージ</li>
+<li>ローカライズされた内容を含むテストフィクスチャ</li>
+<li>ユーザーコンテンツの例</li>
+<li>元の形式を保持しなければならないドメインデータ</li>
+</ul>
+<p>リテラル値に他言語が含まれていても、英語以外の変数名やコメントを使ってよい理由にはならない。</p>
+<h2 id="会話言語">会話言語<a href="#会話言語" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>ユーザーが使用する言語で、自然にコミュニケーションすること。</p>
+<p>会話は次の性質を備えること。</p>
+<ul>
+<li>自然であること</li>
+<li>友好的であること</li>
+<li>明瞭であること</li>
+<li>その言語の慣用に沿っていること</li>
+<li>ユーザーのコミュニケーションスタイルに合うこと</li>
+</ul>
+<p>不必要な言語の混用を避けること。</p>
+<p>中国語で会話しているときも、実装内部で英語を使っているというだけの理由で、英語のフレーズを差し込まないこと。</p>
+<p>次のものを指す場合は、英語を使ってよい。</p>
+<ul>
+<li>コードの識別子</li>
+<li>API 名</li>
+<li>ライブラリ名</li>
+<li>コマンド</li>
+<li>プロダクト名</li>
+<li>確立された技術用語のうち、翻訳するとかえって分かりにくくなるもの</li>
+</ul>
+<p>それ以外では、中国語で自然にコミュニケーションすること。</p>
+<p>この原則はほかの言語でも同様である。</p>
+<h2 id="プロダクトと-ui-の言語">プロダクトと UI の言語<a href="#プロダクトと-ui-の言語" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>会話言語だけを根拠に、プロダクトの言語を推測してはならない。</p>
+<p>プロジェクトの言語方針が文書化されていない場合は、本格的なユーザー向けコンテンツを実装する前に、次の点をユーザーへ確認すること。</p>
+<ul>
+<li>UI の主要言語</li>
+<li>追加でサポートする言語</li>
+<li>求められる文体やトーン</li>
+</ul>
+<p>確認した言語ポリシーは <code>AGENTS.md</code> に記録し（<a href="project-documentation.html">必須のプロジェクトドキュメント</a>を参照）、以後は同じ質問を繰り返さずその方針に従うこと。</p>
+<p>再確認が必要なのは、次の場合だけである。</p>
+<ul>
+<li>ユーザーが要件を明示的に変更した場合</li>
+<li>新しい要件が、文書化されたポリシーと競合する場合</li>
+<li>求められる対象言語が本当に曖昧な場合</li>
+</ul>
+<p>ユーザーが会話言語を変えても、それを理由に UI の言語を黙って変更しないこと。</p>
+<h2 id="言語横断の品質">言語横断の品質<a href="#言語横断の品質" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>会話・コード・プロダクトの言語が異なる場合は、言語間で文言を機械的に直訳しないこと。特に次の点を守る。</p>
+<ul>
+<li>中国語の影響を受けた不自然な日本語や、中国語の文構造を持ち込んだ日本語を書かない。</li>
+<li>自然な中国語の会話に、実装都合の英単語を理由なく混ぜない。</li>
+<li>同じドメイン概念には、UI 全体で統一した訳語を使う。</li>
+<li>中国語の開発会話から日本語の UI 用語を推測したり、英語のコード識別子から中国語の UI 用語を推測したりしない。</li>
+</ul>
+<p>ユーザー向け UI 文言は、次の優先順位で評価すること。</p>
+<ol>
+<li>対象言語における標準的な用法</li>
+<li>正しい文法</li>
+<li>明確な意味</li>
+<li>適切な敬語レベル</li>
+<li>理解しやすさ</li>
+<li>使いやすさ</li>
+<li>プロダクト全体との一貫性</li>
+</ol>
+<p>UI テキストは、直訳調や機械翻訳調ではなく、専門的で自然な表現にすること。</p>
+<p>重要な用語やトーンの選択に確信が持てない場合は、独自の慣例を勝手に作らず、ユーザーに尋ねること。</p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">プラクティス</span><strong>必須のプロジェクトドキュメント</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agent-protocol.html"><span class="related-cat">プラクティス</span><strong>エージェント運用プロトコル</strong></a></li>
+<li><a class="related-chip" href="agents-file.html"><span class="related-cat">プラクティス</span><strong>AGENTS.md の執筆</strong></a></li>
+<li><a class="related-chip" href="change-discipline.html"><span class="related-cat">プラクティス</span><strong>変更の規律</strong></a></li>
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">プラクティス</span><strong>コーディング規約</strong></a></li>
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">プラクティス</span><strong>必須のプロジェクトドキュメント</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="dependencies.html"><span>前へ · プラクティス</span><strong>依存関係の管理方針</strong></a>
+<a class="page-nav-next" href="pipeline.html"><span>次へ · プラクティス</span><strong>パイプライン</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/practices/language-policy.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#コードの言語">コードの言語</a></li>
+<li><a href="#会話言語">会話言語</a></li>
+<li><a href="#プロダクトと-ui-の言語">プロダクトと UI の言語</a></li>
+<li><a href="#言語横断の品質">言語横断の品質</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

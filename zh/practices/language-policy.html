@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>语言政策 · AI 编码指南</title>
+<meta name="description" content="语言边界是明确的项目约束。以下三种语言彼此独立，切勿从其中一种推断另一种：">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/language-policy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="语言政策 · AI 编码指南">
+<meta property="og:description" content="语言边界是明确的项目约束。以下三种语言彼此独立，切勿从其中一种推断另一种：">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/language-policy.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/language-policy.html">English</a><a lang="zh" href="language-policy.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/language-policy.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html" aria-current="page"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="语言政策">语言政策<a href="#语言政策" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p>语言边界是明确的项目约束。以下三种语言彼此独立，切勿从其中一种推断另一种：</p>
+<ol>
+<li>对话语言</li>
+<li>源代码语言</li>
+<li>产品 / UI 语言</li>
+</ol>
+<p>项目可以采用如下组合：</p>
+<pre><code class="language-text">Conversation: Chinese
+UI: Japanese
+Code: English
+</code></pre>
+<p>三者必须分开，各自使用地道的表达。</p>
+<h2 id="代码语言">代码语言<a href="#代码语言" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>除刻意包含其他语言的字面值外，所有源代码一律使用标准英语。</p>
+<p>以下内容必须使用英语：</p>
+<ul>
+<li>变量名</li>
+<li>函数名</li>
+<li>方法名</li>
+<li>类名</li>
+<li>类型名</li>
+<li>接口名</li>
+<li>枚举名</li>
+<li>模块名</li>
+<li>文件名</li>
+<li>目录名</li>
+<li>代码注释</li>
+<li>文档字符串（docstring）</li>
+<li>配置标识符</li>
+<li>内部符号标识符</li>
+</ul>
+<p>禁止在代码标识符或注释中使用英语以外的语言。</p>
+<p>尤其禁止使用：</p>
+<ul>
+<li>日文假名</li>
+<li>日语标识符</li>
+<li>中文标识符</li>
+<li>拼音标识符</li>
+<li>日语罗马字标识符</li>
+</ul>
+<p>以下是禁用标识符及其标准英语替代形式：</p>
+<pre><code class="language-text">kokyakuName   -&gt; customerName
+shinseiStatus -&gt; applicationStatus
+kehuName      -&gt; customerName
+yonghuId      -&gt; userId
+</code></pre>
+<p>不要为了凑 ASCII 字符就把非英语词汇转写成拉丁字母。要求的是<strong>标准英语</strong>，而不只是 ASCII。</p>
+<h3 id="字面值">字面值<a href="#字面值" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>只有当非英语文本有意作为字面值的一部分时，才允许使用，例如：</p>
+<ul>
+<li>UI 文案</li>
+<li>本地化资源</li>
+<li>面向用户的错误信息</li>
+<li>包含本地化内容的测试夹具</li>
+<li>示例用户内容</li>
+<li>必须保持原始形式的领域数据</li>
+</ul>
+<p>字面值不能成为使用非英语变量名或注释的理由。</p>
+<h2 id="对话语言">对话语言<a href="#对话语言" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用用户所用的语言自然交流。</p>
+<p>对话应当：</p>
+<ul>
+<li>自然</li>
+<li>友好</li>
+<li>清晰</li>
+<li>地道</li>
+<li>契合用户的沟通风格</li>
+</ul>
+<p>避免不必要的语言混杂。</p>
+<p>用中文交流时，不要因为实现内部使用英语而插入英文短语。</p>
+<p>涉及以下内容时适合使用英语：</p>
+<ul>
+<li>代码标识符</li>
+<li>API 名称</li>
+<li>库名称</li>
+<li>命令</li>
+<li>产品名</li>
+<li>翻译会降低清晰度的既有技术术语</li>
+</ul>
+<p>其余情况用中文自然交流。</p>
+<p>同样的原则适用于其他语言。</p>
+<h2 id="产品与-ui-语言">产品与 UI 语言<a href="#产品与-ui-语言" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>不要仅根据对话语言推断产品语言。</p>
+<p>如果项目语言尚未记录在文档中，在实现重要的用户可见内容前，先向用户确认：</p>
+<ul>
+<li>UI 主语言</li>
+<li>需额外支持的语言</li>
+<li>相关的正式程度或语气要求</li>
+</ul>
+<p>把确认后的语言政策记录到 <code>AGENTS.md</code> 中（参见<a href="project-documentation.html">必备项目文档</a>），之后直接照此执行，不要反复询问。</p>
+<p>仅在以下情况重新确认：</p>
+<ul>
+<li>用户明确变更需求</li>
+<li>新需求与已记录的政策冲突</li>
+<li>目标语言确实存在歧义</li>
+</ul>
+<p>不要因为用户切换了对话语言，就擅自更改 UI 语言。</p>
+<h2 id="跨语言质量">跨语言质量<a href="#跨语言质量" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>当对话语言、代码语言和产品语言不一致时，切勿跨语言生硬直译。尤其要注意：</p>
+<ul>
+<li>不要写出带中文腔的日语，或把中文句式套进日语</li>
+<li>不要在自然的中文对话里无故夹杂代码实现里的英文词</li>
+<li>同一领域概念在整个 UI 中的译法必须统一</li>
+<li>不要从中文开发对话去猜日语 UI 用词，也不要从英文代码标识符去猜中文 UI 用词</li>
+</ul>
+<p>面向用户的 UI 文案应优先满足以下要求：</p>
+<ol>
+<li>符合目标语言的规范用法</li>
+<li>语法正确</li>
+<li>含义清晰</li>
+<li>正式程度得当</li>
+<li>易于理解</li>
+<li>易于使用</li>
+<li>与产品其余部分保持一致</li>
+</ol>
+<p>UI 文案应当专业、自然，不要带有直译或机器翻译的腔调。</p>
+<p>重要术语或语气拿不准时，询问用户，不要自行发明惯例。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">工程实践</span><strong>必备项目文档</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="agents-file.html"><span class="related-cat">工程实践</span><strong>编写 AGENTS.md</strong></a></li>
+<li><a class="related-chip" href="change-discipline.html"><span class="related-cat">工程实践</span><strong>变更纪律</strong></a></li>
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">工程实践</span><strong>编码标准</strong></a></li>
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">工程实践</span><strong>必备项目文档</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="dependencies.html"><span>上一篇 · 工程实践</span><strong>依赖管理规范</strong></a>
+<a class="page-nav-next" href="pipeline.html"><span>下一篇 · 工程实践</span><strong>流水线</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/language-policy.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#代码语言">代码语言</a></li>
+<li><a href="#对话语言">对话语言</a></li>
+<li><a href="#产品与-ui-语言">产品与 UI 语言</a></li>
+<li><a href="#跨语言质量">跨语言质量</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

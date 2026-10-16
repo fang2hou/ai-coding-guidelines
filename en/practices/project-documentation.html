@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Required Project Documentation · AI Coding Guidelines</title>
+<meta name="description" content="Every project must maintain AGENTS.md, README.md, DEVELOPMENT.md, and CONTRIBUTING.md. ARCHITECTURE.md becomes required…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/project-documentation.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Required Project Documentation · AI Coding Guidelines">
+<meta property="og:description" content="Every project must maintain AGENTS.md, README.md, DEVELOPMENT.md, and CONTRIBUTING.md. ARCHITECTURE.md becomes required…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/practices/project-documentation.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="project-documentation.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/practices/project-documentation.html">中文</a><a lang="ja" href="../../ja/practices/project-documentation.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="project-documentation.html" aria-current="page"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">Practices</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v7</span>
+
+</div>
+<h1 id="required-project-documentation">Required Project Documentation<a href="#required-project-documentation" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p>Every project must maintain <code>AGENTS.md</code>, <code>README.md</code>, <code>DEVELOPMENT.md</code>, and <code>CONTRIBUTING.md</code>. <code>ARCHITECTURE.md</code> becomes required once the project has meaningful architectural boundaries. Use the templates under <code>templates/</code> as the starting point.</p>
+<p>Documentation modes follow <a href="https://diataxis.fr/">Diátaxis</a>: the README orients and routes; <code>DEVELOPMENT.md</code> and <code>CONTRIBUTING.md</code> carry how-to guidance and reference; <code>ARCHITECTURE.md</code> is explanation; <code>AGENTS.md</code> is reference for agents. Keep one mode per document — when a document needs another mode, link to the document that owns it instead of mixing it in.</p>
+<h2 id="agents-md">AGENTS.md<a href="#agents-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every project must include <code>AGENTS.md</code> at the repository root.</p>
+<p>It is the agent-facing entry point: commands, engineering standards, repository layout, boundaries, the confirmed language policy, and project conventions.</p>
+<p>See <a href="agents-file.html">Authoring AGENTS.md</a> for what belongs in <code>AGENTS.md</code>, section order, length limits, and nested files.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/project-agents.template.md">project-agents.template.md</a></p>
+<h2 id="readme-md">README.md<a href="#readme-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every project must include <code>README.md</code>.</p>
+<p>The README is the project's front door, written for readers who skim.
+The first screen states what the project is, what problem it solves, and
+how to run it. It points readers to the right detail documents instead of
+teaching, listing internals, or writing long background essays. Agent-facing
+rules — engineering standards, language policy, project conventions — belong in
+<code>AGENTS.md</code> (see <code>templates/project-agents.template.md</code>), and the README gives a
+copyable prompt that points agents there.</p>
+<p>The body is organized around reader tasks, not around the repository
+directory structure. Do not write a separate Why section; follow this
+order:</p>
+<ul>
+<li>An identity block: the project name, a one-sentence tagline stating what the project is and for whom, and status badges — followed by one to three plain sentences on the need the project solves. Mention what the project intentionally is not, and its status, only when that saves the reader time.</li>
+<li>When the project has a visual surface — a UI, CLI output, generated artifacts — a screenshot or a short GIF immediately after the opening.</li>
+<li>One get-it-running section: <code>Quick Start</code> for projects that need a developer, <code>Usage</code> for end-user products, <code>Usage / Quick Start</code> when both apply. The AI path comes first — the copyable instruction that hands the repository to an AI coding agent via <code>AGENTS.md</code> — and the manual steps follow: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses as examples with their expected output.</li>
+<li>A flexible showcase between the get-it-running section and the reading map, composed only of the blocks the project needs: <code>Concepts</code> — the few ideas a reader needs; <code>Features</code> — what it does, why it matters, how it differs from the alternatives; <code>Performance</code> — a claim in one sentence plus the chart or table that proves it, the measurement environment, and a methodology link, never a claim without numbers; <code>Experiments</code> — experimental content, when the project has it. Order the blocks by what the project must prove first, and give each block a standard title and emoji.</li>
+<li>A Goal → Read table linking the detail documents below.</li>
+<li>The license, stated explicitly.</li>
+</ul>
+<p>Keep section titles standard, short, and instantly recognizable — <code>Quick Start</code>, <code>Usage</code>, <code>Concepts</code>, <code>Features</code>, <code>Performance</code>, <code>Experiments</code>, <code>Learn More</code>, <code>License</code> — and prefix each with one semantically stable emoji: 🚀 for the get-it-running section, 💡 for concepts, ✨ for features, ⚡ for performance, 🧪 for experiments, 📚 for further reading, 📄 for the license. Keep the emoji set small and consistent; the project title and body text carry no emoji.</p>
+<p>Fold long auxiliary content — platform-specific setup, environment variable tables, extended examples, troubleshooting — into <code>&lt;details&gt;</code> blocks whose <code>&lt;summary&gt;</code> names the content in a few words. Keep one blank line after <code>&lt;summary&gt;</code> so Markdown renders, and never collapse the primary path: the opening, the get-it-running commands, and the license stay expanded.</p>
+<p>Keep it scannable: paragraphs of one to three sentences, one idea per
+bullet, copyable commands in code blocks. Present enumerations as lists
+or tables, never as running prose. Route to the detail documents
+instead of duplicating their content — teaching, reference, and
+explanation are their modes, not the README's — but never shrink the
+README to a bare &quot;see the docs&quot; pointer: it must stand alone as the
+entry point. Add a table of contents once it grows beyond a few
+screens.</p>
+<p>An outdated README is worse than none, because it actively misleads.
+Update it in the same change that alters setup, usage, or scope, and
+state at the top when development has slowed or stopped.</p>
+<p>The confirmed product/UI language policy (see <a href="language-policy.html">Language Policy</a>) is agent-facing: record it in <code>AGENTS.md</code>, not in the README.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/README.template.md">README.template.md</a></p>
+<h2 id="development-md">DEVELOPMENT.md<a href="#development-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every project must include <code>DEVELOPMENT.md</code>.</p>
+<p>It is the project's how-to and reference layer: step-by-step workflow first, command and configuration reference after.</p>
+<p>It should describe:</p>
+<ul>
+<li>Development workflow</li>
+<li>Toolchain</li>
+<li>Common mise tasks</li>
+<li>Coding standards</li>
+<li>Testing workflow</li>
+<li>Local setup</li>
+<li>Validation workflow</li>
+<li>Deployment workflow when relevant</li>
+</ul>
+<p>Both humans and AI agents should be able to read it and know how development is done.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/DEVELOPMENT.template.md">DEVELOPMENT.template.md</a></p>
+<h2 id="contributing-md">CONTRIBUTING.md<a href="#contributing-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every project must include <code>CONTRIBUTING.md</code>.</p>
+<p>It is a how-to guide: ordered steps for landing a change, not background essays.</p>
+<p>It should document:</p>
+<ul>
+<li>Contribution expectations</li>
+<li>Issue workflow when relevant</li>
+<li>Pull request workflow</li>
+<li>Review expectations</li>
+<li>Required validation</li>
+<li>Commit conventions</li>
+</ul>
+<p>Every pull request description should clearly include:</p>
+<ul>
+<li>Purpose of the change</li>
+<li>Impact of the change</li>
+<li>Relevant context or background</li>
+<li>Potential risks or concerns</li>
+<li>Testing or validation performed</li>
+</ul>
+<p>The GitHub pull request template must stay synchronized with these requirements.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/CONTRIBUTING.template.md">CONTRIBUTING.template.md</a></p>
+<h2 id="architecture-md">ARCHITECTURE.md<a href="#architecture-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Projects with meaningful architectural boundaries must maintain <code>ARCHITECTURE.md</code>.</p>
+<p>Keep it short and practical: a brief overview, a high-level codebase map (name modules, do not link files), and the architectural invariants.</p>
+<p>Its job is to explain why the boundaries exist and keep the architecture from drifting — not to be a theoretical essay or a complete file list.</p>
+<p>Invariants and ADR rules are defined in <a href="architecture-governance.html">Architecture Governance</a>.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/ARCHITECTURE.template.md">ARCHITECTURE.template.md</a></p>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agents-file.html"><span class="related-cat">Practices</span><strong>Authoring AGENTS.md</strong></a></li>
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">Practices</span><strong>Language Policy</strong></a></li>
+<li><a class="related-chip" href="architecture-governance.html"><span class="related-cat">Practices</span><strong>Architecture Governance</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="architecture-governance.html"><span class="related-cat">Practices</span><strong>Architecture Governance</strong></a></li>
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">Practices</span><strong>Language Policy</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="pipeline.html"><span>Previous · Practices</span><strong>Pipeline</strong></a>
+<a class="page-nav-next" href="security.html"><span>Next · Practices</span><strong>Security</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/practices/project-documentation.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#agents-md">AGENTS.md</a></li>
+<li><a href="#readme-md">README.md</a></li>
+<li><a href="#development-md">DEVELOPMENT.md</a></li>
+<li><a href="#contributing-md">CONTRIBUTING.md</a></li>
+<li><a href="#architecture-md">ARCHITECTURE.md</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

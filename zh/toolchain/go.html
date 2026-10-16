@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Go 工具链 · AI 编码指南</title>
+<meta name="description" content="TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/go.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="Go 工具链 · AI 编码指南">
+<meta property="og:description" content="TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/go.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/toolchain/go.html">English</a><a lang="zh" href="go.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/toolchain/go.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html" aria-current="page"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">工具链</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+<span class="badge badge-draft">草稿</span>
+</div>
+<h1 id="go-工具链">Go 工具链<a href="#go-工具链" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="强制要求">强制要求<a href="#强制要求" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：</p>
+<ul>
+<li>对性能敏感的网络服务</li>
+<li>以独立二进制文件分发的命令行工具</li>
+<li>单个静态二进制文件的部署目标</li>
+<li>高并发工作负载</li>
+</ul>
+<p>采用 Go 必须给出明确理由、征得用户同意，并在项目 ADR 中记录这些内容。</p>
+<p>熟悉 Go 本身不构成采用理由。</p>
+<h2 id="适用范围">适用范围<a href="#适用范围" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>本文档是 Go 项目的基线标准，不能替代项目级评估。采用 Go 前须确认两点：需求属于上述场景之一，且 TypeScript 或 Python 无法以合理成本满足。</p>
+<h2 id="版本策略">版本策略<a href="#版本策略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用 mise 管理最新稳定版 Go。</p>
+<p><code>go.mod</code> 中的 <code>toolchain</code> 指令必须与 mise 管理的 Go 版本一致。</p>
+<p>除非记录了理由，否则不要锁定旧版 Go。</p>
+<h2 id="使用规则">使用规则<a href="#使用规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="lint-工具">Lint 工具<a href="#lint-工具" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>使用 <code>golangci-lint</code> 作为 Lint 工具。</p>
+<p>通过 mise task 提供该工具，确保本地开发和 CI 使用同一份配置。</p>
+<p>将配置作为 <code>.golangci.yml</code> 提交到仓库，并根据项目重点进行调整。不要使用 <code>enable-all</code>：它会启用缓慢且主观的检查，反而掩盖真正有价值的信号。</p>
+<p>始终启用的基线规则：</p>
+<ul>
+<li><code>govet</code>——可疑构造检查，大致对应 <code>go vet</code> 的检查项</li>
+<li><code>staticcheck</code>——正确性、简化与风格检查，包括错误消息风格检查（ST1005）：错误消息以小写开头，结尾不带标点</li>
+<li><code>unused</code>——未使用的常量、变量、函数与类型</li>
+<li><code>ineffassign</code>——无效赋值</li>
+<li><code>misspell</code>——常见英文拼写错误</li>
+</ul>
+<p>在基线之上，根据项目特点增加重点检查组：</p>
+<ul>
+<li>大量使用 context 的服务：<code>contextcheck</code>、<code>containedctx</code>、<code>fatcontext</code>、<code>noctx</code></li>
+<li>以错误处理为重点的项目：在 <code>errcheck</code> 基础上增加 <code>errorlint</code> 与 <code>wrapcheck</code></li>
+</ul>
+<h3 id="格式化">格式化<a href="#格式化" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>使用 <code>gofumpt</code> 作为格式化工具。</p>
+<p>将格式检查加入 pre-commit 配置和 CI。</p>
+<h3 id="错误处理">错误处理<a href="#错误处理" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>添加上下文时，用 <code>%w</code> 包装错误：</p>
+<pre><code class="language-go">return fmt.Errorf(&quot;loading config: %w&quot;, err)
+</code></pre>
+<p>用 <code>errors.Is</code> 和 <code>errors.As</code> 判断包装后的错误。</p>
+<p>不要通过比较错误消息字符串来检查错误。</p>
+<h3 id="context">Context<a href="#context" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>对于会阻塞或具有请求作用域的函数，必须将 <code>context.Context</code> 作为第一个参数传入。</p>
+<p>传递调用方的 context；不要在库代码中创建新的 <code>context.Background</code> 值。</p>
+<h3 id="并发">并发<a href="#并发" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>明确每个 goroutine 的归属：每个 goroutine 只能有一个生命周期负责人。</p>
+<p>通过 context 显式传递取消信号。</p>
+<p>不要泄漏 goroutine。</p>
+<h3 id="测试">测试<a href="#测试" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>使用表驱动测试覆盖多组输入下的行为。</p>
+<p>CI 中运行 <code>go test -race</code>。</p>
+<p>通过 <code>.golangci.yml</code> 中的按路径排除规则，为 <code>_test.go</code> 文件放宽 Lint 要求。测试优先保证可读性和意图清晰，不必遵循生产代码的 Lint 严格度；测试中关闭错误包装和重复代码风格检查：</p>
+<pre><code class="language-yaml">version: &quot;2&quot;
+linters:
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters:
+          - wrapcheck
+          - errorlint
+          - dupl
+</code></pre>
+<h3 id="panic">panic<a href="#panic" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>库代码中不要使用 <code>panic</code>，改为返回错误。</p>
+<p>仅在 <code>cmd/</code> 入口的启动错误不可恢复时使用 <code>panic</code>。</p>
+<h3 id="目录结构">目录结构<a href="#目录结构" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>Go 没有官方标准的项目布局。<code>golang-standards/project-layout</code> 仓库是社区参考而非官方标准；官方的 &quot;Organizing a Go module&quot; 指南也是从把基础包放在模块根目录讲起。</p>
+<ul>
+<li>小型库可以保持根目录扁平：只需 <code>go.mod</code> 和包文件。</li>
+<li>复杂服务应按业务分层设计自己的结构，而不是照搬模板。</li>
+</ul>
+<p><code>cmd/</code>（每个二进制一个入口）与 <code>internal/</code>（由编译器强制限制导入）仍是有用的惯例。只有在它们符合项目设计时才采用，不要把它们当成模板要求。</p>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="mise.html">mise</a>——版本管理：Go 和 golangci-lint 由 mise 管理，并通过 mise task 提供。</li>
+<li><a href="../libraries/go-api-stack.html">Go API 技术栈</a>——HTTP 服务使用的 Web 框架和校验技术栈。</li>
+<li><a href="quality-gates.html">质量门禁</a>——同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。</li>
+<li><a href="git.html">Git 工作流</a>——提交纪律：Go 变更遵循标准的提交和 pull request 规则。</li>
+<li><a href="../practices/testing.html">测试策略</a>——测试重点：测什么，在哪一层测。</li>
+</ul>
+<h2 id="不采用的替代方案">不采用的替代方案<a href="#不采用的替代方案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>不要将单独的 <code>gofmt</code> 或 <code>goimports</code> 作为项目的格式化工具。</p>
+<p><code>gofumpt</code> 是 <code>gofmt</code> 的严格超集；导入排序由 gofumpt 配合 golangci-lint 的 <code>gci</code> 或 <code>goimports</code> 规则完成。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="mise.html"><span class="related-cat">工具链</span><strong>mise</strong></a></li>
+<li><a class="related-chip" href="../libraries/go-api-stack.html"><span class="related-cat">库与框架</span><strong>Go API 技术栈</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">工具链</span><strong>质量门禁</strong></a></li>
+<li><a class="related-chip" href="git.html"><span class="related-cat">工具链</span><strong>Git 工作流</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">工程实践</span><strong>测试策略</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="python.html"><span class="related-cat">工具链</span><strong>Python 工具链</strong></a></li>
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/go-api-stack.html"><span class="related-cat">库与框架</span><strong>Go API 技术栈</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="github-actions.html"><span>上一篇 · 工具链</span><strong>GitHub Actions</strong></a>
+<a class="page-nav-next" href="mise.html"><span>下一篇 · 工具链</span><strong>mise</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/toolchain/go.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#强制要求">强制要求</a></li>
+<li><a href="#适用范围">适用范围</a></li>
+<li><a href="#版本策略">版本策略</a></li>
+<li><a href="#使用规则">使用规则</a></li>
+<li><a href="#联动">联动</a></li>
+<li><a href="#不采用的替代方案">不采用的替代方案</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

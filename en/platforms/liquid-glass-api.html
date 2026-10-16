@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Liquid Glass API reference · AI Coding Guidelines</title>
+<meta name="description" content="Reference for iOS 27 and native macOS 27 apps built with Xcode 27, with deployment targets set to 27.0. Verified on 202…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-api.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Liquid Glass API reference · AI Coding Guidelines">
+<meta property="og:description" content="Reference for iOS 27 and native macOS 27 apps built with Xcode 27, with deployment targets set to 27.0. Verified on 202…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-api.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="liquid-glass-api.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/platforms/liquid-glass-api.html">中文</a><a lang="ja" href="../../ja/platforms/liquid-glass-api.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="liquid-glass-api.html" aria-current="page"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">Platforms</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="liquid-glass-api-reference">Liquid Glass API reference<a href="#liquid-glass-api-reference" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="scope-and-verification">Scope and verification<a href="#scope-and-verification" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Reference for iOS 27 and native macOS 27 apps built with Xcode 27, with deployment targets set to 27.0. Verified on 2026-09-06 against Apple documentation and Xcode 27 beta build <code>27A5252f</code> (<code>iPhoneOS27.0.sdk</code>, <code>MacOSX27.sdk</code>). SDK declarations establish platform availability; the running OS determines rendering and interaction behavior. Beta declarations may change.</p>
+<p>The tables describe support on these two platforms, not historical introduction versions. Use UIKit for iOS and AppKit for native macOS. Isolate platform-specific APIs with <code>#if os(iOS)</code> / <code>#if os(macOS)</code> or platform-specific files.</p>
+<h2 id="swiftui-glass-apis">SwiftUI glass APIs<a href="#swiftui-glass-apis" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>All effects and styles in this section are available on both iOS 27 and macOS 27. Import <code>SwiftUI</code>; some declarations live in its <code>SwiftUICore</code> dependency.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Availability and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>glassEffect(_:in:)</code></td>
+<td>Glass behind content; defaults to <code>.regular</code> and a capsule</td>
+</tr>
+<tr>
+<td><code>Glass.regular</code> / <code>.clear</code> / <code>.identity</code></td>
+<td>Adaptive / clear / no glass effect</td>
+</tr>
+<tr>
+<td><code>Glass.tint(_:)</code> / <code>.interactive(_:)</code></td>
+<td>Configure tint and interactive response, including mouse interaction on macOS</td>
+</tr>
+<tr>
+<td><code>GlassEffectContainer(spacing:content:)</code></td>
+<td>Render related effects together; spacing controls blending</td>
+</tr>
+<tr>
+<td><code>glassEffectID(_:in:)</code></td>
+<td>Stable element identity for morphing within a namespace</td>
+</tr>
+<tr>
+<td><code>glassEffectUnion(id:namespace:)</code></td>
+<td>Combine matching shapes and variants with the same union ID and namespace</td>
+</tr>
+<tr>
+<td><code>glassEffectTransition(_:)</code></td>
+<td><code>.matchedGeometry</code>, <code>.materialize</code>, or <code>.identity</code></td>
+</tr>
+<tr>
+<td><code>.buttonStyle(.glass)</code> / <code>.glassProminent</code> / <code>.glass(.clear)</code></td>
+<td>System glass button styles; preserve semantic actions and roles</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="swiftui-navigation-and-layout">SwiftUI navigation and layout<a href="#swiftui-navigation-and-layout" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Availability and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tabBarMinimizeBehavior(_:)</code></td>
+<td>iOS: minimize the iPhone tab bar while scrolling</td>
+</tr>
+<tr>
+<td><code>ToolbarSpacer(_:placement:)</code> / <code>sharedBackgroundVisibility(_:)</code></td>
+<td>Both: separate toolbar groups and control their backgrounds</td>
+</tr>
+<tr>
+<td><code>scrollEdgeEffectStyle(_:for:)</code> / <code>scrollEdgeEffectHidden(_:for:)</code></td>
+<td>Both: configure style or visibility per scroll edge</td>
+</tr>
+<tr>
+<td><code>backgroundExtensionEffect()</code></td>
+<td>Both: extend background content beneath adjacent UI</td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(content:)</code> / <code>tabViewBottomAccessoryPlacement</code></td>
+<td>iOS: adapt accessory to <code>.inline</code> / <code>.expanded</code> / <code>nil</code></td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(isEnabled:content:)</code></td>
+<td>iOS: dynamically show or hide the accessory</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="uikit-and-appkit">UIKit and AppKit<a href="#uikit-and-appkit" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Availability and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UIGlassEffect(style:)</code> / <code>UIGlassContainerEffect</code></td>
+<td>iOS: custom and grouped effects in <code>UIVisualEffectView</code>; configure <code>tintColor</code> and <code>isInteractive</code></td>
+</tr>
+<tr>
+<td><code>UIButton.Configuration.glass()</code> / <code>.prominentGlass()</code> / <code>.clearGlass()</code> / <code>.prominentClearGlass()</code></td>
+<td>iOS: system button configurations</td>
+</tr>
+<tr>
+<td><code>UIScrollView.topEdgeEffect</code> / <code>.bottomEdgeEffect</code></td>
+<td>iOS: configure <code>style</code> and <code>isHidden</code> on each edge effect</td>
+</tr>
+<tr>
+<td><code>UIScrollEdgeElementContainerInteraction</code> / <code>UIBackgroundExtensionView</code></td>
+<td>iOS: register custom overlays / extend backgrounds</td>
+</tr>
+<tr>
+<td><code>UIBarButtonItem.hidesSharedBackground</code> / <code>.isHidden</code></td>
+<td>iOS: hide the shared background / the item itself</td>
+</tr>
+<tr>
+<td><code>UITabBarController.tabBarMinimizeBehavior</code></td>
+<td>iOS: UIKit tab bar minimization</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView</code> / <code>NSGlassEffectContainerView</code></td>
+<td>macOS: custom glass and grouping, with <code>contentView</code> and <code>spacing</code></td>
+</tr>
+<tr>
+<td><code>NSButton.BezelStyle.glass</code> / <code>NSBackgroundExtensionView</code></td>
+<td>macOS: glass buttons / background extension</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView.effectIsInteractive</code></td>
+<td>macOS: interactive mouse response</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="adaptive-navigation-and-window-behavior">Adaptive navigation and window behavior<a href="#adaptive-navigation-and-window-behavior" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Availability and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>toolbarMinimizationBehavior(_:for:)</code></td>
+<td>iOS navigation bars: minimization policy; use the current name rather than beta <code>toolbarMinimizeBehavior</code></td>
+</tr>
+<tr>
+<td><code>toolbarMinimizationSafeAreaAdjustment(_:for:)</code> / <code>toolbarMinimizationRestoration(_:for:)</code></td>
+<td>iOS navigation bars: safe-area adjustment and restoration policy</td>
+</tr>
+<tr>
+<td><code>UINavigationItem.navigationBarMinimization</code></td>
+<td>iOS: a <code>UIBarMinimization</code> value with <code>minimizationBehavior</code>, <code>safeAreaAdjustment</code>, and <code>restorationBehavior</code></td>
+</tr>
+<tr>
+<td><code>TabRole.prominent</code> / <code>UITabBarController.prominentTabIdentifier</code></td>
+<td>iOS: designate the prominent tab</td>
+</tr>
+<tr>
+<td><code>UITabBarController.Sidebar.preferredPlacement</code></td>
+<td>iOS: opt into sidebar placement when space permits; check <code>isAvailable</code></td>
+</tr>
+<tr>
+<td><code>ToolbarContent.visibilityPriority(_:)</code></td>
+<td>Both: toolbar overflow priority</td>
+</tr>
+<tr>
+<td><code>ToolbarOverflowMenu</code> / <code>.topBarPinnedTrailing</code></td>
+<td>iOS only; unavailable on native macOS</td>
+</tr>
+<tr>
+<td><code>toolbarColorScheme(_:for:)</code> / <code>toolbarVisibility(_:for:)</code> with <code>.statusBar</code></td>
+<td>iOS: status-bar styling and visibility</td>
+</tr>
+<tr>
+<td><code>appearsActive</code></td>
+<td>Both: adapt custom content to window activity</td>
+</tr>
+<tr>
+<td><code>UIMenuElement.preferredImageVisibility</code></td>
+<td>iOS: override default menu icon visibility where needed</td>
+</tr>
+</tbody>
+</table>
+</div><p>Validate the appearance slider, inactive-window styling, and scroll edges as part of the interface. UIKit apps must use the scene lifecycle and provide a launch screen. Layout must accommodate resizable iPhone windows and preserve access to essential actions.</p>
+<h2 id="implementation-checks">Implementation checks<a href="#implementation-checks" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Build and type-check separately for iOS 27 and macOS 27. Shared SwiftUI code still needs platform separation for navigation, toolbars, and framework-specific views.</li>
+<li>Apply appearance modifiers before <code>glassEffect</code>, then identity, union, or transition modifiers. Use containers for related effects and measure actual rendering cost.</li>
+<li>Use semantic buttons for actions. <code>ToolbarItem</code> has no <code>isHidden</code> property; conditionally include the item in SwiftUI.</li>
+<li>Test custom labels, motion, safe areas, and backgrounds under accessibility settings. System material adaptation does not validate app content.</li>
+<li>Recheck beta names against the selected SDK; WWDC samples may retain earlier names.</li>
+</ul>
+<h2 id="official-documentation">Official documentation<a href="#official-documentation" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/glass">Glass</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/glasseffectcontainer">GlassEffectContainer</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views">Applying Liquid Glass to custom views</a></li>
+<li><a href="https://developer.apple.com/documentation/uikit/uiglasseffect">UIGlassEffect</a></li>
+<li><a href="https://developer.apple.com/documentation/appkit/nsglasseffectview">NSGlassEffectView</a></li>
+<li><a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-27-release-notes">iOS and iPadOS 27 release notes</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/278/">Modernize your UIKit app — WWDC26</a></li>
+</ul>
+<p>Design: <a href="liquid-glass-design.html">Liquid Glass design</a>. Recipes: <a href="liquid-glass-patterns.html">Liquid Glass patterns</a>.</p>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-design.html"><span class="related-cat">Platforms</span><strong>Liquid Glass design (Apple platforms)</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">Platforms</span><strong>Liquid Glass implementation patterns</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-design.html"><span class="related-cat">Platforms</span><strong>Liquid Glass design (Apple platforms)</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">Platforms</span><strong>Liquid Glass implementation patterns</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="../libraries/vercel-ai-sdk.html"><span>Previous · Libraries</span><strong>Vercel AI SDK</strong></a>
+<a class="page-nav-next" href="liquid-glass-design.html"><span>Next · Platforms</span><strong>Liquid Glass design (Apple platforms)</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/platforms/liquid-glass-api.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#scope-and-verification">Scope and verification</a></li>
+<li><a href="#swiftui-glass-apis">SwiftUI glass APIs</a></li>
+<li><a href="#swiftui-navigation-and-layout">SwiftUI navigation and layout</a></li>
+<li><a href="#uikit-and-appkit">UIKit and AppKit</a></li>
+<li><a href="#adaptive-navigation-and-window-behavior">Adaptive navigation and window behavior</a></li>
+<li><a href="#implementation-checks">Implementation checks</a></li>
+<li><a href="#official-documentation">Official documentation</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>三言語用語集 · AI コーディングガイドライン</title>
+<meta name="description" content="英語・中国語・日本語の三言語で統一している標準用語です。製品名（mise、pnpm、Vite など）や業界標準の用語（monorepo、pull request など）は三言語とも英語のまま表記します。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/glossary.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="三言語用語集 · AI コーディングガイドライン">
+<meta property="og:description" content="英語・中国語・日本語の三言語で統一している標準用語です。製品名（mise、pnpm、Vite など）や業界標準の用語（monorepo、pull request など）は三言語とも英語のまま表記します。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/glossary.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../en/glossary.html">English</a><a lang="zh" href="../zh/glossary.html">中文</a><a lang="ja" href="glossary.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="index.html">概要</a>
+<a class="side-home" href="glossary.html" aria-current="page">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta"><a class="meta-cat" href="index.html">概要</a><span class="meta-sep" aria-hidden="true">/</span><span>用語集</span></div>
+<h1>三言語用語集</h1>
+<p class="intro">英語・中国語・日本語の三言語で統一している標準用語です。製品名（mise、pnpm、Vite など）や業界標準の用語（monorepo、pull request など）は三言語とも英語のまま表記します。</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>英語 (en)</th><th>中国語 (zh)</th><th>日本語 (ja)</th></tr></thead>
+<tbody>
+<tr><td lang="en">guideline</td><td lang="zh">指南</td><td lang="ja">ガイドライン</td></tr>
+<tr><td lang="en">toolchain</td><td lang="zh">工具链</td><td lang="ja">ツールチェーン</td></tr>
+<tr><td lang="en">linter</td><td lang="zh">Lint 工具</td><td lang="ja">リンター</td></tr>
+<tr><td lang="en">formatter</td><td lang="zh">格式化工具</td><td lang="ja">フォーマッター</td></tr>
+<tr><td lang="en">package manager</td><td lang="zh">包管理器</td><td lang="ja">パッケージマネージャー</td></tr>
+<tr><td lang="en">pre-commit hook</td><td lang="zh">预提交钩子</td><td lang="ja">プリコミットフック</td></tr>
+<tr><td lang="en">architecture decision record (ADR)</td><td lang="zh">架构决策记录(ADR)</td><td lang="ja">アーキテクチャ決定記録(ADR)</td></tr>
+<tr><td lang="en">single source of truth</td><td lang="zh">单一事实来源</td><td lang="ja">信頼できる唯一の情報源</td></tr>
+<tr><td lang="en">validation</td><td lang="zh">校验</td><td lang="ja">検証</td></tr>
+<tr><td lang="en">type checking</td><td lang="zh">类型检查</td><td lang="ja">型チェック</td></tr>
+<tr><td lang="en">dependency</td><td lang="zh">依赖</td><td lang="ja">依存関係</td></tr>
+<tr><td lang="en">breaking change</td><td lang="zh">破坏性变更</td><td lang="ja">破壊的変更</td></tr>
+<tr><td lang="en">secret</td><td lang="zh">敏感凭据</td><td lang="ja">シークレット</td></tr>
+<tr><td lang="en">task runner</td><td lang="zh">任务运行器</td><td lang="ja">タスクランナー</td></tr>
+<tr><td lang="en">root cause</td><td lang="zh">根本原因</td><td lang="ja">根本原因</td></tr>
+<tr><td lang="en">code review</td><td lang="zh">代码评审</td><td lang="ja">コードレビュー</td></tr>
+<tr><td lang="en">pull request</td><td lang="zh">pull request</td><td lang="ja">プルリクエスト</td></tr>
+<tr><td lang="en">AI agent</td><td lang="zh">AI Agent</td><td lang="ja">AI エージェント</td></tr>
+<tr><td lang="en">quality gates</td><td lang="zh">质量门禁</td><td lang="ja">品質ゲート</td></tr>
+<tr><td lang="en">invariant</td><td lang="zh">不变量</td><td lang="ja">不変条件</td></tr>
+<tr><td lang="en">coverage</td><td lang="zh">覆盖率</td><td lang="ja">カバレッジ</td></tr>
+<tr><td lang="en">over-engineering</td><td lang="zh">过度设计</td><td lang="ja">過剰な設計</td></tr>
+<tr><td lang="en">literal value</td><td lang="zh">字面值</td><td lang="ja">リテラル値</td></tr>
+<tr><td lang="en">test fixture</td><td lang="zh">测试夹具</td><td lang="ja">テストフィクスチャ</td></tr>
+<tr><td lang="en">unit test</td><td lang="zh">单元测试</td><td lang="ja">ユニットテスト</td></tr>
+<tr><td lang="en">E2E test</td><td lang="zh">E2E 测试</td><td lang="ja">E2E テスト</td></tr>
+<tr><td lang="en">workflow</td><td lang="zh">工作流</td><td lang="ja">ワークフロー</td></tr>
+<tr><td lang="en">identifier</td><td lang="zh">标识符</td><td lang="ja">識別子</td></tr>
+<tr><td lang="en">lockfile</td><td lang="zh">lockfile</td><td lang="ja">ロックファイル</td></tr>
+<tr><td lang="en">framework-agnostic</td><td lang="zh">框架无关</td><td lang="ja">フレームワーク非依存</td></tr>
+<tr><td lang="en">long-term support (LTS)</td><td lang="zh">LTS</td><td lang="ja">LTS</td></tr>
+<tr><td lang="en">hallucination</td><td lang="zh">幻觉</td><td lang="ja">幻覚</td></tr>
+<tr><td lang="en">secret scanning</td><td lang="zh">凭据扫描</td><td lang="ja">シークレットスキャニング</td></tr>
+<tr><td lang="en">design token</td><td lang="zh">设计令牌</td><td lang="ja">デザイントークン</td></tr>
+<tr><td lang="en">tradeoff</td><td lang="zh">权衡</td><td lang="ja">トレードオフ</td></tr>
+<tr><td lang="en">workload</td><td lang="zh">工作负载</td><td lang="ja">ワークロード</td></tr>
+<tr><td lang="en">discriminated union</td><td lang="zh">可辨识联合</td><td lang="ja">判別可能なユニオン</td></tr>
+<tr><td lang="en">barrel file</td><td lang="zh">桶文件</td><td lang="ja">バレルファイル</td></tr>
+<tr><td lang="en">Atomic Design Methodology</td><td lang="zh">原子设计方法论</td><td lang="ja">アトミックデザイン手法</td></tr>
+<tr><td lang="en">least privilege</td><td lang="zh">最小权限</td><td lang="ja">最小権限</td></tr>
+<tr><td lang="en">branch protection</td><td lang="zh">分支保护</td><td lang="ja">ブランチ保護</td></tr>
+<tr><td lang="en">status check</td><td lang="zh">状态检查</td><td lang="ja">ステータスチェック</td></tr>
+<tr><td lang="en">script injection</td><td lang="zh">脚本注入</td><td lang="ja">スクリプトインジェクション</td></tr>
+<tr><td lang="en">pipeline</td><td lang="zh">流水线</td><td lang="ja">パイプライン</td></tr>
+<tr><td lang="en">stage</td><td lang="zh">阶段</td><td lang="ja">ステージ</td></tr>
+<tr><td lang="en">whitelist</td><td lang="zh">白名单</td><td lang="ja">ホワイトリスト</td></tr>
+<tr><td lang="en">quick start</td><td lang="zh">快速开始</td><td lang="ja">クイックスタート</td></tr>
+<tr><td lang="en">screenshot</td><td lang="zh">截图</td><td lang="ja">スクリーンショット</td></tr>
+<tr><td lang="en">badge</td><td lang="zh">徽章</td><td lang="ja">バッジ</td></tr>
+<tr><td lang="en">tagline</td><td lang="zh">标语</td><td lang="ja">タグライン</td></tr>
+<tr><td lang="en">table of contents</td><td lang="zh">目录</td><td lang="ja">目次</td></tr>
+<tr><td lang="en">license</td><td lang="zh">许可证</td><td lang="ja">ライセンス</td></tr>
+<tr><td lang="en">feature</td><td lang="zh">特性</td><td lang="ja">機能</td></tr>
+<tr><td lang="en">concept</td><td lang="zh">概念</td><td lang="ja">概念</td></tr>
+<tr><td lang="en">how-to guide</td><td lang="zh">操作指南</td><td lang="ja">利用方法</td></tr>
+<tr><td lang="en">reference</td><td lang="zh">参考</td><td lang="ja">参考資料</td></tr>
+<tr><td lang="en">explanation</td><td lang="zh">解释</td><td lang="ja">解説</td></tr>
+<tr><td lang="en">performance</td><td lang="zh">性能</td><td lang="ja">性能</td></tr>
+<tr><td lang="en">experiments</td><td lang="zh">实验</td><td lang="ja">実験</td></tr>
+<tr><td lang="en">design language</td><td lang="zh">设计语言</td><td lang="ja">デザイン言語</td></tr>
+<tr><td lang="en">material</td><td lang="zh">材质</td><td lang="ja">マテリアル</td></tr>
+<tr><td lang="en">control</td><td lang="zh">控件</td><td lang="ja">コントロール</td></tr>
+<tr><td lang="en">navigation bar</td><td lang="zh">导航栏</td><td lang="ja">ナビゲーションバー</td></tr>
+<tr><td lang="en">tab bar</td><td lang="zh">标签栏</td><td lang="ja">タブバー</td></tr>
+<tr><td lang="en">toolbar</td><td lang="zh">工具栏</td><td lang="ja">ツールバー</td></tr>
+<tr><td lang="en">sidebar</td><td lang="zh">侧边栏</td><td lang="ja">サイドバー</td></tr>
+<tr><td lang="en">safe area</td><td lang="zh">安全区</td><td lang="ja">セーフエリア</td></tr>
+<tr><td lang="en">scroll edge effect</td><td lang="zh">滚动边缘效果</td><td lang="ja">スクロールエッジエフェクト</td></tr>
+<tr><td lang="en">concentricity</td><td lang="zh">同心性</td><td lang="ja">同心性</td></tr>
+<tr><td lang="en">accessibility</td><td lang="zh">无障碍</td><td lang="ja">アクセシビリティ</td></tr>
+<tr><td lang="en">inspector</td><td lang="zh">检查器</td><td lang="ja">インスペクター</td></tr>
+<tr><td lang="en">morphing</td><td lang="zh">变形</td><td lang="ja">モーフィング</td></tr>
+<tr><td lang="en">tint</td><td lang="zh">着色</td><td lang="ja">ティント</td></tr>
+<tr><td lang="en">corner radius</td><td lang="zh">圆角</td><td lang="ja">角丸</td></tr>
+<tr><td lang="en">continuous corner</td><td lang="zh">连续圆角</td><td lang="ja">連続角丸</td></tr>
+<tr><td lang="en">vibrancy</td><td lang="zh">鲜明度</td><td lang="ja">ビブランシー</td></tr>
+</tbody>
+</table>
+</div>
+<h2>使用しない訳語</h2>
+<p>不自然な直訳が混入しないよう、検証ツールで機械的にブロックしています。</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>英語</th><th>対象言語</th><th>避ける表現</th><th>標準の表現</th></tr></thead>
+<tbody>
+<tr><td lang="en">workflow</td><td><code>zh</code></td><td lang="zh" class="term-forbidden">工作流程</td><td lang="zh" class="term-preferred">工作流</td></tr>
+<tr><td lang="en">pull request</td><td><code>zh</code></td><td lang="zh" class="term-forbidden">拉取请求</td><td lang="zh" class="term-preferred">pull request</td></tr>
+<tr><td lang="en">secret scanning</td><td><code>zh</code></td><td lang="zh" class="term-forbidden">秘密扫描</td><td lang="zh" class="term-preferred">凭据扫描</td></tr>
+<tr><td lang="en">quality gate</td><td><code>zh</code></td><td lang="zh" class="term-forbidden">质量门槛</td><td lang="zh" class="term-preferred">质量门禁</td></tr>
+<tr><td lang="en">pull request</td><td><code>ja</code></td><td lang="ja" class="term-forbidden">プル要求</td><td lang="ja" class="term-preferred">プルリクエスト</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/GLOSSARY.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>GitHub Actions · AI Coding Guidelines</title>
+<meta name="description" content="GitHub Actions is the standard CI/CD platform and the default choice when the user has not specified a pipeline system.…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/github-actions.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="GitHub Actions · AI Coding Guidelines">
+<meta property="og:description" content="GitHub Actions is the standard CI/CD platform and the default choice when the user has not specified a pipeline system.…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/github-actions.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="github-actions.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/toolchain/github-actions.html">中文</a><a lang="ja" href="../../ja/toolchain/github-actions.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="github-actions.html" aria-current="page"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">Toolchain</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v5</span>
+
+</div>
+<h1 id="github-actions">GitHub Actions<a href="#github-actions" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="standard-platform">Standard Platform<a href="#standard-platform" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>GitHub Actions is the standard CI/CD platform and the default choice when the user has not specified a pipeline system. Tool-agnostic pipeline rules live in <a href="../practices/pipeline.html">Pipeline</a>.</p>
+<h2 id="action-upgrade-checklist">Action Upgrade Checklist<a href="#action-upgrade-checklist" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>When creating or modifying a GitHub Actions workflow:</p>
+<ol>
+<li>Check whether the actions being used have newer stable versions.</li>
+<li>Review the official README or documentation before upgrading.</li>
+<li>Check for breaking changes.</li>
+<li>Check whether required inputs, permissions, runtime versions, or behavior have changed.</li>
+<li>Prefer moving to the current supported version when migration is safe.</li>
+</ol>
+<p>Never bump an action version without checking its release notes first. Major-version tags (<code>@v4</code>) pick up minor and patch releases automatically; use this checklist when crossing a major version boundary.</p>
+<h2 id="ci-layering">CI Layering<a href="#ci-layering" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>CI should use the same standardized project tooling as local development wherever practical.</p>
+<p>Prefer:</p>
+<pre><code class="language-text">GitHub Actions
+    -&gt; mise
+        -&gt; project task
+            -&gt; pnpm / uv / prek / cocogitto / test tooling
+</code></pre>
+<p>rather than duplicating project logic directly inside workflow YAML.</p>
+<p>mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML. See <a href="mise.html">mise</a>.</p>
+<h2 id="event-scoping">Event scoping<a href="#event-scoping" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Scope each workflow file to one trigger audience. A project-validation
+workflow runs on <code>push</code> (default branch) and <code>pull_request</code>; rules that
+exist only for pull requests — for example, PR title rules — live in their
+own workflow triggered by <code>pull_request</code> alone.</li>
+<li>Never emulate that split with <code>if: github.event_name == 'pull_request'</code> on a
+job inside a multi-trigger workflow: on <code>push</code> runs the job reports skipped
+and the run reads as a partial failure. See
+<a href="../practices/pipeline.html">Pipeline</a> for the tool-agnostic rule.</li>
+<li><code>pull_request</code> defaults to <code>opened</code>, <code>synchronize</code>, and <code>reopened</code> — the
+right set for validating code. List <code>types:</code> only to go beyond the default:
+a workflow that validates PR metadata an edit can change (the title) must
+add <code>edited</code>, so retitled pull requests re-verify. Never list activity types
+that cannot change the outcome; every listed type is another trigger.</li>
+<li>Merge gates treat a skipped required check as passing, so this rule is for
+readable run lists. The real merge hazard is a required check whose workflow
+does not run on <code>pull_request</code> or whose job is filtered out — it never
+reports and stays <code>pending</code> forever. Ensure every required check always runs
+and reports.</li>
+</ul>
+<h2 id="checkout-depth">Checkout Depth<a href="#checkout-depth" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><code>actions/checkout</code> fetches a single commit by default. Keep that default:
+most jobs only need the tree they validate.</li>
+<li>Set <code>fetch-depth: 0</code> only in a job that reads history — <code>cog check</code>,
+changelog generation, <code>git describe</code>, diff-against-base logic.</li>
+<li>When one responsibility needs full history and the rest do not, split it
+into its own job rather than deepening the shared checkout. History-reading
+work is its own responsibility under <a href="../practices/pipeline.html">Pipeline</a>
+anyway, and the split keeps the validation job's checkout shallow.</li>
+</ul>
+<h2 id="naming-and-readability">Naming and Readability<a href="#naming-and-readability" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>For the tool-agnostic principle, see <a href="../practices/pipeline.html">Pipeline</a>.</p>
+<p>GitHub Actions specifics:</p>
+<ul>
+<li>Give the workflow a <code>name</code> that states what it does (<code>CI</code>, <code>Release</code>). Do
+not rely on the filename, and do not repeat a job name as the workflow name.</li>
+<li>Give every job a readable <code>name</code>. Job names surface as status checks in
+branch protection; a reader must be able to map a failed check to a
+responsibility (<code>Validate</code>, <code>Validate PR title</code>), not to a tool invocation.</li>
+<li>Name every step with a short imperative phrase saying what it does or
+verifies (<code>Install dependencies (pnpm)</code>, <code>Check commit history (cog)</code>). A
+<code>run:</code> step without <code>name</code> renders as its raw command, and commands are not
+documentation.</li>
+<li>One concern per workflow file. Split by trigger or audience when they
+diverge; prefer several small workflows over one growing file.</li>
+</ul>
+<h2 id="hardening-defaults">Hardening Defaults<a href="#hardening-defaults" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Apply these to every workflow unless it has a stated reason not to:</p>
+<pre><code class="language-yaml">permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    timeout-minutes: 15
+</code></pre>
+<ul>
+<li>Least privilege: default <code>permissions</code> to <code>contents: read</code>; widen only in
+the job that needs more.</li>
+<li>Set <code>timeout-minutes</code> on every job so a hung job cannot burn runner minutes
+up to the platform default.</li>
+<li>Use <code>concurrency</code> with <code>cancel-in-progress</code> so superseded runs on the same
+ref are cancelled instead of queuing.</li>
+<li>Pass untrusted input (PR titles, branch names, issue text) into <code>run:</code>
+scripts through environment variables, never via direct <code>${{ }}</code>
+interpolation — direct interpolation enables script injection.</li>
+<li>Reference actions by the current major version tag from a trusted publisher
+(<code>actions/checkout@v7</code>, <code>jdx/mise-action@v4</code>). The tag keeps receiving
+fixes, runtime updates, and new features inside that major, and an upgrade
+stays a one-token diff a reviewer can read.</li>
+<li>Prefer the tag over a full commit SHA. A SHA freezes the action at one
+revision: fixes never arrive, the workflow stops stating which version it
+runs, and every upgrade becomes a manual SHA lookup. Pin a SHA only under a
+stated immutable-build or supply-chain policy, and record the resolved
+version in a trailing comment. Never leave an action on a bare branch name
+or an unversioned tag.</li>
+<li>A floating major tag trusts the publisher: pair it with the least-privilege
+defaults above, and never expose secrets to a workflow that runs
+pull-request code.</li>
+<li>Never use <code>pull_request_target</code> to check out and run pull-request code; it
+executes the base workflow definition with repository secrets. Use
+<code>pull_request</code>.</li>
+</ul>
+<h2 id="related">Related<a href="#related" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../practices/pipeline.html">Pipeline</a> — tool-agnostic pipeline structure and naming rules.</li>
+<li><a href="quality-gates.html">Quality Gates</a> — run equivalent local checks with the same project configuration.</li>
+<li><a href="git.html">Git Workflow</a> — Conventional Commits validation in CI, including the squash-merge pull-request-title rule.</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/pipeline.html"><span class="related-cat">Practices</span><strong>Pipeline</strong></a></li>
+<li><a class="related-chip" href="mise.html"><span class="related-cat">Toolchain</span><strong>mise</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">Toolchain</span><strong>Quality Gates</strong></a></li>
+<li><a class="related-chip" href="git.html"><span class="related-cat">Toolchain</span><strong>Git Workflow</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">Practices</span><strong>Agent Operating Protocol</strong></a></li>
+<li><a class="related-chip" href="../practices/pipeline.html"><span class="related-cat">Practices</span><strong>Pipeline</strong></a></li>
+<li><a class="related-chip" href="git.html"><span class="related-cat">Toolchain</span><strong>Git Workflow</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">Toolchain</span><strong>Quality Gates</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="git.html"><span>Previous · Toolchain</span><strong>Git Workflow</strong></a>
+<a class="page-nav-next" href="go.html"><span>Next · Toolchain</span><strong>Go Toolchain</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/toolchain/github-actions.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#standard-platform">Standard Platform</a></li>
+<li><a href="#action-upgrade-checklist">Action Upgrade Checklist</a></li>
+<li><a href="#ci-layering">CI Layering</a></li>
+<li><a href="#event-scoping">Event scoping</a></li>
+<li><a href="#checkout-depth">Checkout Depth</a></li>
+<li><a href="#naming-and-readability">Naming and Readability</a></li>
+<li><a href="#hardening-defaults">Hardening Defaults</a></li>
+<li><a href="#related">Related</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

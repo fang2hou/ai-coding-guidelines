@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AGENTS.md の執筆 · AI コーディングガイドライン</title>
+<meta name="description" content="AGENTS.md はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、1 行ごとに載せる…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/agents-file.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="AGENTS.md の執筆 · AI コーディングガイドライン">
+<meta property="og:description" content="AGENTS.md はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、1 行ごとに載せる…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/agents-file.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/practices/agents-file.html">English</a><a lang="zh" href="../../zh/practices/agents-file.html">中文</a><a lang="ja" href="agents-file.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html" aria-current="page"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="agents-md-の執筆">AGENTS.md の執筆<a href="#agents-md-の執筆" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p><code>AGENTS.md</code> はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、1 行ごとに載せる価値がなければならない。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/project-agents.template.md">project-agents.template.md</a></p>
+<h2 id="必須要件">必須要件<a href="#必須要件" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトは、リポジトリのルートに <code>AGENTS.md</code> を 1 つ置くこと。</p>
+<p>正式なファイル名は <code>AGENTS.md</code> である。同じルールを <code>CLAUDE.md</code> などの互換性のあるファイル名に複製しないこと。指示ファイルを複製すると内容が食い違い、コンテキスト予算を二重に消費する。</p>
+<h2 id="適切なファイルへの振り分け">適切なファイルへの振り分け<a href="#適切なファイルへの振り分け" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>指針は種類に応じて適切な場所に置くこと。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>記述先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常に適用するコマンド、規約、境界</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>プロダクトの背景、導入説明、スクリーンショット</td>
+<td><code>README.md</code></td>
+</tr>
+<tr>
+<td>開発ワークフローとツールチェーンの詳細</td>
+<td><code>DEVELOPMENT.md</code></td>
+</tr>
+<tr>
+<td>プルリクエスト、レビュー、検証の要件</td>
+<td><code>CONTRIBUTING.md</code></td>
+</tr>
+<tr>
+<td>アーキテクチャの不変条件</td>
+<td><code>ARCHITECTURE.md</code></td>
+</tr>
+<tr>
+<td>特定のワークフローにだけ必要な手順</td>
+<td>別ドキュメントまたはエージェントスキル（リンクを付けて参照）</td>
+</tr>
+<tr>
+<td>エージェントツールの設定、既定モデル、自律度</td>
+<td>各ツールの設定ファイル</td>
+</tr>
+</tbody>
+</table>
+</div><p>運用手順書や長い参照ドキュメント、個別タスクのメモを <code>AGENTS.md</code> に貼り付けないこと。信頼できる唯一の情報源にリンクすること。</p>
+<h2 id="構成">構成<a href="#構成" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>冒頭に、プロジェクトの目的と対象を 1 文で示すこと。その後は、エージェントが必要とする順に、テンプレートに沿って節を並べること。</p>
+<ol>
+<li>コマンド：セットアップ、実行、単一テスト、全体テスト、リンター、型チェック、ビルド、コード生成、全体検証の正確なコマンドを記載する。プロジェクトにない項目は省く。</li>
+<li>エンジニアリング標準：共有ガイドラインと、プロジェクト固有の例外。</li>
+<li>構成：トップレベルのディレクトリごとに 1 行で、主要モジュールを示す。</li>
+<li>境界：必ず行うこと、決して行わないこと、事前に確認すること。</li>
+<li>確定した言語ポリシー：<a href="language-policy.html">言語ポリシー</a>を参照する。</li>
+<li>プロジェクト固有の規約：コードからは推測できない判断。</li>
+<li>詳細リンク：<code>DEVELOPMENT.md</code>、<code>CONTRIBUTING.md</code>、<code>ARCHITECTURE.md</code> へのリンク。</li>
+</ol>
+<p>コマンドを最初に置くのは、エージェントが最初の 1 分で必要とするためである。対象を絞った軽いコマンド（単一テストファイルの実行など）と、全体検証のコマンド（コミット前の <code>mise run check</code>）の両方を記載し、小さな変更のたびに最も重いコマンドを実行させないようにする。</p>
+<h2 id="検証可能なルール">検証可能なルール<a href="#検証可能なルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのルールは、エージェントが実行でき、レビュアーが確認できる行動として示すこと。コマンド、パス、条件を具体的に記すこと。</p>
+<p>検証可能な例：</p>
+<pre><code class="language-markdown">- `src/auth/` 配下を変更したら `mise run test -- src/auth/token.test.ts` を実行する。
+- `src/generated/` 配下は手で編集しない。`mise run codegen` で再生成する。
+- 依存関係の追加や `ARCHITECTURE.md` の不変条件の変更は、事前に確認する。
+</code></pre>
+<p>検証できず、役に立たない例：</p>
+<pre><code class="language-markdown">- 認証コードは慎重に扱う。
+- すべてが動くことを確認する。
+- ベストプラクティスに従う。
+</code></pre>
+<h2 id="ネストしたファイル">ネストしたファイル<a href="#ネストしたファイル" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>まずルートに 1 ファイルだけ置くこと。ネストした <code>AGENTS.md</code> を追加するのは、そのディレクトリツリーに実質的な違いがある場合だけとする。</p>
+<ul>
+<li>別のパッケージマネージャー、テストランナー、ランタイムを使用する場合。</li>
+<li>手で編集せず、再生成する必要がある生成コードを含む場合。</li>
+<li>マイグレーションやデプロイなど、追加の承認が必要な場合。</li>
+<li>他の場所には適用されない UI やデザインシステムのルールがある場合。</li>
+</ul>
+<p>ネストしたファイルには固有の差分だけを記載し、それ以外はルートに委ねること。ルートのルールをネストしたファイルで繰り返してはならない。</p>
+<h2 id="ファイルサイズ">ファイルサイズ<a href="#ファイルサイズ" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>このファイルはタスクのたびに読み込まれるため、長くなるほど毎回コンテキストを消費する。</p>
+<ul>
+<li>最も重要なルールを先頭に置く。</li>
+<li>詳細ドキュメントは複製せず、リンクで案内する。</li>
+<li>文章での注意書きより自動チェックを優先する。リンター、prek、CI がすでに強制しているルールは重ねて書かない。</li>
+<li>サブシステム固有の指針はルートに書き足さず、サブディレクトリのネストしたファイルへ移す。</li>
+</ul>
+<p>ルートファイルは一度で読み通せる長さに保つこと。長くなりすぎたら、詳細をリンク先へ移し、ツールで強制できる記述を削る。</p>
+<h2 id="記載しない内容">記載しない内容<a href="#記載しない内容" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>シークレット、トークン、内部ホスト名。</li>
+<li>リポジトリ内にすでに存在するドキュメントの複製。</li>
+<li>網羅的なディレクトリ一覧。次のリファクタリングですぐに古くなる。</li>
+<li>Issue やプルリクエストに記載すべき一時的なタスクメモ。</li>
+<li>検証を一律に省略させる指示。</li>
+</ul>
+<h2 id="最新状態の維持">最新状態の維持<a href="#最新状態の維持" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>コマンド、構成、境界、取り決めを変更するときは、同じ変更で <code>AGENTS.md</code> も更新すること。</p>
+<p>古い指示は、指示がないよりも悪い。エージェントはそれを疑わずに実行し、誰も求めていない変更を生み出す。</p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">プラクティス</span><strong>言語ポリシー</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">プラクティス</span><strong>必須のプロジェクトドキュメント</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="agent-protocol.html"><span>前へ · プラクティス</span><strong>エージェント運用プロトコル</strong></a>
+<a class="page-nav-next" href="architecture-governance.html"><span>次へ · プラクティス</span><strong>アーキテクチャガバナンス</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/practices/agents-file.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#必須要件">必須要件</a></li>
+<li><a href="#適切なファイルへの振り分け">適切なファイルへの振り分け</a></li>
+<li><a href="#構成">構成</a></li>
+<li><a href="#検証可能なルール">検証可能なルール</a></li>
+<li><a href="#ネストしたファイル">ネストしたファイル</a></li>
+<li><a href="#ファイルサイズ">ファイルサイズ</a></li>
+<li><a href="#記載しない内容">記載しない内容</a></li>
+<li><a href="#最新状態の維持">最新状態の維持</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

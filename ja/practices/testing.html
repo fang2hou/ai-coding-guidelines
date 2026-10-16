@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>テスト戦略 · AI コーディングガイドライン</title>
+<meta name="description" content="テストはカバレッジの数字を稼ぐためではなく、実際の振る舞いを検証するために書く。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/testing.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="テスト戦略 · AI コーディングガイドライン">
+<meta property="og:description" content="テストはカバレッジの数字を稼ぐためではなく、実際の振る舞いを検証するために書く。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/testing.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/practices/testing.html">English</a><a lang="zh" href="../../zh/practices/testing.html">中文</a><a lang="ja" href="testing.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html" aria-current="page"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="テスト戦略">テスト戦略<a href="#テスト戦略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p>テストはカバレッジの数字を稼ぐためではなく、実際の振る舞いを検証するために書く。</p>
+<p>テストを追加する前に、どの障害を検出するためのテストかを明確にすること。</p>
+<p>優先するのは次の対象である。</p>
+<ul>
+<li>中核となるビジネスロジック</li>
+<li>重要なユーザーの振る舞い</li>
+<li>障害が発生しやすいことが分かっている経路</li>
+<li>境界条件</li>
+<li>エラー処理</li>
+<li>例外的な状況</li>
+<li>統合の境界</li>
+</ul>
+<p>カバレッジの数値は参考になるが、それ自体が目的ではない。目的は、重要な振る舞いが正しく動くと確信できることにある。</p>
+<h2 id="フロントエンドの-e2e-テスト">フロントエンドの E2E テスト<a href="#フロントエンドの-e2e-テスト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>フロントエンドプロジェクトでは、可能な範囲で E2E テストを設けること。</p>
+<p>E2E テストの対象は次のとおりである。</p>
+<ul>
+<li>主要なユーザーフロー</li>
+<li>重要なプロダクトの振る舞い</li>
+<li>重要な統合の振る舞い</li>
+</ul>
+<p>実際の利用に近いテストデータを使うこと。本番に近いデータが有効な場合は、事前に匿名化またはサニタイズし、本番環境の機密情報をテストフィクスチャに絶対に含めないこと。</p>
+<p>E2E テストの実行時間は短く保つ。<a href="../toolchain/quality-gates.html">品質ゲート</a>を大幅に遅らせるだけで、それに見合う確信が得られない肥大化した E2E スイートを作らないこと。</p>
+<p>Playwright を使うプロジェクトでは、<code>jsPlugins</code> 配列を介して <code>eslint-plugin-playwright</code> を oxlint に読み込むこと。このプラグインは oxlint との適合性テストを公式に受けている。oxlint の JS プラグインサポートは現在アルファ版である。</p>
+<p><code>overrides</code> エントリでルールの適用範囲を Playwright のテストファイルに限定し、アプリケーションコードに適用されないようにすること。</p>
+<pre><code class="language-jsonc">// .oxlintrc.json
+{
+  &quot;jsPlugins&quot;: [&quot;eslint-plugin-playwright&quot;],
+  &quot;overrides&quot;: [
+    {
+      &quot;files&quot;: [&quot;e2e/**/*.ts&quot;],
+      &quot;rules&quot;: {
+        &quot;playwright/no-networkidle&quot;: &quot;error&quot;,
+        &quot;playwright/no-wait-for-timeout&quot;: &quot;warn&quot;,
+      },
+    },
+  ],
+}
+</code></pre>
+<h2 id="フロントエンドのユニットテスト">フロントエンドのユニットテスト<a href="#フロントエンドのユニットテスト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>フロントエンドプロジェクトでは、可能な範囲で重要なコンポーネントとロジックにユニットテストを書き、テストの質が高まる場合はサニタイズ済みの現実的なデータを使うこと。</p>
+<p>優先するのは次の対象である。</p>
+<ul>
+<li>重要なコンポーネントの振る舞い</li>
+<li>ビジネスロジック</li>
+<li>状態遷移</li>
+<li>データ変換</li>
+<li>エッジケース</li>
+<li>エラーが発生する条件</li>
+</ul>
+<p>ユニットテストは高速に保つこと。</p>
+<p>実装の詳細をそのまま再現するだけのテストを避けること。</p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/quality-gates.html"><span class="related-cat">ツールチェーン</span><strong>品質ゲート</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/go.html"><span class="related-cat">ツールチェーン</span><strong>Go ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/python.html"><span class="related-cat">ツールチェーン</span><strong>Python ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/rust.html"><span class="related-cat">ツールチェーン</span><strong>Rust ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../libraries/agentation.html"><span class="related-cat">ライブラリ</span><strong>Agentation</strong></a></li>
+<li><a class="related-chip" href="../libraries/go-api-stack.html"><span class="related-cat">ライブラリ</span><strong>Go API スタック</strong></a></li>
+<li><a class="related-chip" href="../libraries/typescript-backend.html"><span class="related-cat">ライブラリ</span><strong>TypeScript バックエンド</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="security.html"><span>前へ · プラクティス</span><strong>セキュリティ</strong></a>
+<a class="page-nav-next" href="../toolchain/databricks.html"><span>次へ · ツールチェーン</span><strong>Databricks</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/practices/testing.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#フロントエンドの-e2e-テスト">フロントエンドの E2E テスト</a></li>
+<li><a href="#フロントエンドのユニットテスト">フロントエンドのユニットテスト</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

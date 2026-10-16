@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Coding Standards · AI Coding Guidelines</title>
+<meta name="description" content="Follow the standard conventions of the language and framework you are using; do not invent custom variants.">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/coding-standards.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Coding Standards · AI Coding Guidelines">
+<meta property="og:description" content="Follow the standard conventions of the language and framework you are using; do not invent custom variants.">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/practices/coding-standards.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="coding-standards.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/practices/coding-standards.html">中文</a><a lang="ja" href="../../ja/practices/coding-standards.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="coding-standards.html" aria-current="page"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">Practices</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="coding-standards">Coding Standards<a href="#coding-standards" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="follow-ecosystem-best-practices">Follow ecosystem best practices<a href="#follow-ecosystem-best-practices" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Follow the standard conventions of the language and framework you are using; do not invent custom variants.</p>
+<p>This covers:</p>
+<ul>
+<li>Clear structure</li>
+<li>Appropriate data structures</li>
+<li>Established framework conventions</li>
+<li>Appropriate design patterns</li>
+<li>Type safety where appropriate</li>
+<li>Idiomatic APIs</li>
+</ul>
+<p>Handle edge cases with early returns so the main path stays flat:</p>
+<pre><code class="language-ts">// bad
+if (order !== null) {
+  if (order.isPaid) {
+    ship(order);
+  }
+}
+// good
+if (order === null || !order.isPaid) return;
+ship(order);
+</code></pre>
+<p>Use a design pattern only when it solves a problem that already exists in the code, not because a catalog lists it.</p>
+<h2 id="avoid-over-engineering">Avoid over-engineering<a href="#avoid-over-engineering" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Do not make the codebase more complex without a concrete need.</p>
+<p>Prefer code that is:</p>
+<ul>
+<li>Simple</li>
+<li>Readable</li>
+<li>Explicit</li>
+<li>Maintainable</li>
+<li>Easy to modify</li>
+</ul>
+<p>Avoid premature generalization: wait for the second use case before introducing an abstraction.</p>
+<pre><code class="language-ts">// bad
+const users = UserRepositoryFactory.create();
+const cache = CacheFactory.createCache();
+// good
+const users = new UserRepository();
+const cache = new Cache();
+</code></pre>
+<p>Do not hide a second behavior behind a boolean parameter; split the function so call sites read without flags.</p>
+<pre><code class="language-ts">// bad
+function saveReport(report: Report, silent: boolean) {
+  /* ... */
+}
+saveReport(report, true);
+// good
+function saveReport(report: Report) {
+  /* ... */
+}
+function saveReportSilently(report: Report) {
+  /* ... */
+}
+</code></pre>
+<h2 id="naming">Naming<a href="#naming" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Use meaningful English names that accurately describe purpose and behavior.</p>
+<p>Avoid:</p>
+<ul>
+<li>Ambiguous abbreviations</li>
+<li>Generic names such as <code>data</code>, <code>thing</code>, or <code>value</code> when a better name exists</li>
+<li>Transliteration</li>
+<li>Project-specific slang when a standard English term exists</li>
+</ul>
+<pre><code class="language-ts">// bad
+const usr = findUsrById(uid);
+let flag = false;
+// good
+const user = findUserById(userId);
+let hasUnsavedChanges = false;
+</code></pre>
+<p>Follow the code-language rules in <a href="language-policy.html">Language Policy</a>.</p>
+<h2 id="comments">Comments<a href="#comments" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Write code that needs few comments. Let clear names and small functions show what the code does; use comments only for what the code itself cannot express.</p>
+<ul>
+<li>Comment the why, never restate the what.</li>
+<li>Do not narrate logic step by step; if a passage needs a running commentary, restructure it first.</li>
+<li>Do not keep comments that describe removed behavior or past intentions.</li>
+<li>Keep configuration files comment-free; put the rationale in the pull request or the project documentation.</li>
+</ul>
+<pre><code class="language-ts">// bad
+// renew the subscription if it is still active
+if (user.subscription &amp;&amp; user.subscription.endsAt &gt; now) {
+  renew(user.subscription);
+}
+// good
+if (user.hasActiveSubscription(now)) {
+  renew(user.subscription);
+}
+</code></pre>
+<h2 id="modularity">Modularity<a href="#modularity" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Write modular code where modularity improves:</p>
+<ul>
+<li>Testing</li>
+<li>Readability</li>
+<li>Ownership</li>
+<li>Reuse</li>
+<li>Change isolation</li>
+</ul>
+<p>Do not create artificial modules merely to satisfy an abstract idea of modularity.</p>
+<p>Rule of thumb: keep a helper used by one screen in that screen's file, and move it to a shared module only when a second caller imports it.
+Order each file for the next reader: group related functions, separate levels of detail, and put the main flow above its helpers.</p>
+<h2 id="new-files-and-modules">New files and modules<a href="#new-files-and-modules" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Before creating a new file or module, state its responsibility in one sentence. If the sentence needs &quot;and&quot; to stay accurate, the file is doing two jobs — split it or reconsider it.</p>
+<p>Do not create:</p>
+<ul>
+<li>Redundant modules</li>
+<li>Duplicate helpers</li>
+<li>Empty abstractions</li>
+<li>Parallel implementations of existing functionality</li>
+</ul>
+<p><code>src/utils/date.ts</code> has a responsibility; <code>src/utils/misc.ts</code> does not.</p>
+<p>New code must remain consistent with the existing architecture.</p>
+<h2 id="performance">Performance<a href="#performance" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Correctness and readability come first; do not trade structure for speed you have not measured.</p>
+<ul>
+<li>Do not avoidably allocate, copy, or recompute.</li>
+<li>Keep O(n) work out of loops that run O(n) times.</li>
+<li>Fix the algorithm or the data structure before scattering micro-optimizations.</li>
+<li>Optimize only measured hot paths, and only with evidence.</li>
+</ul>
+<h2 id="responsive-frontend">Responsive frontend<a href="#responsive-frontend" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Frontend applications must be fully responsive: usable at desktop, tablet, and mobile sizes, built with modern responsive layout techniques.</p>
+<pre><code class="language-tsx">// bad
+&lt;div className=&quot;w-[960px] px-8&quot;&gt;
+// good
+&lt;div className=&quot;w-full max-w-3xl px-4 sm:px-6 lg:px-8&quot;&gt;
+</code></pre>
+<p>Decide breakpoints while implementing the first screen. Do not treat responsive behavior as a final cosmetic step after the application has been built for one fixed viewport.</p>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">Practices</span><strong>Language Policy</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agent-protocol.html"><span class="related-cat">Practices</span><strong>Agent Operating Protocol</strong></a></li>
+<li><a class="related-chip" href="corner-radius.html"><span class="related-cat">Practices</span><strong>Corner Radius</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">Toolchain</span><strong>TypeScript Toolchain</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="change-discipline.html"><span>Previous · Practices</span><strong>Change Discipline</strong></a>
+<a class="page-nav-next" href="corner-radius.html"><span>Next · Practices</span><strong>Corner Radius</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/practices/coding-standards.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#follow-ecosystem-best-practices">Follow ecosystem best practices</a></li>
+<li><a href="#avoid-over-engineering">Avoid over-engineering</a></li>
+<li><a href="#naming">Naming</a></li>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#modularity">Modularity</a></li>
+<li><a href="#new-files-and-modules">New files and modules</a></li>
+<li><a href="#performance">Performance</a></li>
+<li><a href="#responsive-frontend">Responsive frontend</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

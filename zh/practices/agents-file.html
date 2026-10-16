@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>编写 AGENTS.md · AI 编码指南</title>
+<meta name="description" content="AGENTS.md 是仓库中 AI Agent 的入口文件。Agent 工具在每次会话开始时都会加载它，且上下文空间有限，因此每一行都必须言之有物。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/agents-file.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="编写 AGENTS.md · AI 编码指南">
+<meta property="og:description" content="AGENTS.md 是仓库中 AI Agent 的入口文件。Agent 工具在每次会话开始时都会加载它，且上下文空间有限，因此每一行都必须言之有物。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/agents-file.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/agents-file.html">English</a><a lang="zh" href="agents-file.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/agents-file.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html" aria-current="page"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="编写-agents-md">编写 AGENTS.md<a href="#编写-agents-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p><code>AGENTS.md</code> 是仓库中 AI Agent 的入口文件。Agent 工具在每次会话开始时都会加载它，且上下文空间有限，因此每一行都必须言之有物。</p>
+<p>模板：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/project-agents.template.md">project-agents.template.md</a></p>
+<h2 id="强制要求">强制要求<a href="#强制要求" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>每个项目都必须在仓库根目录放置一个 <code>AGENTS.md</code>。</p>
+<p><code>AGENTS.md</code> 是规范文件名。不要把同一套规则复制到 <code>CLAUDE.md</code> 等兼容文件名中：重复的指令文件会逐渐不一致，还会重复占用上下文预算。</p>
+<h2 id="内容放在合适的文件">内容放在合适的文件<a href="#内容放在合适的文件" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>将各类指导放在合适的位置：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>归属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>始终生效的命令、约定和边界</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>产品背景、上手介绍、截图</td>
+<td><code>README.md</code></td>
+</tr>
+<tr>
+<td>完整的开发工作流和工具链细节</td>
+<td><code>DEVELOPMENT.md</code></td>
+</tr>
+<tr>
+<td>pull request、评审和校验要求</td>
+<td><code>CONTRIBUTING.md</code></td>
+</tr>
+<tr>
+<td>架构不变量</td>
+<td><code>ARCHITECTURE.md</code></td>
+</tr>
+<tr>
+<td>仅某个工作流需要的操作步骤</td>
+<td>独立文档或 Agent skill，并通过链接引用</td>
+</tr>
+<tr>
+<td>Agent 工具偏好、默认模型和自主度</td>
+<td>该工具自己的配置文件</td>
+</tr>
+</tbody>
+</table>
+</div><p>不要把运行手册、长篇参考文档或特定任务笔记写入 <code>AGENTS.md</code>，而应链接到事实来源。</p>
+<h2 id="结构">结构<a href="#结构" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>开头用一句话说明项目是什么以及面向谁，然后按 Agent 最先需要的内容排列章节，与模板保持一致：</p>
+<ol>
+<li>命令——列出环境搭建、运行、单个测试、完整测试、Lint、类型检查、构建、重新生成和完整校验所需的准确命令；项目没有的条目直接删除。</li>
+<li>工程标准——共享指南和项目特有的例外。</li>
+<li>目录布局——每个顶层目录各占一行，点名关键模块。</li>
+<li>边界——必须做 / 绝不做 / 先问。</li>
+<li>已确认的语言政策——参见<a href="language-policy.html">语言政策</a>。</li>
+<li>项目约定——Agent 无法仅凭代码推断的决策。</li>
+<li>深入文档链接——指向 <code>DEVELOPMENT.md</code>、<code>CONTRIBUTING.md</code> 和 <code>ARCHITECTURE.md</code>。</li>
+</ol>
+<p>命令放在最前面，因为 Agent 一上手就要用到。同时列出小范围命令（如只跑单个测试文件）和完整检查（提交前运行 <code>mise run check</code>），避免 Agent 每次小改都去跑最慢的全量命令。</p>
+<h2 id="写可验证的规则">写可验证的规则<a href="#写可验证的规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>每条规则都必须明确说明 Agent 可以执行、评审者可以核对的行为。点名命令、路径或条件。</p>
+<p>可验证：</p>
+<pre><code class="language-markdown">- 改动 `src/auth/` 下的文件时，运行 `mise run test -- src/auth/token.test.ts`。
+- 绝不手改 `src/generated/` 下的文件；用 `mise run codegen` 重新生成。
+- 新增依赖或改动 `ARCHITECTURE.md` 中的不变量前先问。
+</code></pre>
+<p>不可验证，因此无用：</p>
+<pre><code class="language-markdown">- 处理认证代码时要小心。
+- 确保一切正常。
+- 遵循最佳实践。
+</code></pre>
+<h2 id="嵌套文件">嵌套文件<a href="#嵌套文件" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>只有子目录树确实存在差异时，才在其中增加嵌套的 <code>AGENTS.md</code>：</p>
+<ul>
+<li>它使用不同的包管理器、测试运行器或运行时。</li>
+<li>它包含只能重新生成、不能手改的生成代码。</li>
+<li>它带有额外的审批要求，例如数据库迁移或部署。</li>
+<li>它有不适用于别处的 UI 或设计系统规则。</li>
+</ul>
+<p>嵌套文件只记录自己的差异，其余一切沿用根文件。绝不在嵌套文件里重述根文件的规则。</p>
+<h2 id="保持精简">保持精简<a href="#保持精简" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>每次任务开始时都会加载该文件，文件越长，每次运行消耗的上下文就越多。</p>
+<ul>
+<li>把最重要的规则放在最前面。</li>
+<li>链接到详细文档，不要复制内容。</li>
+<li>能用工具检查的就不要靠文字叮嘱：Lint 工具、prek 或 CI 已经强制执行的规则不必再写一遍。</li>
+<li>把特定子系统的指引放进子目录的嵌套文件，不要让根文件不断膨胀。</li>
+</ul>
+<p>根文件应能一口气读完。如果篇幅过长，应把细节拆到链接文档，并删掉已由工具强制执行的规则。</p>
+<h2 id="绝不写入的内容">绝不写入的内容<a href="#绝不写入的内容" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>敏感凭据、令牌或内部主机名。</li>
+<li>仓库里已有文档的副本。</li>
+<li>详尽的目录清单——下一次重构就会过期。</li>
+<li>应该留在 issue 或 pull request 里的临时任务笔记。</li>
+<li>要求无条件跳过校验的指令。</li>
+</ul>
+<h2 id="保持更新">保持更新<a href="#保持更新" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>命令、目录布局、边界或约定发生变化时，在同一个变更中更新 <code>AGENTS.md</code>。</p>
+<p>过时的指令比缺失的指令更糟：Agent 会毫不怀疑地照做，并做出没人要求的改动。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">工程实践</span><strong>语言政策</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">工程实践</span><strong>必备项目文档</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="agent-protocol.html"><span>上一篇 · 工程实践</span><strong>Agent 操作协议</strong></a>
+<a class="page-nav-next" href="architecture-governance.html"><span>下一篇 · 工程实践</span><strong>架构治理</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/agents-file.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#强制要求">强制要求</a></li>
+<li><a href="#内容放在合适的文件">内容放在合适的文件</a></li>
+<li><a href="#结构">结构</a></li>
+<li><a href="#写可验证的规则">写可验证的规则</a></li>
+<li><a href="#嵌套文件">嵌套文件</a></li>
+<li><a href="#保持精简">保持精简</a></li>
+<li><a href="#绝不写入的内容">绝不写入的内容</a></li>
+<li><a href="#保持更新">保持更新</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

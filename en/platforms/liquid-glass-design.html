@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Liquid Glass design (Apple platforms) · AI Coding Guidelines</title>
+<meta name="description" content="For new iOS 27 and native macOS 27 apps, adopt Liquid Glass through system navigation and controls first. Add custom gl…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-design.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Liquid Glass design (Apple platforms) · AI Coding Guidelines">
+<meta property="og:description" content="For new iOS 27 and native macOS 27 apps, adopt Liquid Glass through system navigation and controls first. Add custom gl…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-design.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="liquid-glass-design.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/platforms/liquid-glass-design.html">中文</a><a lang="ja" href="../../ja/platforms/liquid-glass-design.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="liquid-glass-design.html" aria-current="page"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">Platforms</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="liquid-glass-design-apple-platforms">Liquid Glass design (Apple platforms)<a href="#liquid-glass-design-apple-platforms" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="adoption-and-scope">Adoption and scope<a href="#adoption-and-scope" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>For new iOS 27 and native macOS 27 apps, adopt Liquid Glass through system navigation and controls first. Add custom glass only where standard components cannot meet the interaction requirements. Set the deployment target to iOS 27.0 or macOS 27.0 and build with Xcode 27. This guideline covers these two platforms only.</p>
+<p>The 27 SDK behavior was verified on 2026-09-06 against the available beta. Recheck Apple’s HIG, release notes, and SDK declarations when adopting the final SDK or a later update.</p>
+<h2 id="separate-controls-from-content">Separate controls from content<a href="#separate-controls-from-content" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Use Liquid Glass for navigation and controls above content: bars, sidebars, menus, system presentations, and custom floating controls. Let the system choose materials for standard components and their interaction states.</li>
+<li>Keep backgrounds, article text, lists, tables, and content cards in the content layer. Use opaque surfaces or standard materials there. A control embedded in content may show a glass effect temporarily during interaction.</li>
+<li>Do not stack independent glass surfaces. Controls on an existing glass surface should use the system’s foreground treatment, fills, or vibrancy.</li>
+<li>Glass adapts to its backdrop through refraction, luminosity, tint, and shadow. Preserve content beneath floating controls; do not add empty glass panels as decoration.</li>
+</ul>
+<h2 id="choose-regular-or-clear">Choose regular or clear<a href="#choose-regular-or-clear" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Use <code>.regular</code> by default, especially for text and dense controls. It adjusts background blur and luminosity to support legibility.</li>
+<li>Use <code>.clear</code> only over media-rich content when dimming the background is acceptable and foreground content is bold and bright. It does not provide regular’s adaptive legibility treatment.</li>
+<li>For bright backgrounds, HIG suggests a black dimming layer at about 35% opacity; the SwiftUI <code>Glass.clear</code> example uses 30%. These are starting points, not a universal contrast guarantee. Verify the actual foreground and moving background together.</li>
+<li>Keep related elements on the same variant. Do not mix regular and clear within one control group.</li>
+</ul>
+<h2 id="tint-and-foreground-color">Tint and foreground color<a href="#tint-and-foreground-color" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Reserve glass tint for the primary action or a meaningful status; keep secondary actions neutral. Put most branding and expressive color in the content layer.</li>
+<li>Prefer semantic colors and system button styles. Small glass controls can switch foreground appearance as their backdrop changes; fixed black or white labels can defeat that adaptation.</li>
+<li>Convey selection, status, and destructive actions through labels, symbols, or button roles as well as color. Tint alone is insufficient.</li>
+</ul>
+<h2 id="shapes-and-concentricity">Shapes and concentricity<a href="#shapes-and-concentricity" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Use system control shapes first. Capsules suit standalone controls; nested rounded surfaces should maintain concentricity with their container.</li>
+<li>Prefer system-derived concentric shapes where available. Give reusable shapes a fallback radius for use outside a rounded container.</li>
+<li>Respect screen and window margins rather than copying a device’s corner radius. Recheck nested corners when padding, Dynamic Type, or window size changes. macOS 27 changes window corner geometry.</li>
+</ul>
+<h2 id="layout-and-scroll-edges">Layout and scroll edges<a href="#layout-and-scroll-edges" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Extend backgrounds and artwork to the window edges, while keeping readable content and controls within appropriate safe areas. Do not apply <code>ignoresSafeArea</code> to the entire interactive hierarchy merely to achieve an edge-to-edge background.</li>
+<li>Let scroll edge effects separate scrolling content from floating bars. Keep the automatic style unless the layout needs an explicit soft or hard boundary. Avoid duplicate effects on the same edge; align their heights across adjacent panes.</li>
+<li>Use background extension on the artwork or main content that should appear beneath a sidebar or inspector. Keep text and controls out of the extended image.</li>
+<li>Base layout on available view size and size classes. Preserve essential actions when the window narrows, the keyboard appears, or text grows.</li>
+</ul>
+<h2 id="accessibility-and-validation">Accessibility and validation<a href="#accessibility-and-validation" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Test Reduce Transparency, Increase Contrast, Reduce Motion, and Dynamic Type. System materials adapt, but custom foreground colors, animations, and layouts remain the app’s responsibility.</li>
+<li>Check text contrast against the actual background in light and dark appearances. Apple’s HIG specifies 4.5:1 for text up to 17 pt, and 3:1 for larger or bold text. Do not use this threshold as a reason to shrink text or make every label bold.</li>
+<li>Use semantic controls with accessible names and adequate hit areas. Verify VoiceOver order, keyboard access, and the platform’s pointer or focus behavior. A visual glass reaction does not create button semantics.</li>
+<li>Reduce custom morphing and spring motion when Reduce Motion is enabled; switching states without animation is a fine fallback.</li>
+<li>Validate bright, dark, busy, and moving backdrops; small windows; large text; and inactive windows. Profile scrolling and transitions with representative content on target hardware.</li>
+</ul>
+<h2 id="system-behavior-in-ios-27-and-macos-27">System behavior in iOS 27 and macOS 27<a href="#system-behavior-in-ios-27-and-macos-27" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Liquid Glass rendering is refined, with revised diffusion, edges, and highlights. The system appearance slider changes the material’s tint; custom interfaces must remain readable across its range.</li>
+<li>Sidebars extend to the edges on iPad and Mac; inactive windows gain a clearer visual distinction. Use <code>appearsActive</code> for custom elements that need to follow window activity.</li>
+<li>Menus show fewer icons by default. Restore an icon only where it helps identify an important action.</li>
+<li>iPhone apps can resize in iPhone Mirroring and on iPad. Standard bars adapt; custom layouts must preserve actions through resizing and toolbar overflow.</li>
+<li>These are runtime and SDK changes with different requirements. Use the <a href="liquid-glass-api.html">API reference</a> to distinguish available symbols from new runtime behavior.</li>
+</ul>
+<h2 id="official-references">Official references<a href="#official-references" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/materials">HIG: Materials</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/color">HIG: Color</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/layout">HIG: Layout</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/accessibility">HIG: Accessibility</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/glass/clear">Glass.clear</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2025/219/">Meet Liquid Glass — WWDC25</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2025/356/">Get to know the new design system — WWDC25</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/102/">Platforms State of the Union — WWDC26</a></li>
+</ul>
+<p>Implementation: <a href="liquid-glass-patterns.html">Liquid Glass patterns</a>. Availability: <a href="liquid-glass-api.html">Liquid Glass API reference</a>.</p>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="liquid-glass-api.html"><span class="related-cat">Platforms</span><strong>Liquid Glass API reference</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">Platforms</span><strong>Liquid Glass implementation patterns</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/corner-radius.html"><span class="related-cat">Practices</span><strong>Corner Radius</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-api.html"><span class="related-cat">Platforms</span><strong>Liquid Glass API reference</strong></a></li>
+<li><a class="related-chip" href="liquid-glass-patterns.html"><span class="related-cat">Platforms</span><strong>Liquid Glass implementation patterns</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="liquid-glass-api.html"><span>Previous · Platforms</span><strong>Liquid Glass API reference</strong></a>
+<a class="page-nav-next" href="liquid-glass-patterns.html"><span>Next · Platforms</span><strong>Liquid Glass implementation patterns</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/platforms/liquid-glass-design.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#adoption-and-scope">Adoption and scope</a></li>
+<li><a href="#separate-controls-from-content">Separate controls from content</a></li>
+<li><a href="#choose-regular-or-clear">Choose regular or clear</a></li>
+<li><a href="#tint-and-foreground-color">Tint and foreground color</a></li>
+<li><a href="#shapes-and-concentricity">Shapes and concentricity</a></li>
+<li><a href="#layout-and-scroll-edges">Layout and scroll edges</a></li>
+<li><a href="#accessibility-and-validation">Accessibility and validation</a></li>
+<li><a href="#system-behavior-in-ios-27-and-macos-27">System behavior in iOS 27 and macOS 27</a></li>
+<li><a href="#official-references">Official references</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

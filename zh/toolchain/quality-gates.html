@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>质量门禁 · AI 编码指南</title>
+<meta name="description" content="使用 prek 作为标准的预提交框架。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/quality-gates.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="质量门禁 · AI 编码指南">
+<meta property="og:description" content="使用 prek 作为标准的预提交框架。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/quality-gates.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/toolchain/quality-gates.html">English</a><a lang="zh" href="quality-gates.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/toolchain/quality-gates.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="quality-gates.html" aria-current="page"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">工具链</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v5</span>
+
+</div>
+<h1 id="质量门禁">质量门禁<a href="#质量门禁" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="prek">prek<a href="#prek" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用 <code>prek</code> 作为标准的预提交框架。</p>
+<p>除非用户明确批准例外，否则不要引入其他预提交框架。</p>
+<p>钩子配置使用 prek 的原生格式 <code>prek.toml</code>。仅在需要兼容 pre-commit 时才使用 <code>.pre-commit-config.yaml</code>。</p>
+<p>将钩子指向所有环节共用的入口：</p>
+<pre><code class="language-toml"># prek.toml - the hook runs the shared entry point
+[[repos]]
+repo = &quot;local&quot;
+hooks = [
+  { id = &quot;check&quot;, entry = &quot;mise run check&quot;, language = &quot;system&quot;, pass_filenames = false }
+]
+</code></pre>
+<h3 id="不采用的替代方案">不采用的替代方案<a href="#不采用的替代方案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>pre-commit</li>
+<li>Lefthook</li>
+</ul>
+<h2 id="默认检查集">默认检查集<a href="#默认检查集" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>在 <code>prek.toml</code> 中配置项目所需的快速检查项，默认包括：</p>
+<ul>
+<li>Lint 检查</li>
+<li>格式化检查</li>
+<li>针对语言的静态检查</li>
+<li>安全相关检查</li>
+<li>视情况执行的依赖检查</li>
+<li>凭据扫描</li>
+</ul>
+<p>在当前工具链中，对应关系如下：</p>
+<pre><code class="language-text">lint         -&gt; oxlint / ruff check
+format check -&gt; oxfmt --check / ruff format --check
+typecheck    -&gt; 开启 typeCheck 的 oxlint（tsgolint）/ tsc --noEmit
+</code></pre>
+<p>oxlint 的 <code>options.typeCheck</code>（通过 <code>oxlint-tsgolint</code>）会报出 TypeScript 诊断并以非零退出码失败，因此可以独立承担 typecheck 检查；未配置类型感知 lint 时，改用独立命令 <code>tsc --noEmit</code>。</p>
+<h2 id="检查应保持快速">检查应保持快速<a href="#检查应保持快速" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>预提交检查将在每次提交时运行，必须保持足够快，方便人和 AI Agent 频繁执行。不要为了让钩子配置显得全面就塞入耗时很长的检查。</p>
+<pre><code class="language-text"># good - fast enough for every commit
+lint, format check, typecheck, secret scanning
+
+# bad - too slow for a commit hook; belong in CI
+full E2E suite, dependency audit against live registries
+</code></pre>
+<h2 id="本地-ci-一致性">本地 / CI 一致性<a href="#本地-ci-一致性" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>在托管于 GitHub 的仓库中，GitHub Actions 应使用同一套项目配置运行完全一致的检查命令，避免本地与 CI 的校验脱节：</p>
+<pre><code class="language-bash"># local
+mise run check &amp;&amp; mise run test
+</code></pre>
+<pre><code class="language-yaml"># .github/workflows/ci.yml - steps section
+- uses: jdx/mise-action@v4 # installs the mise-managed toolchain
+- run: mise run check
+- run: mise run test
+</code></pre>
+<p>如果这些命令在本地通过、却在 CI 中失败，说明两个环境已经不一致；应将它们对齐，不要不断增加仅用于 CI 的修复。</p>
+<p>CI 分层模型见 <a href="github-actions.html">GitHub Actions</a>；有关通过任务调用同一套工具的说明，见 <a href="mise.html">mise</a>。</p>
+<h2 id="校验入口">校验入口<a href="#校验入口" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>在可行的情况下，通过 <code>mise run check</code> 暴露项目的主校验入口：</p>
+<pre><code class="language-bash">mise run check
+</code></pre>
+<p>让 <code>test</code> 依赖 <code>check</code>，确保测试不会在未经校验的代码上运行：</p>
+<pre><code class="language-toml"># mise.toml - the check -&gt; test chain
+[tasks.check]
+depends = [&quot;lint&quot;, &quot;format&quot;, &quot;typecheck&quot;]
+
+[tasks.test]
+depends = [&quot;check&quot;] # test never runs on unvalidated code
+run = &quot;pnpm test&quot;
+</code></pre>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="github-actions.html"><span class="related-cat">工具链</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="mise.html"><span class="related-cat">工具链</span><strong>mise</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="../practices/change-discipline.html"><span class="related-cat">工程实践</span><strong>变更纪律</strong></a></li>
+<li><a class="related-chip" href="../practices/dependencies.html"><span class="related-cat">工程实践</span><strong>依赖管理规范</strong></a></li>
+<li><a class="related-chip" href="../practices/pipeline.html"><span class="related-cat">工程实践</span><strong>流水线</strong></a></li>
+<li><a class="related-chip" href="../practices/security.html"><span class="related-cat">工程实践</span><strong>安全</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">工程实践</span><strong>测试策略</strong></a></li>
+<li><a class="related-chip" href="github-actions.html"><span class="related-cat">工具链</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="go.html"><span class="related-cat">工具链</span><strong>Go 工具链</strong></a></li>
+<li><a class="related-chip" href="python.html"><span class="related-cat">工具链</span><strong>Python 工具链</strong></a></li>
+<li><a class="related-chip" href="rust.html"><span class="related-cat">工具链</span><strong>Rust 工具链</strong></a></li>
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/go-api-stack.html"><span class="related-cat">库与框架</span><strong>Go API 技术栈</strong></a></li>
+<li><a class="related-chip" href="../libraries/typescript-backend.html"><span class="related-cat">库与框架</span><strong>TypeScript 后端技术栈</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="python.html"><span>上一篇 · 工具链</span><strong>Python 工具链</strong></a>
+<a class="page-nav-next" href="rust.html"><span>下一篇 · 工具链</span><strong>Rust 工具链</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/toolchain/quality-gates.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#prek">prek</a></li>
+<li><a href="#默认检查集">默认检查集</a></li>
+<li><a href="#检查应保持快速">检查应保持快速</a></li>
+<li><a href="#本地-ci-一致性">本地 / CI 一致性</a></li>
+<li><a href="#校验入口">校验入口</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

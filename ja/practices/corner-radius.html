@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>角丸 · AI コーディングガイドライン</title>
+<meta name="description" content="角丸は要素ごとに決める値ではなく、プロジェクト全体で揃える体系である。少数のトークン段階を一度定義し、すべての角丸をそこから選ぶ。 2 つのルールですべての場面を網羅できる。単一のサーフェスには連続角丸、ネストしたサーフェスには同心の角丸…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/corner-radius.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="角丸 · AI コーディングガイドライン">
+<meta property="og:description" content="角丸は要素ごとに決める値ではなく、プロジェクト全体で揃える体系である。少数のトークン段階を一度定義し、すべての角丸をそこから選ぶ。 2 つのルールですべての場面を網羅できる。単一のサーフェスには連続角丸、ネストしたサーフェスには同心の角丸…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/corner-radius.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/practices/corner-radius.html">English</a><a lang="zh" href="../../zh/practices/corner-radius.html">中文</a><a lang="ja" href="corner-radius.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html" aria-current="page"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v2</span>
+
+</div>
+<h1 id="角丸">角丸<a href="#角丸" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="原則">原則<a href="#原則" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>角丸は要素ごとに決める値ではなく、プロジェクト全体で揃える体系である。少数のトークン段階を一度定義し、すべての角丸をそこから選ぶ。</li>
+<li>2 つのルールですべての場面を網羅できる。単一のサーフェスには連続角丸、ネストしたサーフェスには同心の角丸を使う。</li>
+<li>この 2 つを一貫して適用する。角丸は 1 つだけ見ても違和感は出にくいが、組み合わせがずれると途端に雑に見える。</li>
+</ul>
+<h2 id="トークンスケール">トークンスケール<a href="#トークンスケール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<pre><code class="language-css">:root {
+  --radius-s: 6px;       /* dense rows, chips */
+  --radius-m: 8px;       /* buttons, inputs — the default control radius */
+  --radius-l: 12px;      /* popovers, menus */
+  --radius-xl: 20px;     /* cards, sheets, dialogs */
+  --radius-full: 9999px; /* circles, pills */
+}
+</code></pre>
+<ul>
+<li>プロジェクト内のすべての角丸はこのスケールから取る。場当たり的な値（<code>13px</code>）はネストの計算に参加できず、すぐに崩れる。</li>
+<li>隣接する段階は区別できる差を保つ（このサイズでは 2px 以上）。</li>
+</ul>
+<h2 id="単一のサーフェス-連続角丸">単一のサーフェス：連続角丸<a href="#単一のサーフェス-連続角丸" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><code>border-radius</code> だけでは、直線の縁と円弧が接合する。この曲率の急変こそ、普通のウェブの角丸が Apple の連続角丸より硬く見える原因である。</li>
+<li>既存の <code>border-radius</code> に <code>corner-shape</code> を組み合わせる。<code>border-radius</code> は引き続き角の大きさを決め、<code>corner-shape</code> は曲線の形だけを変える。背景、ボーダー、アウトライン、シャドウ、<code>overflow: hidden</code>、<code>backdrop-filter</code> はすべて結果の形状に追従する。<code>clip-path</code> も SVG マスクも不要である。</li>
+<li>プロジェクト全体で <code>squircle</code>（= <code>superellipse(2)</code>）の 1 値に統一する。角の形状はトークン体系の一部であり、要素ごとに変えない。</li>
+<li>角丸自体がデザイン上の判断になる場所に適用する。カード、シート、ダイアログ、タイル、メディア、アプリレベルのサーフェス（≥ <code>--radius-l</code>）。約 6px 未満では <code>round</code> との差が見えないため、そこには設定しない。</li>
+<li>プログレッシブエンハンスメントのみに使う。2026 年後半時点では Chromium 系ブラウザ（139+）だけが <code>corner-shape</code> を描画し、Safari と Firefox は無視して通常の角丸にフォールバックする。このフォールバックは許容できる。JS や SVG のポリフィルを決して導入しない。</li>
+<li><code>border-radius</code> が <code>0</code> に解決される場合、<code>corner-shape</code> は効果を持たない。</li>
+</ul>
+<pre><code class="language-css">.card {
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+}
+</code></pre>
+<h2 id="ボタンとコントロール-中程度の角丸">ボタンとコントロール：中程度の角丸<a href="#ボタンとコントロール-中程度の角丸" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>ボタン、入力、セレクトはデフォルトで中程度のトークン（<code>--radius-m</code>、36〜40px のコントロールで約 8px）を使う。密なレイアウトでは浅い段階（<code>--radius-s</code>）を下限として使える。</li>
+<li>中程度の角丸は、テキストと隣接コントロールの整列に使える直線の縁を残し、コントロール内側の hover と押下状態が同心を保つ余地を作る。</li>
+<li>完全な円（<code>--radius-full</code>）のボタンはチップ、タグ、アイデンティティ要素（アバター、トグル）に限る。アクションボタンには使わない。</li>
+</ul>
+<h2 id="ネストされたサーフェス-同心ルール">ネストされたサーフェス：同心ルール<a href="#ネストされたサーフェス-同心ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>外側の半径 <code>R</code> のサーフェスの内側に <code>p</code> px 入り込んだ層の半径は <code>r = R − p</code>（下限 0）でなければならない。こうすると両方の角が同じ曲率中心を共有し、内側の層は「上に貼られたシール」ではなく「同じ表面が持ち上がったもの」として見える。</li>
+<li>このルールは hover と押下のオーバーレイ（<code>::before</code> / <code>::after</code>）、フォーカスリング、カード上のバッジ、パディングを持つサーフェスの内側にあるメディアとコントロール、セグメントコントロール、ツールチップに適用する。</li>
+<li>不一致なネスト——内側と外側の半径が等しい、内側が任意の値——こそ、hover 状態やバッジが断絶した異物の層に見える原因である。</li>
+</ul>
+<h3 id="よくあるケース">よくあるケース<a href="#よくあるケース" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li><code>inset: 0</code> のオーバーレイ：<code>border-radius: inherit</code> を使う。</li>
+<li>表面のパディング分だけ内側に入る層：同じトークンから <code>calc()</code> で計算する。</li>
+<li>コントロールの外側のフォーカスリング：<code>outline</code> か <code>box-shadow</code> を使う。どちらも外側の半径に自動的に追従する。</li>
+<li>幅 <code>w</code> のボーダーを角丸のボックスに引く場合：内側の縁はすでに <code>R − w</code> で描かれる。追加の角丸を設定しない。</li>
+<li><code>corner-shape</code> を設定したサーフェスの内側に入る層：<code>corner-shape: inherit</code> で内側にも同じ形状を設定する。このプロパティは既定では継承されない。外側が squircle で内側が通常の角丸では、同心の見え方が壊れる。</li>
+</ul>
+<pre><code class="language-css">.button {
+  border-radius: var(--radius-m);
+}
+.button::before {
+  /* hover fill */
+  content: &quot;&quot;;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* concentric by construction */
+}
+
+.card {
+  --card-inset: 12px;
+  border-radius: var(--radius-xl);
+  corner-shape: squircle;
+  padding: var(--card-inset);
+}
+.card .media {
+  /* 20 - 12 = 8: same center of curvature and same curve family as the card */
+  border-radius: calc(var(--radius-xl) - var(--card-inset));
+  corner-shape: inherit;
+}
+</code></pre>
+<ul>
+<li>画像の端や特殊な図形などで厳密に合わせられない場合は、内側の角丸を小さめに寄せる（<code>r ≤ R − p</code>）。内側の角がわずかに締まって見えるぶんには自然だが、大きすぎると崩れて見える。</li>
+</ul>
+<h2 id="確認項目">確認項目<a href="#確認項目" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>diff 内のすべての角丸がトークンスケールから取られている。</li>
+<li>コントロールは中程度のトークンを使い、完全な円はチップ、タグ、アイデンティティ要素にしか現れない。</li>
+<li>すべてのネストされた層は <code>r = R − p</code> を満たすか、半径を継承するか、<code>outline</code> / <code>box-shadow</code> を使っている。</li>
+<li><code>corner-shape</code> を設定したサーフェスの内側の層は、同じ角の形状を使っている（<code>corner-shape: inherit</code>）。</li>
+<li>≥ <code>--radius-l</code> のサーフェスに <code>corner-shape: squircle</code> が設定されている。ポリフィルは導入していない。</li>
+</ul>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="coding-standards.html">コーディング標準</a>——文脈：トークンスケールはマジックナンバー禁止ルールの一例である。</li>
+<li><a href="../libraries/tailwindcss.html">Tailwind CSS</a>——併用（条件付き）：Tailwind を使うプロジェクトではスケールをテーマトークンとして表現する。同心ルールは変わらない。</li>
+<li><a href="../platforms/liquid-glass-design.html">Liquid Glass デザイン</a>——文脈：Apple プラットフォームではウェブの近似ではなく、システムの連続角丸 API を使う。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="coding-standards.html"><span class="related-cat">プラクティス</span><strong>コーディング規約</strong></a></li>
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">ライブラリ</span><strong>Tailwind CSS</strong></a></li>
+<li><a class="related-chip" href="../platforms/liquid-glass-design.html"><span class="related-cat">プラットフォーム</span><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../libraries/tailwindcss.html"><span class="related-cat">ライブラリ</span><strong>Tailwind CSS</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="coding-standards.html"><span>前へ · プラクティス</span><strong>コーディング規約</strong></a>
+<a class="page-nav-next" href="dependencies.html"><span>次へ · プラクティス</span><strong>依存関係の管理方針</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/practices/corner-radius.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#原則">原則</a></li>
+<li><a href="#トークンスケール">トークンスケール</a></li>
+<li><a href="#単一のサーフェス-連続角丸">単一のサーフェス：連続角丸</a></li>
+<li><a href="#ボタンとコントロール-中程度の角丸">ボタンとコントロール：中程度の角丸</a></li>
+<li><a href="#ネストされたサーフェス-同心ルール">ネストされたサーフェス：同心ルール</a></li>
+<li><a href="#確認項目">確認項目</a></li>
+<li><a href="#連携">連携</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

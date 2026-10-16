@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Authoring AGENTS.md · AI Coding Guidelines</title>
+<meta name="description" content="AGENTS.md is the entry point for AI agents in a repository. Agent tools load it at the start of every session and limit…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/agents-file.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Authoring AGENTS.md · AI Coding Guidelines">
+<meta property="og:description" content="AGENTS.md is the entry point for AI agents in a repository. Agent tools load it at the start of every session and limit…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/practices/agents-file.html">
+<meta property="og:locale" content="en_US">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI Coding Guidelines</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="Language"><a lang="en" href="agents-file.html" aria-current="true" class="current">English</a><a lang="zh" href="../../zh/practices/agents-file.html">中文</a><a lang="ja" href="../../ja/practices/agents-file.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Overview">
+<div class="side-top">
+<a class="side-home" href="../index.html">Overview</a>
+<a class="side-home" href="../glossary.html">Glossary</a>
+</div>
+<div class="side-group">
+<h3><span>Principles</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Practices</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="agents-file.html" aria-current="page"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Toolchain</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Libraries</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span><span class="side-draft" title="Draft">Draft</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>Platforms</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">Practices</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+
+</div>
+<h1 id="authoring-agents-md">Authoring AGENTS.md<a href="#authoring-agents-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p><code>AGENTS.md</code> is the entry point for AI agents in a repository. Agent tools load it at the start of every session and limit how much instruction text they keep in context, so every line must earn its place.</p>
+<p>Template: <a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/project-agents.template.md">project-agents.template.md</a></p>
+<h2 id="mandate">Mandate<a href="#mandate" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every project must keep one <code>AGENTS.md</code> at the repository root.</p>
+<p><code>AGENTS.md</code> is the canonical filename. Do not copy the same rules into compatible filenames such as <code>CLAUDE.md</code>: duplicated instruction files drift apart and consume the context budget twice.</p>
+<h2 id="put-guidance-in-the-right-file">Put guidance in the right file<a href="#put-guidance-in-the-right-file" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Put each kind of guidance where it belongs:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Where it belongs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always-on commands, conventions, boundaries</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>Product background, onboarding, screenshots</td>
+<td><code>README.md</code></td>
+</tr>
+<tr>
+<td>Full development workflow and toolchain detail</td>
+<td><code>DEVELOPMENT.md</code></td>
+</tr>
+<tr>
+<td>Pull request, review, and validation requirements</td>
+<td><code>CONTRIBUTING.md</code></td>
+</tr>
+<tr>
+<td>Architectural invariants</td>
+<td><code>ARCHITECTURE.md</code></td>
+</tr>
+<tr>
+<td>A procedure needed only for one specific workflow</td>
+<td>A separate document or agent skill, linked</td>
+</tr>
+<tr>
+<td>Agent tool preferences, model defaults, autonomy level</td>
+<td>That tool's own configuration file</td>
+</tr>
+</tbody>
+</table>
+</div><p>Do not paste run books, long reference documents, or task-specific notes into <code>AGENTS.md</code>. Link to the source of truth instead.</p>
+<h2 id="structure">Structure<a href="#structure" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Open with one sentence naming what the project is and for whom, then order the sections by what an agent needs first, following the template:</p>
+<ol>
+<li>Commands — exact setup, run, single-test, test, lint, type check, build, regeneration, and full-validation commands; drop the lines the project does not have.</li>
+<li>Engineering standards — the shared guideline, plus project-specific overrides.</li>
+<li>Layout — one line per top-level directory, naming key modules.</li>
+<li>Boundaries — Always / Never / Ask first.</li>
+<li>Confirmed language policy — see <a href="language-policy.html">Language Policy</a>.</li>
+<li>Project conventions — the decisions an agent would not guess from the code.</li>
+<li>Depth links to <code>DEVELOPMENT.md</code>, <code>CONTRIBUTING.md</code>, and <code>ARCHITECTURE.md</code>.</li>
+</ol>
+<p>Put commands first because agents need them right away. List both fast, targeted commands (such as running a single test file) and the full check (<code>mise run check</code> before committing), so the agent does not run the slowest command after every small edit.</p>
+<h2 id="write-verifiable-rules">Write verifiable rules<a href="#write-verifiable-rules" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Every rule must state a behavior an agent can perform and a reviewer can check. Name the command, the path, or the condition.</p>
+<p>Verifiable:</p>
+<pre><code class="language-markdown">- Run `mise run test -- src/auth/token.test.ts` for changes under `src/auth/`.
+- Never edit files under `src/generated/`; regenerate with `mise run codegen`.
+- Ask before adding a dependency or changing an invariant in `ARCHITECTURE.md`.
+</code></pre>
+<p>Not verifiable, therefore useless:</p>
+<pre><code class="language-markdown">- Be careful with the auth code.
+- Make sure everything works.
+- Follow best practices.
+</code></pre>
+<h2 id="nested-files">Nested files<a href="#nested-files" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Start with one root file. Add a nested <code>AGENTS.md</code> to a subdirectory only when that subtree genuinely differs:</p>
+<ul>
+<li>It uses a different package manager, test runner, or runtime.</li>
+<li>It contains generated code that must be regenerated rather than edited.</li>
+<li>It carries extra approval requirements, such as migrations or deployments.</li>
+<li>It has UI or design-system rules that do not apply elsewhere.</li>
+</ul>
+<p>A nested file lists only what differs in that directory and leaves everything else to the root file. Never repeat root rules in a nested file.</p>
+<h2 id="keep-it-small">Keep it small<a href="#keep-it-small" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>AGENTS.md</code> is loaded at the start of every task, so every extra line costs context on every run.</p>
+<ul>
+<li>Put the most important rules at the top.</li>
+<li>Link to detail documents instead of copying them.</li>
+<li>Prefer automated checks over prose: do not restate rules that oxlint, prek, or CI already enforce.</li>
+<li>Move directory-specific guidance into a nested file instead of growing the root file.</li>
+</ul>
+<p>Keep the root file short enough to read in one pass. When it grows too long, move details into linked files and cut what tools already enforce.</p>
+<h2 id="never-include">Never include<a href="#never-include" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Secrets, credentials, tokens, or private host names.</li>
+<li>Copies of documents that already exist elsewhere in the repository.</li>
+<li>Exhaustive directory inventories, which go stale on the next refactor.</li>
+<li>Temporary task notes that belong in an issue or pull request.</li>
+<li>Blanket instructions to skip validation.</li>
+</ul>
+<h2 id="keep-it-current">Keep it current<a href="#keep-it-current" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Update <code>AGENTS.md</code> in the same change that alters its commands, layout, boundaries, or conventions.</p>
+<p>A stale instruction is worse than a missing one: an agent follows it confidently and produces a change nobody asked for.</p>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">Practices</span><strong>Language Policy</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="project-documentation.html"><span class="related-cat">Practices</span><strong>Required Project Documentation</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="agent-protocol.html"><span>Previous · Practices</span><strong>Agent Operating Protocol</strong></a>
+<a class="page-nav-next" href="architecture-governance.html"><span>Next · Practices</span><strong>Architecture Governance</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/en/practices/agents-file.md" rel="noopener">View Markdown source<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>Rebuilt automatically on every merge to main.</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2>On this page</h2>
+<ul>
+<li><a href="#mandate">Mandate</a></li>
+<li><a href="#put-guidance-in-the-right-file">Put guidance in the right file</a></li>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#write-verifiable-rules">Write verifiable rules</a></li>
+<li><a href="#nested-files">Nested files</a></li>
+<li><a href="#keep-it-small">Keep it small</a></li>
+<li><a href="#never-include">Never include</a></li>
+<li><a href="#keep-it-current">Keep it current</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

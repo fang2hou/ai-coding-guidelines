@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AI コーディングガイドライン</title>
+<meta name="description" content="AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計を英・中・日の三言語で提供します。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="AI コーディングガイドライン">
+<meta property="og:description" content="AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計を英・中・日の三言語で提供します。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/index.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../en/index.html">English</a><a lang="zh" href="../zh/index.html">中文</a><a lang="ja" href="index.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="index.html" aria-current="page">概要</a>
+<a class="side-home" href="glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc index-doc">
+<header class="index-hero">
+<p class="eyebrow">三言語エンジニアリング基準 · 33 件</p>
+<h1>AI コーディングガイドライン</h1>
+<p class="intro">AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、日々の開発プラクティス、ライブラリ選定、プラットフォーム設計を扱い、英語・中国語・日本語のすべてで同じ内容を自然な表現で提供しています。</p>
+</header>
+<section class="start-here">
+<div class="section-head"><h2>まず読むべき基本文書</h2><p>タスクに着手する前に、まずこの 2 本から読み始めてください。</p></div>
+<div class="cards">
+<a class="card card-featured" href="principles/core-principles.html"><span class="card-step">01 · 原則</span><strong>中核となるエンジニアリング原則</strong><span>ガイドラインの目的と、すべての判断の土台となる基本原則。</span></a>
+<a class="card card-featured" href="practices/agent-protocol.html"><span class="card-step">02 · プラクティス</span><strong>エージェント運用プロトコル</strong><span>変更を加える前に AI エージェントが踏むべき 12 ステップの行動手順。</span></a>
+</div></section>
+<section class="recipes-section">
+<div class="section-head"><h2>タスク別の読み進め方</h2><p>目的に合わせて、リンクされたガイドラインを順番に読み進めます。</p></div>
+<div class="recipe-grid">
+<div class="recipe-card"><h3>TypeScript / フロントエンド開発</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/typescript.html">TypeScript ツールチェーン</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/frontend-framework.html">フロントエンドフレームワーク：Vite vs Next.js</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">コーディング規約</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">品質ゲート</a></div></div>
+<div class="recipe-card"><h3>TypeScript バックエンド構築</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/typescript.html">TypeScript ツールチェーン</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/typescript-backend.html">TypeScript バックエンド</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">コーディング規約</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">品質ゲート</a></div></div>
+<div class="recipe-card"><h3>Python API サービス開発</h3><div class="recipe-chain"><a class="recipe-pill" href="toolchain/mise.html">mise</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/python.html">Python ツールチェーン</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/python-api-stack.html">Python API スタック</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">コーディング規約</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/quality-gates.html">品質ゲート</a></div></div>
+<div class="recipe-card"><h3>UI スタイリングと角丸設計</h3><div class="recipe-chain"><a class="recipe-pill" href="practices/corner-radius.html">角丸</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/coding-standards.html">コーディング規約</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/language-policy.html">言語ポリシー</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="libraries/tailwindcss.html">Tailwind CSS</a></div></div>
+<div class="recipe-card"><h3>iOS 27 / macOS 27 Liquid Glass 対応</h3><div class="recipe-chain"><a class="recipe-pill" href="platforms/liquid-glass-design.html">Liquid Glass の設計（Apple プラットフォーム）</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="platforms/liquid-glass-patterns.html">Liquid Glass 実装パターン</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="platforms/liquid-glass-api.html">Liquid Glass API リファレンス</a></div></div>
+<div class="recipe-card"><h3>テスト・Git・CI/CD パイプライン</h3><div class="recipe-chain"><a class="recipe-pill" href="practices/testing.html">テスト戦略</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/git.html">Git ワークフロー</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/change-discipline.html">変更の規律</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="practices/pipeline.html">パイプライン</a><svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg><a class="recipe-pill" href="toolchain/github-actions.html">GitHub Actions</a></div></div>
+</div></section>
+<div class="section-head categories-head"><h2>カテゴリ別に探す</h2></div>
+<section class="cat-section" id="cat-principles">
+<div class="cat-header"><h3>原則</h3><span class="cat-count">1 件</span></div>
+<p>判断の土台となる基本原則：速い検証、選択肢の絞り込み、根本原因の解決。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="principles/core-principles.html"><div class="doc-card-head"><strong>中核となるエンジニアリング原則</strong></div><p>本ガイドラインは、AI 支援によるアイデアの迅速な検証と POC 開発におけるエンジニアリング標準を定める。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-practices">
+<div class="cat-header"><h3>プラクティス</h3><span class="cat-count">12 件</span></div>
+<p>日々の開発プラクティス：コーディング規約、テスト、ドキュメント、依存関係、セキュリティ。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="practices/agent-protocol.html"><div class="doc-card-head"><strong>エージェント運用プロトコル</strong></div><p>自明でない変更を行う前に、AI エージェントは次の手順を踏むこと。</p></a></li>
+<li><a class="doc-card" href="practices/agents-file.html"><div class="doc-card-head"><strong>AGENTS.md の執筆</strong></div><p>AGENTS.md はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、1 行ごとに載せる…</p></a></li>
+<li><a class="doc-card" href="practices/architecture-governance.html"><div class="doc-card-head"><strong>アーキテクチャガバナンス</strong></div><p>AI エージェントが誤って破ってはならないアーキテクチャの境界と不変条件を、ARCHITECTURE.md に明記する。</p></a></li>
+<li><a class="doc-card" href="practices/change-discipline.html"><div class="doc-card-head"><strong>変更の規律</strong></div><p>自明でない変更は、運用プロトコル に加えて、レビューに回す前にこのチェックリストで確認すること。</p></a></li>
+<li><a class="doc-card" href="practices/coding-standards.html"><div class="doc-card-head"><strong>コーディング規約</strong></div><p>選択した言語とフレームワークの確立された規約に従うこと。独自の流儀に置き換えないこと。</p></a></li>
+<li><a class="doc-card" href="practices/corner-radius.html"><div class="doc-card-head"><strong>角丸</strong></div><p>角丸は要素ごとに決める値ではなく、プロジェクト全体で揃える体系である。少数のトークン段階を一度定義し、すべての角丸をそこから選ぶ。 2 つのルールですべての場面を網羅できる。単一のサーフェスには連続角丸、ネストしたサーフェスには同心の角丸…</p></a></li>
+<li><a class="doc-card" href="practices/dependencies.html"><div class="doc-card-head"><strong>依存関係の管理方針</strong></div><p>依存関係を追加する前に、次の 5 つの問いに順番に答えること。</p></a></li>
+<li><a class="doc-card" href="practices/language-policy.html"><div class="doc-card-head"><strong>言語ポリシー</strong></div><p>言語の境界はプロジェクトの明確な制約である。次の 3 つの言語はそれぞれ独立しており、1 つから別を推測してはならない。</p></a></li>
+<li><a class="doc-card" href="practices/pipeline.html"><div class="doc-card-head"><strong>パイプライン</strong></div><p>これらの規則は、GitHub Actions、GitLab CI、CircleCI、Jenkins など、あらゆるシステムの CI/CD パイプラインに適用する。選択したシステム固有の規則は、対応するツールチェーン文書に記載されている。</p></a></li>
+<li><a class="doc-card" href="practices/project-documentation.html"><div class="doc-card-head"><strong>必須のプロジェクトドキュメント</strong></div><p>すべてのプロジェクトは、AGENTS.md、README.md、DEVELOPMENT.md、CONTRIBUTING.md を維持しなければならない。重要なアーキテクチャ上の境界を持つプロジェクトでは、ARCHITECTURE.md も…</p></a></li>
+<li><a class="doc-card" href="practices/security.html"><div class="doc-card-head"><strong>セキュリティ</strong></div><p>次のようなシークレットや機密情報をリポジトリにコミットしてはならない。</p></a></li>
+<li><a class="doc-card" href="practices/testing.html"><div class="doc-card-head"><strong>テスト戦略</strong></div><p>テストはカバレッジの数字を稼ぐためではなく、実際の振る舞いを検証するために書く。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-toolchain">
+<div class="cat-header"><h3>ツールチェーン</h3><span class="cat-count">9 件</span></div>
+<p>言語ごとの標準ツールチェーン。ローカルと CI で同じツールを動かす。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="toolchain/databricks.html"><div class="doc-card-head"><strong>Databricks</strong></div><p>データおよび AI ワークロードでは Databricks を優先する。アプリケーションのホスティングと管理には Databricks Apps、スケジュール実行や自動実行には Databricks Jobs を使う。</p></a></li>
+<li><a class="doc-card" href="toolchain/git.html"><div class="doc-card-head"><strong>Git ワークフロー</strong></div><p>プロジェクトのすべてのコミットは、Conventional Commits 仕様に従わなければならない。</p></a></li>
+<li><a class="doc-card" href="toolchain/github-actions.html"><div class="doc-card-head"><strong>GitHub Actions</strong></div><p>GitHub Actions は標準の CI/CD プラットフォームであり、ユーザーがパイプラインシステムを指定していない場合のデフォルトである。ツールに依存しないパイプラインの規則は パイプライン に記載されている。</p></a></li>
+<li><a class="doc-card" href="toolchain/go.html"><div class="doc-card-head"><strong>Go ツールチェーン</strong><span class="badge badge-draft">ドラフト</span></div><p>AI 支援開発のデフォルト言語は TypeScript と Python である。Go はデフォルトではなく、次の要件が実際に必要な場合に限って選ぶ。</p></a></li>
+<li><a class="doc-card" href="toolchain/mise.html"><div class="doc-card-head"><strong>mise</strong></div><p>mise をすべてのプロジェクトで必須とする。</p></a></li>
+<li><a class="doc-card" href="toolchain/python.html"><div class="doc-card-head"><strong>Python ツールチェーン</strong></div><p>Python と TypeScript は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。</p></a></li>
+<li><a class="doc-card" href="toolchain/quality-gates.html"><div class="doc-card-head"><strong>品質ゲート</strong></div><p>prek を標準のプリコミットフレームワークとして使う。</p></a></li>
+<li><a class="doc-card" href="toolchain/rust.html"><div class="doc-card-head"><strong>Rust ツールチェーン</strong><span class="badge badge-draft">ドラフト</span></div><p>AI 支援開発のデフォルト言語は TypeScript と Python である。Rust はデフォルトではなく、次の要件が実際に必要な場合に限って選ぶ。</p></a></li>
+<li><a class="doc-card" href="toolchain/typescript.html"><div class="doc-card-head"><strong>TypeScript ツールチェーン</strong></div><p>TypeScript と Python は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-libraries">
+<div class="cat-header"><h3>ライブラリ</h3><span class="cat-count">8 件</span></div>
+<p>フロントエンド・バックエンド・AI 機能で標準採用するライブラリとフレームワーク。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="libraries/agentation.html"><div class="doc-card-head"><strong>Agentation</strong><span class="badge badge-draft">ドラフト</span></div><p>条件付き — フロントエンドの反復開発とテスト中に Agentation を有効にし、視覚的なフィードバックを AI コーディングエージェント向けの構造化コンテキストに変換する。</p></a></li>
+<li><a class="doc-card" href="libraries/frontend-framework.html"><div class="doc-card-head"><strong>フロントエンドフレームワーク：Vite vs Next.js</strong></div><p>推奨 — フロントエンドフレームワークは Vite をデフォルトとし、Next.js はフルスタックの React 機能が本当に必要な場合に限り選択する。</p></a></li>
+<li><a class="doc-card" href="libraries/go-api-stack.html"><div class="doc-card-head"><strong>Go API スタック</strong><span class="badge badge-draft">ドラフト</span></div><p>推奨 — Go の Web フレームワークには Echo を使い、リクエスト検証には github.com/go-playground/validator/v10 を使う。Go 自体の採用が Go ツールチェーンの基準に基づいて正当化され…</p></a></li>
+<li><a class="doc-card" href="libraries/python-api-stack.html"><div class="doc-card-head"><strong>Python API スタック</strong></div><p>推奨 — FastAPI + Pydantic + Uvicorn を標準の Python API スタックとする。3 つを別々に選ぶのではなく、1 つのスタックとして採用する。</p></a></li>
+<li><a class="doc-card" href="libraries/svelte.html"><div class="doc-card-head"><strong>Svelte（Svelte 5 + SvelteKit）</strong></div><p>条件付き — Svelte 5 + SvelteKit は、開発の楽しさも目標のひとつである小規模な個人プロジェクトと実験プロジェクトでの採用を認める。デフォルトではない。本番のフロントエンドはフロントエンドフレームワークで選定した Re…</p></a></li>
+<li><a class="doc-card" href="libraries/tailwindcss.html"><div class="doc-card-head"><strong>Tailwind CSS</strong></div><p>条件付き — プロジェクトがすでに Tailwind を使っている、またはコンポーネントキットが Tailwind を必要とする場合に使う。新しいスタイリングのデフォルトはネイティブ CSS である。</p></a></li>
+<li><a class="doc-card" href="libraries/typescript-backend.html"><div class="doc-card-head"><strong>TypeScript バックエンド</strong></div><p>推奨 — TypeScript のバックエンドサービスには Hono を使う。既定のランタイムは Active LTS ラインの Node.js である。Web 標準 API によって、サービスを Cloudflare Workers な…</p></a></li>
+<li><a class="doc-card" href="libraries/vercel-ai-sdk.html"><div class="doc-card-head"><strong>Vercel AI SDK</strong></div><p>条件付き — Vercel AI SDK は、Next.js プロジェクトでストリーミングや UI 統合などの機能を実際に使う場合に限って採用する。</p></a></li>
+</ul></section>
+<section class="cat-section" id="cat-platforms">
+<div class="cat-header"><h3>プラットフォーム</h3><span class="cat-count">3 件</span></div>
+<p>Apple プラットフォーム（iOS / macOS 27 Liquid Glass）のデザインと実装パターン。</p>
+<ul class="doc-list">
+<li><a class="doc-card" href="platforms/liquid-glass-api.html"><div class="doc-card-head"><strong>Liquid Glass API リファレンス</strong></div><p>Xcode 27 でビルドし、最低対応 OS をそれぞれ 27.0 に設定した iOS 27 とネイティブ macOS 27 のアプリを対象とする。2026-09-06 に Apple の文書と Xcode 27 ベータ版のビルド 27A…</p></a></li>
+<li><a class="doc-card" href="platforms/liquid-glass-design.html"><div class="doc-card-head"><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></div><p>iOS 27 とネイティブの macOS 27 向けの新規アプリでは、システムのナビゲーションとコントロールを優先して Liquid Glass を採用する。標準コンポーネントで必要な操作を実現できない場合に限り、カスタムのガラス効果を追…</p></a></li>
+<li><a class="doc-card" href="platforms/liquid-glass-patterns.html"><div class="doc-card-head"><strong>Liquid Glass 実装パターン</strong></div><p>Xcode 27 でビルドする iOS 27 とネイティブの macOS 27 アプリを対象とし、各プラットフォームの最低対応 OS を 27.0 に設定する。SwiftUI を基本とし、独自の組み込みには iOS で UIKit、mac…</p></a></li>
+</ul></section>
+</article>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<span class="page-nav-empty"></span>
+<a class="page-nav-next" href="principles/core-principles.html"><span>次へ · 原則</span><strong>中核となるエンジニアリング原則</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/tree/main/guidelines/ja" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+
+</div>
+</body>
+</html>

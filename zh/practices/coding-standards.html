@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>编码标准 · AI 编码指南</title>
+<meta name="description" content="遵循所用语言和框架的通行惯例，不要另搞一套私有写法。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/coding-standards.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="编码标准 · AI 编码指南">
+<meta property="og:description" content="遵循所用语言和框架的通行惯例，不要另搞一套私有写法。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/coding-standards.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/practices/coding-standards.html">English</a><a lang="zh" href="coding-standards.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/practices/coding-standards.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html" aria-current="page"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v3</span>
+
+</div>
+<h1 id="编码标准">编码标准<a href="#编码标准" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="遵循生态系统最佳实践">遵循生态系统最佳实践<a href="#遵循生态系统最佳实践" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>遵循所用语言和框架的通行惯例，不要另搞一套私有写法。</p>
+<p>具体包括：</p>
+<ul>
+<li>结构清晰</li>
+<li>数据结构恰当</li>
+<li>遵循框架既有惯例</li>
+<li>设计模式得当</li>
+<li>在适用时保证类型安全</li>
+<li>符合惯例的 API 用法</li>
+</ul>
+<p>用提前返回处理边界情况，避免层层嵌套：</p>
+<pre><code class="language-ts">// bad
+if (order !== null) {
+  if (order.isPaid) {
+    ship(order);
+  }
+}
+// good
+if (order === null || !order.isPaid) return;
+ship(order);
+</code></pre>
+<p>只有当设计模式能解决代码里实际存在的问题时才使用，不要为了套模式而用模式。</p>
+<h2 id="避免过度设计">避免过度设计<a href="#避免过度设计" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>没有明确需求时，不要无谓增加代码库的复杂度。</p>
+<p>优先选择符合以下特征的代码：</p>
+<ul>
+<li>简单</li>
+<li>可读</li>
+<li>显式</li>
+<li>可维护</li>
+<li>易于修改</li>
+</ul>
+<p>避免过早泛化：出现第二个用例之前，不要引入抽象。</p>
+<pre><code class="language-ts">// bad
+const users = UserRepositoryFactory.create();
+const cache = CacheFactory.createCache();
+// good
+const users = new UserRepository();
+const cache = new Cache();
+</code></pre>
+<p>不要用布尔参数把第二种行为隐藏在一个函数里；拆成两个函数，让调用处无需查看标志位就能读懂。</p>
+<pre><code class="language-ts">// bad
+function saveReport(report: Report, silent: boolean) {
+  /* ... */
+}
+saveReport(report, true);
+// good
+function saveReport(report: Report) {
+  /* ... */
+}
+function saveReportSilently(report: Report) {
+  /* ... */
+}
+</code></pre>
+<h2 id="命名">命名<a href="#命名" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用有意义的英文名称，准确描述用途和行为。</p>
+<p>避免：</p>
+<ul>
+<li>语义模糊的缩写</li>
+<li>有更好名称可用时，<code>data</code>、<code>thing</code>、<code>value</code> 之类的通用名</li>
+<li>音译</li>
+<li>已有标准英文术语时的项目专属俚语</li>
+</ul>
+<pre><code class="language-ts">// bad
+const usr = findUsrById(uid);
+let flag = false;
+// good
+const user = findUserById(userId);
+let hasUnsavedChanges = false;
+</code></pre>
+<p>遵循<a href="language-policy.html">语言政策</a>中的代码语言规则。</p>
+<h2 id="注释">注释<a href="#注释" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>写出本身就容易读懂、几乎不需要注释的代码。靠清晰的命名和合理拆分表达代码做了什么；注释只用来补充代码本身无法表达的原因。</p>
+<ul>
+<li>注释解释原因，不要复述代码做了什么。</li>
+<li>不要逐步讲解逻辑；如果一段代码需要一条条注释才能说明逻辑，先重构它。</li>
+<li>不要保留描述已删除行为或过去意图的注释。</li>
+<li>配置文件中不要写注释；将理由写入 pull request 或项目文档。</li>
+</ul>
+<pre><code class="language-ts">// bad
+// renew the subscription if it is still active
+if (user.subscription &amp;&amp; user.subscription.endsAt &gt; now) {
+  renew(user.subscription);
+}
+// good
+if (user.hasActiveSubscription(now)) {
+  renew(user.subscription);
+}
+</code></pre>
+<h2 id="模块化">模块化<a href="#模块化" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>只有当模块化能改进以下方面时，才做模块化：</p>
+<ul>
+<li>可测试性</li>
+<li>可读性</li>
+<li>职责归属</li>
+<li>复用</li>
+<li>变更隔离</li>
+</ul>
+<p>不要为了满足抽象的模块化理念而人为拆出模块。</p>
+<p>经验法则：只有一个页面用到的辅助函数就留在该页面文件里，等第二个地方也要导入时再抽到共享模块。
+按阅读顺序组织文件：把相关函数归在一起，区分不同层级的逻辑，主流程放前面、辅助函数放后面。</p>
+<h2 id="新文件与新模块">新文件与新模块<a href="#新文件与新模块" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>创建新文件或新模块之前，先用一句话说明它的职责。如果必须用“和”才能说准确，说明它承担了两项职责——拆分它，或重新考虑。</p>
+<p>禁止创建：</p>
+<ul>
+<li>冗余模块</li>
+<li>重复的辅助代码</li>
+<li>空洞的抽象</li>
+<li>对已有功能的并行实现</li>
+</ul>
+<p><code>src/utils/date.ts</code> 有明确职责；<code>src/utils/misc.ts</code> 没有。</p>
+<p>新代码必须与既有架构保持一致。</p>
+<h2 id="性能">性能<a href="#性能" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>正确性和可读性优先，不要为了未经测量的性能牺牲代码结构。</p>
+<ul>
+<li>不要做可以避免的分配、复制和重复计算。</li>
+<li>不要在运行 O(n) 次的循环中执行 O(n) 的工作。</li>
+<li>先修正算法或数据结构，再考虑零散的微优化。</li>
+<li>只优化度量过的热点路径，且必须有证据支撑。</li>
+</ul>
+<h2 id="响应式前端">响应式前端<a href="#响应式前端" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>前端应用必须做到完整的响应式适配：在桌面、平板、手机尺寸下均可用，并采用现代响应式布局技术。</p>
+<pre><code class="language-tsx">// bad
+&lt;div className=&quot;w-[960px] px-8&quot;&gt;
+// good
+&lt;div className=&quot;w-full max-w-3xl px-4 sm:px-6 lg:px-8&quot;&gt;
+</code></pre>
+<p>实现第一个页面时就确定断点。不要等应用按单一固定视口构建完成后，才把响应式行为当作最后的外观调整。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="language-policy.html"><span class="related-cat">工程实践</span><strong>语言政策</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="corner-radius.html"><span class="related-cat">工程实践</span><strong>圆角</strong></a></li>
+<li><a class="related-chip" href="../toolchain/typescript.html"><span class="related-cat">工具链</span><strong>TypeScript 工具链</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="change-discipline.html"><span>上一篇 · 工程实践</span><strong>变更纪律</strong></a>
+<a class="page-nav-next" href="corner-radius.html"><span>下一篇 · 工程实践</span><strong>圆角</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/practices/coding-standards.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#遵循生态系统最佳实践">遵循生态系统最佳实践</a></li>
+<li><a href="#避免过度设计">避免过度设计</a></li>
+<li><a href="#命名">命名</a></li>
+<li><a href="#注释">注释</a></li>
+<li><a href="#模块化">模块化</a></li>
+<li><a href="#新文件与新模块">新文件与新模块</a></li>
+<li><a href="#性能">性能</a></li>
+<li><a href="#响应式前端">响应式前端</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>TypeScript 工具链 · AI 编码指南</title>
+<meta name="description" content="TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/typescript.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="TypeScript 工具链 · AI 编码指南">
+<meta property="og:description" content="TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/typescript.html">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI 编码指南</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="语言"><a lang="en" href="../../en/toolchain/typescript.html">English</a><a lang="zh" href="typescript.html" aria-current="true" class="current">中文</a><a lang="ja" href="../../ja/toolchain/typescript.html">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="总览">
+<div class="side-top">
+<a class="side-home" href="../index.html">总览</a>
+<a class="side-home" href="../glossary.html">术语表</a>
+</div>
+<div class="side-group">
+<h3><span>核心原则</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工程实践</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>工具链</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust 工具链</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="typescript.html" aria-current="page"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>库与框架</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span><span class="side-draft" title="草稿">草稿</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>平台规范</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">工具链</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v8</span>
+
+</div>
+<h1 id="typescript-工具链">TypeScript 工具链<a href="#typescript-工具链" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="强制要求">强制要求<a href="#强制要求" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</p>
+<p>语言优先级：</p>
+<ul>
+<li>产品与全栈开发默认使用 TypeScript。</li>
+<li>Python 仅用于 <a href="python.html">Python 工具链</a> 列出的适用场景。</li>
+<li>Go 与 Rust 仅用于性能关键或系统级场景；采用前必须说明理由、征得用户批准，并记录在项目 ADR 中。详见 <a href="go.html">Go</a> 与 <a href="rust.html">Rust</a>。</li>
+</ul>
+<p>框架选型见 <a href="../libraries/frontend-framework.html">前端框架：Vite 与 Next.js</a>。</p>
+<h2 id="版本策略">版本策略<a href="#版本策略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用最新稳定版 TypeScript 和 Active LTS 线上的最新稳定版 Node.js。</p>
+<p>截至 2026-08，Active LTS 版本线为 Node.js 24（EOL 2028-04）；Node.js 22 处于维护期（EOL 2027-04），Node.js 26 在 2026-10 之前仍是 Current 线。绝不以 Current 线为目标；只有新的 LTS 版本线稳定后，才升级 Node 主版本。</p>
+<p>模型根据训练数据生成代码，因此主流且经过充分验证的版本在 AI 辅助开发中出错更少；应优先选择这些版本，而不是追求边际收益。该原则见 <a href="../principles/core-principles.html">核心工程原则</a>。</p>
+<p>在项目的 mise 配置中固定 Node.js 的版本；TypeScript 的版本通过 pnpm lockfile 固定，两者都不依赖全局安装的版本。</p>
+<h2 id="pnpm">pnpm<a href="#pnpm" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>使用 <code>pnpm</code>。这条要求同时适用于普通 Node.js 项目和 monorepo。</p>
+<p>在 <code>mise.toml</code> 中固定 <code>pnpm</code> 版本时，应使用最新版本并通过 mise（<code>mise latest pnpm</code>）查询。注意：npm 中的 <code>pnpm</code> <code>latest</code> 是 11，但实际最新版本是 12。</p>
+<p>外部文档给出 npm 或 yarn 命令时，将其改写为 pnpm 等价命令，不要引入其他包管理器。</p>
+<p>项目 lockfile 必须与 pnpm 保持一致。</p>
+<h3 id="不采用的替代方案">不采用的替代方案<a href="#不采用的替代方案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>禁止使用：</p>
+<ul>
+<li>npm</li>
+<li>yarn</li>
+</ul>
+<h2 id="oxlint">oxlint<a href="#oxlint" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>oxlint</code> 是 TypeScript / JavaScript 的标准 Lint 工具。</p>
+<p>当框架、模板或库推荐 ESLint 时：</p>
+<ol>
+<li>弄清它依赖哪些 ESLint 规则或插件。</li>
+<li>判断 oxlint 是否支持所需功能。</li>
+<li>只要可行，就使用 oxlint 提供的等效功能。</li>
+<li>不要仅因模板生成了 ESLint 就保留它。</li>
+</ol>
+<p>除非存在具体的兼容性问题，否则使用最新稳定版 oxlint。</p>
+<h3 id="规则配置">规则配置<a href="#规则配置" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>有针对性地配置 oxlint：根据代码实际运行的环境开启规则和插件，不要只用默认配置，也不要因为脚手架模板没开就漏掉有用的检查。</p>
+<p>对于运行在 Node.js 上的代码，在 <code>.oxlintrc.json</code> 中启用 <code>node</code> 插件并开启相关规则（包括防范旧式 CommonJS 写法的规则），同时关闭与项目定位冲突的限制规则（例如，有意同步读写文件的 CLI 工具应保持 <code>no-sync</code> 关闭）。</p>
+<h3 id="type-aware-与类型检查规则">Type-Aware 与类型检查规则<a href="#type-aware-与类型检查规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>在项目需要时，启用 oxlint 官方支持的 TypeScript 类型感知（type-aware）Lint 和类型检查。</p>
+<p>将配套包 <code>oxlint-tsgolint</code> 与新版 <code>oxlint</code> 一起安装，并在根目录 <code>.oxlintrc.json</code> 中开启 <code>options.typeAware</code> 和 <code>options.typeCheck</code>（截至 2026-08，<code>typeCheck</code> 仍为实验特性）。</p>
+<p>参照 oxlint 当前官方文档配置，不要从旧项目照搬过时配置；只要 oxlint 能满足需求，就不要为了类型感知规则再引入 ESLint。</p>
+<h3 id="不采用的替代方案-1">不采用的替代方案<a href="#不采用的替代方案-1" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>禁止将 ESLint 作为默认 Lint 体系。</p>
+<h2 id="oxfmt">oxfmt<a href="#oxfmt" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>oxfmt</code> 是 TypeScript / JavaScript 项目的标准格式化工具。</p>
+<p>除非存在具体的兼容性问题，否则使用最新稳定版 oxfmt。</p>
+<p>不要对同一组源文件运行多个相互竞争的格式化工具。</p>
+<h3 id="不采用的替代方案-2">不采用的替代方案<a href="#不采用的替代方案-2" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>禁止使用 Prettier。</p>
+<h2 id="tsconfig-基线">tsconfig 基线<a href="#tsconfig-基线" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>每个项目从严格的 tsconfig 基线起步：</p>
+<ul>
+<li><code>&quot;strict&quot;: true</code>——严格模式的基础；除非有 ADR 级别的理由，否则不得关闭任何单独的严格性标志。</li>
+<li><code>&quot;noUncheckedIndexedAccess&quot;: true</code>——索引访问结果为 <code>T | undefined</code>，必须处理 <code>undefined</code> 情况。</li>
+<li><code>&quot;verbatimModuleSyntax&quot;: true</code>——仅用于类型的导入必须使用 <code>import type</code>，避免意外产生运行时导入。</li>
+<li><code>&quot;isolatedModules&quot;: true</code>——每个文件必须能独立编译，与打包器和转译器的实际处理方式一致。</li>
+<li>只用 ESM。应用项目使用 <code>&quot;module&quot;: &quot;ESNext&quot;</code> 配 <code>&quot;moduleResolution&quot;: &quot;Bundler&quot;</code>；Node 库使用 <code>&quot;module&quot;: &quot;NodeNext&quot;</code> 配 <code>&quot;moduleResolution&quot;: &quot;NodeNext&quot;</code>。</li>
+<li>应用项目不让 tsc 生成输出：设置 <code>&quot;noEmit&quot;: true</code>，由打包器生成产物。</li>
+</ul>
+<p>基线示例：</p>
+<pre><code class="language-jsonc">{
+  &quot;compilerOptions&quot;: {
+    &quot;strict&quot;: true,
+    &quot;noUncheckedIndexedAccess&quot;: true,
+    &quot;verbatimModuleSyntax&quot;: true,
+    &quot;isolatedModules&quot;: true,
+    &quot;module&quot;: &quot;ESNext&quot;,
+    &quot;moduleResolution&quot;: &quot;Bundler&quot;,
+    &quot;target&quot;: &quot;ES2022&quot;,
+    &quot;lib&quot;: [&quot;ES2022&quot;, &quot;DOM&quot;],
+    &quot;noEmit&quot;: true,
+  },
+}
+</code></pre>
+<h2 id="语言使用规则">语言使用规则<a href="#语言使用规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>值的类型未知时使用 <code>unknown</code> 而不是 <code>any</code>，先收窄类型再使用。仅在确实需要动态互操作时使用 <code>any</code>，并附注释说明理由。</li>
+<li>非空断言（<code>!</code>）必须附注释，说明为什么该值在此处不可能为 null 或 undefined。</li>
+<li>导出函数显式声明返回类型。</li>
+<li>使用可辨识联合（discriminated union）为状态建模，不要堆叠一组布尔标志。</li>
+<li>用 <code>satisfies</code> 校验配置对象：错误会在定义处暴露，同时保留字面量类型。</li>
+<li>字面量表加上 <code>as const</code>，使元素类型保持精确。</li>
+<li>用联合类型或 <code>const</code> 对象代替 <code>enum</code>。</li>
+<li>不留悬空 promise：要么 <code>await</code>，要么有意用 <code>void</code> 丢弃，并附注释说明为何忽略结果。</li>
+<li>只能抛出 Error 子类；禁止抛出字符串或普通对象。</li>
+</ul>
+<h2 id="项目约定">项目约定<a href="#项目约定" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>应用源码放在 <code>src/</code> 下，入口通过 <code>package.json</code> 暴露。</li>
+<li>文件名使用 kebab-case（<code>user-profile-card.tsx</code>），值使用 camelCase，类型、组件和类使用 PascalCase。</li>
+<li>避免桶文件（barrel file，即用 <code>index.ts</code> 转发整个目录），直接从定义模块导入。桶文件会损害 tree-shaking，还容易造成循环导入。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../libraries/frontend-framework.html">前端框架：Vite 与 Next.js</a></li>
+<li><a href="../libraries/typescript-backend.html">TypeScript 后端</a></li>
+<li><a href="quality-gates.html">质量门禁</a></li>
+<li><a href="../practices/testing.html">测试策略</a></li>
+<li><a href="../practices/coding-standards.html">编码标准</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="python.html"><span class="related-cat">工具链</span><strong>Python 工具链</strong></a></li>
+<li><a class="related-chip" href="go.html"><span class="related-cat">工具链</span><strong>Go 工具链</strong></a></li>
+<li><a class="related-chip" href="rust.html"><span class="related-cat">工具链</span><strong>Rust 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/frontend-framework.html"><span class="related-cat">库与框架</span><strong>前端框架：Vite 与 Next.js</strong></a></li>
+<li><a class="related-chip" href="../principles/core-principles.html"><span class="related-cat">核心原则</span><strong>核心工程原则</strong></a></li>
+<li><a class="related-chip" href="../libraries/typescript-backend.html"><span class="related-cat">库与框架</span><strong>TypeScript 后端技术栈</strong></a></li>
+<li><a class="related-chip" href="quality-gates.html"><span class="related-cat">工具链</span><strong>质量门禁</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">工程实践</span><strong>测试策略</strong></a></li>
+<li><a class="related-chip" href="../practices/coding-standards.html"><span class="related-cat">工程实践</span><strong>编码标准</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">工程实践</span><strong>Agent 操作协议</strong></a></li>
+<li><a class="related-chip" href="../practices/dependencies.html"><span class="related-cat">工程实践</span><strong>依赖管理规范</strong></a></li>
+<li><a class="related-chip" href="python.html"><span class="related-cat">工具链</span><strong>Python 工具链</strong></a></li>
+<li><a class="related-chip" href="../libraries/frontend-framework.html"><span class="related-cat">库与框架</span><strong>前端框架：Vite 与 Next.js</strong></a></li>
+<li><a class="related-chip" href="../libraries/typescript-backend.html"><span class="related-cat">库与框架</span><strong>TypeScript 后端技术栈</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="rust.html"><span>上一篇 · 工具链</span><strong>Rust 工具链</strong></a>
+<a class="page-nav-next" href="../libraries/agentation.html"><span>下一篇 · 库与框架</span><strong>Agentation</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/zh/toolchain/typescript.md" rel="noopener">查看 Markdown 源文件<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>合并至 main 分支时自动构建发布</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2>本页目录</h2>
+<ul>
+<li><a href="#强制要求">强制要求</a></li>
+<li><a href="#版本策略">版本策略</a></li>
+<li><a href="#pnpm">pnpm</a></li>
+<li><a href="#oxlint">oxlint</a></li>
+<li><a href="#oxfmt">oxfmt</a></li>
+<li><a href="#tsconfig-基线">tsconfig 基线</a></li>
+<li><a href="#语言使用规则">语言使用规则</a></li>
+<li><a href="#项目约定">项目约定</a></li>
+<li><a href="#联动">联动</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

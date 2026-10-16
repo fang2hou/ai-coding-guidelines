@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Go API スタック · AI コーディングガイドライン</title>
+<meta name="description" content="推奨 — Go の Web フレームワークには Echo を使い、リクエスト検証には github.com/go-playground/validator/v10 を使う。Go 自体の採用が Go ツールチェーンの基準に基づいて正当化され…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/libraries/go-api-stack.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Go API スタック · AI コーディングガイドライン">
+<meta property="og:description" content="推奨 — Go の Web フレームワークには Echo を使い、リクエスト検証には github.com/go-playground/validator/v10 を使う。Go 自体の採用が Go ツールチェーンの基準に基づいて正当化され…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/libraries/go-api-stack.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/libraries/go-api-stack.html">English</a><a lang="zh" href="../../zh/libraries/go-api-stack.html">中文</a><a lang="ja" href="go-api-stack.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="go-api-stack.html" aria-current="page"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-libraries">ライブラリ</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v1</span>
+<span class="badge badge-draft">ドラフト</span>
+</div>
+<h1 id="go-api-スタック">Go API スタック<a href="#go-api-スタック" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="判定">判定<a href="#判定" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>推奨 — Go の Web フレームワークには Echo を使い、リクエスト検証には <code>github.com/go-playground/validator/v10</code> を使う。Go 自体の採用が <a href="../toolchain/go.html">Go ツールチェーン</a>の基準に基づいて正当化された場合に限り、このスタックを適用する。</p>
+<h2 id="使用する場面">使用する場面<a href="#使用する場面" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Go サービスが HTTP API を必要とし、Go の採用自体が <a href="../toolchain/go.html">Go ツールチェーン</a>の基準をすでに満たしている場合。</li>
+</ul>
+<h2 id="避けるべき場面">避けるべき場面<a href="#避けるべき場面" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Go の採用が正当化されない場合は、このスタックを無理に選ばず、代わりに既定の <a href="typescript-backend.html">TypeScript バックエンド</a>または <a href="python-api-stack.html">Python API スタック</a>を使う。</li>
+</ul>
+<h2 id="長所">長所<a href="#長所" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Echo：ルーティングとミドルウェアが成熟しており、API はコンパクトである。必要な機能を備えながら、<code>net/http</code> を隠さない。</li>
+<li>Echo：高性能でアロケーションのオーバーヘッドが小さく、Go の採用を正当化する性能要件の厳しいサービスに適する。</li>
+<li>Echo：活発に保守されている。現行ラインは v5 であり、v4 も 2026-12-31 までセキュリティ修正とバグ修正を受け続ける。</li>
+<li>validator：Go の構造体検証における事実上の標準ライブラリであり、Echo のリクエストバインディングと統合できる。</li>
+</ul>
+<h2 id="トレードオフ">トレードオフ<a href="#トレードオフ" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>フレームワークのコンテキストは結合を招く。<code>echo.Context</code> は便利だが、それに依存して書いたビジネスロジックはフレームワークに閉じ込められる。以下のレイヤー規則は、この問題を封じ込めるためにある。</li>
+<li>サービスは Echo のアップグレード周期を引き継ぐ。メジャーラインの移行（v4 から v5）はプロジェクトの都合ではなく、フレームワークのスケジュールで行われる。</li>
+</ul>
+<h2 id="バージョン方針">バージョン方針<a href="#バージョン方針" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>新しいサービスは Echo の現行の安定メジャーラインで始め、最新の安定マイナーを追う。2026-08 時点の現行ラインは v5（<code>github.com/labstack/echo/v5</code>）である。着手前に Echo のリリースを確認し、この文書をバージョンの確定情報として扱わない。</li>
+<li>既存サービスは、使用中のメジャーラインの最新マイナーを使う。v4 のサービスは、v4 のサポート終了（2026-12-31）までに v5 へ移行する。移行には Echo の現行ドキュメントに記載されたアップグレード手順を使う。</li>
+<li>フレームワークの現行ドキュメントに記載された作法に従う。GOPATH 時代や Go modules 以前のブログ記事のパターンを決してコピーしない。import パス、プロジェクト構成、ミドルウェア登録はいずれも年月とともに変化している。</li>
+<li>周辺ライブラリは新しい安定メジャーを使い、現在のベストプラクティスに従う。validator の現行 import パスは <code>github.com/go-playground/validator/v10</code> である。</li>
+</ul>
+<h2 id="利用ルール">利用ルール<a href="#利用ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="レイヤー構成-ハンドラは薄いアダプタ">レイヤー構成：ハンドラは薄いアダプタ<a href="#レイヤー構成-ハンドラは薄いアダプタ" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>HTTP ハンドラはトランスポート境界の薄いアダプタである。コア層を呼び出す前に、フレームワークのコンテキスト（<code>echo.Context</code>）を標準の <code>context.Context</code> と検証済みの型付きリクエスト値に変換する。</li>
+<li>コア／ビジネス層は標準ライブラリの context とドメイン型だけに依存し、<code>echo</code> も他の Web フレームワークも import しない。</li>
+<li>これにより、コア層は通常の Go テストで検証でき、トランスポート間でも移植可能である。</li>
+</ul>
+<pre><code class="language-go">// Transport layer — the only place Echo appears.
+func (h *Handler) CreateUser(c echo.Context) error {
+	var in CreateUserInput // transport type with `validate:&quot;...&quot;` tags
+	if err := c.Bind(&amp;in); err != nil {
+		return err
+	}
+	if err := c.Validate(&amp;in); err != nil {
+		return err
+	}
+	return h.Service.Do(c.Request().Context(), in.ToDomain())
+}
+</code></pre>
+<p><code>core.Service.Do(ctx context.Context, req CreateUser)</code> は標準の context とドメイン型だけを受け取り、<code>echo.Context</code> には決して触れない。</p>
+<h3 id="リクエスト検証">リクエスト検証<a href="#リクエスト検証" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>トランスポート境界で <code>github.com/go-playground/validator/v10</code> を使ってリクエストを検証する。bind → validate → ドメイン型への変換の順で処理する。</li>
+<li>コア層は検証済みの値を受け取り、トランスポートに関する検証を再度行わない。</li>
+</ul>
+<h3 id="ミドルウェア">ミドルウェア<a href="#ミドルウェア" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>ミドルウェア（認証、ログ、recovery、CORS）はトランスポート層にだけ置く。コア層はミドルウェアの存在を知らない。</li>
+</ul>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<h3 id="内部の相互関係">内部の相互関係<a href="#内部の相互関係" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>Echo + validator — 起動時に 1 回だけバリデータを登録する。Echo の bind → validate パイプラインが、ドメイン型への変換前にリクエストの形式を検証する標準の場所である。</li>
+</ul>
+<h3 id="関連ガイドライン">関連ガイドライン<a href="#関連ガイドライン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li><a href="../toolchain/go.html">Go ツールチェーン</a> — このスタックでは、そのリンティング、フォーマット、context、エラー処理のルールに従う。</li>
+<li><a href="../practices/testing.html">テスト戦略</a> — フレームワーク非依存のコア層にはテーブル駆動の Go テストを使い、HTTP に関する部分は薄いアダプタのテストでカバーする。</li>
+<li><a href="../toolchain/quality-gates.html">品質ゲート</a> — 同じチェック。prek と CI は同じリンターおよびフォーマッター設定でチェックを実行する。</li>
+</ul>
+<h2 id="採用しない代替案">採用しない代替案<a href="#採用しない代替案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>ビジネスロジックを <code>echo.Context</code> に直接依存させること — フレームワークの外ではテストできず、Echo の内部実装に固定される。</li>
+<li>同じサービスに 2 つ目の Web フレームワークを導入すること — 1 サービスにつき 1 つのフレームワークとする。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/go.html"><span class="related-cat">ツールチェーン</span><strong>Go ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="typescript-backend.html"><span class="related-cat">ライブラリ</span><strong>TypeScript バックエンド</strong></a></li>
+<li><a class="related-chip" href="python-api-stack.html"><span class="related-cat">ライブラリ</span><strong>Python API スタック</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">プラクティス</span><strong>テスト戦略</strong></a></li>
+<li><a class="related-chip" href="../toolchain/quality-gates.html"><span class="related-cat">ツールチェーン</span><strong>品質ゲート</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../toolchain/go.html"><span class="related-cat">ツールチェーン</span><strong>Go ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="typescript-backend.html"><span class="related-cat">ライブラリ</span><strong>TypeScript バックエンド</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="frontend-framework.html"><span>前へ · ライブラリ</span><strong>フロントエンドフレームワーク：Vite vs Next.js</strong></a>
+<a class="page-nav-next" href="python-api-stack.html"><span>次へ · ライブラリ</span><strong>Python API スタック</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/libraries/go-api-stack.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#判定">判定</a></li>
+<li><a href="#使用する場面">使用する場面</a></li>
+<li><a href="#避けるべき場面">避けるべき場面</a></li>
+<li><a href="#長所">長所</a></li>
+<li><a href="#トレードオフ">トレードオフ</a></li>
+<li><a href="#バージョン方針">バージョン方針</a></li>
+<li><a href="#利用ルール">利用ルール</a></li>
+<li><a href="#連携">連携</a></li>
+<li><a href="#採用しない代替案">採用しない代替案</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

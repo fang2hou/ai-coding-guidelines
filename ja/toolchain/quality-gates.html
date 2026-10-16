@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>品質ゲート · AI コーディングガイドライン</title>
+<meta name="description" content="prek を標準のプリコミットフレームワークとして使う。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/quality-gates.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="品質ゲート · AI コーディングガイドライン">
+<meta property="og:description" content="prek を標準のプリコミットフレームワークとして使う。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/quality-gates.html">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'16'%20fill%3D'%230969da'%2F%3E%3Ctext%20x%3D'32'%20y%3D'46'%20font-family%3D'Georgia%2Cserif'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23fff'%3E%C2%A7%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<a class="site-title" href="../index.html"><span class="site-mark" aria-hidden="true">§</span><span>AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<nav class="lang-nav" aria-label="言語"><a lang="en" href="../../en/toolchain/quality-gates.html">English</a><a lang="zh" href="../../zh/toolchain/quality-gates.html">中文</a><a lang="ja" href="quality-gates.html" aria-current="true" class="current">日本語</a></nav>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener"><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+</div>
+</header>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="概要">
+<div class="side-top">
+<a class="side-home" href="../index.html">概要</a>
+<a class="side-home" href="../glossary.html">用語集</a>
+</div>
+<div class="side-group">
+<h3><span>原則</span><span class="side-count">1</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラクティス</span><span class="side-count">12</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ツールチェーン</span><span class="side-count">9</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="quality-gates.html" aria-current="page"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust ツールチェーン</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>ライブラリ</span><span class="side-count">8</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span><span class="side-draft" title="ドラフト">ドラフト</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><span>プラットフォーム</span><span class="side-count">3</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<main class="main" id="main">
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">ツールチェーン</a>
+<span class="meta-sep" aria-hidden="true">/</span>
+<span class="meta-version">v5</span>
+
+</div>
+<h1 id="品質ゲート">品質ゲート<a href="#品質ゲート" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="prek">prek<a href="#prek" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>prek</code> を標準のプリコミットフレームワークとして使う。</p>
+<p>ユーザーが明示的に例外を承認した場合を除き、別のプリコミットフレームワークを導入しない。</p>
+<p>フック設定には prek のネイティブ形式 <code>prek.toml</code> を使う。pre-commit との互換性が必要な場合に限り <code>.pre-commit-config.yaml</code> を使う。</p>
+<p>フックは、他の処理で使うものと同じエントリーポイントを指すこと。</p>
+<pre><code class="language-toml"># prek.toml - the hook runs the shared entry point
+[[repos]]
+repo = &quot;local&quot;
+hooks = [
+  { id = &quot;check&quot;, entry = &quot;mise run check&quot;, language = &quot;system&quot;, pass_filenames = false }
+]
+</code></pre>
+<h3 id="採用しない代替案">採用しない代替案<a href="#採用しない代替案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>pre-commit</li>
+<li>Lefthook</li>
+</ul>
+<h2 id="デフォルトのチェックセット">デフォルトのチェックセット<a href="#デフォルトのチェックセット" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>prek.toml</code> には、短時間で実行できるプロジェクトのチェックを含める。デフォルトは次のとおりである。</p>
+<ul>
+<li>リント</li>
+<li>フォーマットチェック</li>
+<li>言語固有の静的チェック</li>
+<li>セキュリティ関連のチェック</li>
+<li>必要に応じた依存関係チェック</li>
+<li>シークレットスキャニング</li>
+</ul>
+<p>このツールチェーンでの対応は、具体的には次のとおりである。</p>
+<pre><code class="language-text">lint         -&gt; oxlint / ruff check
+format check -&gt; oxfmt --check / ruff format --check
+typecheck    -&gt; typeCheck を有効にした oxlint（tsgolint）/ tsc --noEmit
+</code></pre>
+<p>oxlint の <code>options.typeCheck</code>（<code>oxlint-tsgolint</code> 経由）は TypeScript の診断を報告し、非ゼロの終了コードで失敗する。そのため、typecheck をこの 1 コマンドで担える。型を考慮したリントを設定していない場合は、単体の <code>tsc --noEmit</code> を使う。</p>
+<h2 id="チェックを高速に保つ">チェックを高速に保つ<a href="#チェックを高速に保つ" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>プリコミットチェックはコミットのたびに走るため、人間も AI エージェントもストレスなく繰り返せる速さに保つこと。網羅的に見せるためだけに重いチェックを入れない。</p>
+<pre><code class="language-text"># good - fast enough for every commit
+lint, format check, typecheck, secret scanning
+
+# bad - too slow for a commit hook; belong in CI
+full E2E suite, dependency audit against live registries
+</code></pre>
+<h2 id="ローカルと-ci-の一致">ローカルと CI の一致<a href="#ローカルと-ci-の一致" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>GitHub でホストするリポジトリでは、ローカルで変更の合否を決めるコマンドとまったく同じコマンドを GitHub Actions でも実行し、両環境のずれを防ぐ。</p>
+<pre><code class="language-bash"># local
+mise run check &amp;&amp; mise run test
+</code></pre>
+<pre><code class="language-yaml"># .github/workflows/ci.yml - steps section
+- uses: jdx/mise-action@v4 # installs the mise-managed toolchain
+- run: mise run check
+- run: mise run test
+</code></pre>
+<p>これらのコマンドがローカルでは通るのに CI では失敗するなら、両環境にずれが生じている。CI 専用の修正を重ねるのではなく、両環境を一致させること。</p>
+<p>CI の階層モデルについては <a href="github-actions.html">GitHub Actions</a> を、同じツール群をタスク経由で使う方法については <a href="mise.html">mise</a> を参照。</p>
+<h2 id="検証のエントリーポイント">検証のエントリーポイント<a href="#検証のエントリーポイント" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>可能な限り、主要な検証ワークフローを <code>mise run check</code> として公開する。</p>
+<pre><code class="language-bash">mise run check
+</code></pre>
+<p><code>check</code> の後に <code>test</code> を連鎖させ、検証を通過していないコードではテストを実行しないこと。</p>
+<pre><code class="language-toml"># mise.toml - the check -&gt; test chain
+[tasks.check]
+depends = [&quot;lint&quot;, &quot;format&quot;, &quot;typecheck&quot;]
+
+[tasks.test]
+depends = [&quot;check&quot;] # test never runs on unvalidated code
+run = &quot;pnpm test&quot;
+</code></pre>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="github-actions.html"><span class="related-cat">ツールチェーン</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="mise.html"><span class="related-cat">ツールチェーン</span><strong>mise</strong></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-chip" href="../practices/agent-protocol.html"><span class="related-cat">プラクティス</span><strong>エージェント運用プロトコル</strong></a></li>
+<li><a class="related-chip" href="../practices/change-discipline.html"><span class="related-cat">プラクティス</span><strong>変更の規律</strong></a></li>
+<li><a class="related-chip" href="../practices/dependencies.html"><span class="related-cat">プラクティス</span><strong>依存関係の管理方針</strong></a></li>
+<li><a class="related-chip" href="../practices/pipeline.html"><span class="related-cat">プラクティス</span><strong>パイプライン</strong></a></li>
+<li><a class="related-chip" href="../practices/security.html"><span class="related-cat">プラクティス</span><strong>セキュリティ</strong></a></li>
+<li><a class="related-chip" href="../practices/testing.html"><span class="related-cat">プラクティス</span><strong>テスト戦略</strong></a></li>
+<li><a class="related-chip" href="github-actions.html"><span class="related-cat">ツールチェーン</span><strong>GitHub Actions</strong></a></li>
+<li><a class="related-chip" href="go.html"><span class="related-cat">ツールチェーン</span><strong>Go ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="python.html"><span class="related-cat">ツールチェーン</span><strong>Python ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="rust.html"><span class="related-cat">ツールチェーン</span><strong>Rust ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="typescript.html"><span class="related-cat">ツールチェーン</span><strong>TypeScript ツールチェーン</strong></a></li>
+<li><a class="related-chip" href="../libraries/go-api-stack.html"><span class="related-cat">ライブラリ</span><strong>Go API スタック</strong></a></li>
+<li><a class="related-chip" href="../libraries/typescript-backend.html"><span class="related-cat">ライブラリ</span><strong>TypeScript バックエンド</strong></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="python.html"><span>前へ · ツールチェーン</span><strong>Python ツールチェーン</strong></a>
+<a class="page-nav-next" href="rust.html"><span>次へ · ツールチェーン</span><strong>Rust ツールチェーン</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/guidelines/ja/toolchain/quality-gates.md" rel="noopener">Markdown ソースを表示<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<span>main ブランチへのマージ時に自動ビルド</span>
+</footer>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2>このページの目次</h2>
+<ul>
+<li><a href="#prek">prek</a></li>
+<li><a href="#デフォルトのチェックセット">デフォルトのチェックセット</a></li>
+<li><a href="#チェックを高速に保つ">チェックを高速に保つ</a></li>
+<li><a href="#ローカルと-ci-の一致">ローカルと CI の一致</a></li>
+<li><a href="#検証のエントリーポイント">検証のエントリーポイント</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>
