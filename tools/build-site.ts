@@ -32,10 +32,67 @@ const EXTERNAL_SVG =
 const ARROW_SVG =
   '<svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg>';
 
-interface ReadingRecipe {
-  title: string;
-  ids: string[];
-}
+const RECIPE_CHAINS = [
+  {
+    key: "frontend",
+    ids: [
+      "toolchain/mise",
+      "toolchain/typescript",
+      "libraries/frontend-framework",
+      "practices/coding-standards",
+      "toolchain/quality-gates",
+    ],
+  },
+  {
+    key: "tsBackend",
+    ids: [
+      "toolchain/mise",
+      "toolchain/typescript",
+      "libraries/typescript-backend",
+      "practices/coding-standards",
+      "toolchain/quality-gates",
+    ],
+  },
+  {
+    key: "pythonApi",
+    ids: [
+      "toolchain/mise",
+      "toolchain/python",
+      "libraries/python-api-stack",
+      "practices/coding-standards",
+      "toolchain/quality-gates",
+    ],
+  },
+  {
+    key: "uiStyling",
+    ids: [
+      "practices/corner-radius",
+      "practices/coding-standards",
+      "practices/language-policy",
+      "libraries/tailwindcss",
+    ],
+  },
+  {
+    key: "liquidGlass",
+    ids: [
+      "platforms/liquid-glass-design",
+      "platforms/liquid-glass-patterns",
+      "platforms/liquid-glass-api",
+    ],
+  },
+  {
+    key: "testingCi",
+    ids: [
+      "practices/testing",
+      "toolchain/git",
+      "practices/change-discipline",
+      "practices/pipeline",
+      "toolchain/github-actions",
+    ],
+  },
+] as const;
+
+type RecipeKey = (typeof RECIPE_CHAINS)[number]["key"];
 
 interface Ui {
   siteTitle: string;
@@ -48,7 +105,7 @@ interface Ui {
   startDesc: { core: string; protocol: string };
   recipesTitle: string;
   recipesSub: string;
-  recipes: ReadingRecipe[];
+  recipeTitles: Record<RecipeKey, string>;
   categoriesTitle: string;
   categories: Record<string, string>;
   categoryIntro: Record<string, string>;
@@ -102,65 +159,14 @@ const UI: Record<Lang, Ui> = {
     },
     recipesTitle: "Reading paths by task",
     recipesSub: "Pick your task and read the linked guidelines in order.",
-    recipes: [
-      {
-        title: "TypeScript / frontend project",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/frontend-framework",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "TypeScript backend service",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/typescript-backend",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "Python API service",
-        ids: [
-          "toolchain/mise",
-          "toolchain/python",
-          "libraries/python-api-stack",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "UI styling & components",
-        ids: [
-          "practices/corner-radius",
-          "practices/coding-standards",
-          "practices/language-policy",
-          "libraries/tailwindcss",
-        ],
-      },
-      {
-        title: "iOS 27 / macOS 27 Liquid Glass app",
-        ids: [
-          "platforms/liquid-glass-design",
-          "platforms/liquid-glass-patterns",
-          "platforms/liquid-glass-api",
-        ],
-      },
-      {
-        title: "Testing, Git & CI/CD",
-        ids: [
-          "practices/testing",
-          "toolchain/git",
-          "practices/change-discipline",
-          "practices/pipeline",
-          "toolchain/github-actions",
-        ],
-      },
-    ],
+    recipeTitles: {
+      frontend: "TypeScript / frontend project",
+      tsBackend: "TypeScript backend service",
+      pythonApi: "Python API service",
+      uiStyling: "UI styling & components",
+      liquidGlass: "iOS 27 / macOS 27 Liquid Glass app",
+      testingCi: "Testing, Git & CI/CD",
+    },
     categoriesTitle: "Browse by category",
     categories: {
       principles: "Principles",
@@ -228,65 +234,14 @@ const UI: Record<Lang, Ui> = {
     },
     recipesTitle: "按任务选读",
     recipesSub: "根据手头的任务，按顺序阅读对应的指南链。",
-    recipes: [
-      {
-        title: "新建 TypeScript / 前端项目",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/frontend-framework",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "构建 TypeScript 后端服务",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/typescript-backend",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "开发 Python API 服务",
-        ids: [
-          "toolchain/mise",
-          "toolchain/python",
-          "libraries/python-api-stack",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "UI 样式与圆角细节",
-        ids: [
-          "practices/corner-radius",
-          "practices/coding-standards",
-          "practices/language-policy",
-          "libraries/tailwindcss",
-        ],
-      },
-      {
-        title: "iOS 27 / macOS 27 Liquid Glass 应用",
-        ids: [
-          "platforms/liquid-glass-design",
-          "platforms/liquid-glass-patterns",
-          "platforms/liquid-glass-api",
-        ],
-      },
-      {
-        title: "测试、Git 提交与 CI/CD",
-        ids: [
-          "practices/testing",
-          "toolchain/git",
-          "practices/change-discipline",
-          "practices/pipeline",
-          "toolchain/github-actions",
-        ],
-      },
-    ],
+    recipeTitles: {
+      frontend: "新建 TypeScript / 前端项目",
+      tsBackend: "构建 TypeScript 后端服务",
+      pythonApi: "开发 Python API 服务",
+      uiStyling: "UI 样式与圆角细节",
+      liquidGlass: "iOS 27 / macOS 27 Liquid Glass 应用",
+      testingCi: "测试、Git 提交与 CI/CD",
+    },
     categoriesTitle: "按分类浏览",
     categories: {
       principles: "核心原则",
@@ -351,65 +306,14 @@ const UI: Record<Lang, Ui> = {
     },
     recipesTitle: "タスク別の読み進め方",
     recipesSub: "目的に合わせて、リンクされたガイドラインを順番に読み進めます。",
-    recipes: [
-      {
-        title: "TypeScript / フロントエンド開発",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/frontend-framework",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "TypeScript バックエンド構築",
-        ids: [
-          "toolchain/mise",
-          "toolchain/typescript",
-          "libraries/typescript-backend",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "Python API サービス開発",
-        ids: [
-          "toolchain/mise",
-          "toolchain/python",
-          "libraries/python-api-stack",
-          "practices/coding-standards",
-          "toolchain/quality-gates",
-        ],
-      },
-      {
-        title: "UI スタイリングと角丸設計",
-        ids: [
-          "practices/corner-radius",
-          "practices/coding-standards",
-          "practices/language-policy",
-          "libraries/tailwindcss",
-        ],
-      },
-      {
-        title: "iOS 27 / macOS 27 Liquid Glass 対応",
-        ids: [
-          "platforms/liquid-glass-design",
-          "platforms/liquid-glass-patterns",
-          "platforms/liquid-glass-api",
-        ],
-      },
-      {
-        title: "テスト・Git・CI/CD パイプライン",
-        ids: [
-          "practices/testing",
-          "toolchain/git",
-          "practices/change-discipline",
-          "practices/pipeline",
-          "toolchain/github-actions",
-        ],
-      },
-    ],
+    recipeTitles: {
+      frontend: "TypeScript / フロントエンド開発",
+      tsBackend: "TypeScript バックエンド構築",
+      pythonApi: "Python API サービス開発",
+      uiStyling: "UI スタイリングと角丸設計",
+      liquidGlass: "iOS 27 / macOS 27 Liquid Glass 対応",
+      testingCi: "テスト・Git・CI/CD パイプライン",
+    },
     categoriesTitle: "カテゴリ別に探す",
     categories: {
       principles: "原則",
@@ -1055,7 +959,7 @@ function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
     `<div class="section-head"><h2>${escapeHtml(ui.recipesTitle)}</h2><p>${escapeHtml(ui.recipesSub)}</p></div>`,
   );
   parts.push(`<div class="recipe-grid">`);
-  for (const recipe of ui.recipes) {
+  for (const recipe of RECIPE_CHAINS) {
     const chain = recipe.ids
       .map((id) => byId.get(id))
       .filter((d): d is Doc => d !== undefined)
@@ -1065,7 +969,7 @@ function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
       )
       .join(ARROW_SVG);
     parts.push(
-      `<div class="recipe-card"><h3>${escapeHtml(recipe.title)}</h3><div class="recipe-chain">${chain}</div></div>`,
+      `<div class="recipe-card"><h3>${escapeHtml(ui.recipeTitles[recipe.key])}</h3><div class="recipe-chain">${chain}</div></div>`,
     );
   }
   parts.push(`</div></section>`);
@@ -1270,6 +1174,13 @@ function run(root: string, outDir: string, base: string): number {
     const ids = new Set((byLang.get(lang) ?? []).map((d) => d.id));
     for (const id of enIds) {
       if (!ids.has(id)) warnings.push(`language tree mismatch: '${id}' missing in ${lang}`);
+    }
+  }
+  if (existsSync(join(root, "PORTAL.md"))) {
+    for (const recipe of RECIPE_CHAINS) {
+      for (const id of recipe.ids) {
+        if (!enIds.has(id)) warnings.push(`unknown recipe doc id '${id}' in '${recipe.key}'`);
+      }
     }
   }
 
