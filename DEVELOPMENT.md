@@ -1,7 +1,7 @@
 # Development
 
-How development is performed in this repository, for both humans and AI agents.
-User-facing orientation lives in the README; this document is for people changing the corpus or the tooling.
+How to edit and validate this repository, for humans and AI agents.
+For an overview of the guidelines and how to use them, see [README.md](./README.md).
 
 ## Setup
 
@@ -38,27 +38,27 @@ mise run test -- --test-name-pattern=digest # run matching test cases only
 1. Branch from `main`.
 2. Locate the document via the [PORTAL.md](./PORTAL.md) inventory.
 3. Edit the file in your working language; if it would exceed 300 body lines, split it first.
-4. Bump `version` in all three language files; set `source-lang` to the language you edited. A translation-quality-only polish keeps `version` and `source-lang` unchanged.
-5. Rewrite the other two languages natively (Translation rules below), keeping heading structure isomorphic.
-6. Run `mise run fix`, then `mise run check` — it must pass before commit.
-7. Commit with Conventional Commits and open a pull request (see [CONTRIBUTING.md](./CONTRIBUTING.md)).
+4. When changing meaning, bump `version` in all three language files and set `source-lang` to the language you edited first. Wording-only polish (no change in meaning) keeps `version` and `source-lang` unchanged.
+5. Express the change naturally in the other two languages (see Translation rules below), keeping the exact same heading levels.
+6. Run `mise run fix`, then `mise run check` — it must pass before you commit.
+7. Commit using Conventional Commits and open a pull request (see [CONTRIBUTING.md](./CONTRIBUTING.md)).
 
-Structural changes — add/remove/rename a document, reverse a standing recommendation, change the repository model — have extra requirements in [AGENTS.md](./AGENTS.md) and [ARCHITECTURE.md](./ARCHITECTURE.md).
+Structural changes — adding, removing, or renaming a document, reversing a recommendation, or changing the repository model — have extra rules in [AGENTS.md](./AGENTS.md) and [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Translation rules
 
-- Native rewrite, zero translationese. zh: Simplified Chinese, direct technical register, no honorifics. ja: technical-document register (常体 / である調).
-- Terminology must match [GLOSSARY.md](./GLOSSARY.md); put new recurring terms there in the same change. The glossary's "Forbidden renderings" table is machine-enforced; when fixing a repeated mistranslation, add it there.
-- Punctuation: zh prose uses full-width ，；：; ja prose uses 、。：. Half-width `,;:` stays only inside code spans, paths, and pure-latin clusters. `mise run fix` auto-corrects violations.
-- Code blocks, commands, identifiers: verbatim. Translate only `lang` in front matter; `digest` is recomputed by `mise run fix`.
-- Follow the cross-language quality clauses in `guidelines/en/practices/language-policy.md`.
+- Write naturally in each language — never translate word-for-word. `zh` uses Simplified Chinese in a direct technical style without honorifics (`您`/`请`). `ja` uses plain technical style (常体 / である調).
+- Terminology must match [GLOSSARY.md](./GLOSSARY.md); add new recurring terms there in the same change. The glossary's "Forbidden renderings" table is checked automatically — when fixing a repeated mistranslation, add it there.
+- Punctuation: `zh` prose uses full-width `，；：`; `ja` prose uses `、。：`. Half-width `,;:` stays only inside code spans, paths, and pure-Latin text. `mise run fix` corrects punctuation automatically.
+- Keep code blocks, commands, and identifiers verbatim. In front matter, change only `lang`; `mise run fix` recomputes `digest`.
+- Follow the cross-language rules in `guidelines/en/practices/language-policy.md`.
 
 ## Layout
 
-- `guidelines/{en,zh,ja}/` — the product: isomorphic trilingual guideline trees
+- `guidelines/{en,zh,ja}/` — the product: matching guideline trees in three languages
 - `tools/` — the validator (`check-docs.ts`) and its tests
-- `PORTAL.md` / `GLOSSARY.md` — task routing and canonical terminology
-- `templates/` — copyable templates for consuming projects
+- `PORTAL.md` / `GLOSSARY.md` — task routing and shared terminology
+- `templates/` — copyable templates for projects using these guidelines
 - `skills/apply-guidelines/` — installable agent skill (thin loader)
 - `docs/adr/` — repository decision records
 
@@ -76,8 +76,8 @@ This repository follows its own published standards (see [PORTAL.md](./PORTAL.md
 
 ## Debugging
 
-- Validator errors name the file and the rule; most content drift is repaired by `mise run fix` (punctuation, digests, formatting).
-- A digest mismatch after editing means the body changed without `mise run fix`; never hand-edit `digest`.
+- Validator errors name the file and the rule; `mise run fix` repairs punctuation, digests, and formatting.
+- A digest mismatch after editing means the body changed without `mise run fix`. Never edit `digest` by hand.
 
 ## Validation
 

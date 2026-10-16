@@ -4,14 +4,14 @@ lang: ja
 version: 2
 source-lang: en
 status: draft
-digest: f527e530
+digest: 050436dd
 ---
 
 # Agentation
 
 ## 判定
 
-状況依存 — フロントエンドの反復開発とテスト中に Agentation を有効にし、視覚的なフィードバックを AI コーディングエージェント向けの構造化コンテキストに変換する。
+条件付き — フロントエンドの反復開発とテスト中に Agentation を有効にし、視覚的なフィードバックを AI コーディングエージェント向けの構造化コンテキストに変換する。
 
 ## 使用する場面
 

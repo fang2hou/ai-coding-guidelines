@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 5c75c63d
+digest: d86c5c2c
 ---
 
 # Change Discipline
@@ -41,7 +41,7 @@ Confirm the behavior first. A flaky test must pass repeatedly, not once:
 mise run test e2e/login.spec.ts   # 20 consecutive runs, 20/20 green
 ```
 
-Run the static gates and let them fire:
+Run the static checks:
 
 ```text
 $ mise run check
@@ -67,7 +67,7 @@ $ git diff --stat
  1 file changed
 ```
 
-One file touched: no new dependencies, no new files, no architecture impact. The new comment in the test is English per the [Language Policy](language-policy.md); no user-facing string changed, so product-language compliance is unaffected; the credentials stay in the test fixture, never in the diff ([Security](security.md)).
+Only one file changed: no new dependencies, no new files, and no architecture changes. The new test comment is in English ([Language Policy](language-policy.md)), no UI text changed, and test credentials stay in the fixture rather than the diff ([Security](security.md)).
 
 Commit. prek runs the same checks over the staged tree, and the message follows [Conventional Commits](../toolchain/git.md):
 

@@ -35,7 +35,7 @@ an unrun audit.
 | Gates (hooks, CI jobs, mise tasks)                | toolchain/quality-gates                                                              |
 | CI/CD                                             | practices/pipeline, toolchain/github-actions, toolchain/quality-gates, toolchain/git |
 | Stack markers                                     | the libraries/ document for each detected stack                                      |
-| Frontend structure                                | libraries/tailwindcss, libraries/coss (when present)                                 |
+| Frontend structure                                | libraries/tailwindcss (when present)                                                 |
 | Code quality sample                               | practices/coding-standards, practices/language-policy                                |
 | Project docs (README, CONTRIBUTING, ARCHITECTURE) | practices/project-documentation                                                      |
 
@@ -84,8 +84,8 @@ Return exactly this structure:
 Rules for the report:
 
 - Every violation names the governing document and the concrete fix, not a principle.
-- Optimization directions are ranked by risk reduction; never propose rewrites that churn working code for consistency alone.
-- Prefer codifying a recurring violation into a gate (a lint rule, actionlint, a prek hook) so compliance stops depending on review.
+- Order optimization directions by risk reduction; never propose rewrites of working code just for style consistency.
+- Prefer turning recurring violations into automated checks (a lint rule, `actionlint`, or a `prek` hook) so they do not rely on human review.
 - Do not apply fixes during the audit phase; the report is that phase's deliverable.
 
 ## Step 5: Remediation (on request)

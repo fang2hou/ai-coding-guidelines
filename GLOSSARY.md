@@ -87,6 +87,7 @@ to this table in the same change.
 | tint                               | 着色              | ティント                    |
 | corner radius                      | 圆角              | 角丸                        |
 | continuous corner                  | 连续圆角          | 連続角丸                    |
+| vibrancy                           | 鲜明度            | ビブランシー                |
 
 ## Forbidden renderings
 

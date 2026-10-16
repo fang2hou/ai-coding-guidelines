@@ -4,7 +4,7 @@ lang: en
 version: 5
 source-lang: en
 status: active
-digest: 43e36442
+digest: 77c73f8c
 ---
 
 # GitHub Actions
@@ -23,10 +23,7 @@ When creating or modifying a GitHub Actions workflow:
 4. Check whether required inputs, permissions, runtime versions, or behavior have changed.
 5. Prefer moving to the current supported version when migration is safe.
 
-Do not blindly update an action version number without checking migration
-requirements. A major version tag picks up patch and minor releases on its
-own; this checklist governs the moves it cannot make for you — crossing a
-major boundary.
+Never bump an action version without checking its release notes first. Major-version tags (`@v4`) pick up minor and patch releases automatically; use this checklist when crossing a major version boundary.
 
 ## CI Layering
 
@@ -60,11 +57,11 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
   a workflow that validates PR metadata an edit can change (the title) must
   add `edited`, so retitled pull requests re-verify. Never list activity types
   that cannot change the outcome; every listed type is another trigger.
-- A required status check is satisfied even by a skipped job — the merge gate
-  will not enforce this rule. Apply it for readable run lists, and guard the
-  real hazard: a required check whose workflow does not run on `pull_request`,
-  or whose job is filtered out entirely, never reports and stays pending.
-  Every context that requires a check must produce a report for it.
+- Merge gates treat a skipped required check as passing, so this rule is for
+  readable run lists. The real merge hazard is a required check whose workflow
+  does not run on `pull_request` or whose job is filtered out — it never
+  reports and stays `pending` forever. Ensure every required check always runs
+  and reports.
 
 ## Checkout Depth
 
@@ -74,8 +71,8 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
   changelog generation, `git describe`, diff-against-base logic.
 - When one responsibility needs full history and the rest do not, split it
   into its own job rather than deepening the shared checkout. History-reading
-  work is one responsibility per [Pipeline](../practices/pipeline.md) anyway,
-  and the split keeps the validation job's checkout shallow.
+  work is its own responsibility under [Pipeline](../practices/pipeline.md)
+  anyway, and the split keeps the validation job's checkout shallow.
 
 ## Naming and Readability
 

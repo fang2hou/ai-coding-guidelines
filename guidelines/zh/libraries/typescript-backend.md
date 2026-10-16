@@ -4,14 +4,14 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: 9a981b05
+digest: 540f54ec
 ---
 
 # TypeScript 后端技术栈
 
 ## 结论
 
-优先采用——Hono 是 TypeScript 后端的首选框架。默认运行时为 Node.js，使用 Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经过充分验证的技术栈在 AI 辅助开发中更少出错；这一倾向决定了本文的结论。
+首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经过充分验证的技术栈在 AI 辅助开发中更少出错；这一倾向决定了本文的选型。
 
 ## 适用场景
 
@@ -77,10 +77,10 @@ digest: 9a981b05
 
 ### 相关指南
 
-- [TypeScript 工具链](../toolchain/typescript.md) ——搭配 pnpm、oxlint 和 oxfmt；严格 tsconfig 基线对后端服务同样适用。
-- [Databricks](../toolchain/databricks.md) ——工作项目的部署目标：选择 Apps 还是 Jobs、工作时间窗与部署文件。
-- [测试策略](../practices/testing.md) ——框架无关的核心层使用普通单元测试；HTTP 关注点由薄适配器测试覆盖。
-- [质量门禁](../toolchain/quality-gates.md) ——同一套检查：prek 与 CI 运行相同的 Lint 和格式化配置。
+- [TypeScript 工具链](../toolchain/typescript.md)——搭配 pnpm、oxlint 和 oxfmt；严格 tsconfig 基线对后端服务同样适用。
+- [Databricks](../toolchain/databricks.md)——工作项目的部署目标：选择 Apps 还是 Jobs、工作时间窗与部署文件。
+- [测试策略](../practices/testing.md)——框架无关的核心层使用普通单元测试；HTTP 关注点由轻量适配器测试覆盖。
+- [质量门禁](../toolchain/quality-gates.md)——同一套检查：prek 与 CI 运行相同的 Lint 和格式化配置。
 
 ## 不采用的替代方案
 

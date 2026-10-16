@@ -4,23 +4,22 @@ lang: ja
 version: 4
 source-lang: en
 status: active
-digest: 7b58345f
+digest: d75a78ae
 ---
 
 # Python ツールチェーン
 
 ## 適用義務
 
-Python は TypeScript と並ぶ AI 支援開発のデフォルト言語である。どちらも、利用可能な言語の中でライブラリと AI エージェントを支えるエコシステムが最も充実しているためである。
+Python と TypeScript は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。
 
 言語の優先順位：
 
-- TypeScript と Python は、ライブラリと AI エージェントを支えるエコシステムが最も充実しているため、AI 支援開発のデフォルト言語である。
-- Go と Rust は、性能が重要な処理やシステム領域に限って使う。導入には明確な根拠とユーザーの承認が必要であり、その内容をプロジェクトの ADR に記録する。[Go](../toolchain/go.md) と [Rust](../toolchain/rust.md) を参照。
+- TypeScript だけの構成で足りる場合はそれを優先する（[TypeScript ツールチェーン](../toolchain/typescript.md)を参照）。
+- Python バックエンドは、Python を使う明確な利点がある場合にのみ導入する（基準は下記）。
+- Go と Rust は、性能が重要な処理やシステム領域に限って使う。導入には明確な理由とユーザーの承認が必要であり、プロジェクトの ADR に記録する。[Go](../toolchain/go.md) と [Rust](../toolchain/rust.md) を参照。
 
-Python バックエンドを自動的に導入してはならない。TypeScript だけの構成で十分な場合は、それを優先する。[TypeScript ツールチェーン](../toolchain/typescript.md) を参照。
-
-プロジェクトに、Python を使うことで明確な利点が得られる要件がある場合、特に次の場合に Python バックエンドを導入する。
+特に次の要件がある場合は、Python バックエンドの導入が適している。
 
 - バックエンドのロジックが十分に複雑である
 - Python 固有のライブラリが意味のある価値を提供する
@@ -44,9 +43,7 @@ Python のバージョンは、プロジェクトの mise 設定に固定する�
 
 ## uv
 
-Python の環境と依存関係の管理には `uv` を使う。
-
-別の Python 環境管理システムを導入してはならない。
+Python の環境と依存関係は `uv` で管理し、別の環境管理・パッケージ管理ツールを併用しない。
 
 標準ワークフロー：
 
@@ -80,11 +77,7 @@ Python の環境と依存関係の管理には `uv` を使う。
 
 ## ruff
 
-Python のリントとフォーマットには `ruff` を使う。
-
-ruff が必要なワークフローをカバーしている場合は、別のツールを保守しない。
-
-`ruff check` でリントし、`ruff format` でフォーマットする。両方をプロジェクトの品質ゲートに組み込み、ruff の設定を `pyproject.toml` に記述する。ベースラインのルール選択：
+リント（`ruff check`）とフォーマット（`ruff format`）の両方に `ruff` を使い、品質ゲートに組み込んで `pyproject.toml` で設定する。ベースラインのルール：
 
 ```toml
 [tool.ruff.lint]

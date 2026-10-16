@@ -4,14 +4,14 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: e8c3809c
+digest: 54f8c366
 ---
 
 # TypeScript Backend
 
 ## Verdict
 
-Preferred — Hono is the preferred TypeScript backend framework. The default runtime is Node.js on the Active LTS line; Web-standard APIs keep services portable to Cloudflare Workers and other runtimes. Models generate code from training data, so mainstream, thoroughly validated stacks break less in AI-assisted development — that bias shapes this verdict.
+Preferred — Use Hono for TypeScript backend services. The default runtime is Node.js on the Active LTS line; Web-standard APIs keep services portable to Cloudflare Workers and other runtimes. Models generate code from training data, so mainstream, proven stacks break less in AI-assisted development — that bias shapes this choice.
 
 ## Use when
 
@@ -30,7 +30,7 @@ Preferred — Hono is the preferred TypeScript backend framework. The default ru
 
 ## Tradeoffs
 
-- Hono ships thinner batteries than legacy frameworks; full applications need more assembly.
+- Hono includes fewer built-in features than larger frameworks, so full applications assemble more pieces themselves.
 - Keep one framework per service: do not fork backend patterns by runtime, and do not mix a second backend framework into a Hono service.
 
 ## Version policy

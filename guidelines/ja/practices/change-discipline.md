@@ -4,12 +4,12 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 00eb5935
+digest: 76f0eba0
 ---
 
 # 変更の規律
 
-単純ではない変更は、[運用プロトコル](agent-protocol.md) に加えて、レビューに回す前にこのチェックリストで確認すること。
+自明でない変更は、[運用プロトコル](agent-protocol.md) に加えて、レビューに回す前にこのチェックリストで確認すること。
 
 ## 完了チェックリスト
 
@@ -41,7 +41,7 @@ digest: 00eb5935
 mise run test e2e/login.spec.ts   # 20 consecutive runs, 20/20 green
 ```
 
-静的ゲートを実行し、問題を検出する。
+静的チェックを実行する。
 
 ```text
 $ mise run check
@@ -76,7 +76,7 @@ $ git commit -m "test(e2e): wait for session cookie instead of fixed sleep"
 prek  ok  format check, lint, secret scanning
 ```
 
-これが、すべてのチェックに通り、diff を 1 行ずつ確認し、説明できない変更を残していない状態である。
+これが「通過」の姿である。チェックはすべて緑、diff は 1 行ずつ確認済み、説明できない変更は残っていない。
 
 ## CI の成功は証明にならない
 

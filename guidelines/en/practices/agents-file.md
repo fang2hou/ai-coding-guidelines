@@ -4,12 +4,12 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: bc3d0715
+digest: 85e8fccd
 ---
 
 # Authoring AGENTS.md
 
-`AGENTS.md` is the agent entry point of a repository: the operating context an agent loads before it writes any code. Agent harnesses load it up front and cap how much instruction context they carry, so each line must earn its space.
+`AGENTS.md` is the entry point for AI agents in a repository. Agent tools load it at the start of every session and limit how much instruction text they keep in context, so every line must earn its place.
 
 Template: [project-agents.template.md](../../../templates/project-agents.template.md)
 
@@ -19,7 +19,7 @@ Every project must keep one `AGENTS.md` at the repository root.
 
 `AGENTS.md` is the canonical filename. Do not copy the same rules into compatible filenames such as `CLAUDE.md`: duplicated instruction files drift apart and consume the context budget twice.
 
-## Choose the right surface
+## Put guidance in the right file
 
 Put each kind of guidance where it belongs:
 
@@ -47,7 +47,7 @@ Open with one sentence naming what the project is and for whom, then order the s
 6. Project conventions — the decisions an agent would not guess from the code.
 7. Depth links to `DEVELOPMENT.md`, `CONTRIBUTING.md`, and `ARCHITECTURE.md`.
 
-Commands come first because they are what an agent needs in its first minute. Give both the narrow form and the full gate — a focused test command for a one-line change, `mise run check` before a commit — so the agent does not reach for the expensive command by default.
+Put commands first because agents need them right away. List both fast, targeted commands (such as running a single test file) and the full check (`mise run check` before committing), so the agent does not run the slowest command after every small edit.
 
 ## Write verifiable rules
 
@@ -78,18 +78,18 @@ Start with one root file. Add a nested `AGENTS.md` to a subdirectory only when t
 - It carries extra approval requirements, such as migrations or deployments.
 - It has UI or design-system rules that do not apply elsewhere.
 
-A nested file records only its own deltas and defers to the root for everything else. Never restate root rules in a nested file.
+A nested file lists only what differs in that directory and leaves everything else to the root file. Never repeat root rules in a nested file.
 
 ## Keep it small
 
-The file is loaded at the start of every task, so its size is a cost paid over and over.
+`AGENTS.md` is loaded at the start of every task, so every extra line costs context on every run.
 
-- Put the highest-signal rules at the top.
-- Route to detail documents instead of duplicating them.
-- Prefer a machine-enforced check over a paragraph: a rule that lint, prek, or CI already enforces does not need restating.
-- Move subsystem-specific guidance into a nested file rather than growing the root file.
+- Put the most important rules at the top.
+- Link to detail documents instead of copying them.
+- Prefer automated checks over prose: do not restate rules that oxlint, prek, or CI already enforce.
+- Move directory-specific guidance into a nested file instead of growing the root file.
 
-Keep the root file scannable in a single pass. If it no longer is, the fix is routing and deletion, not smaller type.
+Keep the root file short enough to read in one pass. When it grows too long, move details into linked files and cut what tools already enforce.
 
 ## Never include
 

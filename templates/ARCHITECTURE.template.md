@@ -1,9 +1,6 @@
 # Architecture
 
-This document orients new contributors and guards the design against
-accidental drift — especially by AI agents making broad changes. Keep it short
-and stable: a map of the country, not an atlas of its states. Revisit it
-occasionally; do not try to keep it synchronized with the code.
+This document orients contributors and keeps the design from drifting — especially when AI agents make broad changes. Keep it short and stable: name the main modules and boundaries without listing individual files. Revisit it when the architecture changes, not on routine edits.
 
 ## Overview
 

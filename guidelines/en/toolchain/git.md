@@ -4,7 +4,7 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: 64e123a3
+digest: 897f6180
 ---
 
 # Git Workflow
@@ -38,7 +38,7 @@ test(search): cover empty-result behavior
 ci(commit): validate conventional commits
 ```
 
-Avoid meaningless commit messages such as:
+For commits that will become part of the shared repository history, avoid meaningless messages such as:
 
 ```text
 update
@@ -47,48 +47,29 @@ fix stuff
 wip
 ```
 
-for commits that will become part of the shared repository history.
-
 Breaking changes must be represented according to the Conventional Commits convention.
 
 ## Cocogitto
 
-Cocogitto is the standard Conventional Commits validation tool.
-
-Use Cocogitto consistently across projects rather than selecting a different commit validator for every repository.
-
-Where appropriate, integrate Cocogitto with the local commit workflow through the standardized project tooling.
-
-Do not implement a custom Conventional Commits parser when Cocogitto already provides the required validation.
+Use Cocogitto across all projects to validate Conventional Commits, wired into the local workflow via project tooling. Do not pick a different commit validator per repo or write a custom parser.
 
 ## Validation in GitHub Actions
 
-GitHub Actions must include a Conventional Commits validation check.
-
-Use Cocogitto for this validation.
+Validate Conventional Commits in GitHub Actions with Cocogitto.
 
 `cog verify` resolves a Git author signature even though it creates no commit, and fails with `config value 'user.name' was not found` when no identity is configured. GitHub Actions runners have no Git identity by default — configure `user.name` and `user.email` in the job before invoking it. `cog check` only reads existing commits and needs no identity.
 
-A pull request containing invalid commit messages should fail the relevant validation pipeline.
+Fail the validation pipeline when a pull request has invalid commits.
 
-If the repository uses squash merging and the resulting commit message is based on the pull request title, the pull request title must follow the same Conventional Commits convention.
-
-The goal is to keep both:
-
-- Pull request validation
-- Final repository history
-
-consistent.
+When a repository uses squash merges and takes the final commit message from the pull request title, validate the pull request title with the same Conventional Commits rules so pull request checks and final history stay consistent.
 
 See [GitHub Actions](../toolchain/github-actions.md) for CI workflow standards.
 
 ## Repository Attributes
 
-GitHub-hosted projects should commit a `.gitattributes` file.
+Commit a `.gitattributes` file in GitHub-hosted repositories so lockfiles, config files, and test fixtures do not skew GitHub's language statistics.
 
-Use it to keep GitHub's language statistics honest: toolchain files (lockfiles, configs, CI definitions) and data files (fixtures, snapshots) must not drown out the project's core content.
-
-Prefer a whitelist over a blacklist: exclude everything from the statistics by default and re-include only what the project is.
+Use a whitelist: exclude all files by default and re-include only the project's actual source or content.
 
 ```gitattributes
 * -linguist-detectable
@@ -106,10 +87,4 @@ Keep the file itself comment-free; record the rationale in the pull request or t
 
 ## Git Safety
 
-Do not force push shared repository history without appropriate review and approval.
-
-Follow the established review workflow.
-
-Do not rewrite shared history merely for convenience.
-
-AI agents must not perform destructive Git operations casually.
+Never force push or rewrite shared history without review and approval. AI agents must not run destructive Git commands casually.

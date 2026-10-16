@@ -4,18 +4,14 @@ lang: zh
 version: 2
 source-lang: en
 status: draft
-digest: e7ceba43
+digest: 8b950edd
 ---
 
 # Go 工具链
 
 ## 强制要求
 
-TypeScript 与 Python 是 AI 辅助开发的默认语言，因为它们在库生态和 AI Agent 生态方面获得的支持最强。
-
-Go 不是默认选项。
-
-仅当项目确实需要以下能力时才选择 Go：
+TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：
 
 - 对性能敏感的网络服务
 - 以独立二进制文件分发的命令行工具
@@ -28,11 +24,7 @@ Go 不是默认选项。
 
 ## 适用范围
 
-本文档是 Go 项目的基线规范。
-
-它不能替代项目级评估。
-
-采用 Go 前确认两点：需求确实属于上述场景之一；TypeScript 或 Python 无法以可接受的成本满足该需求。
+本文档是 Go 项目的基线标准，不能替代项目级评估。采用 Go 前须确认两点：需求属于上述场景之一，且 TypeScript 或 Python 无法以合理成本满足。
 
 ## 版本策略
 
@@ -125,7 +117,7 @@ linters:
 
 ### 目录结构
 
-Go 没有官方标准的项目布局。`golang-standards/project-layout` 仓库是社区参考而非官方标准；官方的 "Organizing a Go module" 指南从将基础包放在模块根目录开始。
+Go 没有官方标准的项目布局。`golang-standards/project-layout` 仓库是社区参考而非官方标准；官方的 "Organizing a Go module" 指南也是从把基础包放在模块根目录讲起。
 
 - 小型库可以保持根目录扁平：只需 `go.mod` 和包文件。
 - 复杂服务应按业务分层设计自己的结构，而不是照搬模板。
@@ -134,11 +126,11 @@ Go 没有官方标准的项目布局。`golang-standards/project-layout` 仓库�
 
 ## 联动
 
-- [mise](../toolchain/mise.md) —— 版本管理：Go 和 golangci-lint 由 mise 管理，并通过 mise task 提供。
-- [Go API 技术栈](../libraries/go-api-stack.md) —— HTTP 服务使用的 Web 框架和校验技术栈。
-- [质量门禁](../toolchain/quality-gates.md) —— 同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。
-- [Git 工作流](../toolchain/git.md) —— 提交纪律：Go 变更遵循标准的提交和 pull request 规则。
-- [测试策略](../practices/testing.md) —— 测试重点：测什么，在哪一层测。
+- [mise](../toolchain/mise.md)——版本管理：Go 和 golangci-lint 由 mise 管理，并通过 mise task 提供。
+- [Go API 技术栈](../libraries/go-api-stack.md)——HTTP 服务使用的 Web 框架和校验技术栈。
+- [质量门禁](../toolchain/quality-gates.md)——同一套检查：prek 与 CI 运行相同的 Lint 与格式化配置。
+- [Git 工作流](../toolchain/git.md)——提交纪律：Go 变更遵循标准的提交和 pull request 规则。
+- [测试策略](../practices/testing.md)——测试重点：测什么，在哪一层测。
 
 ## 不采用的替代方案
 

@@ -4,25 +4,24 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 789f04e6
+digest: 64ddb647
 ---
 
 # Vercel AI SDK
 
 ## 结论
 
-视情况采用——仅在 Vercel AI SDK 能为 Next.js 实现带来实际价值时使用。
+视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。
 
 ## 适用场景
 
-- Next.js 实现确实用到该 SDK 的能力。
-- 功能与 SDK 具体提供的能力直接对应，例如流式 AI 响应处理。
+- Next.js 项目直接使用该 SDK 的能力，例如在 React 界面中处理流式 AI 响应。
 
 ## 不适用场景
 
-- 应用仅包含 LLM 功能——仅凭这一点，永远不足以引入该依赖。
-- 不要向所有 AI 相关项目自动添加该 SDK。
-- 项目没有可供该 SDK 使用的 Next.js 实现。
+- 应用只是调用 LLM 接口——单凭这一点不足以引入该依赖。
+- 不要看到是 AI 相关项目就自动添加该 SDK。
+- 项目并未使用 Next.js。
 
 ## 优势
 
@@ -41,9 +40,7 @@ digest: 789f04e6
 
 ## 使用规则
 
-- 仅在 Vercel AI SDK 能为 Next.js 项目带来实际价值时使用。
-- 不要对所有 AI 相关项目自动添加该 SDK。
-- 不要仅因应用包含 LLM 功能就引入该 SDK。
+- 仅当该 SDK 能为 Next.js 项目带来明确价值时才使用；不要一遇到调用 LLM 的项目就自动引入它。
 
 ## 联动
 

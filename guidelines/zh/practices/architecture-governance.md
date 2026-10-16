@@ -4,18 +4,16 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: c6951c5f
+digest: 7119d383
 ---
 
 # 架构治理
 
 ## 架构不变量
 
-项目应明确记录 AI Agent 不得无意中违反的架构约束。
+在 `ARCHITECTURE.md` 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。
 
-使用 `ARCHITECTURE.md` 记录当前架构边界和不变量。
-
-示例包括：
+常见内容包括：
 
 - 领域逻辑属于哪一层
 - 哪些模块可以调用外部 API
@@ -26,21 +24,17 @@ digest: c6951c5f
 - 依赖方向
 - 集成边界
 
-保持本文档简洁。
+`ARCHITECTURE.md` 应保持简短，专注回答一个问题：
 
-本文档应回答：
+> **当前架构有哪些事实必须始终成立？**
 
-> **关于当前架构，哪些事实必须始终成立？**
-
-本文档的适用条件见[必备项目文档](project-documentation.md)。
+何时必须编写该文档，见[必备项目文档](project-documentation.md)。
 
 ## 架构决策记录
 
-对重大架构决策使用 ADR。
+每项重大架构决策都应使用共享的 [ADR 模板](../../../templates/adr.template.md) 单独记录。
 
-每项重要的架构决策都应单独记录，并采用统一的 ADR 结构。
-
-ADR 应说明：
+一篇 ADR 应包含：
 
 - 背景
 - 决策
@@ -48,11 +42,7 @@ ADR 应说明：
 - 理由
 - 后果
 
-上述结构应使用共享的 [ADR 模板](../../../templates/adr.template.md)。
-
-ADR 不是不可更改的铁律。
-
-它们充当架构护栏，帮助防止意外改动，尤其是在 AI Agent 修改代码库时。
+ADR 是架构护栏，而非不可更改的铁律；它的作用是防止贡献者和 AI Agent 在无意间改动架构。
 
 当用户请求与某项 ADR 冲突时：
 

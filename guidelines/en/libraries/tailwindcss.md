@@ -1,10 +1,10 @@
 ---
 id: libraries/tailwindcss
 lang: en
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: bb5412b4
+digest: 2ce61912
 ---
 
 # Tailwind CSS
@@ -16,7 +16,7 @@ Situational — Tailwind CSS is used when the project already runs Tailwind or i
 ## Use when
 
 - The project already uses Tailwind CSS.
-- The chosen component kit requires it (coss ui, DaisyUI), or the user explicitly requests it.
+- The chosen component kit requires it (such as DaisyUI), or the user explicitly requests it.
 
 ## Avoid when
 
@@ -25,7 +25,7 @@ Situational — Tailwind CSS is used when the project already runs Tailwind or i
 
 ## Strengths
 
-- Utility-first classes keep styling colocated with markup and avoid growing bespoke stylesheets.
+- Utility classes keep styling next to markup and avoid growing custom stylesheets.
 - Broad adoption across the React ecosystem.
 - Theming and design tokens configurable in one place per major version.
 
@@ -42,10 +42,8 @@ Situational — Tailwind CSS is used when the project already runs Tailwind or i
 
 ## Usage rules
 
-- Do not introduce Tailwind into a project that does not already use it without an explicit requirement; the default is native CSS.
-- If the user explicitly requests another Tailwind version, another CSS framework, or a project-specific styling architecture, follow the user's requirement.
-- Follow the conventions and configuration model of the selected Tailwind version.
-- Do not mix patterns from incompatible major Tailwind versions.
+- Default to native CSS; do not add Tailwind to a project that does not already use it unless explicitly requested.
+- Follow the conventions and configuration model of the project's Tailwind major version, and never mix patterns across major versions.
 
 ### Class linting and sort interop
 
@@ -78,5 +76,4 @@ Situational — Tailwind CSS is used when the project already runs Tailwind or i
 
 ## Works with
 
-- [coss ui](coss.md) — requires: coss ui is styled with Tailwind CSS v4.
 - [Corner Radius](../practices/corner-radius.md) — applies regardless: express the radius token scale as Tailwind theme tokens when Tailwind is in use.

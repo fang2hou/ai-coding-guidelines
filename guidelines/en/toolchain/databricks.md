@@ -4,18 +4,14 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 2caf9102
+digest: 97ecace8
 ---
 
 # Databricks
 
 ## Apps vs Jobs
 
-Databricks is the preferred platform for relevant data and AI workloads.
-
-For applications, prefer Databricks Apps when appropriate for hosting and application management.
-
-Use Databricks Jobs when scheduling or automated execution is required.
+Databricks is the preferred platform for data and AI workloads: use Databricks Apps to host applications, and Databricks Jobs for scheduled or automated runs.
 
 ## Default Working Window
 
@@ -35,16 +31,10 @@ Keep Databricks deployment YAML and related deployment configuration under:
 /deploy
 ```
 
-Deployment configuration must reflect the current supported Databricks Apps environment and deployment model.
-
-When editing deployment configuration, verify that environment-related settings remain compatible with the current project requirements.
+Keep deployment configuration aligned with the current Databricks Apps deployment model and the project's environment requirements.
 
 ## Permissions
 
-Deployment configuration may define appropriate access permissions.
-
-When appropriate, allow members of the same project or team the necessary edit access.
-
-Do not unintentionally broaden permissions beyond the intended project boundary.
+Grant edit access to project or team members where appropriate, without widening permissions beyond the project boundary.
 
 Python services that back a Databricks workload follow the [Python API Stack](../libraries/python-api-stack.md).

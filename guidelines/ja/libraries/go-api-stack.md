@@ -4,14 +4,14 @@ lang: ja
 version: 1
 source-lang: en
 status: draft
-digest: 1dba5a92
+digest: 435ded0d
 ---
 
 # Go API スタック
 
 ## 判定
 
-推奨 — Go の Web フレームワークには Echo を推奨し、リクエスト検証には `github.com/go-playground/validator/v10` を使う。Go 自体の採用が [Go ツールチェーン](../toolchain/go.md)の基準に基づいて正当化された場合に限り、このスタックを適用する。
+推奨 — Go の Web フレームワークには Echo を使い、リクエスト検証には `github.com/go-playground/validator/v10` を使う。Go 自体の採用が [Go ツールチェーン](../toolchain/go.md)の基準に基づいて正当化された場合に限り、このスタックを適用する。
 
 ## 使用する場面
 

@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 48366e17
+digest: 0cafd8f7
 ---
 
 # Corner Radius
@@ -13,7 +13,7 @@ digest: 48366e17
 
 - Corner radius is a system, not a per-element value: define a small token scale once per project and take every radius from it.
 - Two rules cover all cases: continuous curvature on single surfaces, concentric curvature on nested surfaces.
-- Enforce both rules mechanically. A single corner rarely looks wrong in isolation; wrong combinations are what read as cheap or disjointed.
+- Apply both rules consistently. One corner rarely looks wrong on its own; mismatched corners next to each other are what look sloppy.
 
 ## Token scale
 
@@ -58,7 +58,7 @@ digest: 48366e17
 - The rule applies to hover and pressed overlays (`::before` / `::after`), focus rings, badges on cards, media and controls inside padded surfaces, segmented controls, and tooltips.
 - Mismatched nesting — equal inner and outer radii, or arbitrary inner values — is what makes hover states and badges look like disjoint foreign layers.
 
-### Standard instantiations
+### Common cases
 
 - Overlay at `inset: 0`: `border-radius: inherit`.
 - Layer inset by the surface padding: compute with `calc()` from the same tokens.

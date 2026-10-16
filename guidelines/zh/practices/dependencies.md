@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 388e55f7
+digest: 44e0bec0
 ---
 
 # 依赖管理规范
@@ -13,11 +13,11 @@ digest: 388e55f7
 
 添加依赖之前，按顺序回答以下五个问题：
 
-1. 项目是否已具备合适的功能？
-2. 框架、平台或标准工具链是否已有现成方案？
-3. 该依赖是否解决实际需求？
-4. 维护成本可以接受吗？
-5. 它是否与标准化工具链兼容？
+1. 项目里是否已有现成实现？
+2. 框架、平台或标准工具链是否已经提供该能力？
+3. 这个依赖是否解决真实需求？
+4. 维护成本是否划算？
+5. 它与标准工具链是否兼容？
 
 示例：TypeScript 项目考虑使用 `zod` 进行运行时校验：
 
@@ -31,7 +31,7 @@ digest: 388e55f7
 
 同样的问题也会排除较弱的候选项：`truncate` 之类的字符串工具库过不了第 3 问——用三行清晰代码即可实现，无需添加依赖；平台的 `fetch` 已经满足需求时，`axios` 过不了第 2 问。
 
-若功能简单且无需库即可清晰实现，不要为此引入库。
+功能简单、不用库也能写得清楚时，不要为此引入库。
 
 未经用户明确批准，不要用其他依赖替换标准化工具。
 
@@ -39,10 +39,10 @@ digest: 388e55f7
 
 根据强制工具链评估兼容性：
 
-- [TypeScript 工具链](../toolchain/typescript.md) — pnpm、oxlint、oxfmt
-- [Python 工具链](../toolchain/python.md) — uv、ruff
-- [质量门禁](../toolchain/quality-gates.md) — prek
-- [Git 工作流](../toolchain/git.md) — 用 Cocogitto 校验 Conventional Commits
+- [TypeScript 工具链](../toolchain/typescript.md)——pnpm、oxlint、oxfmt
+- [Python 工具链](../toolchain/python.md)——uv、ruff
+- [质量门禁](../toolchain/quality-gates.md)——prek
+- [Git 工作流](../toolchain/git.md)——用 Cocogitto 校验 Conventional Commits
 
 推荐的库选型见[前端框架](../libraries/frontend-framework.md)和[Python API 技术栈](../libraries/python-api-stack.md)。
 

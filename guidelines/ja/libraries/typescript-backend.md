@@ -4,14 +4,14 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: a9b4e10d
+digest: bdbf2d45
 ---
 
 # TypeScript バックエンド
 
 ## 判定
 
-推奨 — TypeScript バックエンドには Hono を推奨する。既定のランタイムは Active LTS ラインの Node.js である。Web 標準 API によって、サービスを Cloudflare Workers など他のランタイムへ移植できる。モデルは訓練データからコードを生成するため、広く使われ、十分に検証されたスタックほど AI 支援開発でも破綻しにくい。この傾向を本判定に反映している。
+推奨 — TypeScript のバックエンドサービスには Hono を使う。既定のランタイムは Active LTS ラインの Node.js である。Web 標準 API によって、サービスを Cloudflare Workers など他のランタイムへ移植できる。モデルは学習データからコードを生成するため、広く使われ実績のあるスタックほど AI 支援開発で破綻しにくい。この傾向を本選定に反映している。
 
 ## 使用する場面
 
@@ -66,7 +66,7 @@ digest: a9b4e10d
 
 - 個人プロジェクトのデプロイ先は Cloudflare Workers とする。Hono は Workers への第一級サポートを提供しており、コアを Web 標準 API に保てば、同じサービスをローカルの Node.js でも動かせる。
 - 仕事のプロジェクトのデプロイ先は Databricks Apps とし、[Databricks](../toolchain/databricks.md)に従う。2026-08 時点の確認結果は次のとおりである。Databricks Apps は Python、Node.js、またはその両方で構築されたアプリをホストする。Node の依存関係は `package.json` からインストールされ、`pnpm-lock.yaml` がある場合は `pnpm install --frozen-lockfile` が実行される。アプリは `app.yaml` に宣言したコマンドで起動する。管理対象の Node ランタイムはプラットフォームによって固定されており、2026 年半ばの時点では Node 22 で、現在の Active LTS ラインより古い。プラットフォームが公式文書で挙げている Node フレームワークは React、Angular、Svelte、Express である。
-- Databricks では、Node のバージョンをプロジェクトではなくプラットフォームが決める。ローカルの LTS を前提とせず、サービスをプラットフォームのランタイムと互換性のある状態に保つ。Hono は `@hono/node-server`経由で通常の Node.js アプリとしてデプロイできる。プラットフォームの文書が Express を挙げていても、Express を採用しない方針は変わらない。
+- Databricks では、Node のバージョンをプロジェクトではなくプラットフォームが決める。ローカルの LTS を前提とせず、サービスをプラットフォームのランタイムと互換性のある状態に保つ。Hono は `@hono/node-server` 経由で通常の Node.js アプリとしてデプロイできる。プラットフォームの文書が Express を挙げていても、Express を採用しない方針は変わらない。
 - データと AI を中心とする Databricks のワークロードは、[Python API スタック](../libraries/python-api-stack.md)に従い、引き続き Python で扱う。Node サービスは、明確に導入価値がある場合に限って追加する。
 
 ## 連携

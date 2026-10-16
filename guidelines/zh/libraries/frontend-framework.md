@@ -4,44 +4,43 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: d62465f6
+digest: 7bc470e1
 ---
 
 # 前端框架：Vite 与 Next.js
 
 ## 结论
 
-首选——Vite 是默认前端框架；只有项目确实需要全栈能力时才选择 Next.js。
+首选——Vite 是默认前端框架；只有项目确实需要全栈 React 能力时才选择 Next.js。
 
 决策规则：
 
 - 默认使用 Vite。
-- 只有项目需要全栈 React 应用，或确实需要 Next.js 提供的相关能力时，才使用 Next.js。
-- 禁止仅因 Next.js 比 Vite 能力更强而选择它。
-- 如果 Next.js 的额外复杂度没有带来价值，就选择 Vite。
+- 只有项目确实需要全栈 React 应用时，才使用 Next.js。
+- 禁止仅因为 Next.js 功能比 Vite 多而选择它。
+- 只要 Next.js 带来的额外复杂度没有实际价值，就选 Vite。
 
 ## 适用场景
 
 ### Vite
 
-- 构建简单、快速的前端应用，且不需要全栈框架。
-- 不需要服务端渲染和全栈能力。
+- 构建纯前端或单页应用，无需全栈框架。
+- 不需要服务端渲染（SSR）和框架托管的服务端路由。
 
 ### Next.js
 
-- 项目需要全栈 React 应用。
-- 项目确实需要 Next.js 提供的相关能力。
+- 项目需要具备服务端渲染、服务端路由或一体化数据获取的全栈 React 应用。
 
 ## 不适用场景
 
 ### Vite
 
-- 项目需要全栈能力，且这些能力确实值得采用 Next.js。
+- 项目确实需要服务端渲染或一体化全栈 React 能力。
 
 ### Next.js
 
-- 唯一理由只是 Next.js 比 Vite 能力更强。
-- Next.js 的额外复杂度没有带来价值——此时应使用 Vite。
+- 唯一理由只是 Next.js 功能比 Vite 多。
+- Next.js 的额外复杂度对项目没有价值——此时应使用 Vite。
 
 ## 优势
 
@@ -84,10 +83,8 @@ digest: d62465f6
 
 ## 使用规则
 
-- 对无需全栈框架的简单、快速前端应用，使用 Vite。
-- 当项目需要全栈 React 应用，或确实需要 Next.js 提供的相关能力时，使用 Next.js。
-- 不要仅因 Next.js 比 Vite 能力更强而使用它。
-- Next.js 的额外复杂度没有带来价值时，选择 Vite。
+- 前端应用默认使用 Vite。
+- 只有项目确实需要全栈 React 能力时才使用 Next.js；切勿因为它体量更大、功能更多就盲目选用。
 
 ## 联动
 

@@ -5,18 +5,18 @@ Development setup lives in [DEVELOPMENT.md](./DEVELOPMENT.md); rules for AI agen
 
 ## Ground Rules
 
-- Smallest coherent change that solves the requirement
+- Smallest complete change that solves the requirement
 - All three language versions of a document land in the same change
 - No unrelated cleanup mixed into content changes
 - Conclusions only — no discussion process, open questions, or notes in guideline bodies
 
 ## Reporting a Bug
 
-Open an issue with the document id and a short reproduction (the text that misleads, the rule that conflicts). Typos and straightforward wording fixes can go straight to a pull request.
+Open an issue with the document id and the passage that misleads or conflicts with another rule. Typos and clear wording fixes can go straight to a pull request.
 
 ## Proposing a Feature
 
-New documents, new categories, and changes to a standing recommendation reverse prior decisions — open an issue first, sketch the trilingual structure, and record the decision as an ADR when it changes the repository model (see [ARCHITECTURE.md](./ARCHITECTURE.md)).
+Before adding a document, adding a category, or reversing an existing recommendation, open an issue to discuss the change and sketch the three-language structure. If it alters the repository model, record the decision in an ADR (see [ARCHITECTURE.md](./ARCHITECTURE.md)).
 
 ## Pull Request Workflow
 
@@ -30,10 +30,10 @@ New documents, new categories, and changes to a standing recommendation reverse 
 
 Reviewers check:
 
-- Trio isomorphism: identical structure, native quality in zh and ja (not machine-translation tone)
+- Matching structure across all three languages, with natural phrasing in `zh` and `ja` (no stiff literal translations)
 - Terminology matches [GLOSSARY.md](./GLOSSARY.md)
-- One concern per document; body within 300 lines
-- PORTAL inventory and cross-links updated for structural changes
+- One topic per document; body within 300 lines
+- PORTAL inventory and cross-links updated when documents are added, removed, or renamed
 - No sensitive information
 
 ## Commit Conventions

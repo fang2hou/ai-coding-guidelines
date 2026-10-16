@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 4d335908
+digest: 7bd8654e
 ---
 
 # Liquid Glass implementation patterns
@@ -31,7 +31,7 @@ Button("Delete", role: .destructive, action: delete)
     .buttonStyle(.glass)
 ```
 
-The action closures are supplied by the app. Use `.glass(.clear)` only under the clear-variant conditions in the design document. UIKit provides `.glass()`, `.prominentGlass()`, `.clearGlass()`, and `.prominentClearGlass()` on `UIButton.Configuration`; AppKit provides the `.glass` button bezel.
+Pass the action closures from the app. Use `.glass(.clear)` only under the clear-variant conditions in the design document. UIKit provides `.glass()`, `.prominentGlass()`, `.clearGlass()`, and `.prominentClearGlass()` on `UIButton.Configuration`; AppKit provides the `.glass` button bezel.
 
 ## Custom glass
 
@@ -105,7 +105,7 @@ Use `.matchedGeometry` for nearby shapes and `.materialize` for transitions with
 ## Toolbars and navigation
 
 - Group items by function with `ToolbarSpacer(.fixed, placement:)`; use `.flexible` when flexible separation is intended. Set `sharedBackgroundVisibility(.hidden)` on toolbar content that supplies its own visual treatment.
-- In SwiftUI, conditionally include the `ToolbarItem` to remove it. Hiding only its label can leave the item’s background or space behind. UIKit uses `UIBarButtonItem.isHidden`.
+- In SwiftUI, wrap `ToolbarItem` in an `if` block to hide it; hiding only its label can leave an empty background or gap behind. In UIKit, set `UIBarButtonItem.isHidden`.
 - In iOS 27, use `visibilityPriority` to rank overflow candidates, `ToolbarOverflowMenu` for actions always in overflow, and `.topBarPinnedTrailing` for a persistent trailing action. The last two are unavailable on native macOS; see the platform table.
 - `TabRole.prominent` supports a distinct trailing tab in iOS 27. Provide a labeled tab inside `TabView`; the role alone is not a complete tab declaration.
 

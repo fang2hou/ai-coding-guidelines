@@ -6,21 +6,20 @@
 ## Context
 
 The corpus recommended Tailwind CSS as the preferred CSS framework and
-shadcn/ui as the preferred copy-in component system (with coss ui as the
-secondary option). In practice the copy-in model has not paid off for this
-repository's consuming projects: a large generated component surface, upgrade
-churn against registry updates, and an abstraction layer that gets in the way
-of direct CSS work. The user decided on 2026-10-16 to drop shadcn/ui entirely
-and to style UI with native CSS first.
+shadcn/ui as the preferred copy-in component system. In practice the copy-in
+model has not paid off for this repository's consuming projects: a large
+generated component surface, upgrade churn against registry updates, and an
+abstraction layer that gets in the way of direct CSS work. The user decided on
+2026-10-16 to drop copy-in component systems and to style UI with native CSS
+first.
 
 ## Decision
 
 Native CSS is the default styling approach: custom properties and design
 tokens, nesting, `:has()`, container queries, `light-dark()`. Tailwind CSS is
-demoted to situational — existing projects and kits that require it (coss ui,
-DaisyUI). The shadcn/ui guideline is removed; coss ui remains a situational
-copy-in option for projects that explicitly choose it. Corner-radius design
-rules (continuous corners, medium control radii, concentric nesting) are
+demoted to situational — existing projects and kits that require it (such as
+DaisyUI). The copy-in component system guideline is removed. Corner-radius
+design rules (continuous corners, medium control radii, concentric nesting) are
 codified in `practices/corner-radius`.
 
 ## Alternatives Considered
@@ -30,11 +29,6 @@ codified in `practices/corner-radius`.
 - Pros: large ecosystem, familiar registry workflow.
 - Cons: the copy-in model is exactly what failed in practice; the user
   explicitly removed it.
-
-### Promote coss ui to the default component system
-
-- Pros: same registry toolchain, Base UI primitives, never-edit rule.
-- Cons: same copy-in model with the same churn; swaps one vendor for another.
 
 ### Standardize on an unstyled primitives library (Base UI, React Aria)
 

@@ -4,7 +4,7 @@ lang: zh
 version: 5
 source-lang: en
 status: active
-digest: 3f2d59df
+digest: c6886b66
 ---
 
 # 质量门禁
@@ -35,9 +35,7 @@ hooks = [
 
 ## 默认检查集
 
-仓库的 prek 配置应包含项目所需的快速检查项。
-
-默认应包括：
+在 `prek.toml` 中配置项目所需的快速检查项，默认包括：
 
 - Lint 检查
 - 格式化检查
@@ -58,11 +56,7 @@ oxlint 的 `options.typeCheck`（通过 `oxlint-tsgolint`）会报出 TypeScript
 
 ## 检查应保持快速
 
-预提交检查应有实际意义，并且运行迅速。
-
-不要为了让钩子配置看起来覆盖全面，就加入高开销检查。
-
-每次提交都要运行的检查，必须足够快，以便人类和 AI Agent 频繁执行。
+预提交检查将在每次提交时运行，必须保持足够快，方便人和 AI Agent 频繁执行。不要为了让钩子配置显得全面就塞入耗时很长的检查。
 
 ```text
 # good - fast enough for every commit
@@ -74,9 +68,7 @@ full E2E suite, dependency audit against live registries
 
 ## 本地 / CI 一致性
 
-对于托管于 GitHub 的仓库，GitHub Actions 应使用同一套项目配置运行等价检查，避免本地与 CI 的校验分叉。
-
-不变量：本地用于校验变更的命令，必须与 CI 运行的命令完全一致。
+在托管于 GitHub 的仓库中，GitHub Actions 应使用同一套项目配置运行完全一致的检查命令，避免本地与 CI 的校验脱节：
 
 ```bash
 # local
@@ -96,15 +88,11 @@ CI 分层模型见 [GitHub Actions](../toolchain/github-actions.md)；有关通�
 
 ## 校验入口
 
-在可行的情况下，用 mise task 提供相关质量工作流的入口。
-
-例如：
+在可行的情况下，通过 `mise run check` 暴露项目的主校验入口：
 
 ```bash
 mise run check
 ```
-
-上述任务是项目主要校验工作流的固定入口。
 
 让 `test` 依赖 `check`，确保测试不会在未经校验的代码上运行：
 

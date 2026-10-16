@@ -4,18 +4,16 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 02a04159
+digest: 8a4315ec
 ---
 
 # Architecture Governance
 
 ## Architecture invariants
 
-Projects should explicitly record architectural constraints that AI agents must not accidentally violate.
+Record architectural boundaries and invariants in `ARCHITECTURE.md` so AI agents do not break them by accident.
 
-Use `ARCHITECTURE.md` for current architectural boundaries and invariants.
-
-Examples include:
+Typical invariants include:
 
 - Which layer owns domain logic
 - Which modules may call external APIs
@@ -26,21 +24,17 @@ Examples include:
 - Dependency direction
 - Integration boundaries
 
-Keep this document concise.
-
-It should answer:
+Keep `ARCHITECTURE.md` short. It should answer one question:
 
 > **What must remain true about the current architecture?**
 
-When this document is required is defined in [Required Project Documentation](project-documentation.md).
+See [Required Project Documentation](project-documentation.md) for when `ARCHITECTURE.md` is required.
 
 ## Architectural decision records
 
-Use ADRs for significant architectural decisions.
+Record each major architectural decision in its own ADR using the shared [ADR template](../../../templates/adr.template.md).
 
-Each important architectural decision should be stored separately using a consistent ADR structure.
-
-An ADR should explain:
+An ADR covers:
 
 - Context
 - Decision
@@ -48,11 +42,7 @@ An ADR should explain:
 - Reasoning
 - Consequences
 
-Use the shared [ADR template](../../../templates/adr.template.md) for this structure.
-
-ADRs are not immutable laws.
-
-They act as architectural guardrails that help prevent accidental changes, especially when AI agents modify the codebase.
+ADRs are guardrails, not permanent laws: they stop contributors and AI agents from changing the architecture by accident.
 
 When a user's request conflicts with an ADR:
 

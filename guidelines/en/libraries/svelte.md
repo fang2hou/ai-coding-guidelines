@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: f85cf94b
+digest: d59ef191
 ---
 
 # Svelte (Svelte 5 + SvelteKit)
@@ -18,7 +18,7 @@ default: production frontends stay on the React stacks selected in
 
 ## Use when
 
-- The project is personal, a prototype, or a toy — enjoyment is a valid goal.
+- The project is personal, a prototype, or a small experiment where developer enjoyment is a goal.
 - The user explicitly requests Svelte.
 
 ## Avoid when
@@ -58,10 +58,7 @@ default: production frontends stay on the React stacks selected in
 - Scaffold with `npx sv create`, then run `npx sv add ai-tools` — it writes
   the official AGENTS.md instructions for the Svelte MCP tools into the
   project.
-- Register the official MCP server (`npx -y @sveltejs/mcp`). When syntax is
-  uncertain, `list-sections` then `get-documentation` — never guess from
-  memory. Run `svelte-autofixer` on every component written or edited until
-  it returns no findings.
+- Register the official MCP server (`npx -y @sveltejs/mcp`). When unsure of syntax, call `list-sections` and `get-documentation` instead of guessing from memory. Run `svelte-autofixer` on every component you write or edit until it reports no issues.
 - Runes mode only; never emit legacy syntax. In particular:
   - `$derived` (or `$derived.by`) for computed values — never a `$effect`
     that assigns state; effects are an escape hatch for true side effects.

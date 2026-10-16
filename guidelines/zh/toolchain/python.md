@@ -4,29 +4,28 @@ lang: zh
 version: 4
 source-lang: en
 status: active
-digest: 58ee4ad8
+digest: 82bd9292
 ---
 
 # Python 工具链
 
 ## 强制要求
 
-Python 与 TypeScript 并列，都是 AI 辅助开发的默认语言；在现有语言中，它们获得的库生态和 AI Agent 生态支持最强。
+Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。
 
 语言优先级：
 
-- TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们在库生态和 AI Agent 生态方面获得的支持最强。
-- Go 与 Rust 仅用于性能关键或系统级场景；采用 Go 或 Rust 前必须给出明确理由、征得用户同意，并在项目 ADR 中记录这些内容。详见 [Go](../toolchain/go.md) 与 [Rust](../toolchain/rust.md)。
+- 纯 TypeScript 架构足够时，优先只用 TypeScript；详见 [TypeScript 工具链](../toolchain/typescript.md)。
+- 仅当项目确实能从 Python 获益时，才引入 Python 后端（判断标准见下）。
+- Go 与 Rust 仅用于性能关键或系统级场景；采用前必须说明理由、征得用户批准，并记录在项目 ADR 中。详见 [Go](../toolchain/go.md) 与 [Rust](../toolchain/rust.md)。
 
-不要默认引入 Python 后端。纯 TypeScript 架构足够时，优先采用该架构。详见 [TypeScript 工具链](../toolchain/typescript.md)。
-
-仅当项目确实有能从 Python 中获益的需求时，才引入 Python 后端，尤其是以下情况：
+以下情况尤其适合引入 Python 后端：
 
 - 后端逻辑足够复杂
 - Python 特有的库能带来实质价值
 - 部分实现由其他团队负责
 - 数据科学工程师需要修改部分工作流
-- AI Agent 或数据处理逻辑需要独立委派
+- AI Agent 或数据处理逻辑需要单独委派
 
 例如，AI Agent 工作流的一部分预计由数据科学团队维护时，采用 Python 服务是合理的。
 
@@ -44,9 +43,7 @@ Python 与 TypeScript 并列，都是 AI 辅助开发的默认语言；在现有
 
 ## uv
 
-使用 `uv` 管理 Python 环境与依赖。
-
-避免引入第二套 Python 环境管理系统。
+使用 `uv` 管理 Python 环境与依赖，不要引入第二套环境或包管理工具。
 
 标准工作流：
 
@@ -58,7 +55,7 @@ Python 与 TypeScript 并列，都是 AI 辅助开发的默认语言；在现有
 - `uv sync`——按 lockfile 安装环境。
 - `uv run <command>`——在项目环境中执行命令。
 
-禁止直接运行未加前缀的 `python` 或 `pip`：二者都会绕过项目环境和 lockfile。改用 `uv run python` 和 `uv add` / `uv sync`。
+禁止直接运行 `python` 或 `pip`：二者都会绕过项目环境和 lockfile。改用 `uv run python` 和 `uv add` / `uv sync`。
 
 依赖声明写在 `pyproject.toml` 中；`uv.lock` 是生成文件，禁止手工编辑。
 
@@ -80,11 +77,7 @@ Python 与 TypeScript 并列，都是 AI 辅助开发的默认语言；在现有
 
 ## ruff
 
-使用 `ruff` 进行 Python Lint 和格式化。
-
-当 ruff 已覆盖所需工作流时，不要另行维护其他工具。
-
-使用 `ruff check` 进行 Lint、使用 `ruff format` 进行格式化，并将二者接入项目的质量门禁。在 `pyproject.toml` 中配置 ruff。基线规则集：
+使用 `ruff` 完成代码检查（`ruff check`）和格式化（`ruff format`），接入项目质量门禁并在 `pyproject.toml` 中统一配置。基线规则：
 
 ```toml
 [tool.ruff.lint]

@@ -4,20 +4,16 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: fc7702dd
+digest: f8512e86
 ---
 
 # Language Policy
 
-Language boundaries are a project constraint and must be treated explicitly.
-
-Three concepts are independent:
+Treat language boundaries explicitly. Three language choices are independent — never infer one from another:
 
 1. Conversation language
 2. Source code language
 3. Product / UI language
-
-Do not infer one from another.
 
 A valid project may use:
 
@@ -69,9 +65,7 @@ kehuName      -> customerName
 yonghuId      -> userId
 ```
 
-Do not transliterate a non-English word into Latin characters merely to satisfy an ASCII requirement.
-
-The requirement is **standard English**, not merely ASCII.
+Do not transliterate non-English words into Latin letters just to stay in ASCII. The requirement is **standard English**, not merely ASCII.
 
 ### Literal values
 
@@ -119,15 +113,13 @@ The same principle applies to other languages.
 
 Never infer the product language solely from the conversation language.
 
-Before implementing substantial user-facing content when the project language has not already been documented, confirm with the user:
+If the project language is not documented yet, confirm the following with the user before building substantial user-facing content:
 
 - Primary UI language
 - Additional supported languages
 - Relevant formality or tone requirements
 
-Record the confirmed language policy in the project documentation (see [Required Project Documentation](project-documentation.md)).
-
-Once recorded, follow it without repeatedly asking the same question.
+Record the confirmed language policy in `AGENTS.md` (see [Required Project Documentation](project-documentation.md)) and follow it without asking again.
 
 Only reconfirm when:
 
@@ -139,18 +131,12 @@ Do not silently change UI language because the user changed conversation languag
 
 ## Cross-language quality
 
-When conversation, code, and product languages differ, take additional care.
+Take extra care when conversation, code, and UI languages differ. Write naturally in the target language instead of translating word for word:
 
-Do not mechanically translate wording across languages.
-
-In particular:
-
-- Do not create Chinese-influenced Japanese.
-- Do not reproduce Chinese sentence structures unnaturally in Japanese.
-- Do not insert implementation-oriented English directly into otherwise natural Chinese conversation without a reason.
-- Do not translate the same domain concept inconsistently across the UI.
-- Do not infer Japanese UI terminology from Chinese developer conversation.
-- Do not infer Chinese UI terminology from English source code identifiers.
+- Do not write Chinese-influenced Japanese or carry Chinese sentence structures into Japanese.
+- Do not drop implementation English into natural Chinese conversation without a reason.
+- Translate each domain concept consistently across the entire UI.
+- Do not guess Japanese UI terms from Chinese developer chat, or Chinese UI terms from English code identifiers.
 
 User-facing UI copy should prioritize:
 

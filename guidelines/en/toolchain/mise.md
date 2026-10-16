@@ -1,10 +1,10 @@
 ---
 id: toolchain/mise
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: f81ef076
+digest: 25fd055f
 ---
 
 # mise
@@ -39,25 +39,21 @@ This is the toolchain-level application of the central principle in [Core Engine
 
 ## Division of Labor
 
-mise manages runtimes and tool binaries only, such as Node.js, pnpm, uv, and linters.
+mise manages runtimes and tool binaries only, such as Node.js, pnpm, uv, and linters. Language packages and virtual environments belong to each language's own package manager: pnpm for Node.js, uv for Python. Never use mise to install language packages.
 
-Language packages and environments belong exclusively to the language's own package manager: pnpm for Node, uv for Python.
-
-Never use mise to install language packages.
-
-The split is deliberate: a single `mise install` bootstraps the whole toolchain with no additional global installs, while each ecosystem keeps its native best-practice package manager.
+This split is deliberate: a single `mise install` sets up the entire toolchain without global installs, while each language keeps its native package manager.
 
 ## Version Policy
 
-Prefer the latest version of mise.
+Use the latest version of mise and keep it current rather than freezing an old version.
 
-When maintaining projects, keep mise itself current rather than unnecessarily freezing an old version.
+When pinning tool versions in `mise.toml`, use the latest version (except where a language guideline specifies an LTS line, such as Node.js Active LTS). Always check the latest version through mise itself (`mise latest <tool>` or `mise ls-remote <tool>`) rather than relying on training data or external package registries.
+
+Note for `pnpm`: the `latest` tag in npm is 11, but the actual latest version is 12. Check via mise so `pnpm` is pinned to 12.
 
 ## Tool Lifecycle
 
-If a tool is no longer used by the project, remove it from the mise configuration.
-
-Do not leave obsolete tools in the project environment.
+When the project stops using a tool, remove it from `mise.toml` so obsolete tools do not linger in the environment.
 
 ## Tasks
 
@@ -77,13 +73,7 @@ mise run build
 mise run deploy
 ```
 
-Language-specific task definitions may remain in their native ecosystem when appropriate.
-
-For example, frontend scripts may live in `package.json` and be executed through pnpm.
-
-In that case, expose the relevant workflow through mise tasks rather than creating a second independent project task system.
-
-For example:
+Language-specific scripts (such as `package.json` scripts run via pnpm) may stay in their native config, but expose the main workflows through mise tasks instead of maintaining two separate task systems:
 
 ```text
 mise task
@@ -93,14 +83,11 @@ mise task
 
 ## Local / CI Consistency
 
-CI/CD should use mise whenever practical.
+Use mise in CI/CD whenever practical.
 
-The project should not have one toolchain definition for local development and a completely separate one for CI.
-
-The same project-managed tooling should be used in both environments.
+Do not keep one toolchain definition for local development and a separate one
+for CI; both environments use the same project-managed tools.
 
 ## mise MCP
 
-When the AI environment supports MCP and the project workflow can benefit from the mise MCP integration, prefer configuring it.
-
-If the user is using an MCP-capable environment but mise MCP is not configured, the agent may help the user add it rather than creating alternative project-management mechanisms.
+When the AI environment supports MCP and the project workflow benefits from it, prefer configuring the mise MCP integration. If it is not set up yet, the agent may help the user add it instead of creating alternative project-management mechanisms.

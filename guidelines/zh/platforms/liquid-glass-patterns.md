@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: 1faba719
+digest: e0b7ebcb
 ---
 
 # Liquid Glass 实现模式
@@ -31,7 +31,7 @@ Button("Delete", role: .destructive, action: delete)
     .buttonStyle(.glass)
 ```
 
-操作闭包由应用提供。仅在满足设计文档中 clear 的使用条件时采用 `.glass(.clear)`。UIKit 的 `UIButton.Configuration` 提供 `.glass()`、`.prominentGlass()`、`.clearGlass()` 和 `.prominentClearGlass()`；AppKit 提供 `.glass` 按钮边框样式。
+按钮动作由应用传入。仅在满足设计文档中 clear 的使用条件时采用 `.glass(.clear)`。UIKit 的 `UIButton.Configuration` 提供 `.glass()`、`.prominentGlass()`、`.clearGlass()` 和 `.prominentClearGlass()`；AppKit 提供 `.glass` 按钮边框样式。
 
 ## 自定义玻璃
 
@@ -94,7 +94,7 @@ struct FloatingTools: View {
 }
 ```
 
-邻近形状适合 `.matchedGeometry`，没有合适邻近形状的过渡使用 `.materialize`。`glassEffectTransition` 放在 `glassEffect` 之后。静态合并使用 `glassEffectUnion(id:namespace:)`，同样放在各自效果之后；合并标识符、命名空间、形状和玻璃变体一致的成员会合为一个表面。合并标识符用于表面分组，与元素的变形身份不同。
+邻近形状适合 `.matchedGeometry`，没有合适邻近形状的过渡使用 `.materialize`。`glassEffectTransition` 放在 `glassEffect` 之后。静态合并使用 `glassEffectUnion(id:namespace:)`，同样放在各自效果之后；合并标识符、命名空间、形状和玻璃变体一致的成员会合为一个表面。合并标识符只负责表面分组，不是元素变形时的身份标识。
 
 ## 标签栏与附件视图
 
@@ -105,9 +105,9 @@ struct FloatingTools: View {
 ## 工具栏与导航
 
 - 用 `ToolbarSpacer(.fixed, placement:)` 按功能分组；需要弹性间距时使用 `.flexible`。自带视觉样式的工具栏内容可设置 `sharedBackgroundVisibility(.hidden)`。
-- SwiftUI 中通过条件分支决定是否包含 `ToolbarItem`。只隐藏标签可能留下项目背景或占位。UIKit 使用 `UIBarButtonItem.isHidden`。
+- SwiftUI 中用 `if` 条件分支控制是否显示 `ToolbarItem`；只隐藏里面的标签可能会留下空白背景或占位。UIKit 则使用 `UIBarButtonItem.isHidden`。
 - iOS 27 中，用 `visibilityPriority` 指定溢出顺序，`ToolbarOverflowMenu` 放置始终位于溢出菜单的操作，`.topBarPinnedTrailing` 保留末端操作。后两者在原生 macOS 不可用，详见平台表。
-- iOS 27 的 `TabRole.prominent` 支持独立的末端标签。应在 `TabView` 中定义带标签的完整项目，角色本身不是完整的标签声明。
+- iOS 27 的 `TabRole.prominent` 支持独立的末端标签页。在 `TabView` 内定义带文字的完整标签项；仅有角色不构成完整的标签声明。
 
 iOS 直接使用导航栏最小化 API。以下条件编译用于区分 iOS 导航栏行为和原生 macOS 布局：
 

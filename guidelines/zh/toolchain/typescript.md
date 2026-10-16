@@ -1,23 +1,23 @@
 ---
 id: toolchain/typescript
 lang: zh
-version: 7
+version: 8
 source-lang: en
 status: active
-digest: 2bbe6860
+digest: 4d3116fd
 ---
 
 # TypeScript 工具链
 
 ## 强制要求
 
-TypeScript 是 AI 辅助产品开发的默认语言；在现有语言中，它获得的库生态和 AI Agent 生态支持最强。
+TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。
 
 语言优先级：
 
-- TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们在库生态和 AI Agent 生态方面获得的支持最强。
-- Python 仅用于 [Python 工具链](../toolchain/python.md) 中列出的合理场景。
-- Go 与 Rust 仅用于性能关键或系统级场景；采用 Go 或 Rust 前必须给出明确理由、征得用户同意，并在项目 ADR 中记录这些内容。详见 [Go](../toolchain/go.md) 与 [Rust](../toolchain/rust.md)。
+- 产品与全栈开发默认使用 TypeScript。
+- Python 仅用于 [Python 工具链](../toolchain/python.md) 列出的适用场景。
+- Go 与 Rust 仅用于性能关键或系统级场景；采用前必须说明理由、征得用户批准，并记录在项目 ADR 中。详见 [Go](../toolchain/go.md) 与 [Rust](../toolchain/rust.md)。
 
 框架选型见 [前端框架：Vite 与 Next.js](../libraries/frontend-framework.md)。
 
@@ -33,9 +33,9 @@ TypeScript 是 AI 辅助产品开发的默认语言；在现有语言中，它�
 
 ## pnpm
 
-使用 `pnpm`。
+使用 `pnpm`。这条要求同时适用于普通 Node.js 项目和 monorepo。
 
-这条要求适用于普通 Node.js 项目和 monorepo。
+在 `mise.toml` 中固定 `pnpm` 版本时，应使用最新版本并通过 mise（`mise latest pnpm`）查询。注意：npm 中的 `pnpm` `latest` 是 11，但实际最新版本是 12。
 
 外部文档给出 npm 或 yarn 命令时，将其改写为 pnpm 等价命令，不要引入其他包管理器。
 
@@ -63,27 +63,17 @@ TypeScript 是 AI 辅助产品开发的默认语言；在现有语言中，它�
 
 ### 规则配置
 
-应明确配置 oxlint。
+有针对性地配置 oxlint：根据代码实际运行的环境开启规则和插件，不要只用默认配置，也不要因为脚手架模板没开就漏掉有用的检查。
 
-启用适合项目且由 oxlint 官方支持的规则和推荐规则集。
-
-不要因为生成的项目配置默认未启用，就关闭有用的推荐检查。
-
-如果 oxlint 无法正确支持某个规则集或兼容层，应明确配置，而不是强行把不兼容的 ESLint 行为塞进项目。
-
-应根据代码实际运行的环境加载插件，而不只是使用默认插件：对于运行在 Node.js 上的代码，应在 `.oxlintrc.json` 中启用 `node` 插件，并明确开启所需规则——包括 CommonJS 时代的模式防护；同时跳过与项目意图冲突的限制类规则（例如，对于有意使用同步文件访问的 CLI，应保持 `no-sync` 关闭）。
+对于运行在 Node.js 上的代码，在 `.oxlintrc.json` 中启用 `node` 插件并开启相关规则（包括防范旧式 CommonJS 写法的规则），同时关闭与项目定位冲突的限制规则（例如，有意同步读写文件的 CLI 工具应保持 `no-sync` 关闭）。
 
 ### Type-Aware 与类型检查规则
 
-在项目确实需要时，使用 oxlint 官方支持的 TypeScript type-aware 或类型检查功能。
+在项目需要时，启用 oxlint 官方支持的 TypeScript 类型感知（type-aware）Lint 和类型检查。
 
-Type-aware Lint 和类型检查需要安装配套依赖：将 `oxlint-tsgolint` 与较新的 `oxlint` 一起安装，并在根目录的 `.oxlintrc.json` 中通过 `options.typeAware` 和 `options.typeCheck` 开启（`typeCheck` 仍属实验特性）。截至 2026-08，已对照 oxc 官方文档核实。
+将配套包 `oxlint-tsgolint` 与新版 `oxlint` 一起安装，并在根目录 `.oxlintrc.json` 中开启 `options.typeAware` 和 `options.typeCheck`（截至 2026-08，`typeCheck` 仍为实验特性）。
 
-按照 oxlint 当前的官方文档配置所需的 type-aware 功能。
-
-oxlint 已具备所需能力时，不要仅为获得 type-aware Lint 而引入 ESLint。
-
-具体配置会随 oxlint 演进，因此优先采用 oxlint 当前的官方机制，不要从旧项目复制过时配置。
+参照 oxlint 当前官方文档配置，不要从旧项目照搬过时配置；只要 oxlint 能满足需求，就不要为了类型感知规则再引入 ESLint。
 
 ### 不采用的替代方案
 
