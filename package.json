@@ -1,10 +1,12 @@
 {
   "name": "ai-coding-guidelines",
   "private": true,
-  "description": "Trilingual AI coding guidelines corpus and its validator tooling",
+  "description": "Trilingual AI coding guidelines corpus, its validator, and its site builder",
   "type": "module",
   "devDependencies": {
+    "@types/markdown-it": "^14.2.0",
     "@types/node": "^24.13.3",
+    "markdown-it": "14.1.0",
     "oxfmt": "^0.18.0",
     "oxlint": "^1.78.0",
     "oxlint-tsgolint": "^7.0.2001",

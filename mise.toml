@@ -14,10 +14,14 @@ run = [
   "pnpm exec oxfmt --check .",
 ]
 
+[tasks.build-site]
+description = "Build the static HTML site into dist/"
+run = "node tools/build-site.ts"
+
 [tasks.fix]
 description = "Fix punctuation and digests, then format markdown and tools/"
 run = ["node tools/check-docs.ts --fix", "pnpm exec oxfmt .", "node tools/check-docs.ts --fix"]
 
 [tasks.test]
 description = "Run validator tests"
-run = "node --test tools/check-docs.test.ts"
+run = "node --test tools/check-docs.test.ts tools/build-site.test.ts"

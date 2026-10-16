@@ -22,7 +22,7 @@ This repository defines the engineering standard it follows. Before editing a do
 ## Layout
 
 - `guidelines/{en,zh,ja}/` — the product: matching guideline trees in English, Chinese, and Japanese
-- `tools/` — the validator and its tests
+- `tools/` — the trilingual validator and the site builder, with their tests
 - `PORTAL.md` / `GLOSSARY.md` — task routing and shared terminology
 - `templates/` — copyable templates for projects using these guidelines
 - `skills/apply-guidelines/` — installable loader skill

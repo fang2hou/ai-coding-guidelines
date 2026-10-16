@@ -7,7 +7,7 @@ Engineering standards for AI-assisted development — maintained once, applied t
 [![check](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml/badge.svg)](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-[English](./guidelines/en/) · [中文](./guidelines/zh/) · [日本語](./guidelines/ja/)
+[English](https://fang2hou.github.io/ai-coding-guidelines/en/) · [中文](https://fang2hou.github.io/ai-coding-guidelines/zh/) · [日本語](https://fang2hou.github.io/ai-coding-guidelines/ja/) — readable as a website, rebuilt on every merge to `main`
 
 </div>
 
