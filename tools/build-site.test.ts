@@ -18,9 +18,7 @@ function runBuilder(root: string): Outcome {
   const res = spawnSync(
     process.execPath,
     [BUILDER, "--root", root, "--out", join(root, "dist"), "--base", BASE],
-    {
-      encoding: "utf8",
-    },
+    { encoding: "utf8" },
   );
   return { status: res.status ?? 1, stdout: res.stdout + res.stderr };
 }
@@ -52,6 +50,23 @@ function makeFixture(): string {
   const root = mkdtempSync(join(tmpdir(), "site-"));
   mkdirSync(join(root, "templates"), { recursive: true });
   writeFileSync(join(root, "templates", "README.template.md"), "# Template\n");
+  writeFileSync(
+    join(root, "GLOSSARY.md"),
+    [
+      "# Glossary",
+      "",
+      "| en | zh | ja |",
+      "| --- | --- | --- |",
+      "| guideline | 指南 | ガイドライン |",
+      "",
+      "## Forbidden renderings",
+      "",
+      "| English term | Lang | Forbidden | Use instead |",
+      "| --- | --- | --- | --- |",
+      "| workflow | zh | 工作流程 | 工作流 |",
+      "",
+    ].join("\n"),
+  );
 
   for (const lang of ["en", "zh", "ja"] as const) {
     const coreBody = [
@@ -63,6 +78,10 @@ function makeFixture(): string {
       "Out-of-tree: [tpl](../../../templates/README.template.md).",
       "External: [ext](https://example.com/x).",
       "",
+      "## Verification",
+      "",
+      "Second section so the in-page table of contents renders.",
+      "",
     ].join("\n");
     writeDoc(root, lang, "principles/core-principles", TITLES[lang].core, coreBody);
     writeDoc(root, lang, "practices/agent-protocol", TITLES[lang].protocol, "Draft body.", "draft");
@@ -70,7 +89,7 @@ function makeFixture(): string {
   return root;
 }
 
-void test("builds a trilingual site with rewritten links and language switching", () => {
+void test("builds a trilingual site with rewritten links, TOC, backlinks, and glossary", () => {
   const root = makeFixture();
   try {
     const out = runBuilder(root);
@@ -114,9 +133,10 @@ void test("builds a trilingual site with rewritten links and language switching"
       core.includes('href="../../ja/principles/core-principles.html"'),
       "ja switch link wrong",
     );
-    // Heading anchors are injected with the anchor link.
+    // Heading anchors and in-page TOC are generated when 2+ h2 sections exist.
     assert.ok(core.includes('id="details"'), "heading id missing");
-    assert.ok(core.includes('class="anchor"'), "anchor link missing");
+    assert.ok(core.includes('class="page-toc"'), "in-page TOC missing");
+    assert.ok(core.includes('class="related-section"'), "related guidelines section missing");
     // Stylesheet is referenced relative to the page depth.
     assert.ok(core.includes('href="../../style.css"'), "asset prefix wrong");
 
@@ -130,19 +150,30 @@ void test("builds a trilingual site with rewritten links and language switching"
       "en switch link wrong on zh page",
     );
 
+    // Reverse reference (backlink) appears on the referenced target document.
     const protocol = readFileSync(
       join(root, "dist", "ja", "practices", "agent-protocol.html"),
       "utf8",
     );
     assert.ok(protocol.includes("badge-draft"), "draft badge missing");
+    assert.ok(
+      protocol.includes('href="../principles/core-principles.html"'),
+      "inbound backlink missing on target doc",
+    );
+
+    // Glossary page is rendered per language.
+    const zhGlossary = readFileSync(join(root, "dist", "zh", "glossary.html"), "utf8");
+    assert.ok(zhGlossary.includes("三语术语表"), "zh glossary title missing");
+    assert.ok(zhGlossary.includes("工作流程"), "forbidden term table missing");
 
     const sitemap = readFileSync(join(root, "dist", "sitemap.xml"), "utf8");
     assert.ok(
       sitemap.includes(`${BASE}/en/principles/core-principles.html`),
       "sitemap missing page",
     );
-    // Root + 3 languages + 2 docs per language.
-    assert.equal((sitemap.match(/<url>/g) ?? []).length, 10, "sitemap url count wrong");
+    assert.ok(sitemap.includes(`${BASE}/zh/glossary.html`), "sitemap missing glossary");
+    // Root + 3 languages + (2 docs + 1 glossary) per language = 13.
+    assert.equal((sitemap.match(/<url>/g) ?? []).length, 13, "sitemap url count wrong");
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
