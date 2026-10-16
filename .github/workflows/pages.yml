@@ -1,0 +1,36 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and deploy site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Install toolchain (mise)
+        uses: jdx/mise-action@v4
+      - name: Install dependencies (pnpm)
+        run: pnpm install --frozen-lockfile
+      - name: Build site (mise run build-site)
+        run: mise run build-site
+      - name: Deploy to pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: pages
+          publish_dir: dist
+          force_orphan: true
+          commit_message: "deploy site from ${{ github.sha }}"

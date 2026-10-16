@@ -27,8 +27,9 @@ Do not substitute tools without explicit approval — this repository must follo
 ```bash
 mise run check                              # full validation — what CI runs
 mise run fix                                # fix zh/ja punctuation + digests, format
-mise run test                               # validator test suite
+mise run test                               # validator + site builder tests
 mise run test -- --test-name-pattern=digest # run matching test cases only
+mise run build-site                        # build the HTML site into dist/
 ```
 
 `mise run` lists every task. Validation runs `tools/check-docs.ts`, oxlint (including type checking via `typeCheck`), gitleaks, and an oxfmt format check.
@@ -56,11 +57,20 @@ Structural changes — adding, removing, or renaming a document, reversing a rec
 ## Layout
 
 - `guidelines/{en,zh,ja}/` — the product: matching guideline trees in three languages
-- `tools/` — the validator (`check-docs.ts`) and its tests
+- `tools/` — the trilingual validator (`check-docs.ts`), the site builder (`build-site.ts`, `site.css`), and their tests
 - `PORTAL.md` / `GLOSSARY.md` — task routing and shared terminology
 - `templates/` — copyable templates for projects using these guidelines
 - `skills/apply-guidelines/` — installable agent skill (thin loader)
 - `docs/adr/` — repository decision records
+
+## Website
+
+Every merge to `main` rebuilds the site and publishes it to GitHub Pages:
+
+1. `.github/workflows/pages.yml` runs `mise run build-site` and force-pushes `dist/` to the `pages` branch.
+2. GitHub Pages serves the `pages` branch at <https://fang2hou.github.io/ai-coding-guidelines/>.
+
+The site is a pure build artifact: never edit `dist/` or the `pages` branch by hand — change `tools/build-site.ts` or `tools/site.css` and rebuild. Pages carry no JavaScript; navigation, language switching, and theming are static HTML and CSS.
 
 ## Coding standards
 

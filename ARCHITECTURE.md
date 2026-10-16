@@ -10,6 +10,7 @@ This repository is a three-language guidelines collection (`en`, `zh`, `ja`) che
 
 - `guidelines/{en,zh,ja}/` — the product: three matching trees of single-topic documents
 - `tools/check-docs.ts` (and `check-docs.test.ts`) — checks front matter, digests, heading parity, punctuation, terminology, and portal links
+- `tools/build-site.ts` (and `build-site.test.ts`, `site.css`) — renders the trees into the static multilingual site published on GitHub Pages
 - `PORTAL.md` — task-based reading recipes and the full document list
 - `GLOSSARY.md` — shared terminology and the machine-checked list of forbidden translations
 - `templates/` — copyable documentation templates for projects using these guidelines
@@ -27,6 +28,7 @@ This repository is a three-language guidelines collection (`en`, `zh`, `ja`) che
 - **Validator constraints**: `tools/check-docs.ts` stays zero-dependency and fast (ADR-0001); never weaken it to make a check pass
 - **Landing discipline**: every change lands through a pull request; local development, pre-commit hooks, and CI all run `mise run check`
 - **Loader-only skill**: `skills/` contains only the fetching and audit workflow; editing guidelines never requires changing `skills/`
+- **Generated site**: the website is a build artifact of `guidelines/` — `dist/` and the `pages` branch are never edited by hand; the site loads no JavaScript
 
 ## Decisions
 
