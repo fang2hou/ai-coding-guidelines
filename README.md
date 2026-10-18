@@ -17,7 +17,7 @@ Projects repeatedly make the same decisions about package managers, linters, com
 
 ## 🚀 Getting Started
 
-**For AI coding agents**, install the skill once per project:
+**For AI coding agents**, run this command in your project directory to install the skill:
 
 ```bash
 pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
@@ -25,7 +25,7 @@ pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 
 The skill contains no guideline text. On each run, it fetches the latest guidelines from GitHub, selects the relevant documents using [PORTAL.md](./PORTAL.md), and checks the project against them.
 
-You can also ask your agent to use the repository directly:
+After installing, explicitly ask your agent to apply these guidelines to your task. You can also use the following instructions without installing the skill:
 
 ```text
 Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for this task.

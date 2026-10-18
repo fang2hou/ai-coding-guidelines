@@ -111,9 +111,31 @@ void test("builds a trilingual site with rewritten links, TOC, backlinks, and gl
       assert.ok(existsSync(join(root, "dist", name)), `missing dist/${name}`);
     }
 
+    // Visitors can adopt the guidelines from every language homepage without JavaScript.
+    const readme = readFileSync(join(import.meta.dirname, "..", "README.md"), "utf8");
+    const installCommand = "pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines";
+    assert.ok(readme.includes(installCommand), "README installation command diverged");
+    for (const lang of ["en", "zh", "ja"]) {
+      const home = readFileSync(join(root, "dist", lang, "index.html"), "utf8");
+      assert.ok(home.includes(`<code>${installCommand}</code>`), `${lang} install command missing`);
+      assert.ok(
+        home.includes("https://github.com/fang2hou/ai-coding-guidelines"),
+        `${lang} agent instructions missing`,
+      );
+      assert.ok(home.includes("PORTAL.md"), `${lang} agent instructions omit routing`);
+      assert.ok(
+        home.indexOf('id="usage-heading"') < home.indexOf('id="start-heading"'),
+        `${lang} setup must precede reading paths`,
+      );
+    }
+
     const core = readFileSync(
       join(root, "dist", "en", "principles", "core-principles.html"),
       "utf8",
+    );
+    assert.ok(
+      core.includes('href="../index.html#usage-heading"'),
+      "document sidebar must link to setup instructions",
     );
     // Corpus links become relative .html links.
     assert.ok(

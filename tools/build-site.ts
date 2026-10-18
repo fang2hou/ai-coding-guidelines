@@ -23,6 +23,8 @@ const DEFAULT_BASE = "https://fang2hou.github.io/ai-coding-guidelines";
 
 let assetVersion = "";
 
+const INSTALL_COMMAND = "pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines";
+
 const LANG_NAMES: Record<Lang, string> = { en: "English", zh: "中文", ja: "日本語" };
 const OG_LOCALE: Record<Lang, string> = { en: "en_US", zh: "zh_CN", ja: "ja_JP" };
 
@@ -37,6 +39,8 @@ const LOGO_SVG =
 
 // Lucide SVG geometry; license retained in tools/lucide-LICENSE and site output.
 const ICON_PATHS = {
+  copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />',
+  terminal: '<path d="M12 19h8" />   <path d="m4 17 6-6-6-6" />',
   "chevron-down": '<path d="m6 9 6 6 6-6" />',
   github:
     '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" />',
@@ -145,6 +149,17 @@ interface Ui {
   heroTitle: string;
   description: string;
   indexIntro: string;
+  usage: {
+    title: string;
+    install: string;
+    installDescription: string;
+    prompt: string;
+    promptDescription: string;
+    promptText: string;
+    copy: string;
+    copied: string;
+    copyError: string;
+  };
   startHere: string;
   startSub: string;
   startDesc: { core: string; protocol: string };
@@ -200,6 +215,20 @@ const UI: Record<Lang, Ui> = {
       "Engineering standards for AI coding agents and code reviewers — covering toolchains, development practices, library stacks, and platform patterns.",
     indexIntro:
       "Engineering standards for AI coding agents and the people who review their work — covering toolchains, day-to-day practices, library stacks, and platform patterns, organized for fast task-based reading.",
+    usage: {
+      title: "Use in your project",
+      install: "Install the skill",
+      installDescription:
+        "Run this in your project directory, then ask your agent to apply these guidelines to your task.",
+      prompt: "Give your agent these instructions",
+      promptDescription:
+        "You can also paste these instructions into your AI coding agent without installing the skill.",
+      promptText:
+        "Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for this task.\nStart at PORTAL.md and follow its reading recipes.",
+      copy: "Copy",
+      copied: "Copied",
+      copyError: "Select and copy the text",
+    },
     startHere: "Start here",
     startSub: "Read these two documents before any task.",
     startDesc: {
@@ -279,6 +308,18 @@ const UI: Record<Lang, Ui> = {
       "面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范。",
     indexIntro:
       "给 AI Agent 和代码评审者看的工程指南，涵盖工具链、工程实践、技术选型与平台规范，并按任务场景组织阅读顺序。",
+    usage: {
+      title: "在项目中使用",
+      install: "安装 skill",
+      installDescription: "在项目目录运行这条命令，然后明确要求 Agent 按本指南执行当前任务。",
+      prompt: "直接交给 AI Agent",
+      promptDescription: "也可以不安装 skill，直接把下面的提示词发给 AI Agent。",
+      promptText:
+        "请按 https://github.com/fang2hou/ai-coding-guidelines 中的指南执行当前任务。\n从 PORTAL.md 开始，按任务对应的阅读顺序查阅并应用相关规范。",
+      copy: "复制",
+      copied: "已复制",
+      copyError: "请选中文字并复制",
+    },
     startHere: "必读基础",
     startSub: "开始任何任务前，先读这两篇。",
     startDesc: {
@@ -355,6 +396,20 @@ const UI: Record<Lang, Ui> = {
       "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計を扱います。",
     indexIntro:
       "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、日々の開発プラクティス、ライブラリ選定、プラットフォーム設計をタスク別に整理しています。",
+    usage: {
+      title: "プロジェクトで使う",
+      install: "スキルをインストール",
+      installDescription:
+        "プロジェクトのディレクトリで実行し、現在のタスクにこのガイドラインを適用するようエージェントに指示してください。",
+      prompt: "AI エージェントに直接指示する",
+      promptDescription:
+        "スキルをインストールせずに、次の指示を AI エージェントに送ることもできます。",
+      promptText:
+        "https://github.com/fang2hou/ai-coding-guidelines のガイドラインを現在のタスクに適用してください。\nPORTAL.md から始め、タスクに対応する文書を順番に読み、関連する規約に従ってください。",
+      copy: "コピー",
+      copied: "コピーしました",
+      copyError: "テキストを選択してコピーしてください",
+    },
     startHere: "まず読むべき基本文書",
     startSub: "タスクに着手する前に、まずこの 2 本から読み始めてください。",
     startDesc: {
@@ -875,6 +930,9 @@ function sidebarHtml(lang: Lang, docs: Doc[], currentOut: string, hasGlossary: b
   parts.push(
     `<a class="side-home" href="${relOut(currentOut, `${lang}/index.html`)}"${homeActive}>${icon("house")}<span class="side-label">${escapeHtml(ui.home)}</span></a>`,
   );
+  parts.push(
+    `<a class="side-home" href="${relOut(currentOut, `${lang}/index.html`)}#usage-heading">${icon("terminal")}<span class="side-label">${escapeHtml(ui.usage.title)}</span></a>`,
+  );
   if (hasGlossary) {
     const glossaryOut = `${lang}/glossary.html`;
     const glossaryActive = currentOut === glossaryOut ? ` aria-current="page"` : "";
@@ -1058,6 +1116,12 @@ ${opts.toc ?? ""}
 `;
 }
 
+function usageHtml(ui: Ui): string {
+  const example = (label: string, description: string, text: string): string =>
+    `<div class="usage-example"><div class="usage-toolbar"><h3>${escapeHtml(label)}</h3><button class="copy-button" type="button" aria-label="${escapeHtml(`${ui.usage.copy}: ${label}`)}" data-copy-label="${escapeHtml(ui.usage.copy)}" data-copied-label="${escapeHtml(ui.usage.copied)}" data-error-label="${escapeHtml(ui.usage.copyError)}">${icon("copy", "icon", 14)}<span role="status">${escapeHtml(ui.usage.copy)}</span></button></div><p>${escapeHtml(description)}</p><pre><code>${escapeHtml(text)}</code></pre></div>`;
+  return `<section class="usage-section" aria-labelledby="usage-heading"><div class="section-head"><h2 id="usage-heading">${escapeHtml(ui.usage.title)}</h2></div>${example(ui.usage.install, ui.usage.installDescription, INSTALL_COMMAND)}${example(ui.usage.prompt, ui.usage.promptDescription, ui.usage.promptText)}</section>`;
+}
+
 function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
   const ui = UI[lang];
   const byId = new Map(docs.map((d) => [d.id, d]));
@@ -1077,6 +1141,8 @@ function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
   parts.push(`<h1>${escapeHtml(ui.heroTitle)}</h1>`);
   parts.push(`<p class="intro">${escapeHtml(ui.indexIntro)}</p>`);
   parts.push(`</header>`);
+
+  parts.push(usageHtml(ui));
 
   parts.push(`<section class="start-section" aria-labelledby="start-heading">`);
   parts.push(

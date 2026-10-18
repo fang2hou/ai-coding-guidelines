@@ -7,6 +7,32 @@
   root.classList.add("js");
   var scheme = window.matchMedia("(prefers-color-scheme: dark)");
 
+  if (window.isSecureContext && navigator.clipboard) {
+    root.classList.add("can-copy");
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest && event.target.closest(".copy-button");
+      if (!button) return;
+      var code = button.closest(".usage-example").querySelector("code");
+      var status = button.querySelector('[role="status"]');
+      navigator.clipboard
+        .writeText(code.textContent)
+        .then(function () {
+          status.textContent = button.dataset.copiedLabel;
+          window.setTimeout(function () {
+            status.textContent = button.dataset.copyLabel;
+          }, 2000);
+        })
+        .catch(function () {
+          var range = document.createRange();
+          range.selectNodeContents(code);
+          var selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          status.textContent = button.dataset.errorLabel;
+        });
+    });
+  }
+
   function readPreference() {
     try {
       var stored = localStorage.getItem(THEME_KEY);
