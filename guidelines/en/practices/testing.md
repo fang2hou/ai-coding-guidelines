@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 9aa044e5
+digest: 29798268
 ---
 
 # Testing Strategy
@@ -37,7 +37,7 @@ E2E tests should focus on:
 
 Use realistic test data. When production-like data helps, anonymize or sanitize it first — never put real production secrets or personal data in test fixtures.
 
-Keep E2E suites fast. Do not build a sprawling E2E suite that slows down [Quality Gates](../toolchain/quality-gates.md) without adding matching confidence.
+Keep E2E suites fast. Add tests only when the confidence they provide justifies the extra time spent running [Quality Gates](../toolchain/quality-gates.md).
 
 For projects using Playwright, load `eslint-plugin-playwright` into oxlint via the `jsPlugins` array. The plugin is officially conformance-tested with oxlint; oxlint's JS plugin support is currently in alpha.
 

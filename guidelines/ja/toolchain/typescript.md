@@ -4,7 +4,7 @@ lang: ja
 version: 8
 source-lang: en
 status: active
-digest: d50d48ff
+digest: c3e4217d
 ---
 
 # TypeScript ツールチェーン
@@ -27,7 +27,7 @@ TypeScript と Python は、ライブラリと AI エージェントのエコシ
 
 2026-08 時点では、Active LTS ラインは Node.js 24（EOL 2028-04）である。Node.js 22 はメンテナンス期（EOL 2027-04）にあり、Node.js 26 は 2026-10 まで Current ラインである。Current ラインを対象にしてはならない。Node.js のメジャーバージョンは、新しい LTS ラインが定着してから更新する。
 
-モデルは学習データに基づいてコードを生成する。そのため、AI 支援開発では主流で十分に検証されたバージョンのほうが破綻が少ない。わずかな性能向上よりも、これらのバージョンを優先する。この原則は [中核となるエンジニアリング原則](../principles/core-principles.md) に定められている。
+モデルは学習データに基づいてコードを生成する。そのため、AI 支援開発では主流で十分に検証されたバージョンのほうがエラーが起きにくい。わずかな性能向上よりも、これらのバージョンを優先する。この原則は [中核となるエンジニアリング原則](../principles/core-principles.md) に定められている。
 
 Node.js のバージョンはプロジェクトの mise 設定に固定し、TypeScript のバージョンは pnpm のロックファイルで固定する。いずれもグローバルにインストールされたバージョンに依存しない。
 
@@ -73,7 +73,7 @@ Node.js 上で動くコードでは、`.oxlintrc.json` で `node` プラグイ�
 
 最新の `oxlint` とともに `oxlint-tsgolint` をインストールし、ルートの `.oxlintrc.json` で `options.typeAware` と `options.typeCheck` を有効にする（`typeCheck` は 2026-08 時点で実験的機能）。
 
-古いプロジェクトの設定をコピーせず最新の公式ドキュメントに従って設定し、oxlint で対応できる範囲のために ESLint を追加しないこと。
+古いプロジェクトの設定をコピーせず最新の公式ドキュメントに従って設定し、oxlint で対応できる型情報を使うルールのために ESLint を追加しないこと。
 
 ### 採用しない代替案
 

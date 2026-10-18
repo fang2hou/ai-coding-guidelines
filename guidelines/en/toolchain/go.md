@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 75b0a301
+digest: ab85bafb
 ---
 
 # Go Toolchain
@@ -42,7 +42,7 @@ Use `golangci-lint` as the linter.
 
 Expose it through mise tasks so local development and CI use the same configuration.
 
-Commit the configuration as `.golangci.yml` and tailor it to the project's emphasis. Do not use `enable-all`: it enables slow, opinionated checks and buries the signal.
+Commit the configuration as `.golangci.yml` and tailor it to the project's emphasis. Do not use `enable-all`: it enables slow, opinionated checks that make important findings harder to identify.
 
 Always-on baseline:
 

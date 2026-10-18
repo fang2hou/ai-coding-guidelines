@@ -4,7 +4,7 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 5887d867
+digest: 59119c1e
 ---
 
 # 依存関係の管理方針
@@ -29,7 +29,7 @@ digest: 5887d867
 
 判断：`zod` を追加する。
 
-同じ問いを適用すると、弱い候補は却下される。`truncate` のような文字列ヘルパーライブラリは問い 3 を通らない。3 行の明確なコードで実装できるため、依存関係は不要である。プラットフォームの `fetch` で要件をすでに満たせる場合、`axios` は問い 2 を通らない。
+同じ問いで、不要な依存関係も見分けられる。`truncate` のような文字列ヘルパーライブラリは、問い 3 の条件を満たさない。3 行の明確なコードで実装できるため、依存関係は不要である。プラットフォームの `fetch` で要件をすでに満たせる場合、`axios` は問い 2 の条件を満たさない。
 
 数行のコードで明確に書ける処理のために、ライブラリを追加してはならない。
 
@@ -42,7 +42,7 @@ digest: 5887d867
 - [TypeScript ツールチェーン](../toolchain/typescript.md) — pnpm、oxlint、oxfmt
 - [Python ツールチェーン](../toolchain/python.md) — uv、ruff
 - [品質ゲート](../toolchain/quality-gates.md) — prek
-- [Git ワークフロー](../toolchain/git.md) — Conventional Commits のための Cocogitto
+- [Git ワークフロー](../toolchain/git.md) — Cocogitto による Conventional Commits の検証
 
 推奨ライブラリの選定については、[フロントエンドフレームワーク](../libraries/frontend-framework.md)と[Python API スタック](../libraries/python-api-stack.md)を参照すること。
 

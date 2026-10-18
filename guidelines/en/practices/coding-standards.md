@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 26f6bae5
+digest: 99a5a9ee
 ---
 
 # Coding Standards
@@ -61,7 +61,7 @@ const users = new UserRepository();
 const cache = new Cache();
 ```
 
-Do not hide a second behavior behind a boolean parameter; split the function so call sites read without flags.
+Do not use a boolean parameter to switch between two behaviors. Split the function so its name makes the intended behavior clear at each call site.
 
 ```ts
 // bad
@@ -155,7 +155,7 @@ New code must remain consistent with the existing architecture.
 
 Correctness and readability come first; do not trade structure for speed you have not measured.
 
-- Do not avoidably allocate, copy, or recompute.
+- Avoid unnecessary allocations, copies, and recomputation.
 - Keep O(n) work out of loops that run O(n) times.
 - Fix the algorithm or the data structure before scattering micro-optimizations.
 - Optimize only measured hot paths, and only with evidence.

@@ -4,7 +4,7 @@ lang: zh
 version: 4
 source-lang: en
 status: active
-digest: 82bd9292
+digest: 9ca06fa5
 ---
 
 # Python 工具链
@@ -35,7 +35,7 @@ Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生
 
 默认使用 Python 3.12。mise 提供解释器和 uv 工具；环境与依赖（`uv.lock` 等）由 uv 管理。在 ML 生态和模型训练数据跟上之前，不要采用更新的 CPython 版本线；等生态的默认版本发生变化后再重新评估。
 
-模型根据训练数据生成代码，因此成熟且在训练数据中覆盖广泛的版本在 AI 辅助开发中出错更少。该原则见 [核心工程原则](../principles/core-principles.md)。
+模型根据训练数据生成代码，因此训练数据中示例较多的成熟版本，在 AI 辅助开发中出错更少。该原则见 [核心工程原则](../principles/core-principles.md)。
 
 在项目 mise 配置中固定 Python 的确切版本。
 

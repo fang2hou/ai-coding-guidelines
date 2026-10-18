@@ -4,7 +4,7 @@ lang: en
 version: 6
 source-lang: en
 status: active
-digest: 3dde71b3
+digest: c649159a
 ---
 
 # Quality Gates
@@ -52,8 +52,8 @@ format check -> oxfmt --check / ruff format --check
 typecheck    -> oxlint with typeCheck enabled (tsgolint) / tsc --noEmit
 ```
 
-oxlint's `options.typeCheck` (via `oxlint-tsgolint`) surfaces TypeScript
-diagnostics and fails the run, so it carries the typecheck gate on its own;
+oxlint's `options.typeCheck` (via `oxlint-tsgolint`) reports TypeScript
+diagnostics and fails the run, so it can perform the type check on its own;
 use `tsc --noEmit` as the stand-alone form when type-aware linting is not
 configured.
 

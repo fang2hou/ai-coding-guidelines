@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 8a4315ec
+digest: 720d50f9
 ---
 
 # Architecture Governance
@@ -42,7 +42,7 @@ An ADR covers:
 - Reasoning
 - Consequences
 
-ADRs are guardrails, not permanent laws: they stop contributors and AI agents from changing the architecture by accident.
+ADRs prevent contributors and AI agents from changing the architecture by accident. Revise them when the architectural decision needs to change.
 
 When a user's request conflicts with an ADR:
 

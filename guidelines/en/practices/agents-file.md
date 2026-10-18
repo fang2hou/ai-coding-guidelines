@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: 85e8fccd
+digest: 8908f230
 ---
 
 # Authoring AGENTS.md
@@ -75,7 +75,7 @@ Start with one root file. Add a nested `AGENTS.md` to a subdirectory only when t
 
 - It uses a different package manager, test runner, or runtime.
 - It contains generated code that must be regenerated rather than edited.
-- It carries extra approval requirements, such as migrations or deployments.
+- It requires additional approval for operations such as migrations or deployments.
 - It has UI or design-system rules that do not apply elsewhere.
 
 A nested file lists only what differs in that directory and leaves everything else to the root file. Never repeat root rules in a nested file.

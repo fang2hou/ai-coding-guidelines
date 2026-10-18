@@ -4,7 +4,7 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: b8e71184
+digest: b272342e
 ---
 
 # Python Toolchain
@@ -35,7 +35,7 @@ For the standard API framework, validation, and server stack, see [Python API St
 
 Default to Python 3.12. mise provides the interpreter and uv itself; environments and dependencies (`uv.lock` etc.) belong to uv. Do not adopt newer CPython lines until the ML ecosystem and model training data have caught up; revisit when the ecosystem's default shifts.
 
-Models generate code from training data, so a mature, widely trained-on version breaks less in AI-assisted development. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
+Models generate code from training data, so a mature version well represented in training data causes fewer errors in AI-assisted development. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
 
 Pin the exact Python version in the project's mise configuration.
 

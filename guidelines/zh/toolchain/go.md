@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: 8b950edd
+digest: 3139cc75
 ---
 
 # Go 工具链
@@ -42,7 +42,7 @@ TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项
 
 通过 mise task 提供该工具，确保本地开发和 CI 使用同一份配置。
 
-将配置作为 `.golangci.yml` 提交到仓库，并根据项目重点进行调整。不要使用 `enable-all`：它会启用缓慢且主观的检查，反而掩盖真正有价值的信号。
+将配置作为 `.golangci.yml` 提交到仓库，并根据项目重点调整。不要使用 `enable-all`：它会启用耗时较长、带有主观风格偏好的检查，使重要问题更难发现。
 
 始终启用的基线规则：
 

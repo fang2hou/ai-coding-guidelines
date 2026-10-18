@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 54f8c366
+digest: 1f04a67b
 ---
 
 # TypeScript Backend
@@ -30,7 +30,7 @@ Preferred — Use Hono for TypeScript backend services. The default runtime is N
 
 ## Tradeoffs
 
-- Hono includes fewer built-in features than larger frameworks, so full applications assemble more pieces themselves.
+- Hono includes fewer built-in features than larger frameworks, so developers must combine more components to build a complete application.
 - Keep one framework per service: do not fork backend patterns by runtime, and do not mix a second backend framework into a Hono service.
 
 ## Version policy
@@ -60,7 +60,7 @@ Preferred — Use Hono for TypeScript backend services. The default runtime is N
 
 ### Middleware
 
-- Middleware lives only in the transport layer; the core layer does not know middleware exists.
+- Middleware lives only in the transport layer; core modules do not depend on middleware.
 
 ### Deployment defaults
 

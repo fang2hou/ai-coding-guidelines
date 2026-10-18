@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: active
-digest: 7119d383
+digest: b9a89325
 ---
 
 # 架构治理
@@ -42,7 +42,7 @@ digest: 7119d383
 - 理由
 - 后果
 
-ADR 是架构护栏，而非不可更改的铁律；它的作用是防止贡献者和 AI Agent 在无意间改动架构。
+ADR 用于防止贡献者和 AI Agent 无意间改动架构；架构决策需要改变时，也可以修订 ADR。
 
 当用户请求与某项 ADR 冲突时：
 

@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: d91f1f09
+digest: a7039eff
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -32,8 +32,8 @@ digest: d91f1f09
 
 ## 代价
 
-- LLM 训练语料覆盖比 React 薄；主要风险是幻觉出 Svelte 4 的旧模式。用官方 AI 工具缓解，绝不靠记忆。
-- 组件生态较小；UI 工作交给 DaisyUI 或手写组件。
+- LLM 训练语料中的 Svelte 示例比 React 少，主要风险是模型因幻觉生成 Svelte 4 的旧写法。用官方 AI 工具降低这一风险，不凭记忆编写。
+- 组件生态较小；使用 DaisyUI 或手写组件构建 UI。
 - 迭代快：预发布的大版本走 `next` 通道，`latest` 始终是稳定版。除非探索新大版本本身就是项目目的，否则留在 `latest` 上。
 
 ## 版本策略

@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: 540f54ec
+digest: 340c7f65
 ---
 
 # TypeScript 后端技术栈
@@ -30,7 +30,7 @@ digest: 540f54ec
 
 ## 代价
 
-- Hono 的内置能力不如传统框架齐全；完整应用需要自行组装更多功能。
+- Hono 的内置功能比大型框架少；开发完整应用时，需要自行组合更多组件。
 - 一个服务只用一个框架：不要按运行时拆分后端模式，也不要在 Hono 服务中混用第二个后端框架。
 
 ## 版本策略
@@ -60,13 +60,13 @@ digest: 540f54ec
 
 ### 中间件
 
-- 中间件只存在于传输层；核心层不感知中间件的存在。
+- 中间件只存在于传输层；核心模块不依赖中间件。
 
 ### 部署默认值
 
 - 个人项目部署到 Cloudflare Workers：Hono 对 Workers 提供一流支持，核心层只使用 Web 标准 API，因此同一服务也能在本地 Node.js 上运行。
 - 工作项目部署到 Databricks Apps；遵循 [Databricks](../toolchain/databricks.md)。截至 2026-08，已确认 Databricks Apps 可托管由 Python、Node.js 或二者构建的应用；Node 依赖从 `package.json` 安装（存在 `pnpm-lock.yaml` 时会执行 `pnpm install --frozen-lockfile`），并运行 `app.yaml` 中声明的命令。托管 Node 运行时由平台固定——2026 年中为 Node 22，早于当前 Active LTS 线——平台文档列出的 Node 框架为 React、Angular、Svelte 和 Express。
-- 在 Databricks 上，Node 版本由平台而不是项目决定：让服务与平台运行时兼容，不要假设本地 LTS。Hono 通过 `@hono/node-server` 部署为普通 Node.js 应用；即使平台文档列出了 Express，也不改变不采用 Express 的结论。
+- 在 Databricks 上，Node 版本由平台而不是项目决定：让服务兼容平台运行时，不要假设平台使用本地的 LTS 版本。Hono 通过 `@hono/node-server` 部署为普通 Node.js 应用；即使平台文档列出了 Express，也不改变不采用 Express 的结论。
 - 数据和 AI 密集型 Databricks 工作负载仍属于 [Python API 技术栈](../libraries/python-api-stack.md) 的适用范围；只有在 Node 服务确实有明确价值时，才在这类工作负载中增加 Node 服务。
 
 ## 联动

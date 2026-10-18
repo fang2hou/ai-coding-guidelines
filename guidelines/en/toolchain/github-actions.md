@@ -4,7 +4,7 @@ lang: en
 version: 5
 source-lang: en
 status: active
-digest: 77c73f8c
+digest: 817a8f36
 ---
 
 # GitHub Actions
@@ -44,7 +44,7 @@ mise is the entry point CI invokes; do not duplicate tool setup in workflow YAML
 
 ## Event scoping
 
-- Scope each workflow file to one trigger audience. A project-validation
+- Group triggers in each workflow file by the checks they require. A project-validation
   workflow runs on `push` (default branch) and `pull_request`; rules that
   exist only for pull requests — for example, PR title rules — live in their
   own workflow triggered by `pull_request` alone.

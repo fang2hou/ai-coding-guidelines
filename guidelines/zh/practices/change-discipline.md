@@ -4,12 +4,12 @@ lang: zh
 version: 2
 source-lang: en
 status: active
-digest: 9e13ed25
+digest: 7a9b136a
 ---
 
 # 变更纪律
 
-对每项实质性变更，在交付评审前都要检查这份清单；同时参照[操作协议](agent-protocol.md)。
+每项实质性变更交付评审前，都要按这份清单检查，并遵循[操作协议](agent-protocol.md)。
 
 ## 完成清单
 
@@ -76,7 +76,7 @@ $ git commit -m "test(e2e): wait for session cookie instead of fixed sleep"
 prek  ok  format check, lint, secret scanning
 ```
 
-这就是通过的标准：所有检查均通过，逐行审阅 diff，且变更中没有无法解释的内容。
+提交前，所有检查必须通过，diff 必须逐行审阅，每处变更都必须能解释清楚。
 
 ## CI 通过不是正确性的证明
 

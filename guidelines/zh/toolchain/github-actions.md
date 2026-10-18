@@ -4,7 +4,7 @@ lang: zh
 version: 5
 source-lang: en
 status: active
-digest: 7ab14c91
+digest: a046df29
 ---
 
 # GitHub Actions
@@ -44,7 +44,7 @@ mise 是 CI 调用的入口；不要在工作流 YAML 中重复设置工具。�
 
 ## 事件作用域
 
-- 每个工作流文件只面向一种触发受众。项目校验工作流在 `push`（默认分支）和 `pull_request` 上运行；只对 pull request 成立的规则——例如 pull request 标题规则——放在仅由 `pull_request` 触发的独立工作流中。
+- 将需要执行相同检查的触发条件放在同一个工作流文件中。项目校验工作流在 `push`（默认分支）和 `pull_request` 上运行；只对 pull request 成立的规则——例如 pull request 标题规则——放在仅由 `pull_request` 触发的独立工作流中。
 - 绝不要在多触发工作流里给某个 job 加 `if: github.event_name == 'pull_request'` 来模拟这种拆分：在 `push` 触发的运行中，该 job 显示为 skipped，整个运行看起来像部分失败。工具无关的规则见 [流水线](../practices/pipeline.md)。
 - `pull_request` 默认由 `opened`、`synchronize`、`reopened` 触发——这正是校验代码所需的集合。只有在超出默认范围时才列出 `types:`：校验可能因编辑而改变的 pull request 元数据（标题）的工作流必须加上 `edited`，让改过标题的 pull request 重新接受校验。绝不要列出无法改变结果的 activity type；每多列一个 type，就多一个触发入口。
 - 合并门禁会把 skipped 的必需检查视为通过，因此这条规则主要是为了让运行列表清晰可读。真正会卡住合并的是从不上报结果的必需检查：如果工作流不在 `pull_request` 上触发，或对应 job 被过滤条件完全排除，该检查就会一直停在 `pending`。务必确保每项必需检查在需要它的场景下都会实际运行并上报结果。
@@ -89,7 +89,7 @@ jobs:
 - 将不可信输入（pull request 标题、分支名、issue 文本）传给 `run:` 脚本时，必须通过环境变量传递，绝不要直接插入 `${{ }}`——直接插值会导致脚本注入。
 - 将 action 引用为受信任发布者发布的当前主版本 tag（`actions/checkout@v7`、`jdx/mise-action@v4`）。该 tag 会持续接收此主版本内的修复、运行时更新和新功能，升级时只需改动一个 token，评审者一眼即可看懂。
 - 优先使用 tag，而不是完整 commit SHA。SHA 会将 action 冻结在某个 revision：修复永远不会自动到达，工作流也不再声明它运行的版本，每次升级都变成手动查找 SHA。只有在已有明确的不可变构建或供应链策略时，才固定 SHA，并在行末注释中记录实际对应的版本。绝不要让 action 停留在裸分支名或未带版本的 tag。
-- 浮动的主版本 tag 信任发布者：应与上面的最小权限默认值配套，绝不要向运行 pull request 代码的工作流暴露敏感凭据。
+- 使用浮动主版本 tag 意味着信任发布者：应与上面的最小权限默认值配套，绝不要向运行 pull request 代码的工作流暴露敏感凭据。
 - 绝不要用 `pull_request_target` 检出并运行 pull request 的代码；它会以仓库敏感凭据执行基础分支上的工作流定义。应使用 `pull_request`。
 
 ## 相关文档

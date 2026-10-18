@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: d86c5c2c
+digest: 8669071a
 ---
 
 # Change Discipline
@@ -76,7 +76,7 @@ $ git commit -m "test(e2e): wait for session cookie instead of fixed sleep"
 prek  ok  format check, lint, secret scanning
 ```
 
-That is what passing looks like: every check green, the diff read line by line, and nothing in the change you cannot explain.
+Before committing, every check must pass, you must review the diff line by line, and you must be able to explain every change.
 
 ## Green CI Is Not Proof
 

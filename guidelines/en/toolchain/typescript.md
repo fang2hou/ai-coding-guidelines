@@ -4,7 +4,7 @@ lang: en
 version: 8
 source-lang: en
 status: active
-digest: d1479726
+digest: cc667e04
 ---
 
 # TypeScript Toolchain
@@ -27,7 +27,7 @@ Use the latest stable TypeScript and Node.js on the Active LTS line.
 
 As of 2026-08, the Active LTS line is Node.js 24 (EOL 2028-04); Node.js 22 is in maintenance (EOL 2027-04), and Node.js 26 is the Current line until 2026-10. Never target the Current line; upgrade the Node major only after the new LTS line has settled.
 
-Models generate code from training data, so mainstream, thoroughly validated versions break less in AI-assisted development — prefer them over marginal gains. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
+Models generate code from training data, so mainstream, thoroughly validated versions cause fewer errors in AI-assisted development. Prefer them over marginal gains. The principle lives in [Core Engineering Principles](../principles/core-principles.md).
 
 Pin the Node.js version in the project's mise configuration; pin the TypeScript version through the pnpm lockfile — never rely on globally installed versions of either.
 

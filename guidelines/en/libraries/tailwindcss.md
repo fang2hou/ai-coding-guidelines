@@ -4,7 +4,7 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: 2ce61912
+digest: c7e264c2
 ---
 
 # Tailwind CSS
@@ -48,7 +48,7 @@ Situational — Tailwind CSS is used when the project already runs Tailwind or i
 ### Class linting and sort interop
 
 - Install `oxlint-tailwindcss` as a dev dependency and load it through the `jsPlugins` array in `.oxlintrc.json`.
-- Set `settings.tailwindcss.entryPoint` to the project's Tailwind v4 CSS entry — the file that imports `tailwindcss` and declares `@theme` design tokens. The setting is required and explicit; the plugin performs no filesystem auto-detect.
+- Set `settings.tailwindcss.entryPoint` to the project's Tailwind v4 CSS entry — the file that imports `tailwindcss` and declares `@theme` design tokens. Set this path explicitly; the plugin does not search the filesystem for the entry point.
 - Enable `oxlint-tailwindcss/enforce-sort-order`, which produces the official Tailwind class sort order.
 - Keep the linter and oxfmt on the same design system: point oxfmt's `sortTailwindcss.stylesheet` in `.oxfmtrc.json` at the same CSS file. Otherwise oxfmt reads the `theme.css` bundled inside the `tailwindcss` package and disagrees with the linter on custom `@theme` tokens.
 

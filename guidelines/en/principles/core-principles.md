@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 8ddbd9c9
+digest: 9dbd7c4f
 ---
 
 # Core Engineering Principles
@@ -27,7 +27,7 @@ The central principle:
 
 > **Standardize everything that does not need to be a project-specific decision.**
 
-Stop re-deciding package managers, formatters, linters, task runners, commit conventions, and pre-commit hooks in every project.
+Do not choose package managers, formatters, linters, task runners, commit conventions, and pre-commit hooks anew for every project.
 
 Product decisions and architecture vary from project to project; the engineering toolchain does not.
 
@@ -104,7 +104,7 @@ If a rule genuinely does not fit the project, changing its configuration is allo
 
 ## Final Principles
 
-This guideline does not exist to add process. It exists to keep the engineering environment predictable, so humans and AI agents can move fast without re-making the same tooling and workflow decisions.
+This guideline keeps the engineering environment predictable without adding process for its own sake. Humans and AI agents can work quickly without repeatedly choosing the same tools and workflows.
 
 When a choice does not depend on the product:
 

@@ -4,7 +4,7 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: bdbf2d45
+digest: 1888424b
 ---
 
 # TypeScript バックエンド
@@ -30,7 +30,7 @@ digest: bdbf2d45
 
 ## トレードオフ
 
-- Hono はレガシーフレームワークほど機能が揃っておらず、完全なアプリケーションにはより多くの構成要素を組み合わせる必要がある。
+- Hono の組み込み機能は大規模なフレームワークより少ないため、開発者はアプリケーション全体を作る際に、より多くの構成要素を組み合わせる必要がある。
 - 1 サービスにつき 1 つのフレームワークとする。ランタイムごとにバックエンドの実装パターンを分岐させず、Hono のサービスに別のバックエンドフレームワークを混在させない。
 
 ## バージョン方針
@@ -60,11 +60,11 @@ digest: bdbf2d45
 
 ### ミドルウェア
 
-- ミドルウェアはトランスポート層にだけ置く。コア層はミドルウェアの存在を知らない。
+- ミドルウェアはトランスポート層にだけ置く。コアモジュールはミドルウェアに依存しない。
 
 ### デプロイ先の既定値
 
-- 個人プロジェクトのデプロイ先は Cloudflare Workers とする。Hono は Workers への第一級サポートを提供しており、コアを Web 標準 API に保てば、同じサービスをローカルの Node.js でも動かせる。
+- 個人プロジェクトのデプロイ先は Cloudflare Workers とする。Hono は Workers に標準で対応しており、コアを Web 標準 API に保てば、同じサービスをローカルの Node.js でも動かせる。
 - 仕事のプロジェクトのデプロイ先は Databricks Apps とし、[Databricks](../toolchain/databricks.md)に従う。2026-08 時点の確認結果は次のとおりである。Databricks Apps は Python、Node.js、またはその両方で構築されたアプリをホストする。Node の依存関係は `package.json` からインストールされ、`pnpm-lock.yaml` がある場合は `pnpm install --frozen-lockfile` が実行される。アプリは `app.yaml` に宣言したコマンドで起動する。管理対象の Node ランタイムはプラットフォームによって固定されており、2026 年半ばの時点では Node 22 で、現在の Active LTS ラインより古い。プラットフォームが公式文書で挙げている Node フレームワークは React、Angular、Svelte、Express である。
 - Databricks では、Node のバージョンをプロジェクトではなくプラットフォームが決める。ローカルの LTS を前提とせず、サービスをプラットフォームのランタイムと互換性のある状態に保つ。Hono は `@hono/node-server` 経由で通常の Node.js アプリとしてデプロイできる。プラットフォームの文書が Express を挙げていても、Express を採用しない方針は変わらない。
 - データと AI を中心とする Databricks のワークロードは、[Python API スタック](../libraries/python-api-stack.md)に従い、引き続き Python で扱う。Node サービスは、明確に導入価値がある場合に限って追加する。

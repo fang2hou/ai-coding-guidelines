@@ -4,12 +4,12 @@ lang: en
 version: 1
 source-lang: en
 status: active
-digest: f8512e86
+digest: 40b20a51
 ---
 
 # Language Policy
 
-Treat language boundaries explicitly. Three language choices are independent — never infer one from another:
+Choose each of the following languages independently; never infer one from another:
 
 1. Conversation language
 2. Source code language
@@ -134,7 +134,7 @@ Do not silently change UI language because the user changed conversation languag
 Take extra care when conversation, code, and UI languages differ. Write naturally in the target language instead of translating word for word:
 
 - Do not write Chinese-influenced Japanese or carry Chinese sentence structures into Japanese.
-- Do not drop implementation English into natural Chinese conversation without a reason.
+- Do not mix English implementation terms into Chinese conversation without a reason.
 - Translate each domain concept consistently across the entire UI.
 - Do not guess Japanese UI terms from Chinese developer chat, or Chinese UI terms from English code identifiers.
 
@@ -148,6 +148,6 @@ User-facing UI copy should prioritize:
 6. Ease of use
 7. Consistency with the rest of the product
 
-UI text should be professional and natural rather than literal or machine-translated in tone.
+Write professional, natural UI text. Avoid wording that sounds like a literal or machine translation.
 
 When an important term or tone choice is uncertain, ask the user instead of inventing a convention.

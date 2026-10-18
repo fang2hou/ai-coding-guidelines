@@ -4,12 +4,12 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: 76f0eba0
+digest: 1eb62db0
 ---
 
 # 変更の規律
 
-自明でない変更は、[運用プロトコル](agent-protocol.md) に加えて、レビューに回す前にこのチェックリストで確認すること。
+自明でない変更をレビューに回す前に、[運用プロトコル](agent-protocol.md)に従い、このチェックリストでも確認すること。
 
 ## 完了チェックリスト
 
@@ -35,7 +35,7 @@ digest: 76f0eba0
 
 レビュー対象は、`tests/e2e/login.spec.ts` が CI で断続的に失敗する問題の修正である。固定の 3 秒待ちを session cookie の待機に置き換える。
 
-まず振る舞いを確認する。不安定なテストは繰り返し通過する必要があり、1 回の成功では不十分である。
+まず振る舞いを確認する。不安定なテストは繰り返し成功することを確認する必要がある。1 回の成功では不十分である。
 
 ```bash
 mise run test e2e/login.spec.ts   # 20 consecutive runs, 20/20 green
@@ -50,7 +50,7 @@ oxlint  ERROR tests/e2e/login.spec.ts:4:3  no-unused-vars  `expect` is never use
 tsc     not reached
 ```
 
-残った import を削除して再実行する。通過時の出力は次のとおりである。
+残った import を削除して再実行する。成功時の出力は次のとおりである。
 
 ```text
 $ mise run check
@@ -76,7 +76,7 @@ $ git commit -m "test(e2e): wait for session cookie instead of fixed sleep"
 prek  ok  format check, lint, secret scanning
 ```
 
-これが「通過」の姿である。チェックはすべて緑、diff は 1 行ずつ確認済み、説明できない変更は残っていない。
+コミット前に、すべてのチェックが成功し、diff を 1 行ずつ確認し、すべての変更を説明できる状態にすること。
 
 ## CI の成功は証明にならない
 

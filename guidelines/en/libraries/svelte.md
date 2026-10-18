@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 1a3def78
+digest: fb475dba
 ---
 
 # Svelte (Svelte 5 + SvelteKit)
@@ -42,7 +42,7 @@ default: production frontends stay on the React stacks selected in
   patterns are the main risk. Mitigate with the official AI tooling, never
   with memory.
 - Smaller component ecosystem; UI work goes through DaisyUI or hand-written components.
-- Fast-moving: pre-release majors ride the `next` dist-tag while `latest`
+- Fast-moving: pre-release majors use the `next` dist-tag while `latest`
   stays on the stable line. Stay on `latest` unless exploring the next major
   is the point of the project.
 

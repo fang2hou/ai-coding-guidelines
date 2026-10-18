@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 7bd8654e
+digest: 06995240
 ---
 
 # Liquid Glass implementation patterns
@@ -94,7 +94,7 @@ struct FloatingTools: View {
 }
 ```
 
-Use `.matchedGeometry` for nearby shapes and `.materialize` for transitions without a suitable nearby shape. Apply `glassEffectTransition` after `glassEffect`. For a static union, apply `glassEffectUnion(id:namespace:)` after each effect: members with matching union identifiers, namespaces, shapes, and glass variants combine. A union identifier groups surfaces; it is not an element’s morph identity.
+Use `.matchedGeometry` for nearby shapes and `.materialize` for transitions without a suitable nearby shape. Apply `glassEffectTransition` after `glassEffect`. For a static union, apply `glassEffectUnion(id:namespace:)` after each effect: members with matching union identifiers, namespaces, shapes, and glass variants combine. Use the union identifier to group surfaces and the morph identity to identify an individual element.
 
 ## Tab bars and accessories
 

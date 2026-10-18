@@ -4,7 +4,7 @@ lang: zh
 version: 4
 source-lang: en
 status: active
-digest: 5fb5b4bc
+digest: ff520ccb
 ---
 
 # Git 工作流
@@ -81,7 +81,7 @@ pnpm-lock.yaml linguist-generated
 
 Markdown 等文档语言默认不计入统计，必须显式添加 `linguist-detectable` 规则。之后新增的文件在显式放行前也不会计入统计。
 
-按目录放行时，目录下的数据文件和工具链文件也会一并计入统计。属性规则以最后一条匹配为准，因此要在放行规则之后补上排除模式：数据文件按扩展名（`*.json`、`*.yaml`、`*.toml`），lockfile 等生成文件用 `linguist-generated`。
+按目录纳入统计时，其中的数据文件和工具链文件也会一并计入。属性规则以最后一条匹配为准，因此要在放行规则之后补上排除模式：数据文件按扩展名（`*.json`、`*.yaml`、`*.toml`），lockfile 等生成文件用 `linguist-generated`。
 
 文件本身不要包含注释；将理由记录在 pull request 或项目文档中。
 
