@@ -72,6 +72,10 @@ function makeFixture(): string {
     const coreBody = [
       "First paragraph of the corpus.",
       "",
+      "```ts",
+      "const answer = 42;",
+      "```",
+      "",
       "## Details",
       "",
       "Cross-directory: [protocol](../practices/agent-protocol.md).",
@@ -101,14 +105,37 @@ void test("builds a trilingual site with rewritten links, TOC, backlinks, and gl
       "sitemap.xml",
       "robots.txt",
       "style.css",
+      "site.js",
       ".nojekyll",
     ]) {
       assert.ok(existsSync(join(root, "dist", name)), `missing dist/${name}`);
     }
 
+    // Visitors can adopt the guidelines from every language homepage without JavaScript.
+    const readme = readFileSync(join(import.meta.dirname, "..", "README.md"), "utf8");
+    const installCommand = "pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines";
+    assert.ok(readme.includes(installCommand), "README installation command diverged");
+    for (const lang of ["en", "zh", "ja"]) {
+      const home = readFileSync(join(root, "dist", lang, "index.html"), "utf8");
+      assert.ok(home.includes(`<code>${installCommand}</code>`), `${lang} install command missing`);
+      assert.ok(
+        home.includes("https://github.com/fang2hou/ai-coding-guidelines"),
+        `${lang} agent instructions missing`,
+      );
+      assert.ok(home.includes("PORTAL.md"), `${lang} agent instructions omit routing`);
+      assert.ok(
+        home.indexOf('id="usage-heading"') < home.indexOf('id="start-heading"'),
+        `${lang} setup must precede reading paths`,
+      );
+    }
+
     const core = readFileSync(
       join(root, "dist", "en", "principles", "core-principles.html"),
       "utf8",
+    );
+    assert.ok(
+      core.includes('href="../index.html#usage-heading"'),
+      "document sidebar must link to setup instructions",
     );
     // Corpus links become relative .html links.
     assert.ok(
@@ -136,9 +163,21 @@ void test("builds a trilingual site with rewritten links, TOC, backlinks, and gl
     // Heading anchors and in-page TOC are generated when 2+ h2 sections exist.
     assert.ok(core.includes('id="details"'), "heading id missing");
     assert.ok(core.includes('class="page-toc"'), "in-page TOC missing");
+    assert.ok(core.includes('class="page-toc-inline"'), "inline TOC missing");
+    assert.ok(
+      core.includes('class="code-block" data-lang="ts"'),
+      "fenced code language label missing",
+    );
+    assert.ok(core.includes("hljs-keyword"), "fenced code syntax highlighting missing");
+    // Machine-readable alternates point at the same page in every tree.
+    assert.ok(core.includes('hreflang="zh"'), "zh hreflang alternate missing");
+    assert.ok(core.includes('hreflang="x-default"'), "x-default hreflang missing");
     assert.ok(core.includes('class="related-section"'), "related guidelines section missing");
-    // Stylesheet is referenced relative to the page depth.
-    assert.ok(core.includes('href="../../style.css"'), "asset prefix wrong");
+    // Stylesheet and behavior script are versioned and relative to the page depth.
+    assert.match(core, /href="\.\.\/\.\.\/style\.css\?v=[a-f0-9]{8}"/);
+    assert.match(core, /src="\.\.\/\.\.\/site\.js\?v=[a-f0-9]{8}"/);
+    assert.ok(core.includes('class="sidebar-shell"'), "sidebar shell missing");
+    assert.ok(core.includes('class="theme-toggle"'), "theme toggle missing");
 
     const zhCore = readFileSync(
       join(root, "dist", "zh", "principles", "core-principles.html"),
@@ -163,8 +202,11 @@ void test("builds a trilingual site with rewritten links, TOC, backlinks, and gl
 
     // Glossary page is rendered per language.
     const zhGlossary = readFileSync(join(root, "dist", "zh", "glossary.html"), "utf8");
-    assert.ok(zhGlossary.includes("三语术语表"), "zh glossary title missing");
+    assert.ok(zhGlossary.includes("术语表"), "zh glossary title missing");
     assert.ok(zhGlossary.includes("工作流程"), "forbidden term table missing");
+
+    const notFound = readFileSync(join(root, "dist", "404.html"), "utf8");
+    assert.ok(notFound.includes('name="robots" content="noindex"'), "404 should be noindex");
 
     const sitemap = readFileSync(join(root, "dist", "sitemap.xml"), "utf8");
     assert.ok(

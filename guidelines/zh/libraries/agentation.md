@@ -1,9 +1,9 @@
 ---
 id: libraries/agentation
 lang: zh
-version: 2
+version: 3
 source-lang: en
-status: draft
+status: active
 digest: d0de66ec
 ---
 

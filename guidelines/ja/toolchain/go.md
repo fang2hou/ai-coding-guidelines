@@ -1,9 +1,9 @@
 ---
 id: toolchain/go
 lang: ja
-version: 2
+version: 3
 source-lang: en
-status: draft
+status: active
 digest: e7b5d471
 ---
 

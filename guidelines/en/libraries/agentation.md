@@ -1,9 +1,9 @@
 ---
 id: libraries/agentation
 lang: en
-version: 2
+version: 3
 source-lang: en
-status: draft
+status: active
 digest: dd7d7a09
 ---
 
