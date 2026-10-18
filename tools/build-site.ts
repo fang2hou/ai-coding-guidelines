@@ -1,11 +1,16 @@
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join, posix, relative, resolve } from "node:path";
 import process from "node:process";
+import hljs from "highlight.js/lib/common";
 import MarkdownIt from "markdown-it";
+import { transform } from "lightningcss";
 
 // Static site builder: renders guidelines/{en,zh,ja} and GLOSSARY.md into dist/
-// as zero-JavaScript HTML with task reading paths, in-page table of contents,
-// bidirectional related-guideline links, and per-language typography.
+// as largely static HTML with task reading paths, in-page table of contents,
+// bidirectional related-guideline links, per-language typography, and a small
+// progressive-enhancement script for theme switching, scroll affordances, and
+// same-origin partial navigation.
 
 const LANGS = ["en", "zh", "ja"] as const;
 type Lang = (typeof LANGS)[number];
@@ -16,21 +21,61 @@ const REPO_URL = "https://github.com/fang2hou/ai-coding-guidelines";
 const SOURCE_BRANCH = "main";
 const DEFAULT_BASE = "https://fang2hou.github.io/ai-coding-guidelines";
 
+let assetVersion = "";
+
 const LANG_NAMES: Record<Lang, string> = { en: "English", zh: "中文", ja: "日本語" };
 const OG_LOCALE: Record<Lang, string> = { en: "en_US", zh: "zh_CN", ja: "ja_JP" };
 
 const FAVICON =
   "data:image/svg+xml," +
   encodeURIComponent(
-    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='#0969da'/><text x='32' y='46' font-family='Georgia,serif' font-size='38' font-weight='700' text-anchor='middle' fill='#fff'>§</text></svg>",
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill-rule='evenodd' fill='#3a8b8f' d='M14 7h36v50L32 44 14 57V7Zm10 13h16v4H24v-4Zm0 10h10v4H24v-4Z'/></svg>",
   );
 
-const BURGER_SVG =
-  '<svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
-const EXTERNAL_SVG =
-  '<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
-const ARROW_SVG =
-  '<svg class="icon arrow-step" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5"/></svg>';
+const LOGO_SVG =
+  '<svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg>';
+
+// Lucide SVG geometry; license retained in tools/lucide-LICENSE and site output.
+const ICON_PATHS = {
+  "chevron-down": '<path d="m6 9 6 6 6-6" />',
+  github:
+    '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" />',
+  monitor:
+    '<rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" />',
+  sun: '<circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" />',
+  moon: '<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />',
+  menu: '<path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" />',
+  x: '<path d="M18 6 6 18" />   <path d="m6 6 12 12" />',
+  "arrow-up-right": '<path d="M7 7h10v10" />   <path d="M7 17 17 7" />',
+  "arrow-right": '<path d="M5 12h14" />   <path d="m12 5 7 7-7 7" />',
+  house:
+    '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />',
+  "book-open":
+    '<path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />',
+  list: '<path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" />',
+  compass:
+    '<circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" />',
+  "sliders-horizontal":
+    '<path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" />',
+  wrench:
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />',
+  blocks:
+    '<path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" />',
+  "panels-top-left":
+    '<rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" />',
+} as const;
+function icon(name: keyof typeof ICON_PATHS, className = "icon", size = 16): string {
+  return `<svg class="${className}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[name]}</svg>`;
+}
+const THEME_ICONS = {
+  auto: icon("monitor", "theme-icon theme-icon-auto"),
+  light: icon("sun", "theme-icon theme-icon-light"),
+  dark: icon("moon", "theme-icon theme-icon-dark"),
+};
+const BURGER_SVG = icon("menu", "icon", 20);
+const CLOSE_SVG = icon("x", "icon", 18);
+const EXTERNAL_SVG = icon("arrow-up-right", "icon", 12);
+const ARROW_SVG = icon("arrow-right", "icon arrow-step", 12);
 
 const RECIPE_CHAINS = [
   {
@@ -107,9 +152,17 @@ interface Ui {
   recipesSub: string;
   recipeTitles: Record<RecipeKey, string>;
   categoriesTitle: string;
+  catalogSub: string;
   categories: Record<string, string>;
   categoryIntro: Record<string, string>;
   home: string;
+  navLabel: string;
+  repoLabel: string;
+  close: string;
+  theme: string;
+  themeAuto: string;
+  themeLight: string;
+  themeDark: string;
   glossaryTitle: string;
   glossaryNav: string;
   glossaryIntro: string;
@@ -133,10 +186,6 @@ interface Ui {
   referencedByLabel: string;
   previous: string;
   next: string;
-  viewOnGithub: string;
-  footerNote: string;
-  versionPrefix: string;
-  active: string;
   draft: string;
   deprecated: string;
   docCountUnit: (n: number) => string;
@@ -145,12 +194,12 @@ interface Ui {
 const UI: Record<Lang, Ui> = {
   en: {
     siteTitle: "AI Coding Guidelines",
-    heroEyebrow: "Trilingual Engineering Corpus",
+    heroEyebrow: "Engineering reference",
     heroTitle: "AI Coding Guidelines",
     description:
-      "Engineering standards for AI coding agents and code reviewers — covering toolchains, development practices, library stacks, and platform patterns in English, Chinese, and Japanese.",
+      "Engineering standards for AI coding agents and code reviewers — covering toolchains, development practices, library stacks, and platform patterns.",
     indexIntro:
-      "Engineering standards for AI coding agents and the people who review their work — covering toolchains, day-to-day practices, library stacks, and platform patterns. Maintained in English, Chinese, and Japanese with identical structure across all three.",
+      "Engineering standards for AI coding agents and the people who review their work — covering toolchains, day-to-day practices, library stacks, and platform patterns, organized for fast task-based reading.",
     startHere: "Start here",
     startSub: "Read these two documents before any task.",
     startDesc: {
@@ -168,6 +217,7 @@ const UI: Record<Lang, Ui> = {
       testingCi: "Testing, Git & CI/CD",
     },
     categoriesTitle: "Browse by category",
+    catalogSub: "Every guideline, grouped by the part of the stack it governs.",
     categories: {
       principles: "Principles",
       practices: "Practices",
@@ -185,10 +235,17 @@ const UI: Record<Lang, Ui> = {
       platforms: "Design and implementation rules for iOS 27 and macOS 27 Liquid Glass.",
     },
     home: "Overview",
+    navLabel: "Guideline index",
+    repoLabel: "GitHub repository",
+    close: "Close menu",
+    theme: "Theme",
+    themeAuto: "Follow system",
+    themeLight: "Light",
+    themeDark: "Dark",
     glossaryTitle: "Shared Glossary",
     glossaryNav: "Glossary",
     glossaryIntro:
-      "Canonical terminology across English, Chinese, and Japanese. Product names and industry-standard terms stay in English across all three editions.",
+      "Canonical terminology used consistently in every edition. Product names and industry-standard terms stay in English.",
     glossaryForbiddenTitle: "Disallowed translations",
     glossaryForbiddenIntro:
       "Checked automatically by the validator so recurring mistranslations cannot return.",
@@ -210,22 +267,18 @@ const UI: Record<Lang, Ui> = {
     referencedByLabel: "Documents that reference this",
     previous: "Previous",
     next: "Next",
-    viewOnGithub: "View Markdown source",
-    footerNote: "Rebuilt automatically on every merge to main.",
-    versionPrefix: "v",
-    active: "Active",
     draft: "Draft",
     deprecated: "Deprecated",
     docCountUnit: (n) => `${n} ${n === 1 ? "guide" : "guides"}`,
   },
   zh: {
     siteTitle: "AI 编码指南",
-    heroEyebrow: "三语工程规范库",
+    heroEyebrow: "工程参考",
     heroTitle: "AI 编码指南",
     description:
-      "面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范，英、中、日三语同步维护。",
+      "面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范。",
     indexIntro:
-      "给 AI Agent 和代码评审者看的工程指南，涵盖工具链、工程实践、技术选型与平台规范。英、中、日三版结构一致，均按各自语言的母语习惯编写。",
+      "给 AI Agent 和代码评审者看的工程指南，涵盖工具链、工程实践、技术选型与平台规范，并按任务场景组织阅读顺序。",
     startHere: "必读基础",
     startSub: "开始任何任务前，先读这两篇。",
     startDesc: {
@@ -243,6 +296,7 @@ const UI: Record<Lang, Ui> = {
       testingCi: "测试、Git 提交与 CI/CD",
     },
     categoriesTitle: "按分类浏览",
+    catalogSub: "全部指南按所属技术层分组，便于逐类浏览。",
     categories: {
       principles: "核心原则",
       practices: "工程实践",
@@ -258,10 +312,17 @@ const UI: Record<Lang, Ui> = {
       platforms: "Apple 平台（iOS / macOS 27 Liquid Glass）的设计与实现规范。",
     },
     home: "总览",
-    glossaryTitle: "三语术语表",
+    navLabel: "指南目录",
+    repoLabel: "GitHub 仓库",
+    close: "关闭菜单",
+    theme: "主题",
+    themeAuto: "跟随系统",
+    themeLight: "浅色",
+    themeDark: "深色",
+    glossaryTitle: "术语表",
     glossaryNav: "术语表",
     glossaryIntro:
-      "英、中、日三版统一使用的标准术语。工具与产品名称（如 mise、pnpm、Vite）及行业通用词（如 monorepo、pull request）在三种语言中均保持英文原文。",
+      "各语言版本统一使用的标准术语。工具与产品名称（如 mise、pnpm、Vite）及行业通用词（如 monorepo、pull request）保持英文原文。",
     glossaryForbiddenTitle: "禁用译法对照",
     glossaryForbiddenIntro: "以下生硬直译由校验器自动拦截，确保不会混入文档：",
     glossaryCols: {
@@ -282,22 +343,18 @@ const UI: Record<Lang, Ui> = {
     referencedByLabel: "引用本文的指南",
     previous: "上一篇",
     next: "下一篇",
-    viewOnGithub: "查看 Markdown 源文件",
-    footerNote: "合并至 main 分支时自动构建发布",
-    versionPrefix: "v",
-    active: "生效中",
     draft: "草稿",
     deprecated: "已废弃",
     docCountUnit: (n) => `${n} 篇`,
   },
   ja: {
     siteTitle: "AI コーディングガイドライン",
-    heroEyebrow: "三言語エンジニアリング基準",
+    heroEyebrow: "エンジニアリングリファレンス",
     heroTitle: "AI コーディングガイドライン",
     description:
-      "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計を英・中・日の三言語で提供します。",
+      "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計を扱います。",
     indexIntro:
-      "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、日々の開発プラクティス、ライブラリ選定、プラットフォーム設計を扱い、英語・中国語・日本語のすべてで同じ内容を自然な表現で提供しています。",
+      "AI エージェントとコードレビュアーのためのエンジニアリングガイドライン。ツールチェーン、日々の開発プラクティス、ライブラリ選定、プラットフォーム設計をタスク別に整理しています。",
     startHere: "まず読むべき基本文書",
     startSub: "タスクに着手する前に、まずこの 2 本から読み始めてください。",
     startDesc: {
@@ -315,6 +372,7 @@ const UI: Record<Lang, Ui> = {
       testingCi: "テスト・Git・CI/CD パイプライン",
     },
     categoriesTitle: "カテゴリ別に探す",
+    catalogSub: "すべてのガイドラインを領域ごとに整理しています。",
     categories: {
       principles: "原則",
       practices: "プラクティス",
@@ -331,10 +389,17 @@ const UI: Record<Lang, Ui> = {
       platforms: "Apple プラットフォーム（iOS / macOS 27 Liquid Glass）のデザインと実装パターン。",
     },
     home: "概要",
-    glossaryTitle: "三言語用語集",
+    navLabel: "ガイドライン一覧",
+    repoLabel: "GitHub リポジトリ",
+    close: "メニューを閉じる",
+    theme: "テーマ",
+    themeAuto: "システムに合わせる",
+    themeLight: "ライト",
+    themeDark: "ダーク",
+    glossaryTitle: "用語集",
     glossaryNav: "用語集",
     glossaryIntro:
-      "英語・中国語・日本語の三言語で統一している標準用語です。製品名（mise、pnpm、Vite など）や業界標準の用語（monorepo、pull request など）は三言語とも英語のまま表記します。",
+      "各言語版で統一している標準用語です。製品名（mise、pnpm、Vite など）や業界標準の用語（monorepo、pull request など）は英語のまま表記します。",
     glossaryForbiddenTitle: "使用しない訳語",
     glossaryForbiddenIntro:
       "不自然な直訳が混入しないよう、検証ツールで機械的にブロックしています。",
@@ -356,10 +421,6 @@ const UI: Record<Lang, Ui> = {
     referencedByLabel: "この文書を参照しているガイドライン",
     previous: "前へ",
     next: "次へ",
-    viewOnGithub: "Markdown ソースを表示",
-    footerNote: "main ブランチへのマージ時に自動ビルド",
-    versionPrefix: "v",
-    active: "有効",
     draft: "ドラフト",
     deprecated: "非推奨",
     docCountUnit: (n) => `${n} 件`,
@@ -379,7 +440,6 @@ interface Doc {
   file: string;
   title: string;
   summary: string;
-  version: string;
   status: string;
   body: string;
   outboundIds: string[];
@@ -532,7 +592,6 @@ function loadDocs(root: string): Map<Lang, Doc[]> {
         file: rel,
         title: heading !== null ? stripInline(heading) : id.slice(id.lastIndexOf("/") + 1),
         summary: truncate(extractSummary(body), 120),
-        version: fm.get("version") ?? "1",
         status: fm.get("status") ?? "active",
         body,
         outboundIds: collectOutboundDocIds(body, rel, lang),
@@ -662,7 +721,22 @@ function resolveHref(href: string, env: unknown): string | null {
 }
 
 function createRenderer(): InstanceType<typeof MarkdownIt> {
-  const md = new MarkdownIt({ html: false, linkify: false, typographer: false, breaks: false });
+  const md = new MarkdownIt({
+    html: false,
+    linkify: false,
+    typographer: false,
+    breaks: false,
+    highlight: (code, lang) => {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
+        } catch {
+          return "";
+        }
+      }
+      return "";
+    },
+  });
 
   md.core.ruler.push("heading_anchors", (state) => {
     const seen = new Map<string, number>();
@@ -712,6 +786,17 @@ function createRenderer(): InstanceType<typeof MarkdownIt> {
     `<div class="table-wrap">` + s.renderToken(t, i, o);
   md.renderer.rules.table_close = (t, i, o, _e, s) => s.renderToken(t, i, o) + `</div>`;
 
+  const defaultFence = md.renderer.rules.fence;
+  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    const rendered =
+      defaultFence !== undefined
+        ? defaultFence(tokens, idx, options, env, self)
+        : self.renderToken(tokens, idx, options);
+    const info = tokens[idx]?.info.trim().split(/\s+/)[0] ?? "";
+    if (info === "") return rendered;
+    return `<div class="code-block" data-lang="${escapeHtml(info)}">${rendered}</div>`;
+  };
+
   return md;
 }
 
@@ -735,9 +820,17 @@ function assetPrefix(outPath: string): string {
 function langNavLinks(current: Lang, hrefFor: (l: Lang) => string): string {
   return LANGS.map((l) => {
     const attrs = l === current ? ` aria-current="true" class="current"` : "";
-    return `<a lang="${l}" href="${hrefFor(l)}"${attrs}>${LANG_NAMES[l]}</a>`;
+    return `<a lang="${l}" hreflang="${l}" href="${hrefFor(l)}"${attrs}>${LANG_NAMES[l]}</a>`;
   }).join("");
 }
+
+function themeToggleHtml(ui: Ui): string {
+  const label = `${ui.theme}: ${ui.themeAuto}`;
+  return `<button class="theme-toggle" type="button" data-mode="auto" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" data-label-theme="${escapeHtml(ui.theme)}" data-label-auto="${escapeHtml(ui.themeAuto)}" data-label-light="${escapeHtml(ui.themeLight)}" data-label-dark="${escapeHtml(ui.themeDark)}">${THEME_ICONS.auto}${THEME_ICONS.light}${THEME_ICONS.dark}</button>`;
+}
+
+const PAGE_SCROLL =
+  '<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>';
 
 function badgeHtml(status: string, ui: Ui): string {
   if (status === "draft") return `<span class="badge badge-draft">${escapeHtml(ui.draft)}</span>`;
@@ -773,17 +866,20 @@ ${card(nav.next, "page-nav-next", ui.next)}
 
 function sidebarHtml(lang: Lang, docs: Doc[], currentOut: string, hasGlossary: boolean): string {
   const ui = UI[lang];
-  const parts: string[] = [`<nav class="side-nav" aria-label="${escapeHtml(ui.home)}">`];
+  const parts: string[] = [`<nav class="side-nav" aria-label="${escapeHtml(ui.navLabel)}">`];
   const homeActive = currentOut === `${lang}/index.html` ? ` aria-current="page"` : "";
   parts.push(`<div class="side-top">`);
   parts.push(
-    `<a class="side-home" href="${relOut(currentOut, `${lang}/index.html`)}"${homeActive}>${escapeHtml(ui.home)}</a>`,
+    `<label class="side-close" for="nav-toggle" title="${escapeHtml(ui.close)}" aria-hidden="true">${CLOSE_SVG}</label>`,
+  );
+  parts.push(
+    `<a class="side-home" href="${relOut(currentOut, `${lang}/index.html`)}"${homeActive}>${icon("house")}<span class="side-label">${escapeHtml(ui.home)}</span></a>`,
   );
   if (hasGlossary) {
     const glossaryOut = `${lang}/glossary.html`;
     const glossaryActive = currentOut === glossaryOut ? ` aria-current="page"` : "";
     parts.push(
-      `<a class="side-home" href="${relOut(currentOut, glossaryOut)}"${glossaryActive}>${escapeHtml(ui.glossaryNav)}</a>`,
+      `<a class="side-home" href="${relOut(currentOut, glossaryOut)}"${glossaryActive}>${icon("book-open")}<span class="side-label">${escapeHtml(ui.glossaryNav)}</span></a>`,
     );
   }
   parts.push(`</div>`);
@@ -791,8 +887,15 @@ function sidebarHtml(lang: Lang, docs: Doc[], currentOut: string, hasGlossary: b
     const inCat = docs.filter((d) => d.category === category);
     if (inCat.length === 0) continue;
     parts.push(`<div class="side-group">`);
+    const categoryIcon = {
+      principles: "compass",
+      practices: "sliders-horizontal",
+      toolchain: "wrench",
+      libraries: "blocks",
+      platforms: "panels-top-left",
+    } as const;
     parts.push(
-      `<h3><span>${escapeHtml(ui.categories[category] ?? category)}</span><span class="side-count">${inCat.length}</span></h3><ul>`,
+      `<h3>${icon(categoryIcon[category])}<span class="side-label">${escapeHtml(ui.categories[category] ?? category)}</span></h3><ul>`,
     );
     for (const doc of inCat) {
       const out = `${lang}/${doc.id}.html`;
@@ -815,16 +918,30 @@ function tocHtml(headings: HeadingEntry[], ui: Ui): string {
   const h2s = headings.filter((h) => h.level === 2);
   if (h2s.length < 2) return "";
   const items = h2s
-    .map((h) => `<li><a href="#${h.slug}">${escapeHtml(h.text)}</a></li>`)
+    .map((h) => `<li><a class="toc-link" href="#${h.slug}">${escapeHtml(h.text)}</a></li>`)
     .join("\n");
   return `<aside class="page-toc" aria-label="${escapeHtml(ui.onThisPage)}">
 <div class="toc-inner">
-<h2>${escapeHtml(ui.onThisPage)}</h2>
+<h2>${icon("list", "icon", 14)}${escapeHtml(ui.onThisPage)}</h2>
 <ul>
 ${items}
 </ul>
 </div>
 </aside>`;
+}
+
+function inlineTocHtml(headings: HeadingEntry[], ui: Ui): string {
+  const h2s = headings.filter((h) => h.level === 2);
+  if (h2s.length < 2) return "";
+  const items = h2s
+    .map((h) => `<li><a class="toc-link" href="#${h.slug}">${escapeHtml(h.text)}</a></li>`)
+    .join("\n");
+  return `<details class="page-toc-inline">
+<summary>${icon("list", "icon", 14)}<span>${escapeHtml(ui.onThisPage)}</span>${icon("chevron-down", "icon toc-chevron", 14)}</summary>
+<ul>
+${items}
+</ul>
+</details>`;
 }
 
 function relatedHtml(
@@ -841,7 +958,7 @@ function relatedHtml(
       .map((target) => {
         const href = relOut(currentOut, `${doc.lang}/${target.id}.html`);
         const catLabel = ui.categories[target.category] ?? target.category;
-        return `<li><a class="related-chip" href="${href}"><span class="related-cat">${escapeHtml(catLabel)}</span><strong>${escapeHtml(target.title)}</strong></a></li>`;
+        return `<li><a class="related-link" href="${href}"><span class="related-cat">${escapeHtml(catLabel)}</span><span class="related-title">${escapeHtml(target.title)}</span></a></li>`;
       })
       .join("\n");
     return `<div class="related-group">
@@ -877,40 +994,60 @@ function pageShell(opts: {
   const homeHref = relOut(opts.outPath, `${opts.lang}/index.html`);
   const hasToc = opts.toc !== undefined && opts.toc !== "";
   const layoutClass = hasToc ? "layout has-toc" : "layout";
+  const alternateHref = (l: Lang): string =>
+    new URL(opts.langNavHref(l), `${opts.base}/${opts.outPath}`).href;
+  const alternateLinks = [
+    ...LANGS.map(
+      (l) => `<link rel="alternate" hreflang="${l}" href="${escapeHtml(alternateHref(l))}">`,
+    ),
+    `<link rel="alternate" hreflang="x-default" href="${escapeHtml(alternateHref("en"))}">`,
+  ].join("\n");
+  const alternateLocales = LANGS.filter((l) => l !== opts.lang)
+    .map((l) => `<meta property="og:locale:alternate" content="${OG_LOCALE[l]}">`)
+    .join("\n");
   return `<!doctype html>
 <html lang="${opts.lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbf1c7">
 <title>${escapeHtml(opts.title)}</title>
 <meta name="description" content="${escapeHtml(opts.description)}">
 <link rel="canonical" href="${canonical}">
+${alternateLinks}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${escapeHtml(ui.siteTitle)}">
 <meta property="og:title" content="${escapeHtml(opts.title)}">
 <meta property="og:description" content="${escapeHtml(opts.description)}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:locale" content="${OG_LOCALE[opts.lang]}">
+${alternateLocales}
 <link rel="icon" href="${FAVICON}">
-<link rel="stylesheet" href="${prefix}style.css">
+<script src="${prefix}site.js?v=${assetVersion}"></script>
+<link rel="stylesheet" href="${prefix}style.css?v=${assetVersion}">
 </head>
 <body>
-<input type="checkbox" id="nav-toggle" class="nav-toggle">
+${PAGE_SCROLL}
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="${escapeHtml(ui.menu)}">
 <a class="skip-link" href="#main">${escapeHtml(ui.skip)}</a>
 <header class="site-header">
 <label class="nav-toggle-label" for="nav-toggle" aria-label="${escapeHtml(ui.menu)}">${BURGER_SVG}</label>
-<a class="site-title" href="${homeHref}"><span class="site-mark" aria-hidden="true">§</span><span>${escapeHtml(ui.siteTitle)}</span></a>
+<a class="site-title" href="${homeHref}" aria-label="${escapeHtml(ui.siteTitle)}">${LOGO_SVG}<span class="site-title-text">${escapeHtml(ui.siteTitle)}</span></a>
 <div class="header-actions">
 <nav class="lang-nav" aria-label="${escapeHtml(ui.language)}">${langNavLinks(opts.lang, opts.langNavHref)}</nav>
-<a class="repo-link" href="${REPO_URL}" rel="noopener"><span>GitHub</span>${EXTERNAL_SVG}</a>
+${themeToggleHtml(ui)}
+<a class="repo-link" href="${REPO_URL}" rel="noopener" aria-label="${escapeHtml(ui.repoLabel)}" title="${escapeHtml(ui.repoLabel)}">${icon("github", "icon", 18)}</a>
 </div>
 </header>
 <label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
 <div class="${layoutClass}">
+<div class="sidebar-shell">
 <aside class="sidebar">
 ${opts.sidebar}
 </aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
 <main class="main" id="main">
 ${opts.content}
 </main>
@@ -935,48 +1072,53 @@ function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
   parts.push(`<article class="doc index-doc">`);
   parts.push(`<header class="index-hero">`);
   parts.push(
-    `<p class="eyebrow">${escapeHtml(ui.heroEyebrow)} · ${escapeHtml(ui.docCountUnit(docs.length))}</p>`,
+    `<p class="kicker">${escapeHtml(ui.heroEyebrow)} · ${escapeHtml(ui.docCountUnit(docs.length))}</p>`,
   );
   parts.push(`<h1>${escapeHtml(ui.heroTitle)}</h1>`);
   parts.push(`<p class="intro">${escapeHtml(ui.indexIntro)}</p>`);
   parts.push(`</header>`);
 
-  parts.push(`<section class="start-here">`);
+  parts.push(`<section class="start-section" aria-labelledby="start-heading">`);
   parts.push(
-    `<div class="section-head"><h2>${escapeHtml(ui.startHere)}</h2><p>${escapeHtml(ui.startSub)}</p></div>`,
+    `<div class="section-head"><h2 id="start-heading">${escapeHtml(ui.startHere)}</h2><p>${escapeHtml(ui.startSub)}</p></div>`,
   );
-  parts.push(`<div class="cards">`);
-  parts.push(
-    `<a class="card card-featured" href="${relOut(currentOut, `${lang}/${core.id}.html`)}"><span class="card-step">01 · ${escapeHtml(ui.categories[core.category] ?? core.category)}</span><strong>${escapeHtml(core.title)}</strong><span>${escapeHtml(ui.startDesc.core)}</span></a>`,
-  );
-  parts.push(
-    `<a class="card card-featured" href="${relOut(currentOut, `${lang}/${protocol.id}.html`)}"><span class="card-step">02 · ${escapeHtml(ui.categories[protocol.category] ?? protocol.category)}</span><strong>${escapeHtml(protocol.title)}</strong><span>${escapeHtml(ui.startDesc.protocol)}</span></a>`,
-  );
-  parts.push(`</div></section>`);
+  parts.push(`<ul class="start-list">`);
+  const startItems = [
+    { doc: core, desc: ui.startDesc.core },
+    { doc: protocol, desc: ui.startDesc.protocol },
+  ];
+  for (const item of startItems) {
+    parts.push(
+      `<li><a class="start-item" href="${relOut(currentOut, `${lang}/${item.doc.id}.html`)}"><span class="start-copy"><strong>${escapeHtml(item.doc.title)}</strong><span>${escapeHtml(item.desc)}</span></span><span class="start-arrow" aria-hidden="true">${ARROW_SVG}</span></a></li>`,
+    );
+  }
+  parts.push(`</ul></section>`);
 
-  parts.push(`<section class="recipes-section">`);
+  parts.push(`<section class="paths-section" aria-labelledby="paths-heading">`);
   parts.push(
-    `<div class="section-head"><h2>${escapeHtml(ui.recipesTitle)}</h2><p>${escapeHtml(ui.recipesSub)}</p></div>`,
+    `<div class="section-head"><h2 id="paths-heading">${escapeHtml(ui.recipesTitle)}</h2><p>${escapeHtml(ui.recipesSub)}</p></div>`,
   );
-  parts.push(`<div class="recipe-grid">`);
+  parts.push(`<div class="path-list">`);
   for (const recipe of RECIPE_CHAINS) {
     const chain = recipe.ids
       .map((id) => byId.get(id))
       .filter((d): d is Doc => d !== undefined)
       .map(
         (d) =>
-          `<a class="recipe-pill" href="${relOut(currentOut, `${lang}/${d.id}.html`)}">${escapeHtml(d.title)}</a>`,
+          `<li><a class="path-link" href="${relOut(currentOut, `${lang}/${d.id}.html`)}">${escapeHtml(d.title)}</a></li>`,
       )
-      .join(ARROW_SVG);
+      .join("\n");
     parts.push(
-      `<div class="recipe-card"><h3>${escapeHtml(ui.recipeTitles[recipe.key])}</h3><div class="recipe-chain">${chain}</div></div>`,
+      `<div class="path-row"><h3>${escapeHtml(ui.recipeTitles[recipe.key])}</h3><ol class="path-steps">${chain}</ol></div>`,
     );
   }
   parts.push(`</div></section>`);
 
+  parts.push(`<section class="catalog-section" aria-labelledby="catalog-heading">`);
   parts.push(
-    `<div class="section-head categories-head"><h2>${escapeHtml(ui.categoriesTitle)}</h2></div>`,
+    `<div class="section-head"><h2 id="catalog-heading">${escapeHtml(ui.categoriesTitle)}</h2><p>${escapeHtml(ui.catalogSub)}</p></div>`,
   );
+  parts.push(`<div class="catalog">`);
   for (const category of CATEGORY_ORDER) {
     const inCat = docs.filter((d) => d.category === category);
     if (inCat.length === 0) continue;
@@ -990,11 +1132,12 @@ function indexBodyHtml(lang: Lang, docs: Doc[], currentOut: string): string {
     for (const doc of inCat) {
       const badge = badgeHtml(doc.status, ui);
       parts.push(
-        `<li><a class="doc-card" href="${relOut(currentOut, `${lang}/${doc.id}.html`)}"><div class="doc-card-head"><strong>${escapeHtml(doc.title)}</strong>${badge}</div><p>${escapeHtml(doc.summary)}</p></a></li>`,
+        `<li><a class="doc-row" href="${relOut(currentOut, `${lang}/${doc.id}.html`)}"><span class="doc-row-head"><strong>${escapeHtml(doc.title)}</strong>${badge}</span><span class="doc-summary">${escapeHtml(doc.summary)}</span></a></li>`,
       );
     }
     parts.push(`</ul></section>`);
   }
+  parts.push(`</div></section>`);
   parts.push(`</article>`);
   return parts.join("\n");
 }
@@ -1049,41 +1192,51 @@ function docBodyHtml(
   const catLabel = ui.categories[doc.category] ?? doc.category;
   const badge = badgeHtml(doc.status, ui);
   const homeHref = relOut(currentOut, `${doc.lang}/index.html`);
+  const rendered = md.render(doc.body, env);
   return `<article class="doc">
 <div class="doc-meta">
 <a class="meta-cat" href="${homeHref}#cat-${doc.category}">${escapeHtml(catLabel)}</a>
-<span class="meta-sep" aria-hidden="true">/</span>
-<span class="meta-version">${escapeHtml(ui.versionPrefix)}${escapeHtml(doc.version)}</span>
 ${badge}
 </div>
-${md.render(doc.body, env)}
+${inlineTocHtml(env.headings, ui)}
+${rendered}
 </article>`;
 }
 
-function footerHtml(sourceUrl: string, ui: Ui): string {
+function footerHtml(ui: Ui): string {
   return `<footer class="site-footer">
-<a href="${sourceUrl}" rel="noopener">${escapeHtml(ui.viewOnGithub)}${EXTERNAL_SVG}</a>
-<span>${escapeHtml(ui.footerNote)}</span>
+<a href="${REPO_URL}" rel="noopener" aria-label="${escapeHtml(ui.repoLabel)}">${escapeHtml(ui.repoLabel)}${EXTERNAL_SVG}</a>
 </footer>`;
 }
 
-function landingShell(title: string, description: string, body: string, base: string): string {
+function landingShell(
+  title: string,
+  description: string,
+  body: string,
+  base: string,
+  canonicalPath = "",
+  noindex = false,
+): string {
+  const canonical = canonicalPath === "" ? `${base}/` : `${base}/${canonicalPath}`;
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbf1c7">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
-<link rel="canonical" href="${base}/">
+<link rel="canonical" href="${canonical}">${noindex ? `\n<meta name="robots" content="noindex">` : ""}
 <meta property="og:type" content="website">
 <meta property="og:title" content="${escapeHtml(title)}">
 <meta property="og:description" content="${escapeHtml(description)}">
+<meta property="og:url" content="${canonical}">
 <link rel="icon" href="${FAVICON}">
-<link rel="stylesheet" href="style.css">
+<script src="site.js?v=${assetVersion}"></script>
+<link rel="stylesheet" href="style.css?v=${assetVersion}">
 </head>
 <body class="landing">
+${PAGE_SCROLL}
 ${body}
 </body>
 </html>
@@ -1093,34 +1246,34 @@ ${body}
 function rootIndexHtml(base: string, docCount: number): string {
   return landingShell(
     "AI Coding Guidelines",
-    "Engineering standards for AI coding agents and code reviewers, in English, Chinese, and Japanese.",
+    "Engineering standards for AI coding agents and code reviewers.",
     `<main class="picker">
-<div class="picker-head">
-<span class="site-mark picker-mark" aria-hidden="true">§</span>
+<div class="picker-theme">${themeToggleHtml(UI.en)}</div>
+<header class="picker-head">
+<span class="picker-mark">${LOGO_SVG}</span>
 <h1>AI Coding Guidelines</h1>
-<p class="picker-sub">Engineering standards for AI coding agents and the people who review their work — ${docCount} guidelines in English, Chinese, and Japanese.</p>
-</div>
-<div class="lang-cards">
-<a class="lang-card" lang="en" href="./en/">
-<span class="lang-tag">EN · ${docCount} guides</span>
-<h2>English</h2>
-<p>Toolchains, engineering practices, library stacks, and platform patterns for AI-assisted development.</p>
-<span class="go">Read in English ${ARROW_SVG}</span>
+<p class="picker-sub">Engineering standards for AI coding agents and the people who review their work. ${docCount} documents for toolchains, practices, library stacks, and platform patterns.</p>
+</header>
+<nav class="lang-list" aria-label="Language editions">
+<a class="lang-row" lang="en" hreflang="en" href="./en/">
+<span class="lang-name">English</span>
+<span class="lang-desc">Toolchains, engineering practices, library stacks, and platform patterns.</span>
+<span class="lang-go">Read ${ARROW_SVG}</span>
 </a>
-<a class="lang-card" lang="zh" href="./zh/">
-<span class="lang-tag">ZH · ${docCount} 篇指南</span>
-<h2>简体中文</h2>
-<p>面向 AI Agent 与代码评审者的工程指南：工具链、工程实践、技术选型与平台规范。</p>
-<span class="go">阅读中文版 ${ARROW_SVG}</span>
+<a class="lang-row" lang="zh" hreflang="zh" href="./zh/">
+<span class="lang-name">简体中文</span>
+<span class="lang-desc">工具链、工程实践、技术选型与平台规范。</span>
+<span class="lang-go">阅读 ${ARROW_SVG}</span>
 </a>
-<a class="lang-card" lang="ja" href="./ja/">
-<span class="lang-tag">JA · ${docCount} 件のガイド</span>
-<h2>日本語</h2>
-<p>AI エージェントとコードレビュアーのためのエンジニアリング基準：ツールチェーン・開発実践・技術選定。</p>
-<span class="go">日本語で読む ${ARROW_SVG}</span>
+<a class="lang-row" lang="ja" hreflang="ja" href="./ja/">
+<span class="lang-name">日本語</span>
+<span class="lang-desc">ツールチェーン、開発プラクティス、ライブラリ選定、プラットフォーム設計。</span>
+<span class="lang-go">読む ${ARROW_SVG}</span>
 </a>
-</div>
-<p class="picker-repo"><a href="${REPO_URL}" rel="noopener"><span>GitHub Repository</span>${EXTERNAL_SVG}</a></p>
+</nav>
+<footer class="picker-foot">
+<a class="picker-repo" href="${REPO_URL}" rel="noopener">GitHub repository ${EXTERNAL_SVG}</a>
+</footer>
 </main>`,
     base,
   );
@@ -1130,16 +1283,23 @@ function notFoundHtml(base: string): string {
   return landingShell(
     "404 · AI Coding Guidelines",
     "Page not found.",
-    `<main class="picker">
+    `<main class="picker notfound">
+<div class="picker-theme">${themeToggleHtml(UI.en)}</div>
 <p class="notfound-code">404</p>
-<h1>Page not found · 页面不存在 · ページが見つかりません</h1>
+<h1>Page not found</h1>
+<p class="picker-sub">This page does not exist. Choose a language edition below.</p>
 <ul class="notfound-links">
 <li lang="en"><a href="${base}/en/">English Overview</a></li>
 <li lang="zh"><a href="${base}/zh/">中文总览</a></li>
 <li lang="ja"><a href="${base}/ja/">日本語概要</a></li>
 </ul>
+<footer class="picker-foot">
+<a class="picker-repo" href="${REPO_URL}" rel="noopener">GitHub repository ${EXTERNAL_SVG}</a>
+</footer>
 </main>`,
     base,
+    "404.html",
+    true,
   );
 }
 
@@ -1161,6 +1321,14 @@ function run(root: string, outDir: string, base: string): number {
     process.stdout.write(`ERROR: no guidelines/ directory under ${root}\n`);
     return 1;
   }
+
+  const siteCss = transform({
+    filename: "site.css",
+    code: readFileSync(join(import.meta.dirname, "site.css")),
+    minify: true,
+  }).code;
+  const siteJs = readFileSync(join(import.meta.dirname, "site.js"));
+  assetVersion = createHash("sha256").update(siteCss).update(siteJs).digest("hex").slice(0, 8);
 
   const loaded = loadDocs(root);
   const byLang = new Map<Lang, Doc[]>();
@@ -1272,9 +1440,7 @@ function run(root: string, outDir: string, base: string): number {
             renderedDoc +
             (related === "" ? "" : "\n" + related) +
             "\n" +
-            pageNavHtml({ prev: nav(-1), next: nav(1) }, ui) +
-            "\n" +
-            footerHtml(`${REPO_URL}/blob/${SOURCE_BRANCH}/${doc.file}`, ui),
+            pageNavHtml({ prev: nav(-1), next: nav(1) }, ui),
         }),
       );
       urls.push(`${base}/${out}`);
@@ -1292,10 +1458,7 @@ function run(root: string, outDir: string, base: string): number {
           base,
           sidebar: sidebarHtml(lang, docs, glossaryOut, true),
           langNavHref: (l: Lang) => relOut(glossaryOut, `${l}/glossary.html`),
-          content:
-            glossaryBodyHtml(lang, glossary) +
-            "\n" +
-            footerHtml(`${REPO_URL}/blob/${SOURCE_BRANCH}/GLOSSARY.md`, ui),
+          content: glossaryBodyHtml(lang, glossary),
         }),
       );
       urls.push(`${base}/${glossaryOut}`);
@@ -1331,7 +1494,7 @@ function run(root: string, outDir: string, base: string): number {
                 ui,
               )) +
           "\n" +
-          footerHtml(`${REPO_URL}/tree/${SOURCE_BRANCH}/guidelines/${lang}`, ui),
+          footerHtml(ui),
       }),
     );
   }
@@ -1341,7 +1504,12 @@ function run(root: string, outDir: string, base: string): number {
   emit("sitemap.xml", sitemapXml(urls));
   emit("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);
   emit(".nojekyll", "");
-  writeFileSync(join(outDir, "style.css"), readFileSync(join(import.meta.dirname, "site.css")));
+  writeFileSync(join(outDir, "style.css"), siteCss);
+  writeFileSync(join(outDir, "site.js"), siteJs);
+  writeFileSync(
+    join(outDir, "lucide-LICENSE.txt"),
+    readFileSync(join(import.meta.dirname, "lucide-LICENSE")),
+  );
   pageCount++;
 
   if (warnings.length > 0) {

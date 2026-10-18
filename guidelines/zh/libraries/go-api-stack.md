@@ -1,9 +1,9 @@
 ---
 id: libraries/go-api-stack
 lang: zh
-version: 1
+version: 2
 source-lang: en
-status: draft
+status: active
 digest: b9395659
 ---
 

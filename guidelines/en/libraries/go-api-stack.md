@@ -1,9 +1,9 @@
 ---
 id: libraries/go-api-stack
 lang: en
-version: 1
+version: 2
 source-lang: en
-status: draft
+status: active
 digest: a9ae0632
 ---
 

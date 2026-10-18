@@ -1,9 +1,9 @@
 ---
 id: toolchain/rust
 lang: ja
-version: 1
+version: 2
 source-lang: en
-status: draft
+status: active
 digest: 2881b141
 ---
 
