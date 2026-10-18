@@ -1217,7 +1217,15 @@ pre code {
   padding: 0.55rem 0.85rem;
   border-top: 1px solid var(--border-soft);
   text-align: left;
-  vertical-align: top;
+  vertical-align: baseline;
+}
+
+/* Table cells already provide spacing and a background for inline identifiers. */
+.doc :is(th, td) > code {
+  padding: 0;
+  background: transparent;
+  font-size: 0.95em;
+  line-height: inherit;
 }
 
 .doc thead th,
