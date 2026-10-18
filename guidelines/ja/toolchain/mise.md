@@ -4,7 +4,7 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: d1ab52d4
+digest: 8d64e7ed
 ---
 
 # mise
@@ -59,7 +59,7 @@ mise は最新版を使い、理由なく古いバージョンに固定しない
 
 `mise tasks` をプロジェクト共通のタスクインターフェースとして使う。
 
-プロジェクトの代表的な処理は、次のようなコマンドで実行できるようにする。
+プロジェクトでよく使うタスクは、次のようなコマンドで実行できるようにする。
 
 ```bash
 mise run dev

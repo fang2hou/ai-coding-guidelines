@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: df453543
+digest: 6a083a6e
 ---
 
 # mise
@@ -41,7 +41,7 @@ mise 管理的工具包括：
 
 mise 只管理运行时和工具二进制文件（如 Node.js、pnpm、uv 和 Lint 工具）。语言包和虚拟环境一律交由各语言自己的包管理器管理：Node.js 用 pnpm，Python 用 uv。禁止用 mise 安装语言包。
 
-这样分工是因为：执行一次 `mise install` 就能装齐整套工具链，无需任何全局安装，同时每种语言仍使用各自生态最成熟的包管理器。
+这样只需执行一次 `mise install` 就能装齐工具链，无需全局安装，各语言的依赖仍由自己的包管理器管理。
 
 ## 版本策略
 
@@ -49,7 +49,7 @@ mise 只管理运行时和工具二进制文件（如 Node.js、pnpm、uv 和 Li
 
 在 `mise.toml` 中固定工具版本时，应使用最新版本（语言指南另有 LTS 要求的除外，例如 Node.js Active LTS）。务必通过 mise 自身（`mise latest <tool>` 或 `mise ls-remote <tool>`）查询最新版本，不要依赖训练数据或外部包仓库。
 
-注意 `pnpm` 版本：npm 中的 `latest` 版本是 11，但实际最新版本已是 12。请通过 mise 查询并固定到 12。
+注意 `pnpm` 版本：npm 中的 `latest` 版本是 11，但实际最新版本已是 12。通过 mise 查询并固定到 12。
 
 ## 工具生命周期
 
@@ -59,7 +59,7 @@ mise 只管理运行时和工具二进制文件（如 Node.js、pnpm、uv 和 Li
 
 把 `mise tasks` 用作统一的项目级任务接口。
 
-项目常用命令应可通过以下形式调用：
+通过以下形式调用项目常用任务：
 
 ```bash
 mise run dev

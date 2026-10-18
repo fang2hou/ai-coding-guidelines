@@ -4,7 +4,7 @@ lang: en
 version: 1
 source-lang: en
 status: draft
-digest: a9ae0632
+digest: 3c1c469c
 ---
 
 # Go API Stack
@@ -30,7 +30,7 @@ Preferred — Use Echo as the Go web framework, with `github.com/go-playground/v
 
 ## Tradeoffs
 
-- Framework contexts invite coupling: `echo.Context` is convenient, and business logic written against it stays trapped in the framework. The layering rule below exists to contain this.
+- Framework contexts invite coupling: `echo.Context` is convenient, and business logic written against it depends on the framework. The layering rule below limits this coupling.
 - The service inherits Echo's upgrade cadence: major-line migrations (v4 to v5) arrive on the framework's schedule, not the project's.
 
 ## Version policy
@@ -71,7 +71,7 @@ func (h *Handler) CreateUser(c echo.Context) error {
 
 ### Middleware
 
-- Middleware (auth, logging, recovery, CORS) lives only in the transport layer. The core layer does not know middleware exists.
+- Middleware (auth, logging, recovery, CORS) lives only in the transport layer. Core modules do not depend on middleware.
 
 ## Works with
 

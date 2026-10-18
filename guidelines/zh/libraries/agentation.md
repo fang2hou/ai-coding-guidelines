@@ -4,7 +4,7 @@ lang: zh
 version: 2
 source-lang: en
 status: draft
-digest: 3dfa5483
+digest: d0de66ec
 ---
 
 # Agentation
@@ -27,7 +27,7 @@ digest: 3dfa5483
 
 ## 优势
 
-- 标注可定位到代码：输出包含 CSS 选择器路径、React 组件树和 computed styles；Agent 可直接检索代码库，无需猜测对应的元素。
+- Agent 可根据标注输出中的 CSS 选择器路径、React 组件树和 computed styles 检索代码库，定位对应元素，无需猜测。
 - Markdown 输出与具体 Agent 无关；接入 MCP 服务器（`agentation-mcp`）后，可用实时工具替代复制粘贴，列出、确认、解决和回复标注。
 - 工具栏是轻量的客户端浮层：不改应用 DOM，也不拦截网络请求。
 - 兼容 React 18+ 和常见 SSR 框架（Next.js 等）。

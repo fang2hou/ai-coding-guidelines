@@ -4,7 +4,7 @@ lang: ja
 version: 2
 source-lang: en
 status: active
-digest: d7c4eddb
+digest: 4b082ac8
 ---
 
 # テスト戦略
@@ -37,7 +37,7 @@ E2E テストの対象は次のとおりである。
 
 実際の利用に近いテストデータを使うこと。本番に近いデータが有効な場合は、事前に匿名化またはサニタイズし、本番環境の機密情報をテストフィクスチャに絶対に含めないこと。
 
-E2E テストの実行時間は短く保つ。[品質ゲート](../toolchain/quality-gates.md)を大幅に遅らせるだけで、それに見合う確信が得られない肥大化した E2E スイートを作らないこと。
+E2E テストの実行時間は短く保つこと。テストを追加する際は、得られる検証の効果が[品質ゲート](../toolchain/quality-gates.md)の実行時間の増加に見合うか確認する。
 
 Playwright を使うプロジェクトでは、`jsPlugins` 配列を介して `eslint-plugin-playwright` を oxlint に読み込むこと。このプラグインは oxlint との適合性テストを公式に受けている。oxlint の JS プラグインサポートは現在アルファ版である。
 

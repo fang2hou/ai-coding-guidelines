@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 25fd055f
+digest: c69f5826
 ---
 
 # mise
@@ -59,7 +59,7 @@ When the project stops using a tool, remove it from `mise.toml` so obsolete tool
 
 Use `mise tasks` as the common project-level task interface.
 
-Typical project commands should be accessible through commands such as:
+Expose common project tasks through commands such as:
 
 ```bash
 mise run dev

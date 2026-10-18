@@ -4,7 +4,7 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: b81a599c
+digest: 1765b36a
 ---
 
 # Liquid Glass 実装パターン
@@ -94,7 +94,7 @@ struct FloatingTools: View {
 }
 ```
 
-近い形状には `.matchedGeometry`、近くに適切な形状がない遷移には `.materialize` を使う。`glassEffectTransition` は `glassEffect` の後に置く。静的に結合する場合は、各効果の後に `glassEffectUnion(id:namespace:)` を適用する。結合用の識別子、名前空間、形状、ガラスのバリアントが一致する要素が 1 つの面になる。結合用の識別子と、モーフィングで要素を識別する ID は役割が異なる。
+近い形状には `.matchedGeometry`、近くに適切な形状がない遷移には `.materialize` を使う。`glassEffectTransition` は `glassEffect` の後に置く。静的に結合する場合は、各効果の後に `glassEffectUnion(id:namespace:)` を適用する。結合用の識別子、名前空間、形状、ガラスのバリアントが一致する要素が 1 つの面になる。結合用の識別子はサーフェスのグループ分けに使い、モーフィングの ID は個々の要素の識別に使う。
 
 ## タブバーとアクセサリビュー
 

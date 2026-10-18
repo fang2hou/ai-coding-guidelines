@@ -4,7 +4,7 @@ lang: ja
 version: 4
 source-lang: en
 status: active
-digest: cdb5fbae
+digest: 398ef82f
 ---
 
 # Tailwind CSS
@@ -48,7 +48,7 @@ digest: cdb5fbae
 ### クラスのリントとソートの相互運用
 
 - `oxlint-tailwindcss` を開発用依存関係としてインストールし、`.oxlintrc.json` の `jsPlugins` 配列から読み込む。
-- `settings.tailwindcss.entryPoint` に、プロジェクトの Tailwind v4 の CSS エントリを指定する。これは、`tailwindcss` をインポートし、`@theme` ブロックでデザイントークンを宣言するファイルである。この設定は必須であり、明示的に指定する。プラグインはファイルシステムを自動検出しない。
+- `settings.tailwindcss.entryPoint` に、プロジェクトの Tailwind v4 の CSS エントリを指定する。これは、`tailwindcss` をインポートし、`@theme` ブロックでデザイントークンを宣言するファイルである。このパスは必ず明示的に指定する。プラグインはファイルシステムからエントリファイルを自動で探さない。
 - `oxlint-tailwindcss/enforce-sort-order` を有効にし、Tailwind 公式のクラス順を適用する。
 - リンターと oxfmt が同じデザインシステムを使うようにする。`.oxfmtrc.json` の `sortTailwindcss.stylesheet` を同じ CSS ファイルに指定する。そうしないと、oxfmt は `tailwindcss` パッケージに同梱された `theme.css` を読み込み、カスタム `@theme` トークンの扱いについてリンターと判定が食い違う。
 

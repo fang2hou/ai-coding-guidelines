@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: b3572682
+digest: 3e5460c7
 ---
 
 # Pipeline
@@ -36,8 +36,8 @@ A flat list of commands becomes hard to read as a pipeline grows. Break it into 
 - Never put a job that runs for only one trigger inside a multi-trigger
   pipeline behind a condition. Give it its own pipeline file scoped to that
   trigger.
-- A skipped job still appears in the run list as skipped, making a clean run
-  look half-failed and forcing readers to guess which trigger fired.
+- A skipped job still appears in the run list as skipped, so readers must
+  distinguish expected skips from failures and infer which trigger fired.
 - Anyone looking at the run list should be able to tell pass from fail at a
   glance: every job in a pipeline must run whenever that pipeline triggers.
 - Merge gates treat a skipped required check as passing, so this rule is for
@@ -48,7 +48,7 @@ A flat list of commands becomes hard to read as a pipeline grows. Break it into 
 
 ## Naming and Readability
 
-Every level of the pipeline must stay explainable from the run log alone.
+The run log must make each pipeline, job, and step understandable on its own.
 
 - Name the pipeline, every job, and every step.
 - Names state responsibilities, not tool invocations: `Validate`, not `cog`.

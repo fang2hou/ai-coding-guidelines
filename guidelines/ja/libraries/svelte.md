@@ -4,7 +4,7 @@ lang: ja
 version: 3
 source-lang: en
 status: active
-digest: 7e9ec906
+digest: aa3dd351
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -28,11 +28,11 @@ digest: 7e9ec906
 - 主要なコンポーネントフレームワークの中でボイラープレートが最も少ない。コンパイル結果は細粒度のリアクティビティを備え、バンドルも小さい。
 - runes によりリアクティブな状態が明示的になり、静的解析できる。
 - SvelteKit は Vite 上にアプリケーション層一式（ルーティング、SSR、フォームアクション）を提供する。
-- 公式の AI ツール群（MCP サーバー、skills、`sv add ai-tools`）が、React より薄い LLM 学習カバレッジを補う。
+- 公式の AI ツール群（MCP サーバー、skills、`sv add ai-tools`）が、LLM 学習データに含まれる例が React より少ない点を補う。
 
 ## トレードオフ
 
-- LLM の学習カバレッジは React より薄く、最大のリスクは Svelte 4 のパターンの幻覚である。緩和には公式 AI ツールを使い、決して記憶に頼らない。
+- LLM の学習データに含まれる例は React より少なく、主なリスクは幻覚によって Svelte 4 の書き方を生成することである。このリスクを抑えるために公式 AI ツールを使い、記憶に頼らない。
 - コンポーネントのエコシステムは小さい。UI 作業は DaisyUI か手書きコンポーネントで行う。
 - 動きが速い。プレリリースのメジャー版は `next` チャネルで配布され、`latest` は常に安定版ラインである。新しいメジャーの探索自体がプロジェクトの目的でない限り、`latest` を維持する。
 
@@ -47,7 +47,7 @@ digest: 7e9ec906
 - `npx sv create` でスキャフォールドし、続けて `npx sv add ai-tools` を実行する — Svelte MCP ツール向けの公式 AGENTS.md インストラクションをプロジェクトに書き込むコマンドである。
 - 公式 MCP サーバー（`npx -y @sveltejs/mcp`）を登録する。構文が曖昧なときは記憶に頼らず、`list-sections` に続けて `get-documentation` を呼ぶ。作成・編集したすべてのコンポーネントに `svelte-autofixer` を実行し、指摘がゼロになるまで修正する。
 - runes モードのみを使い、レガシー構文は決して出力しない。特に：
-  - 算出値には `$derived`（または `$derived.by`）を使う — 状態への代入を `$effect` で行ってはならない。`$effect` は本物の副作用のための抜け道である。
+  - 算出値には `$derived`（または `$derived.by`）を使う — 状態への代入を `$effect` で行ってはならない。`$effect` は実際に副作用が必要な場合の例外的な手段とする。
   - `$state` はリアクティブにすべき値に限定する。API レスポンスのような、丸ごと再代入される大きなオブジェクトには `$state.raw` を使う。
   - props は変わりうるものとして扱う。通常の `let` にコピーせず、`$derived` で派生させる。
   - イベントは `onclick={...}` 属性（`on:click` は禁止）。`createEventDispatcher` の代わりにコールバック props を使う。

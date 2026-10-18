@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: e0b7ebcb
+digest: 3724e60f
 ---
 
 # Liquid Glass 实现模式
@@ -94,7 +94,7 @@ struct FloatingTools: View {
 }
 ```
 
-邻近形状适合 `.matchedGeometry`，没有合适邻近形状的过渡使用 `.materialize`。`glassEffectTransition` 放在 `glassEffect` 之后。静态合并使用 `glassEffectUnion(id:namespace:)`，同样放在各自效果之后；合并标识符、命名空间、形状和玻璃变体一致的成员会合为一个表面。合并标识符只负责表面分组，不是元素变形时的身份标识。
+邻近形状适合 `.matchedGeometry`，没有合适邻近形状的过渡使用 `.materialize`。`glassEffectTransition` 放在 `glassEffect` 之后。静态合并使用 `glassEffectUnion(id:namespace:)`，同样放在各自效果之后；合并标识符、命名空间、形状和玻璃变体一致的成员会合为一个表面。合并标识符用于表面分组，变形时的身份标识用于区分单个元素。
 
 ## 标签栏与附件视图
 

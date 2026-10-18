@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: c43a4acd
+digest: 3142f2de
 ---
 
 # Liquid Glass API 参考
@@ -77,7 +77,7 @@ digest: c43a4acd
 - 分别针对 iOS 27 和 macOS 27 构建并做类型检查。共享 SwiftUI 代码仍须隔离导航、工具栏和框架专有视图的平台差异。
 - 外观修饰符位于 `glassEffect` 之前，身份、合并或过渡修饰符位于之后。相关效果使用容器，并测量实际渲染成本。
 - 操作使用有语义的按钮。`ToolbarItem` 没有 `isHidden` 属性；SwiftUI 通过条件分支包含或移除项目。
-- 在无障碍设置下验证自定义标签、动画、安全区和背景。系统材质适应不等于应用内容已经通过验证。
+- 在无障碍设置下验证自定义标签、动画、安全区和背景。应用内容仍须单独验证；系统只会自动调整材质。
 - 按所选 SDK 复核 Beta 名称，WWDC 示例可能保留早期命名。
 
 ## 官方文档

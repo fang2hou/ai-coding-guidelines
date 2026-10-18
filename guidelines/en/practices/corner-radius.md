@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: 0cafd8f7
+digest: fa5297c0
 ---
 
 # Corner Radius
@@ -27,7 +27,7 @@ digest: 0cafd8f7
 }
 ```
 
-- Every radius in the project comes from this scale. One-off values (`13px`) cannot participate in nesting arithmetic and drift immediately.
+- Every radius in the project comes from this scale. One-off values (`13px`) bypass the shared tokens used to calculate nested radii, making inconsistent values harder to prevent.
 - Adjacent steps must stay distinguishable (≥ 2px apart at these sizes).
 
 ## Single surfaces: continuous corners
@@ -54,9 +54,9 @@ digest: 0cafd8f7
 
 ## Nested surfaces: the concentric rule
 
-- When a layer sits `p` px inside a surface with outer radius `R`, its radius must be `r = R − p` (clamped at 0). Both corners then share one center of curvature, so the inner layer reads as the same surface lifted — not as a sticker on top.
+- When a layer sits `p` px inside a surface with outer radius `R`, its radius must be `r = R − p` (clamped at 0). Both corners then share one center of curvature, making the inner layer look like part of the same surface.
 - The rule applies to hover and pressed overlays (`::before` / `::after`), focus rings, badges on cards, media and controls inside padded surfaces, segmented controls, and tooltips.
-- Mismatched nesting — equal inner and outer radii, or arbitrary inner values — is what makes hover states and badges look like disjoint foreign layers.
+- Equal inner and outer radii, or arbitrary inner values, break concentricity and make hover states and badges look disconnected from the surrounding surface.
 
 ### Common cases
 

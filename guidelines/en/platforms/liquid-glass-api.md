@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 7f7591e8
+digest: 3e47997a
 ---
 
 # Liquid Glass API reference
@@ -77,7 +77,7 @@ Validate the appearance slider, inactive-window styling, and scroll edges as par
 - Build and type-check separately for iOS 27 and macOS 27. Shared SwiftUI code still needs platform separation for navigation, toolbars, and framework-specific views.
 - Apply appearance modifiers before `glassEffect`, then identity, union, or transition modifiers. Use containers for related effects and measure actual rendering cost.
 - Use semantic buttons for actions. `ToolbarItem` has no `isHidden` property; conditionally include the item in SwiftUI.
-- Test custom labels, motion, safe areas, and backgrounds under accessibility settings. System material adaptation does not validate app content.
+- Test custom labels, motion, safe areas, and backgrounds under accessibility settings. Test app content separately; the system only adapts the material.
 - Recheck beta names against the selected SDK; WWDC samples may retain earlier names.
 
 ## Official documentation

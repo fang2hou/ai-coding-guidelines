@@ -4,14 +4,14 @@ lang: en
 version: 7
 source-lang: en
 status: active
-digest: f2715e8a
+digest: fde04ad6
 ---
 
 # Required Project Documentation
 
 Every project must maintain `AGENTS.md`, `README.md`, `DEVELOPMENT.md`, and `CONTRIBUTING.md`. `ARCHITECTURE.md` becomes required once the project has meaningful architectural boundaries. Use the templates under `templates/` as the starting point.
 
-Documentation modes follow [Diátaxis](https://diataxis.fr/): the README orients and routes; `DEVELOPMENT.md` and `CONTRIBUTING.md` carry how-to guidance and reference; `ARCHITECTURE.md` is explanation; `AGENTS.md` is reference for agents. Keep one mode per document — when a document needs another mode, link to the document that owns it instead of mixing it in.
+Documentation modes follow [Diátaxis](https://diataxis.fr/): the README introduces the project and directs readers to the relevant documents; `DEVELOPMENT.md` and `CONTRIBUTING.md` contain how-to guidance and reference material; `ARCHITECTURE.md` is explanation; `AGENTS.md` is reference for agents. Keep one mode per document — when a document needs another mode, link to the document that owns it instead of mixing it in.
 
 ## AGENTS.md
 
@@ -41,8 +41,12 @@ order:
 
 - An identity block: the project name, a one-sentence tagline stating what the project is and for whom, and status badges — followed by one to three plain sentences on the need the project solves. Mention what the project intentionally is not, and its status, only when that saves the reader time.
 - When the project has a visual surface — a UI, CLI output, generated artifacts — a screenshot or a short GIF immediately after the opening.
-- One get-it-running section: `Quick Start` for projects that need a developer, `Usage` for end-user products, `Usage / Quick Start` when both apply. The AI path comes first — the copyable instruction that hands the repository to an AI coding agent via `AGENTS.md` — and the manual steps follow: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses as examples with their expected output.
-- A flexible showcase between the get-it-running section and the reading map, composed only of the blocks the project needs: `Concepts` — the few ideas a reader needs; `Features` — what it does, why it matters, how it differs from the alternatives; `Performance` — a claim in one sentence plus the chart or table that proves it, the measurement environment, and a methodology link, never a claim without numbers; `Experiments` — experimental content, when the project has it. Order the blocks by what the project must prove first, and give each block a standard title and emoji.
+- One section for getting started: use `Quick Start` for projects that need a developer, `Usage` for end-user products, and `Usage / Quick Start` when both apply. Start with a copyable instruction directing an AI coding agent to `AGENTS.md`. Then give the manual steps: prerequisites (toolchain, supported platforms, pinned versions), copy-paste commands, and the expected result. For end-user products, show the two or three most common uses with their expected output.
+- Between the getting-started section and the reading map, include only the sections the project needs. Order them by what the project must demonstrate first, using a standard title and emoji for each:
+  - `Concepts`: the few ideas a reader needs to understand.
+  - `Features`: what the project does, why it matters, and how it differs from alternatives.
+  - `Performance`: a one-sentence claim, a supporting chart or table, the measurement environment, and a methodology link. Every performance claim needs numbers.
+  - `Experiments`: experimental content, if the project has any.
 - A Goal → Read table linking the detail documents below.
 - The license, stated explicitly.
 
@@ -71,7 +75,7 @@ Template: [README.template.md](../../../templates/README.template.md)
 
 Every project must include `DEVELOPMENT.md`.
 
-It is the project's how-to and reference layer: step-by-step workflow first, command and configuration reference after.
+Describe the development workflow step by step, then provide the command and configuration reference.
 
 It should describe:
 
@@ -84,7 +88,7 @@ It should describe:
 - Validation workflow
 - Deployment workflow when relevant
 
-Both humans and AI agents should be able to read it and know how development is done.
+Both humans and AI agents should be able to follow it to develop the project.
 
 Template: [DEVELOPMENT.template.md](../../../templates/DEVELOPMENT.template.md)
 

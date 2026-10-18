@@ -4,7 +4,7 @@ lang: en
 version: 5
 source-lang: en
 status: active
-digest: 19b8ea84
+digest: cc9ad788
 ---
 
 # Agent Operating Protocol
@@ -34,7 +34,7 @@ Do not add an abstraction just because similar code appears twice; add one only 
 
 Agents with persistent memory should record that the project uses these guidelines.
 
-Memory is only a pointer, not the source of truth: the files in the repository always win over remembered rules or summaries.
+Use memory to locate the relevant guidance. Treat repository files as the source of truth; they always take precedence over remembered rules or summaries.
 
 During larger tasks, re-read the relevant guideline sections, especially:
 

@@ -4,7 +4,7 @@ lang: zh
 version: 1
 source-lang: en
 status: draft
-digest: b9395659
+digest: aefca5ee
 ---
 
 # Go API 技术栈
@@ -30,7 +30,7 @@ digest: b9395659
 
 ## 代价
 
-- 框架上下文容易导致耦合：`echo.Context` 虽然方便，直接基于它编写的业务逻辑会被锁在框架内。下面的分层规则用于限制这种耦合。
+- 框架上下文容易导致耦合：`echo.Context` 虽然方便，直接基于它编写的业务逻辑会依赖框架。下面的分层规则用于限制这种耦合。
 - 服务会跟随 Echo 的升级节奏：主版本迁移（v4 到 v5）遵循框架时间表，而不是项目时间表。
 
 ## 版本策略
@@ -71,7 +71,7 @@ func (h *Handler) CreateUser(c echo.Context) error {
 
 ### 中间件
 
-- 中间件（认证、日志、recovery、CORS）仅位于传输层；核心层不感知中间件的存在。
+- 中间件（认证、日志、recovery、CORS）仅位于传输层；核心模块不依赖中间件。
 
 ## 联动
 

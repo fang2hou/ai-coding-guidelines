@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: draft
-digest: b33f9975
+digest: dd7d7a09
 ---
 
 # Agentation
@@ -27,7 +27,7 @@ Situational — enable Agentation during frontend iteration and testing to turn 
 
 ## Strengths
 
-- Annotations resolve to code: the output carries the CSS selector path, React component tree, and computed styles, so the agent greps the codebase instead of guessing which element was meant.
+- Agents can locate annotated elements in code using the CSS selector path, React component tree, and computed styles in the output, without guessing which element was meant.
 - The markdown output is agent-agnostic; the MCP server (`agentation-mcp`) replaces copy-paste with live tools that list, acknowledge, resolve, and reply to annotations.
 - The toolbar is a lightweight client-side overlay: it does not modify the application DOM or intercept network requests.
 - Works with React 18+ and the common SSR frameworks (Next.js and others).

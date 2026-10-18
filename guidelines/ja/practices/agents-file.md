@@ -4,12 +4,12 @@ lang: ja
 version: 1
 source-lang: en
 status: active
-digest: 3a1ecdbd
+digest: f35d6b69
 ---
 
 # AGENTS.md の執筆
 
-`AGENTS.md` はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、1 行ごとに載せる価値がなければならない。
+`AGENTS.md` はリポジトリにおける AI エージェントの入口であり、コードを書く前に読み込む作業コンテキストである。エージェントツールはセッション開始時にこれを読み込み、保持できるコンテキスト量にも上限があるため、各行には作業に必要な内容だけを記載する。
 
 テンプレート：[project-agents.template.md](../../../templates/project-agents.template.md)
 

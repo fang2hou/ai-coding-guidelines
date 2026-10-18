@@ -4,7 +4,7 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: 897f6180
+digest: 096bc0a4
 ---
 
 # Git Workflow
@@ -81,7 +81,7 @@ pnpm-lock.yaml linguist-generated
 
 Prose languages such as Markdown are not counted by default; they need an explicit `linguist-detectable` rule. Files added later stay out of the statistics until they are opted in.
 
-A directory opt-in re-includes everything beneath it — data files and toolchain files that merely live there count as well. Attribute rules resolve by last match, so place re-exclusion patterns after the opt-in rules: data files by extension (`*.json`, `*.yaml`, `*.toml`), lockfiles and other generated files with `linguist-generated`.
+Including a directory in the statistics also includes every file beneath it, including data and toolchain files. Attribute rules resolve by last match, so place re-exclusion patterns after the opt-in rules: data files by extension (`*.json`, `*.yaml`, `*.toml`), lockfiles and other generated files with `linguist-generated`.
 
 Keep the file itself comment-free; record the rationale in the pull request or the project documentation.
 

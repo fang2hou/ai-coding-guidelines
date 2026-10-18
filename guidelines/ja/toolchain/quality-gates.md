@@ -4,7 +4,7 @@ lang: ja
 version: 6
 source-lang: en
 status: active
-digest: ec7f220b
+digest: 6e3a8a44
 ---
 
 # 品質ゲート
@@ -52,7 +52,7 @@ format check -> oxfmt --check / ruff format --check
 typecheck    -> typeCheck を有効にした oxlint（tsgolint）/ tsc --noEmit
 ```
 
-oxlint の `options.typeCheck`（`oxlint-tsgolint` 経由）は TypeScript の診断を報告し、非ゼロの終了コードで失敗する。そのため、typecheck をこの 1 コマンドで担える。型を考慮したリントを設定していない場合は、単体の `tsc --noEmit` を使う。
+oxlint の `options.typeCheck`（`oxlint-tsgolint` 経由）は TypeScript の診断を報告し、非ゼロの終了コードで失敗を示す。そのため、この 1 コマンドで typecheck も実行できる。型を考慮したリントを設定していない場合は、単体の `tsc --noEmit` を使う。
 
 ## チェックを高速に保つ
 

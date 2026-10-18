@@ -4,7 +4,7 @@ lang: zh
 version: 4
 source-lang: en
 status: active
-digest: 49c6f5b7
+digest: e6406739
 ---
 
 # Tailwind CSS
@@ -48,7 +48,7 @@ digest: 49c6f5b7
 ### 类名 Lint 与排序工具互操作
 
 - 将 `oxlint-tailwindcss` 安装为开发依赖，并通过 `.oxlintrc.json` 的 `jsPlugins` 数组加载。
-- 将 `settings.tailwindcss.entryPoint` 指向项目的 Tailwind v4 CSS 入口，即引入 `tailwindcss` 并声明 `@theme` 设计令牌的文件。该设置为必填项，且必须显式指定；插件不会自动探测文件系统。
+- 将 `settings.tailwindcss.entryPoint` 指向项目的 Tailwind v4 CSS 入口，即引入 `tailwindcss` 并声明 `@theme` 设计令牌的文件。必须显式指定该路径；插件不会在文件系统中自动查找入口文件。
 - 启用 `oxlint-tailwindcss/enforce-sort-order`，以采用 Tailwind 官方的类名排序顺序。
 - 将 `.oxfmtrc.json` 中 oxfmt 的 `sortTailwindcss.stylesheet` 指向同一个 CSS 文件，使 Lint 工具和 oxfmt 使用同一设计系统。否则，oxfmt 会读取 `tailwindcss` 包内置的 `theme.css`，在自定义 `@theme` 令牌的排序上与 Lint 工具产生不一致。
 

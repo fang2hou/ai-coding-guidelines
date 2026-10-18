@@ -4,7 +4,7 @@ lang: zh
 version: 3
 source-lang: en
 status: active
-digest: 5edde3f4
+digest: e97847b8
 ---
 
 # 编码标准
@@ -61,7 +61,7 @@ const users = new UserRepository();
 const cache = new Cache();
 ```
 
-不要用布尔参数把第二种行为隐藏在一个函数里；拆成两个函数，让调用处无需查看标志位就能读懂。
+不要用布尔参数在两种行为之间切换。拆成两个函数，让调用处的函数名直接说明要执行哪种行为。
 
 ```ts
 // bad
@@ -155,7 +155,7 @@ if (user.hasActiveSubscription(now)) {
 
 正确性和可读性优先，不要为了未经测量的性能牺牲代码结构。
 
-- 不要做可以避免的分配、复制和重复计算。
+- 避免不必要的内存分配、复制和重复计算。
 - 不要在运行 O(n) 次的循环中执行 O(n) 的工作。
 - 先修正算法或数据结构，再考虑零散的微优化。
 - 只优化度量过的热点路径，且必须有证据支撑。

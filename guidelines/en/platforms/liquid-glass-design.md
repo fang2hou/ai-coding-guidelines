@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: a0f60c4a
+digest: a56342fd
 ---
 
 # Liquid Glass design (Apple platforms)
@@ -50,7 +50,7 @@ The 27 SDK behavior was verified on 2026-09-06 against the available beta. Reche
 
 ## Accessibility and validation
 
-- Test Reduce Transparency, Increase Contrast, Reduce Motion, and Dynamic Type. System materials adapt, but custom foreground colors, animations, and layouts remain the app’s responsibility.
+- Test Reduce Transparency, Increase Contrast, Reduce Motion, and Dynamic Type. System materials adapt to these settings; test and adjust custom foreground colors, animations, and layouts in the app.
 - Check text contrast against the actual background in light and dark appearances. Apple’s HIG specifies 4.5:1 for text up to 17 pt, and 3:1 for larger or bold text. Do not use this threshold as a reason to shrink text or make every label bold.
 - Use semantic controls with accessible names and adequate hit areas. Verify VoiceOver order, keyboard access, and the platform’s pointer or focus behavior. A visual glass reaction does not create button semantics.
 - Reduce custom morphing and spring motion when Reduce Motion is enabled; switching states without animation is a fine fallback.
