@@ -39,6 +39,8 @@ const LOGO_SVG =
 
 // Lucide SVG geometry; license retained in tools/lucide-LICENSE and site output.
 const ICON_PATHS = {
+  globe:
+    '<circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" />',
   copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />',
   terminal: '<path d="M12 19h8" />   <path d="m4 17 6-6-6-6" />',
   "chevron-down": '<path d="m6 9 6 6 6-6" />',
@@ -1092,11 +1094,19 @@ ${PAGE_SCROLL}
 <label class="nav-toggle-label" for="nav-toggle" aria-label="${escapeHtml(ui.menu)}">${BURGER_SVG}</label>
 <a class="site-title" href="${homeHref}" aria-label="${escapeHtml(ui.siteTitle)}">${LOGO_SVG}<span class="site-title-text">${escapeHtml(ui.siteTitle)}</span></a>
 <div class="header-actions">
-<nav class="lang-nav" aria-label="${escapeHtml(ui.language)}">${langNavLinks(opts.lang, opts.langNavHref)}</nav>
+<button class="toc-toggle" type="button" aria-label="${escapeHtml(ui.onThisPage)}" title="${escapeHtml(ui.onThisPage)}" aria-haspopup="dialog" aria-controls="mobile-toc" hidden>${icon("list", "icon", 18)}</button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="${escapeHtml(ui.language)}" title="${escapeHtml(ui.language)}" aria-expanded="false" aria-controls="language-options">${icon("globe", "icon", 18)}</button>
+<nav class="lang-nav" id="language-options" aria-label="${escapeHtml(ui.language)}">${langNavLinks(opts.lang, opts.langNavHref)}</nav>
+</div>
 ${themeToggleHtml(ui)}
 <a class="repo-link" href="${REPO_URL}" rel="noopener" aria-label="${escapeHtml(ui.repoLabel)}" title="${escapeHtml(ui.repoLabel)}">${icon("github", "icon", 18)}</a>
 </div>
 </header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">${escapeHtml(ui.onThisPage)}</h2><button class="toc-dismiss" type="button" aria-label="${escapeHtml(ui.close)}">${CLOSE_SVG}</button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
 <label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
 <div class="${layoutClass}">
 <div class="sidebar-shell">
@@ -1259,12 +1269,12 @@ function docBodyHtml(
   const badge = badgeHtml(doc.status, ui);
   const homeHref = relOut(currentOut, `${doc.lang}/index.html`);
   const rendered = md.render(doc.body, env);
-  return `<article class="doc">
+  return `${inlineTocHtml(env.headings, ui)}
+<article class="doc">
 <div class="doc-meta">
 <a class="meta-cat" href="${homeHref}#cat-${doc.category}">${escapeHtml(catLabel)}</a>
 ${badge}
 </div>
-${inlineTocHtml(env.headings, ui)}
 ${rendered}
 </article>`;
 }
