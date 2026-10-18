@@ -248,6 +248,11 @@
       }
     }
 
+    copyAttribute(next, ".lang-toggle", "aria-label");
+    copyAttribute(next, ".lang-toggle", "title");
+    copyAttribute(next, ".toc-toggle", "aria-label");
+    copyAttribute(next, ".toc-toggle", "title");
+    copyAttribute(next, ".toc-dismiss", "aria-label");
     copyAttribute(next, ".nav-toggle-label", "aria-label");
     copyAttribute(next, "#nav-toggle", "aria-label");
     copyAttribute(next, ".repo-link", "aria-label");
@@ -350,10 +355,10 @@
           }
           if (push) history.pushState({ partial: true }, "", targetUrl.href);
           currentPath = targetUrl.pathname + targetUrl.search;
+          refreshTocSpy();
           scrollToTarget(targetUrl);
           refreshPageScroll();
           refreshSidebar();
-          refreshTocSpy();
           updateLangCurrent(next);
         }
 
@@ -398,14 +403,21 @@
           event.preventDefault();
           if (navigationController) navigationController.abort();
           if (target.href !== window.location.href) history.pushState(null, "", target.href);
-          heading.scrollIntoView({
-            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-              ? "instant"
-              : "smooth",
-            block: "start",
-          });
-          heading.setAttribute("tabindex", "-1");
-          heading.focus({ preventScroll: true });
+          var fromTocDialog = !!link.closest(".toc-dialog");
+          function jumpToHeading() {
+            heading.scrollIntoView({
+              behavior:
+                fromTocDialog || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                  ? "instant"
+                  : "smooth",
+              block: "start",
+            });
+            heading.setAttribute("tabindex", "-1");
+            heading.focus({ preventScroll: true });
+          }
+          // Wait for the modal's scroll lock and focus restoration to finish.
+          if (fromTocDialog) window.setTimeout(jumpToHeading, 0);
+          else jumpToHeading();
         }
       }
       return;
@@ -421,8 +433,10 @@
     var headings = [];
     var links = [];
     var frame = 0;
-
     function collect() {
+      var inlineToc = document.querySelector(".page-toc-inline");
+      var toggle = document.querySelector(".toc-toggle");
+      if (toggle) toggle.hidden = !inlineToc;
       headings = Array.prototype.slice.call(document.querySelectorAll(".doc h2[id]"));
       links = Array.prototype.slice.call(
         document.querySelectorAll(".toc-inner a[href^='#'], .page-toc-inline a[href^='#']"),
@@ -473,6 +487,69 @@
     refresh();
   }
 
+  function initLanguageMenu() {
+    var switcher = document.querySelector(".lang-switch");
+    var toggle = document.querySelector(".lang-toggle");
+    if (!switcher || !toggle) return;
+
+    function close() {
+      switcher.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", function () {
+      var open = switcher.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", function (event) {
+      if (!switcher.contains(event.target) || event.target.closest(".lang-nav a")) close();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && switcher.classList.contains("is-open")) {
+        close();
+        toggle.focus();
+      }
+    });
+    switcher.addEventListener("focusout", function (event) {
+      if (!switcher.contains(event.relatedTarget)) close();
+    });
+    window.addEventListener("resize", close);
+  }
+
+  function initMobileToc() {
+    var dialog = document.querySelector(".toc-dialog");
+    var toggle = document.querySelector(".toc-toggle");
+    if (!dialog || !toggle) return;
+
+    toggle.addEventListener("click", function () {
+      var toc = document.querySelector(".page-toc-inline");
+      if (!toc) return;
+      var drawer = document.querySelector("#nav-toggle");
+      if (drawer) drawer.checked = false;
+      dialog.querySelector("h2").textContent = toc.querySelector("summary span").textContent;
+      dialog.querySelector("nav").replaceChildren(toc.querySelector("ul").cloneNode(true));
+      dialog.showModal();
+      var current = dialog.querySelector(".is-active") || dialog.querySelector("a");
+      if (current) current.focus({ preventScroll: true });
+      if (current) current.scrollIntoView({ block: "nearest", behavior: "instant" });
+    });
+
+    dialog.addEventListener("click", function (event) {
+      var bounds = dialog.getBoundingClientRect();
+      var outside =
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom;
+      if (event.target.closest("a, .toc-dismiss") || (event.target === dialog && outside)) {
+        dialog.close();
+      }
+    });
+    window.matchMedia("(min-width: 1320px)").addEventListener("change", function (event) {
+      if (event.matches && dialog.open) dialog.close();
+    });
+  }
+
   function initNavigation() {
     if (!document.querySelector(".main")) return;
     if (!window.fetch || !window.history || !window.DOMParser) return;
@@ -499,6 +576,8 @@
       initPageScroll();
       initSidebar();
       initTocSpy();
+      initLanguageMenu();
+      initMobileToc();
       initNavigation();
     });
   } else {
@@ -506,6 +585,8 @@
     initPageScroll();
     initSidebar();
     initTocSpy();
+    initLanguageMenu();
+    initMobileToc();
     initNavigation();
   }
 })();
