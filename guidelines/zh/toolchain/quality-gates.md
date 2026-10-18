@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: zh
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: c6886b66
+digest: e8e26934
 ---
 
 # 质量门禁
@@ -24,7 +24,7 @@ digest: c6886b66
 [[repos]]
 repo = "local"
 hooks = [
-  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+  { id = "check", name = "project-check", entry = "mise run check", language = "system", pass_filenames = false },
 ]
 ```
 

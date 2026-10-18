@@ -1,10 +1,10 @@
 ---
 id: libraries/svelte
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: c0b75bee
+digest: d91f1f09
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -34,12 +34,12 @@ digest: c0b75bee
 
 - LLM 训练语料覆盖比 React 薄；主要风险是幻觉出 Svelte 4 的旧模式。用官方 AI 工具缓解，绝不靠记忆。
 - 组件生态较小；UI 工作交给 DaisyUI 或手写组件。
-- 迭代快：SvelteKit 3.0 处于预发布阶段。除非探索新大版本本身就是项目目的，否则留在稳定版线上。
+- 迭代快：预发布的大版本走 `next` 通道，`latest` 始终是稳定版。除非探索新大版本本身就是项目目的，否则留在 `latest` 上。
 
 ## 版本策略
 
 - Svelte 5 最新稳定版。组件级 `await` 表达式需要 `experimental.async`（Svelte ≥ 5.36）——实验特性，不是默认行为。
-- SvelteKit ≥ 2.70 稳定版线；默认不采用 3.0 预发布版。
+- SvelteKit 3.x `latest` 稳定版线；默认不采用 `next` 通道的预发布版。
 - 需要基于类的 UI 套件时用 DaisyUI 5（Tailwind CSS v4 插件模型），否则用手写的原生 CSS 组件。
 
 ## 使用规则

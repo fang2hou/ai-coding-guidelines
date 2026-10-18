@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: ja
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: 70ab7b48
+digest: ec7f220b
 ---
 
 # 品質ゲート
@@ -24,7 +24,7 @@ digest: 70ab7b48
 [[repos]]
 repo = "local"
 hooks = [
-  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+  { id = "check", name = "project-check", entry = "mise run check", language = "system", pass_filenames = false },
 ]
 ```
 
