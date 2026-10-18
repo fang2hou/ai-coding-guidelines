@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fang2hou.github.io/ai-coding-guidelines/sitemap.xml

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>Python ツールチェーン · AI コーディングガイドライン</title>
+<meta name="description" content="Python と TypeScript は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/python.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/python.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/python.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/python.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/python.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Python ツールチェーン · AI コーディングガイドライン">
+<meta property="og:description" content="Python と TypeScript は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/python.html">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="ナビゲーションを開閉">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI コーディングガイドライン"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="このページの目次" title="このページの目次" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="言語" title="言語" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="言語"><a lang="en" hreflang="en" href="../../en/toolchain/python.html">English</a><a lang="zh" hreflang="zh" href="../../zh/toolchain/python.html">中文</a><a lang="ja" hreflang="ja" href="python.html" aria-current="true" class="current">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="テーマ: システムに合わせる" title="テーマ: システムに合わせる" data-label-theme="テーマ" data-label-auto="システムに合わせる" data-label-light="ライト" data-label-dark="ダーク"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub リポジトリ" title="GitHub リポジトリ"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">このページの目次</h2><button class="toc-dismiss" type="button" aria-label="メニューを閉じる"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="ガイドライン一覧">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="メニューを閉じる" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">概要</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">プロジェクトで使う</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">用語集</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">原則</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">プラクティス</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">ツールチェーン</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go ツールチェーン</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html" aria-current="page"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust ツールチェーン</span></a></li>
+<li><a href="typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">ライブラリ</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">プラットフォーム</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>このページの目次</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#適用義務">適用義務</a></li>
+<li><a class="toc-link" href="#バージョン方針">バージョン方針</a></li>
+<li><a class="toc-link" href="#uv">uv</a></li>
+<li><a class="toc-link" href="#ruff">ruff</a></li>
+<li><a class="toc-link" href="#言語の利用ルール">言語の利用ルール</a></li>
+<li><a class="toc-link" href="#プロジェクトレイアウト">プロジェクトレイアウト</a></li>
+<li><a class="toc-link" href="#連携">連携</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">ツールチェーン</a>
+
+</div>
+<h1 id="python-ツールチェーン">Python ツールチェーン<a href="#python-ツールチェーン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="適用義務">適用義務<a href="#適用義務" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Python と TypeScript は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。</p>
+<p>言語の優先順位：</p>
+<ul>
+<li>TypeScript だけの構成で足りる場合はそれを優先する（<a href="typescript.html">TypeScript ツールチェーン</a>を参照）。</li>
+<li>Python バックエンドは、Python を使う明確な利点がある場合にのみ導入する（基準は下記）。</li>
+<li>Go と Rust は、性能が重要な処理やシステム領域に限って使う。導入には明確な理由とユーザーの承認が必要であり、プロジェクトの ADR に記録する。<a href="go.html">Go</a> と <a href="rust.html">Rust</a> を参照。</li>
+</ul>
+<p>特に次の要件がある場合は、Python バックエンドの導入が適している。</p>
+<ul>
+<li>バックエンドのロジックが十分に複雑である</li>
+<li>Python 固有のライブラリが意味のある価値を提供する</li>
+<li>実装の一部を別チームが担当する</li>
+<li>データサイエンスエンジニアがワークフローの一部を変更する必要がある</li>
+<li>エージェントやデータ処理のロジックを、ほかの部分と分けて担当者に任せる必要がある</li>
+</ul>
+<p>たとえば、エージェントのワークフローの一部をデータサイエンスチームが保守することが想定される場合、Python サービスは適切な選択になり得る。</p>
+<p>標準の API フレームワーク、検証、サーバースタックについては <a href="../libraries/python-api-stack.html">Python API スタック</a> を参照。</p>
+<h2 id="バージョン方針">バージョン方針<a href="#バージョン方針" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>既定は Python 3.12 とする。mise はインタープリターと uv 本体を提供し、環境と依存関係（<code>uv.lock</code> など）は uv が管理する。ML エコシステムとモデルの訓練データが追いつくまで、新しい CPython 系列を採用しない。エコシステムのデフォルトが変わった時点で再検討する。</p>
+<p>モデルは学習データに基づいてコードを生成する。そのため、成熟して学習データにも十分含まれるバージョンほど、AI 支援開発でエラーが起きにくい。この原則は <a href="../principles/core-principles.html">中核となるエンジニアリング原則</a> に定められている。</p>
+<p>Python のバージョンは、プロジェクトの mise 設定に固定する。</p>
+<p>どの環境でも同じ依存関係のバージョンが解決されるよう、<code>uv.lock</code> をコミットする。</p>
+<h2 id="uv">uv<a href="#uv" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Python の環境と依存関係は <code>uv</code> で管理し、別の環境管理・パッケージ管理ツールを併用しない。</p>
+<p>標準ワークフロー：</p>
+<ul>
+<li><code>uv init</code>——プロジェクトを開始する。</li>
+<li><code>uv add &lt;package&gt;</code>——ランタイムの依存関係を追加し、ロックファイルを更新する。</li>
+<li><code>uv add --dev &lt;package&gt;</code>——リントやテストツールなど、開発専用の依存関係を追加する。</li>
+<li><code>uv remove &lt;package&gt;</code>——依存関係を削除する。</li>
+<li><code>uv lock --upgrade</code>——ロックされた依存関係のバージョンを更新する。</li>
+<li><code>uv sync</code>——ロックされた環境をインストールする。</li>
+<li><code>uv run &lt;command&gt;</code>——プロジェクト環境内でコマンドを実行する。</li>
+</ul>
+<p>素の <code>python</code> や <code>pip</code> を実行してはならない。どちらもプロジェクト環境とロックファイルを経由しないためである。代わりに <code>uv run python</code> と <code>uv add</code> / <code>uv sync</code> を使う。</p>
+<p>依存関係は <code>pyproject.toml</code> に定義する。<code>uv.lock</code> は生成物であり、手で編集してはならない。</p>
+<p>単独のスクリプトでは、PEP 723 のインラインスクリプトメタデータで依存関係を宣言し、<code>uv run script.py</code> で実行する。</p>
+<div class="code-block" data-lang="python"><pre><code class="language-python"><span class="hljs-comment"># /// script</span>
+<span class="hljs-comment"># requires-python = &quot;&gt;=3.12&quot;</span>
+<span class="hljs-comment"># dependencies = [&quot;httpx&quot;]</span>
+<span class="hljs-comment"># ///</span>
+</code></pre>
+</div><h3 id="採用しない代替案">採用しない代替案<a href="#採用しない代替案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>次のツールは使わない。</p>
+<ul>
+<li>Pipenv</li>
+<li>Poetry</li>
+</ul>
+<h2 id="ruff">ruff<a href="#ruff" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>リント（<code>ruff check</code>）とフォーマット（<code>ruff format</code>）の両方に <code>ruff</code> を使い、品質ゲートに組み込んで <code>pyproject.toml</code> で設定する。ベースラインのルール：</p>
+<div class="code-block" data-lang="toml"><pre><code class="language-toml"><span class="hljs-section">[tool.ruff.lint]</span>
+<span class="hljs-attr">select</span> = [<span class="hljs-string">&quot;E&quot;</span>, <span class="hljs-string">&quot;F&quot;</span>, <span class="hljs-string">&quot;I&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;UP&quot;</span>, <span class="hljs-string">&quot;SIM&quot;</span>]
+</code></pre>
+</div><p>E と F は構文レベルと正しさの問題を検出し、I はインポートを整列させ、B は典型的なバグパターンを検出し、UP は構文を最新化し、SIM は単純化できるコードを検出する。必要に応じてプロジェクト単位でこのベースラインを拡張する。黙って縮小してはならない。</p>
+<h3 id="採用しない代替案-1">採用しない代替案<a href="#採用しない代替案-1" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>次のツールは使わない。</p>
+<ul>
+<li>flake8</li>
+<li>black</li>
+</ul>
+<h2 id="言語の利用ルール">言語の利用ルール<a href="#言語の利用ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>すべての公開関数に型ヒントを付け、引数と戻り値の両方を含める。</li>
+<li>ファイルシステムのパスには <code>os.path</code> ではなく <code>pathlib</code> を使う。</li>
+<li>文字列の組み立てには f-string を使う。新しいコードで <code>%</code> フォーマットや <code>str.format</code> を使わない。</li>
+<li>可変オブジェクトをデフォルト引数にしてはならない（<code>def f(items=[])</code>）。デフォルトには <code>None</code> を使い、コレクションは関数内で生成する。</li>
+<li>ファイル、ソケット、セッション、クライアントなどのリソースは、コンテキストマネージャー（<code>with</code>）で管理する。</li>
+<li>例外を再送出するときは原因を保持し、<code>raise NewError(...) from err</code> とする。</li>
+<li>内部データ構造には <code>dataclasses</code> を使う。Pydantic は検証境界でのみ使う。詳しくは <a href="../libraries/python-api-stack.html">Python API スタック</a> を参照。</li>
+</ul>
+<h2 id="プロジェクトレイアウト">プロジェクトレイアウト<a href="#プロジェクトレイアウト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>パッケージは <code>src/</code> の下（<code>src/&lt;package&gt;/</code>）に置き、<code>tests/</code> はプロジェクトルートで <code>src/</code> と並べる。</li>
+<li>この構成により、パッケージをインストールせずに誤ってインポートすることを防ぐ。</li>
+</ul>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../libraries/python-api-stack.html">Python API スタック</a></li>
+<li><a href="quality-gates.html">品質ゲート</a></li>
+<li><a href="../practices/testing.html">テスト戦略</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="typescript.html"><span class="related-cat">ツールチェーン</span><span class="related-title">TypeScript ツールチェーン</span></a></li>
+<li><a class="related-link" href="go.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Go ツールチェーン</span></a></li>
+<li><a class="related-link" href="rust.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Rust ツールチェーン</span></a></li>
+<li><a class="related-link" href="../libraries/python-api-stack.html"><span class="related-cat">ライブラリ</span><span class="related-title">Python API スタック</span></a></li>
+<li><a class="related-link" href="../principles/core-principles.html"><span class="related-cat">原則</span><span class="related-title">中核となるエンジニアリング原則</span></a></li>
+<li><a class="related-link" href="quality-gates.html"><span class="related-cat">ツールチェーン</span><span class="related-title">品質ゲート</span></a></li>
+<li><a class="related-link" href="../practices/testing.html"><span class="related-cat">プラクティス</span><span class="related-title">テスト戦略</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="../practices/agent-protocol.html"><span class="related-cat">プラクティス</span><span class="related-title">エージェント運用プロトコル</span></a></li>
+<li><a class="related-link" href="../practices/dependencies.html"><span class="related-cat">プラクティス</span><span class="related-title">依存関係の管理方針</span></a></li>
+<li><a class="related-link" href="typescript.html"><span class="related-cat">ツールチェーン</span><span class="related-title">TypeScript ツールチェーン</span></a></li>
+<li><a class="related-link" href="../libraries/python-api-stack.html"><span class="related-cat">ライブラリ</span><span class="related-title">Python API スタック</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="mise.html"><span>前へ · ツールチェーン</span><strong>mise</strong></a>
+<a class="page-nav-next" href="quality-gates.html"><span>次へ · ツールチェーン</span><strong>品質ゲート</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>このページの目次</h2>
+<ul>
+<li><a class="toc-link" href="#適用義務">適用義務</a></li>
+<li><a class="toc-link" href="#バージョン方針">バージョン方針</a></li>
+<li><a class="toc-link" href="#uv">uv</a></li>
+<li><a class="toc-link" href="#ruff">ruff</a></li>
+<li><a class="toc-link" href="#言語の利用ルール">言語の利用ルール</a></li>
+<li><a class="toc-link" href="#プロジェクトレイアウト">プロジェクトレイアウト</a></li>
+<li><a class="toc-link" href="#連携">連携</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

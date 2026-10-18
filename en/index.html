@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>AI Coding Guidelines</title>
+<meta name="description" content="Engineering standards for AI coding agents and code reviewers — covering toolchains, development practices, library stacks, and platform patterns.">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/index.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="AI Coding Guidelines">
+<meta property="og:description" content="Engineering standards for AI coding agents and code reviewers — covering toolchains, development practices, library stacks, and platform patterns.">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="index.html" aria-label="AI Coding Guidelines"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI Coding Guidelines</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="On this page" title="On this page" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="Language" title="Language" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="Language"><a lang="en" hreflang="en" href="index.html" aria-current="true" class="current">English</a><a lang="zh" hreflang="zh" href="../zh/index.html">中文</a><a lang="ja" hreflang="ja" href="../ja/index.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="Theme: Follow system" title="Theme: Follow system" data-label-theme="Theme" data-label-auto="Follow system" data-label-light="Light" data-label-dark="Dark"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub repository" title="GitHub repository"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">On this page</h2><button class="toc-dismiss" type="button" aria-label="Close menu"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Guideline index">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="Close menu" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="index.html" aria-current="page"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">Overview</span></a>
+<a class="side-home" href="index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">Use in your project</span></a>
+<a class="side-home" href="glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">Glossary</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">Principles</span></h3><ul>
+<li><a href="principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">Practices</span></h3><ul>
+<li><a href="practices/agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="practices/agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="practices/architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="practices/change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="practices/coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="practices/corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="practices/dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="practices/language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="practices/pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="practices/project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="practices/security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="practices/testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">Toolchain</span></h3><ul>
+<li><a href="toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="toolchain/go.html"><span class="side-link-text">Go Toolchain</span></a></li>
+<li><a href="toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span></a></li>
+<li><a href="toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">Libraries</span></h3><ul>
+<li><a href="libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span></a></li>
+<li><a href="libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">Platforms</span></h3><ul>
+<li><a href="platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<article class="doc index-doc">
+<header class="index-hero">
+<p class="kicker">Engineering reference · 33 guides</p>
+<h1>AI Coding Guidelines</h1>
+<p class="intro">Engineering standards for AI coding agents and the people who review their work — covering toolchains, day-to-day practices, library stacks, and platform patterns, organized for fast task-based reading.</p>
+</header>
+<section class="usage-section" aria-labelledby="usage-heading"><div class="section-head"><h2 id="usage-heading">Use in your project</h2></div><div class="usage-example"><div class="usage-toolbar"><h3>Install the skill</h3><button class="copy-button" type="button" aria-label="Copy: Install the skill" data-copy-label="Copy" data-copied-label="Copied" data-error-label="Select and copy the text"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span role="status">Copy</span></button></div><p>Run this in your project directory, then ask your agent to apply these guidelines to your task.</p><pre><code>pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines</code></pre></div><div class="usage-example"><div class="usage-toolbar"><h3>Give your agent these instructions</h3><button class="copy-button" type="button" aria-label="Copy: Give your agent these instructions" data-copy-label="Copy" data-copied-label="Copied" data-error-label="Select and copy the text"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span role="status">Copy</span></button></div><p>You can also paste these instructions into your AI coding agent without installing the skill.</p><pre><code>Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for this task.
+Start at PORTAL.md and follow its reading recipes.</code></pre></div></section>
+<section class="start-section" aria-labelledby="start-heading">
+<div class="section-head"><h2 id="start-heading">Start here</h2><p>Read these two documents before any task.</p></div>
+<ul class="start-list">
+<li><a class="start-item" href="principles/core-principles.html"><span class="start-copy"><strong>Core Engineering Principles</strong><span>Why these guidelines exist, and the core maxims behind every rule.</span></span><span class="start-arrow" aria-hidden="true"><svg class="icon arrow-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" />   <path d="m12 5 7 7-7 7" /></svg></span></a></li>
+<li><a class="start-item" href="practices/agent-protocol.html"><span class="start-copy"><strong>Agent Operating Protocol</strong><span>The 12-step operating workflow every agent follows before making a change.</span></span><span class="start-arrow" aria-hidden="true"><svg class="icon arrow-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" />   <path d="m12 5 7 7-7 7" /></svg></span></a></li>
+</ul></section>
+<section class="paths-section" aria-labelledby="paths-heading">
+<div class="section-head"><h2 id="paths-heading">Reading paths by task</h2><p>Pick your task and read the linked guidelines in order.</p></div>
+<div class="path-list">
+<div class="path-row"><h3>TypeScript / frontend project</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/typescript.html">TypeScript Toolchain</a></li>
+<li><a class="path-link" href="libraries/frontend-framework.html">Frontend Framework: Vite vs Next.js</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">Coding Standards</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">Quality Gates</a></li></ol></div>
+<div class="path-row"><h3>TypeScript backend service</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/typescript.html">TypeScript Toolchain</a></li>
+<li><a class="path-link" href="libraries/typescript-backend.html">TypeScript Backend</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">Coding Standards</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">Quality Gates</a></li></ol></div>
+<div class="path-row"><h3>Python API service</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/python.html">Python Toolchain</a></li>
+<li><a class="path-link" href="libraries/python-api-stack.html">Python API Stack</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">Coding Standards</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">Quality Gates</a></li></ol></div>
+<div class="path-row"><h3>UI styling &amp; components</h3><ol class="path-steps"><li><a class="path-link" href="practices/corner-radius.html">Corner Radius</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">Coding Standards</a></li>
+<li><a class="path-link" href="practices/language-policy.html">Language Policy</a></li>
+<li><a class="path-link" href="libraries/tailwindcss.html">Tailwind CSS</a></li></ol></div>
+<div class="path-row"><h3>iOS 27 / macOS 27 Liquid Glass app</h3><ol class="path-steps"><li><a class="path-link" href="platforms/liquid-glass-design.html">Liquid Glass design (Apple platforms)</a></li>
+<li><a class="path-link" href="platforms/liquid-glass-patterns.html">Liquid Glass implementation patterns</a></li>
+<li><a class="path-link" href="platforms/liquid-glass-api.html">Liquid Glass API reference</a></li></ol></div>
+<div class="path-row"><h3>Testing, Git &amp; CI/CD</h3><ol class="path-steps"><li><a class="path-link" href="practices/testing.html">Testing Strategy</a></li>
+<li><a class="path-link" href="toolchain/git.html">Git Workflow</a></li>
+<li><a class="path-link" href="practices/change-discipline.html">Change Discipline</a></li>
+<li><a class="path-link" href="practices/pipeline.html">Pipeline</a></li>
+<li><a class="path-link" href="toolchain/github-actions.html">GitHub Actions</a></li></ol></div>
+</div></section>
+<section class="catalog-section" aria-labelledby="catalog-heading">
+<div class="section-head"><h2 id="catalog-heading">Browse by category</h2><p>Every guideline, grouped by the part of the stack it governs.</p></div>
+<div class="catalog">
+<section class="cat-section" id="cat-principles">
+<div class="cat-header"><h3>Principles</h3><span class="cat-count">1 guide</span></div>
+<p>Core maxims behind every rule: fast validation, fewer choices, fixing root causes.</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="principles/core-principles.html"><span class="doc-row-head"><strong>Core Engineering Principles</strong></span><span class="doc-summary">This guideline sets the engineering standard for AI-assisted idea validation and POC development.</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-practices">
+<div class="cat-header"><h3>Practices</h3><span class="cat-count">12 guides</span></div>
+<p>Day-to-day engineering: code style, testing, documentation, dependencies, CI, and security.</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="practices/agent-protocol.html"><span class="doc-row-head"><strong>Agent Operating Protocol</strong></span><span class="doc-summary">Before making a non-trivial change, an AI agent should:</span></a></li>
+<li><a class="doc-row" href="practices/agents-file.html"><span class="doc-row-head"><strong>Authoring AGENTS.md</strong></span><span class="doc-summary">AGENTS.md is the entry point for AI agents in a repository. Agent tools load it at the start of every session and limit…</span></a></li>
+<li><a class="doc-row" href="practices/architecture-governance.html"><span class="doc-row-head"><strong>Architecture Governance</strong></span><span class="doc-summary">Record architectural boundaries and invariants in ARCHITECTURE.md so AI agents do not break them by accident.</span></a></li>
+<li><a class="doc-row" href="practices/change-discipline.html"><span class="doc-row-head"><strong>Change Discipline</strong></span><span class="doc-summary">Apply this checklist to every non-trivial change before handing it over for review, in addition to the operating protoc…</span></a></li>
+<li><a class="doc-row" href="practices/coding-standards.html"><span class="doc-row-head"><strong>Coding Standards</strong></span><span class="doc-summary">Follow the standard conventions of the language and framework you are using; do not invent custom variants.</span></a></li>
+<li><a class="doc-row" href="practices/corner-radius.html"><span class="doc-row-head"><strong>Corner Radius</strong></span><span class="doc-summary">Corner radius is a system, not a per-element value: define a small token scale once per project and take every radius f…</span></a></li>
+<li><a class="doc-row" href="practices/dependencies.html"><span class="doc-row-head"><strong>Dependency Discipline</strong></span><span class="doc-summary">Before adding a dependency, answer these five questions in order:</span></a></li>
+<li><a class="doc-row" href="practices/language-policy.html"><span class="doc-row-head"><strong>Language Policy</strong></span><span class="doc-summary">Choose each of the following languages independently; never infer one from another:</span></a></li>
+<li><a class="doc-row" href="practices/pipeline.html"><span class="doc-row-head"><strong>Pipeline</strong></span><span class="doc-summary">These rules apply to CI/CD pipelines in any system — GitHub Actions, GitLab CI, CircleCI, Jenkins, or any other. Tool-s…</span></a></li>
+<li><a class="doc-row" href="practices/project-documentation.html"><span class="doc-row-head"><strong>Required Project Documentation</strong></span><span class="doc-summary">Every project must maintain AGENTS.md, README.md, DEVELOPMENT.md, and CONTRIBUTING.md. ARCHITECTURE.md becomes required…</span></a></li>
+<li><a class="doc-row" href="practices/security.html"><span class="doc-row-head"><strong>Security</strong></span><span class="doc-summary">Never commit secrets or sensitive data to the repository, including:</span></a></li>
+<li><a class="doc-row" href="practices/testing.html"><span class="doc-row-head"><strong>Testing Strategy</strong></span><span class="doc-summary">Write tests to verify real behavior, not to pad coverage numbers.</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-toolchain">
+<div class="cat-header"><h3>Toolchain</h3><span class="cat-count">9 guides</span></div>
+<p>Standard tools per language ecosystem — identical on your machine and in CI.</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="toolchain/databricks.html"><span class="doc-row-head"><strong>Databricks</strong></span><span class="doc-summary">Databricks is the preferred platform for data and AI workloads: use Databricks Apps to host applications, and Databrick…</span></a></li>
+<li><a class="doc-row" href="toolchain/git.html"><span class="doc-row-head"><strong>Git Workflow</strong></span><span class="doc-summary">All project commits must follow the Conventional Commits specification.</span></a></li>
+<li><a class="doc-row" href="toolchain/github-actions.html"><span class="doc-row-head"><strong>GitHub Actions</strong></span><span class="doc-summary">GitHub Actions is the standard CI/CD platform and the default choice when the user has not specified a pipeline system.…</span></a></li>
+<li><a class="doc-row" href="toolchain/go.html"><span class="doc-row-head"><strong>Go Toolchain</strong></span><span class="doc-summary">TypeScript and Python are the default languages for AI-assisted development. Go is not a default choice — use it only w…</span></a></li>
+<li><a class="doc-row" href="toolchain/mise.html"><span class="doc-row-head"><strong>mise</strong></span><span class="doc-summary">mise is mandatory for every project.</span></a></li>
+<li><a class="doc-row" href="toolchain/python.html"><span class="doc-row-head"><strong>Python Toolchain</strong></span><span class="doc-summary">Python and TypeScript are the default languages for AI-assisted development because they have the strongest library and…</span></a></li>
+<li><a class="doc-row" href="toolchain/quality-gates.html"><span class="doc-row-head"><strong>Quality Gates</strong></span><span class="doc-summary">Use prek as the standard pre-commit framework.</span></a></li>
+<li><a class="doc-row" href="toolchain/rust.html"><span class="doc-row-head"><strong>Rust Toolchain</strong></span><span class="doc-summary">TypeScript and Python are the default languages for AI-assisted development. Rust is not a default choice — use it only…</span></a></li>
+<li><a class="doc-row" href="toolchain/typescript.html"><span class="doc-row-head"><strong>TypeScript Toolchain</strong></span><span class="doc-summary">TypeScript and Python are the default languages for AI-assisted development because they have the strongest library and…</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-libraries">
+<div class="cat-header"><h3>Libraries</h3><span class="cat-count">8 guides</span></div>
+<p>Default frameworks and libraries for web frontends, HTTP APIs, and AI features.</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="libraries/agentation.html"><span class="doc-row-head"><strong>Agentation</strong></span><span class="doc-summary">Situational — enable Agentation during frontend iteration and testing to turn visual feedback into structured context f…</span></a></li>
+<li><a class="doc-row" href="libraries/frontend-framework.html"><span class="doc-row-head"><strong>Frontend Framework: Vite vs Next.js</strong></span><span class="doc-summary">Preferred — Vite is the default frontend framework; choose Next.js only when the project genuinely needs full-stack Rea…</span></a></li>
+<li><a class="doc-row" href="libraries/go-api-stack.html"><span class="doc-row-head"><strong>Go API Stack</strong></span><span class="doc-summary">Preferred — Use Echo as the Go web framework, with github.com/go-playground/validator/v10 for request validation. This…</span></a></li>
+<li><a class="doc-row" href="libraries/python-api-stack.html"><span class="doc-row-head"><strong>Python API Stack</strong></span><span class="doc-summary">Preferred — FastAPI + Pydantic + Uvicorn is the standard Python API stack; adopt all three together, not as separate pi…</span></a></li>
+<li><a class="doc-row" href="libraries/svelte.html"><span class="doc-row-head"><strong>Svelte (Svelte 5 + SvelteKit)</strong></span><span class="doc-summary">Situational — Svelte 5 with SvelteKit is approved for small personal and experimental projects where developer enjoymen…</span></a></li>
+<li><a class="doc-row" href="libraries/tailwindcss.html"><span class="doc-row-head"><strong>Tailwind CSS</strong></span><span class="doc-summary">Situational — Tailwind CSS is used when the project already runs Tailwind or its component kit requires it. Native CSS…</span></a></li>
+<li><a class="doc-row" href="libraries/typescript-backend.html"><span class="doc-row-head"><strong>TypeScript Backend</strong></span><span class="doc-summary">Preferred — Use Hono for TypeScript backend services. The default runtime is Node.js on the Active LTS line; Web-standa…</span></a></li>
+<li><a class="doc-row" href="libraries/vercel-ai-sdk.html"><span class="doc-row-head"><strong>Vercel AI SDK</strong></span><span class="doc-summary">Situational — use the Vercel AI SDK only when a Next.js project directly uses its streaming or UI integration features.</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-platforms">
+<div class="cat-header"><h3>Platforms</h3><span class="cat-count">3 guides</span></div>
+<p>Design and implementation rules for iOS 27 and macOS 27 Liquid Glass.</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="platforms/liquid-glass-api.html"><span class="doc-row-head"><strong>Liquid Glass API reference</strong></span><span class="doc-summary">Reference for iOS 27 and native macOS 27 apps built with Xcode 27, with deployment targets set to 27.0. Verified on 202…</span></a></li>
+<li><a class="doc-row" href="platforms/liquid-glass-design.html"><span class="doc-row-head"><strong>Liquid Glass design (Apple platforms)</strong></span><span class="doc-summary">For new iOS 27 and native macOS 27 apps, adopt Liquid Glass through system navigation and controls first. Add custom gl…</span></a></li>
+<li><a class="doc-row" href="platforms/liquid-glass-patterns.html"><span class="doc-row-head"><strong>Liquid Glass implementation patterns</strong></span><span class="doc-summary">Use these recipes for iOS 27 and native macOS 27 apps built with Xcode 27. Set the matching deployment target to 27.0.…</span></a></li>
+</ul></section>
+</div></section>
+</article>
+<nav class="page-nav" aria-label="Previous / Next">
+<span class="page-nav-empty"></span>
+<a class="page-nav-next" href="principles/core-principles.html"><span>Next · Principles</span><strong>Core Engineering Principles</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub repository">GitHub repository<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10" />   <path d="M7 17 17 7" /></svg></a>
+</footer>
+</main>
+
+</div>
+</body>
+</html>

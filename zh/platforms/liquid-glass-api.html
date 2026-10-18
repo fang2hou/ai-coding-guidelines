@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>Liquid Glass API 参考 · AI 编码指南</title>
+<meta name="description" content="面向使用 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，最低系统版本均设为 27.0。核验日期为 2026-09-06，依据 Apple 文档和 Xcode 27 Beta 构建 27A5252f（iPhoneO…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/platforms/liquid-glass-api.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-api.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/platforms/liquid-glass-api.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-api.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-api.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="Liquid Glass API 参考 · AI 编码指南">
+<meta property="og:description" content="面向使用 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，最低系统版本均设为 27.0。核验日期为 2026-09-06，依据 Apple 文档和 Xcode 27 Beta 构建 27A5252f（iPhoneO…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/platforms/liquid-glass-api.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="展开导航菜单">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI 编码指南"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI 编码指南</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="本页目录" title="本页目录" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="语言" title="语言" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="语言"><a lang="en" hreflang="en" href="../../en/platforms/liquid-glass-api.html">English</a><a lang="zh" hreflang="zh" href="liquid-glass-api.html" aria-current="true" class="current">中文</a><a lang="ja" hreflang="ja" href="../../ja/platforms/liquid-glass-api.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="主题: 跟随系统" title="主题: 跟随系统" data-label-theme="主题" data-label-auto="跟随系统" data-label-light="浅色" data-label-dark="深色"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub 仓库" title="GitHub 仓库"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">本页目录</h2><button class="toc-dismiss" type="button" aria-label="关闭菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="指南目录">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="关闭菜单" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">总览</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">在项目中使用</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">术语表</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">核心原则</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">工程实践</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">工具链</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">库与框架</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">平台规范</span></h3><ul>
+<li><a href="liquid-glass-api.html" aria-current="page"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>本页目录</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#范围与核验">范围与核验</a></li>
+<li><a class="toc-link" href="#swiftui-玻璃-api">SwiftUI 玻璃 API</a></li>
+<li><a class="toc-link" href="#swiftui-导航与布局">SwiftUI 导航与布局</a></li>
+<li><a class="toc-link" href="#uikit-与-appkit">UIKit 与 AppKit</a></li>
+<li><a class="toc-link" href="#自适应导航与窗口行为">自适应导航与窗口行为</a></li>
+<li><a class="toc-link" href="#实现检查">实现检查</a></li>
+<li><a class="toc-link" href="#官方文档">官方文档</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">平台规范</a>
+
+</div>
+<h1 id="liquid-glass-api-参考">Liquid Glass API 参考<a href="#liquid-glass-api-参考" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="范围与核验">范围与核验<a href="#范围与核验" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>面向使用 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，最低系统版本均设为 27.0。核验日期为 2026-09-06，依据 Apple 文档和 Xcode 27 Beta 构建 <code>27A5252f</code>（<code>iPhoneOS27.0.sdk</code>、<code>MacOSX27.sdk</code>）。SDK 声明决定平台可用性，运行中的系统决定渲染和交互行为。Beta 声明仍可能变化。</p>
+<p>下表只说明这两个平台的支持情况，不记录历史引入版本。iOS 使用 UIKit，原生 macOS 使用 AppKit。平台专有 API 通过 <code>#if os(iOS)</code>／<code>#if os(macOS)</code> 或平台专用文件隔离。</p>
+<h2 id="swiftui-玻璃-api">SwiftUI 玻璃 API<a href="#swiftui-玻璃-api" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>本节效果和样式在 iOS 27 与 macOS 27 均可用。导入 <code>SwiftUI</code> 即可；部分声明位于其依赖 <code>SwiftUICore</code> 中。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>可用性与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>glassEffect(_:in:)</code></td>
+<td>在内容后方添加玻璃；默认 <code>.regular</code> 和胶囊形</td>
+</tr>
+<tr>
+<td><code>Glass.regular</code> / <code>.clear</code> / <code>.identity</code></td>
+<td>自适应／清透／无玻璃效果</td>
+</tr>
+<tr>
+<td><code>Glass.tint(_:)</code> / <code>.interactive(_:)</code></td>
+<td>配置着色与交互反馈，包括 macOS 鼠标交互</td>
+</tr>
+<tr>
+<td><code>GlassEffectContainer(spacing:content:)</code></td>
+<td>共同渲染相关效果；spacing 控制融合距离</td>
+</tr>
+<tr>
+<td><code>glassEffectID(_:in:)</code></td>
+<td>命名空间内用于变形的稳定元素身份</td>
+</tr>
+<tr>
+<td><code>glassEffectUnion(id:namespace:)</code></td>
+<td>合并同一命名空间和合并 ID 下的相同形状与变体</td>
+</tr>
+<tr>
+<td><code>glassEffectTransition(_:)</code></td>
+<td><code>.matchedGeometry</code>、<code>.materialize</code> 或 <code>.identity</code></td>
+</tr>
+<tr>
+<td><code>.buttonStyle(.glass)</code> / <code>.glassProminent</code> / <code>.glass(.clear)</code></td>
+<td>系统玻璃按钮样式；保留操作语义与角色</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="swiftui-导航与布局">SwiftUI 导航与布局<a href="#swiftui-导航与布局" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>可用性与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tabBarMinimizeBehavior(_:)</code></td>
+<td>iOS：滚动时收起 iPhone 标签栏</td>
+</tr>
+<tr>
+<td><code>ToolbarSpacer(_:placement:)</code> / <code>sharedBackgroundVisibility(_:)</code></td>
+<td>两者：工具栏分组与背景控制</td>
+</tr>
+<tr>
+<td><code>scrollEdgeEffectStyle(_:for:)</code> / <code>scrollEdgeEffectHidden(_:for:)</code></td>
+<td>两者：按滚动边缘配置样式或可见性</td>
+</tr>
+<tr>
+<td><code>backgroundExtensionEffect()</code></td>
+<td>两者：将背景内容延展到相邻界面下方</td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(content:)</code> / <code>tabViewBottomAccessoryPlacement</code></td>
+<td>iOS：附件适应 <code>.inline</code>／<code>.expanded</code>／<code>nil</code></td>
+</tr>
+<tr>
+<td><code>tabViewBottomAccessory(isEnabled:content:)</code></td>
+<td>iOS：动态显示或隐藏附件</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="uikit-与-appkit">UIKit 与 AppKit<a href="#uikit-与-appkit" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>可用性与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UIGlassEffect(style:)</code> / <code>UIGlassContainerEffect</code></td>
+<td>iOS：在 <code>UIVisualEffectView</code> 中创建单个或成组效果，配置 <code>tintColor</code> 和 <code>isInteractive</code></td>
+</tr>
+<tr>
+<td><code>UIButton.Configuration.glass()</code> / <code>.prominentGlass()</code> / <code>.clearGlass()</code> / <code>.prominentClearGlass()</code></td>
+<td>iOS：系统按钮配置</td>
+</tr>
+<tr>
+<td><code>UIScrollView.topEdgeEffect</code> / <code>.bottomEdgeEffect</code></td>
+<td>iOS：配置各边缘效果的 <code>style</code> 和 <code>isHidden</code></td>
+</tr>
+<tr>
+<td><code>UIScrollEdgeElementContainerInteraction</code> / <code>UIBackgroundExtensionView</code></td>
+<td>iOS：注册自定义覆盖层／延展背景</td>
+</tr>
+<tr>
+<td><code>UIBarButtonItem.hidesSharedBackground</code> / <code>.isHidden</code></td>
+<td>iOS：隐藏共享背景／项目本身</td>
+</tr>
+<tr>
+<td><code>UITabBarController.tabBarMinimizeBehavior</code></td>
+<td>iOS：UIKit 标签栏最小化</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView</code> / <code>NSGlassEffectContainerView</code></td>
+<td>macOS：通过 <code>contentView</code> 和 <code>spacing</code> 配置自定义玻璃与分组</td>
+</tr>
+<tr>
+<td><code>NSButton.BezelStyle.glass</code> / <code>NSBackgroundExtensionView</code></td>
+<td>macOS：玻璃按钮／背景延展</td>
+</tr>
+<tr>
+<td><code>NSGlassEffectView.effectIsInteractive</code></td>
+<td>macOS：鼠标交互反馈</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="自适应导航与窗口行为">自适应导航与窗口行为<a href="#自适应导航与窗口行为" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>可用性与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>toolbarMinimizationBehavior(_:for:)</code></td>
+<td>iOS 导航栏：最小化策略；使用当前名称，不使用 Beta 旧名 <code>toolbarMinimizeBehavior</code></td>
+</tr>
+<tr>
+<td><code>toolbarMinimizationSafeAreaAdjustment(_:for:)</code> / <code>toolbarMinimizationRestoration(_:for:)</code></td>
+<td>iOS 导航栏：安全区调整和恢复策略</td>
+</tr>
+<tr>
+<td><code>UINavigationItem.navigationBarMinimization</code></td>
+<td>iOS：<code>UIBarMinimization</code> 值包含 <code>minimizationBehavior</code>、<code>safeAreaAdjustment</code> 和 <code>restorationBehavior</code></td>
+</tr>
+<tr>
+<td><code>TabRole.prominent</code> / <code>UITabBarController.prominentTabIdentifier</code></td>
+<td>iOS：指定突出显示的标签</td>
+</tr>
+<tr>
+<td><code>UITabBarController.Sidebar.preferredPlacement</code></td>
+<td>iOS：空间允许时选择侧边栏布局，检查 <code>isAvailable</code></td>
+</tr>
+<tr>
+<td><code>ToolbarContent.visibilityPriority(_:)</code></td>
+<td>两者：工具栏溢出优先级</td>
+</tr>
+<tr>
+<td><code>ToolbarOverflowMenu</code> / <code>.topBarPinnedTrailing</code></td>
+<td>仅 iOS；原生 macOS 不可用</td>
+</tr>
+<tr>
+<td><code>toolbarColorScheme(_:for:)</code> / <code>toolbarVisibility(_:for:)</code> with <code>.statusBar</code></td>
+<td>iOS：状态栏样式和可见性</td>
+</tr>
+<tr>
+<td><code>appearsActive</code></td>
+<td>两者：自定义内容适应窗口活动状态</td>
+</tr>
+<tr>
+<td><code>UIMenuElement.preferredImageVisibility</code></td>
+<td>iOS：按需覆盖菜单图标的默认可见性</td>
+</tr>
+</tbody>
+</table>
+</div><p>界面验收应覆盖外观滑块、非活动窗口样式和滚动边缘。UIKit 应用必须使用场景生命周期并提供启动屏幕。布局须适应可调整大小的 iPhone 窗口，保留重要操作入口。</p>
+<h2 id="实现检查">实现检查<a href="#实现检查" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>分别针对 iOS 27 和 macOS 27 构建并做类型检查。共享 SwiftUI 代码仍须隔离导航、工具栏和框架专有视图的平台差异。</li>
+<li>外观修饰符位于 <code>glassEffect</code> 之前，身份、合并或过渡修饰符位于之后。相关效果使用容器，并测量实际渲染成本。</li>
+<li>操作使用有语义的按钮。<code>ToolbarItem</code> 没有 <code>isHidden</code> 属性；SwiftUI 通过条件分支包含或移除项目。</li>
+<li>在无障碍设置下验证自定义标签、动画、安全区和背景。应用内容仍须单独验证；系统只会自动调整材质。</li>
+<li>按所选 SDK 复核 Beta 名称，WWDC 示例可能保留早期命名。</li>
+</ul>
+<h2 id="官方文档">官方文档<a href="#官方文档" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/glass">Glass</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/glasseffectcontainer">GlassEffectContainer</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views">Applying Liquid Glass to custom views</a></li>
+<li><a href="https://developer.apple.com/documentation/uikit/uiglasseffect">UIGlassEffect</a></li>
+<li><a href="https://developer.apple.com/documentation/appkit/nsglasseffectview">NSGlassEffectView</a></li>
+<li><a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-27-release-notes">iOS and iPadOS 27 release notes</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/278/">Modernize your UIKit app — WWDC26</a></li>
+</ul>
+<p>设计见 <a href="liquid-glass-design.html">Liquid Glass 设计</a>，实现见 <a href="liquid-glass-patterns.html">Liquid Glass 实现模式</a>。</p>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">平台规范</span><span class="related-title">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a class="related-link" href="liquid-glass-patterns.html"><span class="related-cat">平台规范</span><span class="related-title">Liquid Glass 实现模式</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">平台规范</span><span class="related-title">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a class="related-link" href="liquid-glass-patterns.html"><span class="related-cat">平台规范</span><span class="related-title">Liquid Glass 实现模式</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="../libraries/vercel-ai-sdk.html"><span>上一篇 · 库与框架</span><strong>Vercel AI SDK</strong></a>
+<a class="page-nav-next" href="liquid-glass-design.html"><span>下一篇 · 平台规范</span><strong>Liquid Glass 设计（Apple 平台）</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>本页目录</h2>
+<ul>
+<li><a class="toc-link" href="#范围与核验">范围与核验</a></li>
+<li><a class="toc-link" href="#swiftui-玻璃-api">SwiftUI 玻璃 API</a></li>
+<li><a class="toc-link" href="#swiftui-导航与布局">SwiftUI 导航与布局</a></li>
+<li><a class="toc-link" href="#uikit-与-appkit">UIKit 与 AppKit</a></li>
+<li><a class="toc-link" href="#自适应导航与窗口行为">自适应导航与窗口行为</a></li>
+<li><a class="toc-link" href="#实现检查">实现检查</a></li>
+<li><a class="toc-link" href="#官方文档">官方文档</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

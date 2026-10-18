@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>Liquid Glass implementation patterns · AI Coding Guidelines</title>
+<meta name="description" content="Use these recipes for iOS 27 and native macOS 27 apps built with Xcode 27. Set the matching deployment target to 27.0.…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Coding Guidelines">
+<meta property="og:title" content="Liquid Glass implementation patterns · AI Coding Guidelines">
+<meta property="og:description" content="Use these recipes for iOS 27 and native macOS 27 apps built with Xcode 27. Set the matching deployment target to 27.0.…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="Toggle navigation"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI Coding Guidelines"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI Coding Guidelines</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="On this page" title="On this page" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="Language" title="Language" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="Language"><a lang="en" hreflang="en" href="liquid-glass-patterns.html" aria-current="true" class="current">English</a><a lang="zh" hreflang="zh" href="../../zh/platforms/liquid-glass-patterns.html">中文</a><a lang="ja" hreflang="ja" href="../../ja/platforms/liquid-glass-patterns.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="Theme: Follow system" title="Theme: Follow system" data-label-theme="Theme" data-label-auto="Follow system" data-label-light="Light" data-label-dark="Dark"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub repository" title="GitHub repository"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">On this page</h2><button class="toc-dismiss" type="button" aria-label="Close menu"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="Guideline index">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="Close menu" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">Overview</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">Use in your project</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">Glossary</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">Principles</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">Core Engineering Principles</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">Practices</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent Operating Protocol</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">Authoring AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">Architecture Governance</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">Change Discipline</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">Coding Standards</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">Corner Radius</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">Dependency Discipline</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">Language Policy</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">Pipeline</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">Required Project Documentation</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">Security</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">Testing Strategy</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">Toolchain</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git Workflow</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go Toolchain</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python Toolchain</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">Quality Gates</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust Toolchain</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript Toolchain</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">Libraries</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">Frontend Framework: Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API Stack</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API Stack</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte (Svelte 5 + SvelteKit)</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript Backend</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">Platforms</span></h3><ul>
+<li><a href="liquid-glass-api.html"><span class="side-link-text">Liquid Glass API reference</span></a></li>
+<li><a href="liquid-glass-design.html"><span class="side-link-text">Liquid Glass design (Apple platforms)</span></a></li>
+<li><a href="liquid-glass-patterns.html" aria-current="page"><span class="side-link-text">Liquid Glass implementation patterns</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>On this page</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#scope">Scope</a></li>
+<li><a class="toc-link" href="#start-with-system-components">Start with system components</a></li>
+<li><a class="toc-link" href="#buttons">Buttons</a></li>
+<li><a class="toc-link" href="#custom-glass">Custom glass</a></li>
+<li><a class="toc-link" href="#containers-morphing-and-unions">Containers, morphing, and unions</a></li>
+<li><a class="toc-link" href="#tab-bars-and-accessories">Tab bars and accessories</a></li>
+<li><a class="toc-link" href="#toolbars-and-navigation">Toolbars and navigation</a></li>
+<li><a class="toc-link" href="#scroll-edges-and-background-extension">Scroll edges and background extension</a></li>
+<li><a class="toc-link" href="#uikit-and-appkit-integration">UIKit and AppKit integration</a></li>
+<li><a class="toc-link" href="#official-references">Official references</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">Platforms</a>
+
+</div>
+<h1 id="liquid-glass-implementation-patterns">Liquid Glass implementation patterns<a href="#liquid-glass-implementation-patterns" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="scope">Scope<a href="#scope" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Use these recipes for iOS 27 and native macOS 27 apps built with Xcode 27. Set the matching deployment target to 27.0. SwiftUI is the default; use UIKit on iOS and AppKit on macOS for custom integration. Shared code needs platform separation where APIs differ; consult the <a href="liquid-glass-api.html">API reference</a>. Design decisions follow <a href="liquid-glass-design.html">Liquid Glass design</a>.</p>
+<h2 id="start-with-system-components">Start with system components<a href="#start-with-system-components" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Use the system design supplied by the 27 SDKs. Use standard navigation, tab bars, toolbars, sheets, and menus without adding another glass background.</li>
+<li>Avoid custom bar backgrounds, borders, and sheet styling that obscure the system material. Keep customization only when the design needs it and validate the result.</li>
+</ul>
+<h2 id="buttons">Buttons<a href="#buttons" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Prefer semantic <code>Button</code> controls and system styles. Keep destructive roles explicit; prominent styling is for the primary action, not a substitute for a destructive role.</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Save&quot;</span>, action: save)
+    .buttonStyle(.glassProminent)
+<span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Cancel&quot;</span>, action: cancel)
+    .buttonStyle(.glass)
+<span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Delete&quot;</span>, role: .destructive, action: delete)
+    .buttonStyle(.glass)
+</code></pre>
+</div><p>Pass the action closures from the app. Use <code>.glass(.clear)</code> only under the clear-variant conditions in the design document. UIKit provides <code>.glass()</code>, <code>.prominentGlass()</code>, <code>.clearGlass()</code>, and <code>.prominentClearGlass()</code> on <code>UIButton.Configuration</code>; AppKit provides the <code>.glass</code> button bezel.</p>
+<h2 id="custom-glass">Custom glass<a href="#custom-glass" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Apply <code>glassEffect</code> after sizing and appearance modifiers. Its defaults are <code>.regular</code> and a capsule. Add an explicit shape only when the control’s geometry calls for it.</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Text</span>(<span class="hljs-string">&quot;3 selected&quot;</span>)
+    .font(.headline)
+    .padding()
+    .glassEffect(in: .rect(cornerRadius: <span class="hljs-number">16</span>))
+</code></pre>
+</div><p><code>.interactive()</code> configures the material’s response; it does not supply an action, keyboard activation, or accessibility traits. Keep actionable content in a <code>Button</code>. On macOS, use <code>Glass.interactive(_:)</code> in SwiftUI or <code>effectIsInteractive</code> in AppKit for mouse-optimized responses.</p>
+<p>For clear glass, treat the background as part of the design. Apple’s example uses 30% black beneath the effect; adjust it against the actual media and check foreground contrast.</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Label</span>(<span class="hljs-string">&quot;Flag&quot;</span>, systemImage: <span class="hljs-string">&quot;flag.fill&quot;</span>)
+    .padding()
+    .glassEffect(.clear)
+    .background(.black.opacity(<span class="hljs-number">0.3</span>))
+</code></pre>
+</div><h2 id="containers-morphing-and-unions">Containers, morphing, and unions<a href="#containers-morphing-and-unions" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Group related custom glass effects in a <code>GlassEffectContainer</code> so the system renders them together and can blend their shapes. <code>spacing</code> controls when nearby shapes interact; spacing larger than the layout gap can blend them at rest. Containers improve rendering efficiency but do not guarantee a fixed render-pass count.</p>
+<p>Use stable, distinct <code>glassEffectID</code> values in one namespace for insertion and removal. This complete control keeps button semantics and disables custom motion when Reduce Motion is enabled:</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">import</span> SwiftUI
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">FloatingTools</span>: <span class="hljs-title class_ inherited__">View</span> {
+    <span class="hljs-meta">@Environment</span>(\.accessibilityReduceMotion) <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> reduceMotion
+    <span class="hljs-meta">@Namespace</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> namespace
+    <span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isExpanded <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">let</span> mark: () -&gt; <span class="hljs-type">Void</span>
+
+    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> {
+        <span class="hljs-type">GlassEffectContainer</span>(spacing: <span class="hljs-number">24</span>) {
+            <span class="hljs-type">HStack</span>(spacing: <span class="hljs-number">16</span>) {
+                <span class="hljs-type">Button</span>(isExpanded <span class="hljs-operator">?</span> <span class="hljs-string">&quot;Hide tools&quot;</span> : <span class="hljs-string">&quot;Show tools&quot;</span>,
+                       systemImage: <span class="hljs-string">&quot;slider.horizontal.3&quot;</span>) {
+                    withAnimation(reduceMotion <span class="hljs-operator">?</span> nil : .smooth) {
+                        isExpanded.toggle()
+                    }
+                }
+                .glassEffectID(<span class="hljs-string">&quot;toggle&quot;</span>, in: namespace)
+
+                <span class="hljs-keyword">if</span> isExpanded {
+                    <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Mark&quot;</span>, systemImage: <span class="hljs-string">&quot;pencil&quot;</span>, action: mark)
+                        .glassEffectID(<span class="hljs-string">&quot;mark&quot;</span>, in: namespace)
+                }
+            }
+            .buttonStyle(.glass)
+            .labelStyle(.iconOnly)
+            .controlSize(.large)
+        }
+    }
+}
+</code></pre>
+</div><p>Use <code>.matchedGeometry</code> for nearby shapes and <code>.materialize</code> for transitions without a suitable nearby shape. Apply <code>glassEffectTransition</code> after <code>glassEffect</code>. For a static union, apply <code>glassEffectUnion(id:namespace:)</code> after each effect: members with matching union identifiers, namespaces, shapes, and glass variants combine. Use the union identifier to group surfaces and the morph identity to identify an individual element.</p>
+<h2 id="tab-bars-and-accessories">Tab bars and accessories<a href="#tab-bars-and-accessories" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Apply <code>.tabBarMinimizeBehavior(.onScrollDown)</code> to the <code>TabView</code> when the iPhone layout benefits from minimization. Keep navigation discoverable after collapse.</li>
+<li>Use <code>.tabViewBottomAccessory { ... }</code> for persistent controls such as playback. Inside the accessory, read <code>tabViewBottomAccessoryPlacement</code> and adapt to <code>.inline</code>, <code>.expanded</code>, or an undefined (<code>nil</code>) placement.</li>
+<li>Use <code>.searchable</code> and the search tab role for system search placement. Do not build an overlapping custom search field solely to imitate the system design.</li>
+</ul>
+<h2 id="toolbars-and-navigation">Toolbars and navigation<a href="#toolbars-and-navigation" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Group items by function with <code>ToolbarSpacer(.fixed, placement:)</code>; use <code>.flexible</code> when flexible separation is intended. Set <code>sharedBackgroundVisibility(.hidden)</code> on toolbar content that supplies its own visual treatment.</li>
+<li>In SwiftUI, wrap <code>ToolbarItem</code> in an <code>if</code> block to hide it; hiding only its label can leave an empty background or gap behind. In UIKit, set <code>UIBarButtonItem.isHidden</code>.</li>
+<li>In iOS 27, use <code>visibilityPriority</code> to rank overflow candidates, <code>ToolbarOverflowMenu</code> for actions always in overflow, and <code>.topBarPinnedTrailing</code> for a persistent trailing action. The last two are unavailable on native macOS; see the platform table.</li>
+<li><code>TabRole.prominent</code> supports a distinct trailing tab in iOS 27. Provide a labeled tab inside <code>TabView</code>; the role alone is not a complete tab declaration.</li>
+</ul>
+<p>Apply navigation-bar minimization directly on iOS. The conditional compilation below separates the iOS navigation-bar behavior from the native macOS layout:</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">#if</span> os(iOS)
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">AdaptiveNavigation</span>&lt;<span class="hljs-type">Content</span>: <span class="hljs-type">View</span>&gt;: <span class="hljs-title class_ inherited__">View</span> {
+    <span class="hljs-keyword">let</span> content: <span class="hljs-type">Content</span>
+
+    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> {
+        <span class="hljs-type">NavigationStack</span> {
+            content.toolbarMinimizationBehavior(
+                .onScrollDown, for: .navigationBar)
+        }
+    }
+}
+<span class="hljs-keyword">#endif</span>
+</code></pre>
+</div><h2 id="scroll-edges-and-background-extension">Scroll edges and background extension<a href="#scroll-edges-and-background-extension" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Keep automatic scroll edge styling first. Use <code>.scrollEdgeEffectStyle(.hard, for: .top)</code> only for a deliberately stronger boundary; <code>nil</code> restores the default. Recheck explicit overrides when adopting a new OS release; automatic styling can evolve.</li>
+<li>UIKit exposes per-edge effects on <code>UIScrollView</code>. Register custom overlays with <code>UIScrollEdgeElementContainerInteraction</code> rather than layering a second blur.</li>
+<li>Apply <code>backgroundExtensionEffect()</code> to the background artwork before adding text and controls in an overlay. Do not apply it to an entire sidebar full of controls. UIKit and AppKit provide <code>UIBackgroundExtensionView</code> and <code>NSBackgroundExtensionView</code>.</li>
+</ul>
+<h2 id="uikit-and-appkit-integration">UIKit and AppKit integration<a href="#uikit-and-appkit-integration" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>For UIKit custom glass, add content to <code>UIVisualEffectView.contentView</code> and supply constraints for both the effect view and its content. This factory creates a sized glass label; the caller positions the returned view:</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">import</span> UIKit
+
+<span class="hljs-meta">@MainActor</span>
+<span class="hljs-keyword">func</span> <span class="hljs-title function_">makeGlassLabel</span>() -&gt; <span class="hljs-type">UIVisualEffectView</span> {
+    <span class="hljs-keyword">let</span> glass <span class="hljs-operator">=</span> <span class="hljs-type">UIVisualEffectView</span>(effect: <span class="hljs-type">UIGlassEffect</span>(style: .regular))
+    <span class="hljs-keyword">let</span> label <span class="hljs-operator">=</span> <span class="hljs-type">UILabel</span>()
+    label.text <span class="hljs-operator">=</span> <span class="hljs-string">&quot;3 selected&quot;</span>
+    label.font <span class="hljs-operator">=</span> .preferredFont(forTextStyle: .headline)
+    label.adjustsFontForContentSizeCategory <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>
+    label.translatesAutoresizingMaskIntoConstraints <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>
+    glass.contentView.addSubview(label)
+    <span class="hljs-type">NSLayoutConstraint</span>.activate([
+        label.leadingAnchor.constraint(equalTo: glass.contentView.leadingAnchor, constant: <span class="hljs-number">16</span>),
+        label.trailingAnchor.constraint(equalTo: glass.contentView.trailingAnchor, constant: <span class="hljs-operator">-</span><span class="hljs-number">16</span>),
+        label.topAnchor.constraint(equalTo: glass.contentView.topAnchor, constant: <span class="hljs-number">12</span>),
+        label.bottomAnchor.constraint(equalTo: glass.contentView.bottomAnchor, constant: <span class="hljs-operator">-</span><span class="hljs-number">12</span>)
+    ])
+    <span class="hljs-keyword">return</span> glass
+}
+</code></pre>
+</div><ul>
+<li>For several nearby UIKit effects, put their effect views inside the <code>contentView</code> of a <code>UIVisualEffectView</code> configured with <code>UIGlassContainerEffect</code>. Its <code>spacing</code> controls the interaction distance.</li>
+<li>On macOS, set <code>NSGlassEffectView.contentView</code>, <code>style</code>, <code>cornerRadius</code>, and optional <code>tintColor</code>. Group related views with <code>NSGlassEffectContainerView</code>. Prefer <code>NSButton</code> with the <code>.glass</code> bezel for buttons.</li>
+<li>Set AppKit’s <code>effectIsInteractive = true</code> for glass that responds to mouse interaction. Check performance and accessibility with the <a href="liquid-glass-design.html">design validation criteria</a>.</li>
+</ul>
+<h2 id="official-references">Official references<a href="#official-references" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views">Applying Liquid Glass to custom views</a></li>
+<li><a href="https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass">Adopting Liquid Glass</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/tabviewbottomaccessoryplacement">TabViewBottomAccessoryPlacement</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/278/">Modernize your UIKit app — WWDC26</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="Related guidelines">
+<h2>Related guidelines</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>Referenced in this document</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-api.html"><span class="related-cat">Platforms</span><span class="related-title">Liquid Glass API reference</span></a></li>
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">Platforms</span><span class="related-title">Liquid Glass design (Apple platforms)</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>Documents that reference this</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-api.html"><span class="related-cat">Platforms</span><span class="related-title">Liquid Glass API reference</span></a></li>
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">Platforms</span><span class="related-title">Liquid Glass design (Apple platforms)</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="Previous / Next">
+<a class="page-nav-prev" href="liquid-glass-design.html"><span>Previous · Platforms</span><strong>Liquid Glass design (Apple platforms)</strong></a>
+<span class="page-nav-empty"></span>
+</nav>
+</main>
+<aside class="page-toc" aria-label="On this page">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>On this page</h2>
+<ul>
+<li><a class="toc-link" href="#scope">Scope</a></li>
+<li><a class="toc-link" href="#start-with-system-components">Start with system components</a></li>
+<li><a class="toc-link" href="#buttons">Buttons</a></li>
+<li><a class="toc-link" href="#custom-glass">Custom glass</a></li>
+<li><a class="toc-link" href="#containers-morphing-and-unions">Containers, morphing, and unions</a></li>
+<li><a class="toc-link" href="#tab-bars-and-accessories">Tab bars and accessories</a></li>
+<li><a class="toc-link" href="#toolbars-and-navigation">Toolbars and navigation</a></li>
+<li><a class="toc-link" href="#scroll-edges-and-background-extension">Scroll edges and background extension</a></li>
+<li><a class="toc-link" href="#uikit-and-appkit-integration">UIKit and AppKit integration</a></li>
+<li><a class="toc-link" href="#official-references">Official references</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

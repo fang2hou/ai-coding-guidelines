@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>圆角 · AI 编码指南</title>
+<meta name="description" content="圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/corner-radius.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/corner-radius.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/corner-radius.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/corner-radius.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/corner-radius.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="圆角 · AI 编码指南">
+<meta property="og:description" content="圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/corner-radius.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="展开导航菜单">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI 编码指南"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI 编码指南</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="本页目录" title="本页目录" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="语言" title="语言" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="语言"><a lang="en" hreflang="en" href="../../en/practices/corner-radius.html">English</a><a lang="zh" hreflang="zh" href="corner-radius.html" aria-current="true" class="current">中文</a><a lang="ja" hreflang="ja" href="../../ja/practices/corner-radius.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="主题: 跟随系统" title="主题: 跟随系统" data-label-theme="主题" data-label-auto="跟随系统" data-label-light="浅色" data-label-dark="深色"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub 仓库" title="GitHub 仓库"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">本页目录</h2><button class="toc-dismiss" type="button" aria-label="关闭菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="指南目录">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="关闭菜单" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">总览</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">在项目中使用</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">术语表</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">核心原则</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">工程实践</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="corner-radius.html" aria-current="page"><span class="side-link-text">圆角</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">工具链</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">库与框架</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">平台规范</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>本页目录</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#原则">原则</a></li>
+<li><a class="toc-link" href="#圆角档位">圆角档位</a></li>
+<li><a class="toc-link" href="#单个表面-连续圆角">单个表面：连续圆角</a></li>
+<li><a class="toc-link" href="#按钮与控件-中等圆角">按钮与控件：中等圆角</a></li>
+<li><a class="toc-link" href="#嵌套表面-同心规则">嵌套表面：同心规则</a></li>
+<li><a class="toc-link" href="#检查清单">检查清单</a></li>
+<li><a class="toc-link" href="#联动">联动</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">工程实践</a>
+
+</div>
+<h1 id="圆角">圆角<a href="#圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="原则">原则<a href="#原则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。</li>
+<li>两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。</li>
+<li>严格执行这两条规则。单个圆角孤立看很少出错，但错误地组合在一起就会显得粗糙、割裂。</li>
+</ul>
+<h2 id="圆角档位">圆角档位<a href="#圆角档位" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<div class="code-block" data-lang="css"><pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attr">--radius-s</span>: <span class="hljs-number">6px</span>;       <span class="hljs-comment">/* dense rows, chips */</span>
+  <span class="hljs-attr">--radius-m</span>: <span class="hljs-number">8px</span>;       <span class="hljs-comment">/* buttons, inputs — the default control radius */</span>
+  <span class="hljs-attr">--radius-l</span>: <span class="hljs-number">12px</span>;      <span class="hljs-comment">/* popovers, menus */</span>
+  <span class="hljs-attr">--radius-xl</span>: <span class="hljs-number">20px</span>;     <span class="hljs-comment">/* cards, sheets, dialogs */</span>
+  <span class="hljs-attr">--radius-full</span>: <span class="hljs-number">9999px</span>; <span class="hljs-comment">/* circles, pills */</span>
+}
+</code></pre>
+</div><ul>
+<li>项目中的所有圆角都取自这组档位。单独写死数值（如 <code>13px</code>）会绕过用于计算嵌套圆角的共享令牌，容易造成不一致。</li>
+<li>相邻档位必须拉开可辨识的差距（在这个尺寸下 ≥ 2px）。</li>
+</ul>
+<h2 id="单个表面-连续圆角">单个表面：连续圆角<a href="#单个表面-连续圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>只用 <code>border-radius</code> 时，直边与圆弧相接，曲率突变正是普通网页圆角比苹果连续圆角显得生硬的原因。</li>
+<li>把 <code>corner-shape</code> 与现有的 <code>border-radius</code> 配对使用：<code>border-radius</code> 继续决定圆角大小，<code>corner-shape</code> 只改变曲线形状。背景、边框、outline、阴影、<code>overflow: hidden</code> 和 <code>backdrop-filter</code> 都会跟随最终形状——不需要 <code>clip-path</code>，也不需要 SVG 遮罩。</li>
+<li>全项目统一使用 <code>squircle</code>（= <code>superellipse(2)</code>）这一个值。圆角形状属于令牌体系的一部分，不要逐元素改变。</li>
+<li>用在圆角形状明显影响外观的地方：卡片、浮层、对话框、磁贴、媒体、应用级表面（≥ <code>--radius-l</code>）。低于约 6px 时与 <code>round</code> 的差异不可见——不要在那里设置。</li>
+<li>只做渐进增强：截至 2026 年末，只有基于 Chromium 的浏览器（139+）会渲染 <code>corner-shape</code>；Safari 和 Firefox 会忽略它并回退到普通圆角。这种回退可以接受。绝不为此引入 JS 或 SVG polyfill。</li>
+<li><code>border-radius</code> 为 <code>0</code> 时，<code>corner-shape</code> 不产生任何效果。</li>
+</ul>
+<div class="code-block" data-lang="css"><pre><code class="language-css"><span class="hljs-selector-class">.card</span> {
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-built_in">var</span>(--radius-xl);
+  <span class="hljs-attribute">corner-shape</span>: squircle;
+}
+</code></pre>
+</div><h2 id="按钮与控件-中等圆角">按钮与控件：中等圆角<a href="#按钮与控件-中等圆角" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>按钮、输入框、下拉框默认使用中等档位（<code>--radius-m</code>，在 36–40px 控件高度上约为 8px）。紧凑布局可以使用浅档（<code>--radius-s</code>）作为下限。</li>
+<li>中等圆角保留了一段平直边缘，让文字和相邻控件对齐，也为控件内部的 hover 和按压状态留出保持同心的空间。</li>
+<li>全圆（<code>--radius-full</code>）按钮只用于 chip、标签和身份元素（头像、开关）。不要用于操作按钮。</li>
+</ul>
+<h2 id="嵌套表面-同心规则">嵌套表面：同心规则<a href="#嵌套表面-同心规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>当内层元素距离外层表面（半径 <code>R</code>）边缘的间距为 <code>p</code> px 时，内层半径应为 <code>r = R − p</code>（最小为 0）。这样内外圆角共享同一个圆心，内层看起来与外层属于同一个表面。</li>
+<li>该规则适用于 hover 与按压浮层（<code>::before</code> / <code>::after</code>）、焦点环、卡片上的徽章、带内边距容器中的媒体和控件、分段控件以及 tooltip。</li>
+<li>内外半径相等或内层随意取值，都会破坏同心关系，让 hover 状态和徽章与周围表面显得不协调。</li>
+</ul>
+<h3 id="常见场景">常见场景<a href="#常见场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<ul>
+<li>覆盖层位于 <code>inset: 0</code>：用 <code>border-radius: inherit</code>。</li>
+<li>内缩距离等于表面内边距：用同一组令牌以 <code>calc()</code> 计算。</li>
+<li>控件外侧的焦点环：用 <code>outline</code> 或 <code>box-shadow</code>——两者都会自动跟随外层半径。</li>
+<li>宽度为 <code>w</code> 的边框画在圆角盒子上：内边缘已经按 <code>R − w</code> 绘制；不要再额外加圆角。</li>
+<li>嵌套在设置了 <code>corner-shape</code> 的表面内部的层：用 <code>corner-shape: inherit</code> 在内层设置相同形状——该属性默认不继承；外层 squircle 配内层普通圆角会破坏同心观感。</li>
+</ul>
+<div class="code-block" data-lang="css"><pre><code class="language-css"><span class="hljs-selector-class">.button</span> {
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-built_in">var</span>(--radius-m);
+}
+<span class="hljs-selector-class">.button</span><span class="hljs-selector-pseudo">::before</span> {
+  <span class="hljs-comment">/* hover fill */</span>
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">inset</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">border-radius</span>: inherit; <span class="hljs-comment">/* concentric by construction */</span>
+}
+
+<span class="hljs-selector-class">.card</span> {
+  <span class="hljs-attr">--card-inset</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-built_in">var</span>(--radius-xl);
+  <span class="hljs-attribute">corner-shape</span>: squircle;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--card-inset);
+}
+<span class="hljs-selector-class">.card</span> <span class="hljs-selector-class">.media</span> {
+  <span class="hljs-comment">/* 20 - 12 = 8: same center of curvature and same curve family as the card */</span>
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--radius-xl) - <span class="hljs-built_in">var</span>(--card-inset));
+  <span class="hljs-attribute">corner-shape</span>: inherit;
+}
+</code></pre>
+</div><ul>
+<li>遇到位图边缘或特殊图形、无法精确对齐时，宁小勿大：保持 <code>r ≤ R − p</code>。内层圆角稍微收紧一点显得利落，偏大则会显得错位。</li>
+</ul>
+<h2 id="检查清单">检查清单<a href="#检查清单" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>diff 中的每个圆角都来自令牌档位。</li>
+<li>控件使用中等档位；全圆只出现在 chip、标签和身份元素上。</li>
+<li>每个嵌套层要么满足 <code>r = R − p</code>，要么继承半径，要么使用 <code>outline</code> / <code>box-shadow</code>。</li>
+<li>位于设置了 <code>corner-shape</code> 的表面内部的层使用相同的角形状（<code>corner-shape: inherit</code>）。</li>
+<li>≥ <code>--radius-l</code> 的表面设置了 <code>corner-shape: squircle</code>；没有为它引入 polyfill。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="coding-standards.html">编码标准</a>——背景：圆角档位是“禁止魔法值”规则的一个实例。</li>
+<li><a href="../libraries/tailwindcss.html">Tailwind CSS</a>——搭配（视情况）：使用 Tailwind 的项目把档位表达为主题令牌；同心规则不变。</li>
+<li><a href="../platforms/liquid-glass-design.html">Liquid Glass 设计</a>——背景：在苹果平台上使用系统自带的连续圆角 API，而不是网页近似方案。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-link" href="coding-standards.html"><span class="related-cat">工程实践</span><span class="related-title">编码标准</span></a></li>
+<li><a class="related-link" href="../libraries/tailwindcss.html"><span class="related-cat">库与框架</span><span class="related-title">Tailwind CSS</span></a></li>
+<li><a class="related-link" href="../platforms/liquid-glass-design.html"><span class="related-cat">平台规范</span><span class="related-title">Liquid Glass 设计（Apple 平台）</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>引用本文的指南</h3>
+<ul class="related-list">
+<li><a class="related-link" href="../libraries/tailwindcss.html"><span class="related-cat">库与框架</span><span class="related-title">Tailwind CSS</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="coding-standards.html"><span>上一篇 · 工程实践</span><strong>编码标准</strong></a>
+<a class="page-nav-next" href="dependencies.html"><span>下一篇 · 工程实践</span><strong>依赖管理规范</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>本页目录</h2>
+<ul>
+<li><a class="toc-link" href="#原则">原则</a></li>
+<li><a class="toc-link" href="#圆角档位">圆角档位</a></li>
+<li><a class="toc-link" href="#单个表面-连续圆角">单个表面：连续圆角</a></li>
+<li><a class="toc-link" href="#按钮与控件-中等圆角">按钮与控件：中等圆角</a></li>
+<li><a class="toc-link" href="#嵌套表面-同心规则">嵌套表面：同心规则</a></li>
+<li><a class="toc-link" href="#检查清单">检查清单</a></li>
+<li><a class="toc-link" href="#联动">联动</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

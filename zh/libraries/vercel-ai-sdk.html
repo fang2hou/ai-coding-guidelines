@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>Vercel AI SDK · AI 编码指南</title>
+<meta name="description" content="视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/libraries/vercel-ai-sdk.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/libraries/vercel-ai-sdk.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/libraries/vercel-ai-sdk.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/libraries/vercel-ai-sdk.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/libraries/vercel-ai-sdk.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="Vercel AI SDK · AI 编码指南">
+<meta property="og:description" content="视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/libraries/vercel-ai-sdk.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="展开导航菜单">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI 编码指南"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI 编码指南</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="本页目录" title="本页目录" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="语言" title="语言" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="语言"><a lang="en" hreflang="en" href="../../en/libraries/vercel-ai-sdk.html">English</a><a lang="zh" hreflang="zh" href="vercel-ai-sdk.html" aria-current="true" class="current">中文</a><a lang="ja" hreflang="ja" href="../../ja/libraries/vercel-ai-sdk.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="主题: 跟随系统" title="主题: 跟随系统" data-label-theme="主题" data-label-auto="跟随系统" data-label-light="浅色" data-label-dark="深色"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub 仓库" title="GitHub 仓库"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">本页目录</h2><button class="toc-dismiss" type="button" aria-label="关闭菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="指南目录">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="关闭菜单" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">总览</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">在项目中使用</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">术语表</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">核心原则</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">工程实践</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">工具链</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go 工具链</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust 工具链</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">库与框架</span></h3><ul>
+<li><a href="agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="go-api-stack.html"><span class="side-link-text">Go API 技术栈</span></a></li>
+<li><a href="python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="vercel-ai-sdk.html" aria-current="page"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">平台规范</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>本页目录</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#结论">结论</a></li>
+<li><a class="toc-link" href="#适用场景">适用场景</a></li>
+<li><a class="toc-link" href="#不适用场景">不适用场景</a></li>
+<li><a class="toc-link" href="#优势">优势</a></li>
+<li><a class="toc-link" href="#代价">代价</a></li>
+<li><a class="toc-link" href="#版本策略">版本策略</a></li>
+<li><a class="toc-link" href="#使用规则">使用规则</a></li>
+<li><a class="toc-link" href="#联动">联动</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-libraries">库与框架</a>
+
+</div>
+<h1 id="vercel-ai-sdk">Vercel AI SDK<a href="#vercel-ai-sdk" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="结论">结论<a href="#结论" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。</p>
+<h2 id="适用场景">适用场景<a href="#适用场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>Next.js 项目直接使用该 SDK 的能力，例如在 React 界面中处理流式 AI 响应。</li>
+</ul>
+<h2 id="不适用场景">不适用场景<a href="#不适用场景" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>应用只是调用 LLM 接口——单凭这一点不足以引入该依赖。</li>
+<li>不要看到是 AI 相关项目就自动添加该 SDK。</li>
+<li>项目并未使用 Next.js。</li>
+</ul>
+<h2 id="优势">优势<a href="#优势" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>为 React 与 Next.js 界面提供流式 AI 响应处理。</li>
+<li>统一不同 LLM 集成中访问 provider 的方式和工具调用模式。</li>
+</ul>
+<h2 id="代价">代价<a href="#代价" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>增加一个依赖，其价值取决于实现是否实际使用 SDK 的能力。</li>
+<li>本指南仅将该 SDK 用于 Next.js 项目。</li>
+</ul>
+<h2 id="版本策略">版本策略<a href="#版本策略" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>使用该 SDK 时优先选择最新稳定版。</li>
+<li>没有具体的兼容性理由，不要让项目停留在过时版本上。</li>
+</ul>
+<h2 id="使用规则">使用规则<a href="#使用规则" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>仅当该 SDK 能为 Next.js 项目带来明确价值时才使用；不要一遇到调用 LLM 的项目就自动引入它。</li>
+</ul>
+<h2 id="联动">联动<a href="#联动" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="frontend-framework.html">前端框架：Vite 与 Next.js</a>——仅与 Next.js 搭配；只有当该 SDK 对 Next.js 实现确有实际价值时才应引入。</li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="关联指南">
+<h2>关联指南</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>本文引用的指南</h3>
+<ul class="related-list">
+<li><a class="related-link" href="frontend-framework.html"><span class="related-cat">库与框架</span><span class="related-title">前端框架：Vite 与 Next.js</span></a></li>
+</ul>
+</div>
+
+</div>
+</section>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<a class="page-nav-prev" href="typescript-backend.html"><span>上一篇 · 库与框架</span><strong>TypeScript 后端技术栈</strong></a>
+<a class="page-nav-next" href="../platforms/liquid-glass-api.html"><span>下一篇 · 平台规范</span><strong>Liquid Glass API 参考</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="本页目录">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>本页目录</h2>
+<ul>
+<li><a class="toc-link" href="#结论">结论</a></li>
+<li><a class="toc-link" href="#适用场景">适用场景</a></li>
+<li><a class="toc-link" href="#不适用场景">不适用场景</a></li>
+<li><a class="toc-link" href="#优势">优势</a></li>
+<li><a class="toc-link" href="#代价">代价</a></li>
+<li><a class="toc-link" href="#版本策略">版本策略</a></li>
+<li><a class="toc-link" href="#使用规则">使用规则</a></li>
+<li><a class="toc-link" href="#联动">联动</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>
