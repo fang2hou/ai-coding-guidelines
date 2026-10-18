@@ -1,12 +1,12 @@
 # Contributing
 
-Thanks for wanting to contribute. This document covers how changes land.
-Development setup lives in [DEVELOPMENT.md](./DEVELOPMENT.md); rules for AI agents live in [AGENTS.md](./AGENTS.md).
+This document explains how to propose, review, and merge changes.
+For development setup, see [DEVELOPMENT.md](./DEVELOPMENT.md); for AI agent instructions, see [AGENTS.md](./AGENTS.md).
 
 ## Ground Rules
 
-- Smallest complete change that solves the requirement
-- All three language versions of a document land in the same change
+- Make the smallest complete change that meets the requirement
+- Include all three language versions of a document in the same change
 - No unrelated cleanup mixed into content changes
 - Conclusions only — no discussion process, open questions, or notes in guideline bodies
 
