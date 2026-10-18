@@ -1,10 +1,10 @@
 ---
 id: libraries/svelte
 lang: ja
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 73f0e71c
+digest: 7e9ec906
 ---
 
 # Svelte（Svelte 5 + SvelteKit）
@@ -34,12 +34,12 @@ digest: 73f0e71c
 
 - LLM の学習カバレッジは React より薄く、最大のリスクは Svelte 4 のパターンの幻覚である。緩和には公式 AI ツールを使い、決して記憶に頼らない。
 - コンポーネントのエコシステムは小さい。UI 作業は DaisyUI か手書きコンポーネントで行う。
-- 動きが速い。SvelteKit 3.0 はプレリリース段階であり、新しいメジャーの探索自体がプロジェクトの目的でない限り、安定版ラインを維持する。
+- 動きが速い。プレリリースのメジャー版は `next` チャネルで配布され、`latest` は常に安定版ラインである。新しいメジャーの探索自体がプロジェクトの目的でない限り、`latest` を維持する。
 
 ## バージョン方針
 
 - Svelte 5 の最新安定版。コンポーネントレベルの `await` 式には `experimental.async` が必要（Svelte ≥ 5.36）— 実験的機能であり、デフォルトではない。
-- SvelteKit は ≥ 2.70 の安定版ライン。3.0 のプレリリースはデフォルトでは採用しない。
+- SvelteKit は 3.x の `latest` 安定版ライン。`next` チャネルのプレリリースはデフォルトでは採用しない。
 - クラスベースのキットが必要な場合は DaisyUI 5（Tailwind CSS v4 プラグインモデル）を使い、それ以外はネイティブ CSS の手書きコンポーネントとする。
 
 ## 利用ルール

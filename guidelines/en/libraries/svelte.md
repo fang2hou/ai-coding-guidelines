@@ -1,10 +1,10 @@
 ---
 id: libraries/svelte
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: d59ef191
+digest: 1a3def78
 ---
 
 # Svelte (Svelte 5 + SvelteKit)
@@ -42,14 +42,16 @@ default: production frontends stay on the React stacks selected in
   patterns are the main risk. Mitigate with the official AI tooling, never
   with memory.
 - Smaller component ecosystem; UI work goes through DaisyUI or hand-written components.
-- Fast-moving: SvelteKit 3.0 is in pre-release. Stay on the stable line
-  unless exploring the new major is the point of the project.
+- Fast-moving: pre-release majors ride the `next` dist-tag while `latest`
+  stays on the stable line. Stay on `latest` unless exploring the next major
+  is the point of the project.
 
 ## Version policy
 
 - Svelte 5 latest stable. Component-level `await` expressions require
   `experimental.async` (Svelte ≥ 5.36) — experimental, not a default.
-- SvelteKit ≥ 2.70 stable line; do not adopt 3.0 pre-releases by default.
+- SvelteKit 3.x on the `latest` stable line; do not adopt `next`-tag
+  pre-releases by default.
 - DaisyUI 5 (Tailwind CSS v4 plugin model) when a class-based kit is wanted,
   or hand-written native CSS components.
 
