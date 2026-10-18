@@ -9,7 +9,7 @@ Engineering standards for AI-assisted development, maintained centrally and appl
 
 [English](https://fang2hou.github.io/ai-coding-guidelines/en/) · [中文](https://fang2hou.github.io/ai-coding-guidelines/zh/) · [日本語](https://fang2hou.github.io/ai-coding-guidelines/ja/)
 
-Read the guidelines online. The website updates after every merge to `main`.
+Read the guidelines online.
 
 </div>
 
