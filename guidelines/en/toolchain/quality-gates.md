@@ -1,10 +1,10 @@
 ---
 id: toolchain/quality-gates
 lang: en
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: 87171829
+digest: 3dde71b3
 ---
 
 # Quality Gates
@@ -24,7 +24,7 @@ Point the hook at the same entry point everything else uses:
 [[repos]]
 repo = "local"
 hooks = [
-  { id = "check", entry = "mise run check", language = "system", pass_filenames = false }
+  { id = "check", name = "project-check", entry = "mise run check", language = "system", pass_filenames = false },
 ]
 ```
 
