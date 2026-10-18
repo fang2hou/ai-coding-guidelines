@@ -4,7 +4,7 @@ lang: en
 version: 2
 source-lang: en
 status: active
-digest: dcd0cd61
+digest: 5e8a2c96
 ---
 
 # Dependency Discipline
@@ -29,9 +29,9 @@ Worked example — candidate `zod` for runtime validation in a TypeScript projec
 
 Decision: add `zod`.
 
-The same questions reject weaker candidates: a `truncate` string-helper library fails question 3 — three clear lines implement it without a dependency; `axios` fails question 2 when the platform `fetch` already covers the requirement.
+Use the same questions to rule out unnecessary dependencies: a `truncate` string-helper library fails question 3 — three clear lines implement it without a dependency; `axios` fails question 2 when the platform `fetch` already covers the requirement.
 
-Do not add a library for simple logic you can write clearly in a few lines.
+Do not add a library for logic you can write clearly in a few lines.
 
 Do not replace a standardized tool with another dependency without explicit user approval.
 
