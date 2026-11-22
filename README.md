@@ -2,58 +2,55 @@
 
 # AI Coding Guidelines
 
-Engineering standards for AI-assisted development, maintained centrally and applied across projects.
+Shared engineering standards for AI-assisted software development, maintained in one repository and applied across projects.
 
-[![check](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml/badge.svg)](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[English](https://fang2hou.github.io/ai-coding-guidelines/en/) | [中文](https://fang2hou.github.io/ai-coding-guidelines/zh/) | [日本語](https://fang2hou.github.io/ai-coding-guidelines/ja/)
 
-[English](https://fang2hou.github.io/ai-coding-guidelines/en/) · [中文](https://fang2hou.github.io/ai-coding-guidelines/zh/) · [日本語](https://fang2hou.github.io/ai-coding-guidelines/ja/)
-
-Read the guidelines online.
+[![check](https://img.shields.io/github/actions/workflow/status/fang2hou/ai-coding-guidelines/check.yml?branch=main&label=check&style=flat-square)](https://github.com/fang2hou/ai-coding-guidelines/actions/workflows/check.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
 
 </div>
 
-Projects repeatedly make the same decisions about package managers, linters, commit conventions, and CI. AI agents can make different choices from one session to the next. This repository defines shared tools and conventions so humans and agents can apply them consistently, while product and architecture decisions remain specific to each project.
+Software projects repeatedly revisit the same tooling decisions: package managers, linters, formatters, commit conventions, and CI pipelines. AI coding agents also drift between sessions when those defaults are not written down. This repository defines a shared set of toolchains, libraries, and practices so humans and agents follow the same baseline across projects, while product and architecture choices stay in each project.
 
-## 🚀 Getting Started
+## 🚀 Usage
 
-**For AI coding agents**, run this command in your project directory to install the skill:
+### Use with an AI Agent
+
+Install the `apply-guidelines` skill in your target project:
 
 ```bash
 pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines
 ```
 
-The skill contains no guideline text. On each run, it fetches the latest guidelines from GitHub, selects the relevant documents using [PORTAL.md](./PORTAL.md), and checks the project against them.
+The skill carries no bundled guideline text. On each run, it fetches the current files from GitHub, selects the relevant documents through [PORTAL.md](./PORTAL.md), and checks your project against them.
 
-After installing, explicitly ask your agent to apply these guidelines to your task. You can also use the following instructions without installing the skill:
+After installing, ask your agent to apply these guidelines to your task. If you prefer not to install the skill, point your agent to the repository directly:
 
 ```text
 Apply the guidelines from https://github.com/fang2hou/ai-coding-guidelines for this task.
 Start at PORTAL.md and follow its reading recipes.
 ```
 
-**For human readers**, choose a reading recipe in [PORTAL.md](./PORTAL.md), such as starting a frontend project, writing tests, or adding a dependency. You can also browse [guidelines/en/](./guidelines/en/) ([中文](./guidelines/zh/) · [日本語](./guidelines/ja/)).
+### Browse as a Human
 
-**To contribute to this repository**, install [mise](https://mise.jdx.dev/) and use the runtime versions pinned in `mise.toml`:
-
-```bash
-git clone https://github.com/fang2hou/ai-coding-guidelines && cd ai-coding-guidelines
-mise install && pnpm install --frozen-lockfile
-mise run check
-```
-
-Expected result: `OK: 99 documents, 33 ids x 3 languages`. See the full workflow in [DEVELOPMENT.md](./DEVELOPMENT.md).
-
-## 💡 Concepts
-
-- **Single source of truth** — agents fetch the live guidelines at run time instead of relying on memory or summaries
-- **Three languages, one structure** — 33 documents in English, Chinese, and Japanese, with matching headings and natural wording in each language
-- **Automated checks** — CI verifies sha256 digests, terminology, Chinese and Japanese punctuation, cross-links, and the 300-line limit per document
-- **Task-based reading** — [PORTAL.md](./PORTAL.md) lists only the documents needed for each task
+Pick a task in [PORTAL.md](./PORTAL.md) (such as starting a frontend project, writing tests, or adding a dependency) and read the listed documents in order. You can also browse the full trees directly: [English](./guidelines/en/) | [中文](./guidelines/zh/) | [日本語](./guidelines/ja/).
 
 ## ✨ Features
 
-What these guidelines standardize:
+### `1` Task-Based Routing
+
+[PORTAL.md](./PORTAL.md) maps common engineering tasks to ordered reading lists, so humans and agents read only the documents relevant to the work at hand.
+
+### `2` Parallel Language Trees
+
+Each guideline is maintained across parallel language trees (English, Chinese, and Japanese) with matching heading structures and natural technical prose in each language.
+
+### `3` Automated Validation
+
+CI checks SHA-256 body digests, shared glossary terminology, punctuation rules, relative links, and document length limits for every file.
+
+### `4` Standardized Stack
 
 | Area               | Standard                                                          |
 | ------------------ | ----------------------------------------------------------------- |
@@ -65,17 +62,24 @@ What these guidelines standardize:
 | Frontend           | Vite or Next.js; native CSS by default (Tailwind CSS when needed) |
 | Validation         | Same checks locally, in pre-commit hooks, and in CI               |
 
-## 📚 Learn More
+## 🛠️ Development
 
-| Goal                             | Read                                 |
-| -------------------------------- | ------------------------------------ |
-| Find guidelines for a task       | [PORTAL.md](./PORTAL.md)             |
-| Develop and validate the repo    | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
-| Contribute a change              | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| Understand the design            | [ARCHITECTURE.md](./ARCHITECTURE.md) |
-| Configure an agent for this repo | [AGENTS.md](./AGENTS.md)             |
-| Repository decisions             | [docs/adr/](./docs/adr/)             |
+Install [mise](https://mise.jdx.dev/) and use the runtime versions pinned in `mise.toml`:
+
+```bash
+git clone https://github.com/fang2hou/ai-coding-guidelines && cd ai-coding-guidelines
+mise install && pnpm install --frozen-lockfile
+mise run check
+```
+
+All validation steps (document checks, linting, secret scanning, and formatting) pass with exit code 0.
+
+Read [DEVELOPMENT.md](./DEVELOPMENT.md) for the editing and translation workflow, and [ARCHITECTURE.md](./ARCHITECTURE.md) for repository invariants.
+
+## 🤝 Contributing
+
+Read [CONTRIBUTING.md](./CONTRIBUTING.md) for pull request and review rules.
 
 ## 📄 License
 
-Licensed under MIT. See [LICENSE](./LICENSE). You may reuse and adapt the guidelines in your own projects.
+[MIT](./LICENSE)
