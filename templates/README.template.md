@@ -1,73 +1,102 @@
 <div align="center">
 
+<!-- Optional: project logo or banner -->
+<!-- <img src="{{assets/logo.png}}" alt="{{Project Name}}" width="120" /> -->
+<!-- if the logo includes Project name, then remove the h1 -->
+
 # {{Project Name}}
 
 {{One-sentence tagline: what the project is and who it is for.}}
 
-[![CI](https://github.com/<org>/<repo>/actions/workflows/check.yml/badge.svg)](https://github.com/<org>/<repo>/actions/workflows/check.yml)
-[![License: <SPDX>](https://img.shields.io/badge/License-<SPDX>-green.svg)](./LICENSE)
+[Installation](#-installation) | [Usage](#-usage) | [Features](#-features) | [Development](#-development)
+
+[![CI](https://img.shields.io/github/actions/workflow/status/<org>/<repo>/check.yml?branch=main&label=CI&style=flat-square)](https://github.com/<org>/<repo>/actions/workflows/check.yml)
+[![License: <SPDX>](https://img.shields.io/badge/License-<SPDX>-green.svg?style=flat-square)](./LICENSE)
 
 </div>
 
-{{What the project does and the need it solves — one to three plain sentences. Mention what it intentionally is not, or its status, only when that saves the reader time.}}
+{{What the project does and the problem it solves in one to three plain sentences. Mention scope limits or project status only when that saves the reader time.}}
 
-{{Optional — a screenshot or short GIF when the project has a visual surface (UI, CLI output, artifacts).}}
+<!-- Optional: add a screenshot or short GIF when the project has a visual surface (UI, CLI output, or generated artifacts). -->
+<!-- ![{{Project Name}} preview]({{assets/preview.png}}) -->
 
-## 🚀 Quick Start
+## 📦 Installation
 
-{{End-user products: name this section Usage and show install/run examples with their expected output; both audiences: Usage / Quick Start.}}
+<!-- For installable programs, CLIs, packages, or downloadable assets (e.g., fonts), use Installation or Download & Install to show how end users obtain the project. Delete this section for developer-only repositories that are not distributed to end users. -->
 
-**With an AI coding agent** — paste this into the agent to hand it the repository:
-
-```text
-Work in this repository. Read AGENTS.md at the repository root first and follow it.
+```bash
+{{package manager install command or download instructions}}
 ```
 
-**As a human** — requires [mise](https://mise.jdx.dev/) on {{supported platforms, e.g. macOS and Linux}}.
-Runtime versions are pinned in `mise.toml`; {{required environment variables and external services, with local alternatives if any}}.
+## 🚀 Usage
+
+<!-- Show the two or three most common end-user commands or workflows with their expected output. For developer-only repositories with no separate end-user install, rename this section to Quick Start. -->
+
+```bash
+{{common command}}
+```
+
+{{Expected output or result.}}
+
+<!-- Include only the sections this project needs from ✨ Features, 💡 Concepts, ⚡ Performance, and 🧪 Experiments, ordered by what helps readers most. Delete unused sections. -->
+
+## ✨ Features
+
+<!-- For richer projects, use ### `order` subsections with one or two plain sentences each. For compact projects, replace these subsections with a two-column table or plain-sentence bullets. -->
+
+### `1` {{Feature One}}
+
+{{Describe what this feature does in one or two plain sentences, without marketing language.}}
+
+### `2` {{Feature Two}}
+
+{{Describe a second core capability directly, including essential behavior readers need to know.}}
+
+## 💡 Concepts
+
+<!-- Only needed for projects built with a distinct design concept or angle that differs from alternatives. -->
+
+| Concept       | Summary                                                   |
+| ------------- | --------------------------------------------------------- |
+| {{Concept A}} | {{The core idea a reader needs to use the project well.}} |
+| {{Concept B}} | {{A second key concept, stated in one plain sentence.}}   |
+
+## ⚡ Performance
+
+<!-- Only needed for projects focused on performance optimization or performance-sensitive workloads. -->
+
+{{State the claim in one sentence, then show the evidence that backs it up.}}
+
+![{{Benchmark: project vs. alternatives}}]({{static/benchmark.png}})
+
+Environment: {{hardware, runtime versions, date}}. Methodology: [reproduction steps]({{link-to-reproduction-steps}}).
+
+## 🛠️ Development
+
+<!-- Local setup for developers working on this repository. Keep contributor tooling separate from end-user Installation and Usage. -->
+
+Requires [mise](https://mise.jdx.dev/) on {{supported platforms, e.g. macOS and Linux}}. Runtime versions are pinned in `mise.toml`. {{List required environment variables and external services, with local alternatives if any.}}
 
 ```bash
 mise install
 mise run dev
 ```
 
-{{Expected result, e.g. the dev server on http://localhost:5173.}} `mise run` lists every other task ({{e.g. `build`, `test`}}).
+{{Expected result, e.g. the dev server starts on http://localhost:5173.}} Run `mise run` to list all tasks ({{e.g. `build`, `test`}}).
 
 <details>
 <summary>Advanced setup</summary>
 
-{{Optional — platform-specific setup, environment variables, extended examples, troubleshooting. Delete the block when unused.}}
+{{Optional: platform-specific setup, environment variable tables, extended examples, and troubleshooting. Delete this block when unused.}}
 
 </details>
 
-{{Compose this region from the blocks the project needs, in the order that serves it best — 💡 Concepts, ✨ Features, ⚡ Performance, 🧪 Experiments. Drop unused blocks.}}
+## 🤝 Contributing
 
-## 💡 Concepts
+<!-- Only needed for non-personal projects, if you don't know, ask user to decide. -->
 
-- **{{Concept}}** — {{the one idea a reader needs in order to use the project well}}
-
-## ✨ Features
-
-- **{{Feature}}** — {{what it does and why it matters}}
-- {{Optional: nearest alternative and what differs — one line}}
-
-## ⚡ Performance
-
-{{The claim in one sentence, then the evidence that proves it.}}
-
-![{{Benchmark: project vs. alternatives}}]({{static/benchmark.png}})
-
-{{Environment: hardware, runtime versions, date.}} Methodology: {{link to the reproduction steps}}.
-
-## 📚 Learn More
-
-| Goal                  | Read                                 |
-| --------------------- | ------------------------------------ |
-| Understand the system | [ARCHITECTURE.md](./ARCHITECTURE.md) |
-| Develop and validate  | [DEVELOPMENT.md](./DEVELOPMENT.md)   |
-| Contribute a change   | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| Give it to an agent   | [AGENTS.md](./AGENTS.md)             |
+See [DEVELOPMENT.md](./DEVELOPMENT.md) for local setup and workflow, and [CONTRIBUTING.md](./CONTRIBUTING.md) for pull request and review rules.
 
 ## 📄 License
 
-{{SPDX identifier, e.g. MIT}} — see [LICENSE](./LICENSE).
+[{{SPDX identifier, e.g. MIT}}](./LICENSE)
