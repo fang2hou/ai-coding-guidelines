@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>Liquid Glass 実装パターン · AI コーディングガイドライン</title>
+<meta name="description" content="Xcode 27 でビルドする iOS 27 とネイティブの macOS 27 アプリを対象とし、各プラットフォームの最低対応 OS を 27.0 に設定する。SwiftUI を基本とし、独自の組み込みには iOS で UIKit、mac…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-patterns.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/platforms/liquid-glass-patterns.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="Liquid Glass 実装パターン · AI コーディングガイドライン">
+<meta property="og:description" content="Xcode 27 でビルドする iOS 27 とネイティブの macOS 27 アプリを対象とし、各プラットフォームの最低対応 OS を 27.0 に設定する。SwiftUI を基本とし、独自の組み込みには iOS で UIKit、mac…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/platforms/liquid-glass-patterns.html">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="ナビゲーションを開閉">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI コーディングガイドライン"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="このページの目次" title="このページの目次" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="言語" title="言語" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="言語"><a lang="en" hreflang="en" href="../../en/platforms/liquid-glass-patterns.html">English</a><a lang="zh" hreflang="zh" href="../../zh/platforms/liquid-glass-patterns.html">中文</a><a lang="ja" hreflang="ja" href="liquid-glass-patterns.html" aria-current="true" class="current">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="テーマ: システムに合わせる" title="テーマ: システムに合わせる" data-label-theme="テーマ" data-label-auto="システムに合わせる" data-label-light="ライト" data-label-dark="ダーク"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub リポジトリ" title="GitHub リポジトリ"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">このページの目次</h2><button class="toc-dismiss" type="button" aria-label="メニューを閉じる"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="ガイドライン一覧">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="メニューを閉じる" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">概要</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">プロジェクトで使う</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">用語集</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">原則</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">プラクティス</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">ツールチェーン</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">ライブラリ</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">プラットフォーム</span></h3><ul>
+<li><a href="liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="liquid-glass-patterns.html" aria-current="page"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>このページの目次</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#対象範囲">対象範囲</a></li>
+<li><a class="toc-link" href="#システムコンポーネントから始める">システムコンポーネントから始める</a></li>
+<li><a class="toc-link" href="#ボタン">ボタン</a></li>
+<li><a class="toc-link" href="#カスタムのガラス効果">カスタムのガラス効果</a></li>
+<li><a class="toc-link" href="#コンテナー-モーフィング-結合">コンテナー、モーフィング、結合</a></li>
+<li><a class="toc-link" href="#タブバーとアクセサリビュー">タブバーとアクセサリビュー</a></li>
+<li><a class="toc-link" href="#ツールバーとナビゲーション">ツールバーとナビゲーション</a></li>
+<li><a class="toc-link" href="#スクロール端と背景の延長">スクロール端と背景の延長</a></li>
+<li><a class="toc-link" href="#uikit-と-appkit-への組み込み">UIKit と AppKit への組み込み</a></li>
+<li><a class="toc-link" href="#公式資料">公式資料</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-platforms">プラットフォーム</a>
+
+</div>
+<h1 id="liquid-glass-実装パターン">Liquid Glass 実装パターン<a href="#liquid-glass-実装パターン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="対象範囲">対象範囲<a href="#対象範囲" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>Xcode 27 でビルドする iOS 27 とネイティブの macOS 27 アプリを対象とし、各プラットフォームの最低対応 OS を 27.0 に設定する。SwiftUI を基本とし、独自の組み込みには iOS で UIKit、macOS で AppKit を使う。共有コードではプラットフォーム専用の API を分離する。<a href="liquid-glass-api.html">API リファレンス</a>を確認し、設計は <a href="liquid-glass-design.html">Liquid Glass の設計</a>に従う。</p>
+<h2 id="システムコンポーネントから始める">システムコンポーネントから始める<a href="#システムコンポーネントから始める" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>27 系 SDK が提供するシステムデザインを使う。標準のナビゲーション、タブバー、ツールバー、シート、メニューにはガラス背景を追加しない。</li>
+<li>独自のバー背景、枠線、シートのスタイルでシステムのマテリアルを覆わない。設計上必要なカスタマイズだけを残し、結果を検証する。</li>
+</ul>
+<h2 id="ボタン">ボタン<a href="#ボタン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>操作には <code>Button</code> とシステムのスタイルを優先する。破壊的な操作はロールで明示する。主要な操作を強調するスタイルは、破壊的な操作のロールを代替しない。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Save&quot;</span>, action: save)
+    .buttonStyle(.glassProminent)
+<span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Cancel&quot;</span>, action: cancel)
+    .buttonStyle(.glass)
+<span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Delete&quot;</span>, role: .destructive, action: delete)
+    .buttonStyle(.glass)
+</code></pre>
+</div><p>操作のクロージャはアプリ側で用意する。<code>.glass(.clear)</code> は設計文書の clear の使用条件を満たす場合に限る。UIKit の <code>UIButton.Configuration</code> には <code>.glass()</code>、<code>.prominentGlass()</code>、<code>.clearGlass()</code>、<code>.prominentClearGlass()</code> があり、AppKit ではボタンのベゼルに <code>.glass</code> を指定できる。</p>
+<h2 id="カスタムのガラス効果">カスタムのガラス効果<a href="#カスタムのガラス効果" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>サイズと外観を設定するモディファイアの後に <code>glassEffect</code> を適用する。標準は <code>.regular</code> のカプセル形状となる。コントロールの形状に必要な場合だけ、明示的に形状を指定する。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Text</span>(<span class="hljs-string">&quot;3 selected&quot;</span>)
+    .font(.headline)
+    .padding()
+    .glassEffect(in: .rect(cornerRadius: <span class="hljs-number">16</span>))
+</code></pre>
+</div><p><code>.interactive()</code> が設定するのはマテリアルの反応である。操作、キーボードからの実行、アクセシビリティ特性は追加されない。操作可能な内容には <code>Button</code> を使う。macOS では SwiftUI の <code>Glass.interactive(_:)</code> または AppKit の <code>effectIsInteractive</code> を使い、マウス操作に適した反応を有効にする。</p>
+<p>clear のガラス効果では背景も含めて設計する。Apple の例は効果の背後に不透明度 30% の黒を置く。実際の画像や動画に合わせて調整し、前景のコントラストを確認する。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-type">Label</span>(<span class="hljs-string">&quot;Flag&quot;</span>, systemImage: <span class="hljs-string">&quot;flag.fill&quot;</span>)
+    .padding()
+    .glassEffect(.clear)
+    .background(.black.opacity(<span class="hljs-number">0.3</span>))
+</code></pre>
+</div><h2 id="コンテナー-モーフィング-結合">コンテナー、モーフィング、結合<a href="#コンテナー-モーフィング-結合" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>関連するカスタムのガラス効果を <code>GlassEffectContainer</code> にまとめ、システムが一緒に描画して形状を融合できるようにする。<code>spacing</code> は近接する形状が相互作用を始める距離を指定する。レイアウトの間隔より大きいと、静止時にも融合する場合がある。コンテナーは描画効率を改善するが、描画パス数を固定する保証はない。</p>
+<p>要素の追加と削除には、同じ名前空間で安定した重複のない <code>glassEffectID</code> を使う。次のコントロールはボタンの意味を保ち、「視差効果を減らす」が有効な場合は独自のアニメーションを無効にする。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">import</span> SwiftUI
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">FloatingTools</span>: <span class="hljs-title class_ inherited__">View</span> {
+    <span class="hljs-meta">@Environment</span>(\.accessibilityReduceMotion) <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> reduceMotion
+    <span class="hljs-meta">@Namespace</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> namespace
+    <span class="hljs-meta">@State</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isExpanded <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">let</span> mark: () -&gt; <span class="hljs-type">Void</span>
+
+    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> {
+        <span class="hljs-type">GlassEffectContainer</span>(spacing: <span class="hljs-number">24</span>) {
+            <span class="hljs-type">HStack</span>(spacing: <span class="hljs-number">16</span>) {
+                <span class="hljs-type">Button</span>(isExpanded <span class="hljs-operator">?</span> <span class="hljs-string">&quot;Hide tools&quot;</span> : <span class="hljs-string">&quot;Show tools&quot;</span>,
+                       systemImage: <span class="hljs-string">&quot;slider.horizontal.3&quot;</span>) {
+                    withAnimation(reduceMotion <span class="hljs-operator">?</span> nil : .smooth) {
+                        isExpanded.toggle()
+                    }
+                }
+                .glassEffectID(<span class="hljs-string">&quot;toggle&quot;</span>, in: namespace)
+
+                <span class="hljs-keyword">if</span> isExpanded {
+                    <span class="hljs-type">Button</span>(<span class="hljs-string">&quot;Mark&quot;</span>, systemImage: <span class="hljs-string">&quot;pencil&quot;</span>, action: mark)
+                        .glassEffectID(<span class="hljs-string">&quot;mark&quot;</span>, in: namespace)
+                }
+            }
+            .buttonStyle(.glass)
+            .labelStyle(.iconOnly)
+            .controlSize(.large)
+        }
+    }
+}
+</code></pre>
+</div><p>近い形状には <code>.matchedGeometry</code>、近くに適切な形状がない遷移には <code>.materialize</code> を使う。<code>glassEffectTransition</code> は <code>glassEffect</code> の後に置く。静的に結合する場合は、各効果の後に <code>glassEffectUnion(id:namespace:)</code> を適用する。結合用の識別子、名前空間、形状、ガラスのバリアントが一致する要素が 1 つの面になる。結合用の識別子はサーフェスのグループ分けに使い、モーフィングの ID は個々の要素の識別に使う。</p>
+<h2 id="タブバーとアクセサリビュー">タブバーとアクセサリビュー<a href="#タブバーとアクセサリビュー" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>iPhone のレイアウトで最小化が有用な場合は、<code>TabView</code> に <code>.tabBarMinimizeBehavior(.onScrollDown)</code> を適用する。折りたたんだ後もナビゲーションを見つけやすくする。</li>
+<li>再生操作などの常設コントロールには <code>.tabViewBottomAccessory { ... }</code> を使う。アクセサリ内で <code>tabViewBottomAccessoryPlacement</code> を読み、<code>.inline</code>、<code>.expanded</code>、未定義の <code>nil</code> に応じて表示を変える。</li>
+<li>検索の配置には <code>.searchable</code> と検索タブのロールを使う。システムの外観を模倣するためだけに、独自の検索欄を重ねない。</li>
+</ul>
+<h2 id="ツールバーとナビゲーション">ツールバーとナビゲーション<a href="#ツールバーとナビゲーション" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><code>ToolbarSpacer(.fixed, placement:)</code> で操作を機能別に分ける。伸縮する間隔には <code>.flexible</code> を使う。独自の外観を持つツールバー項目には <code>sharedBackgroundVisibility(.hidden)</code> を設定できる。</li>
+<li>SwiftUI では条件分岐で <code>ToolbarItem</code> 自体を含めるかどうか決める。ラベルだけを隠すと、背景や空間が残る場合がある。UIKit では <code>UIBarButtonItem.isHidden</code> を使う。</li>
+<li>iOS 27 では <code>visibilityPriority</code> でオーバーフローの優先順位を指定し、常にメニューへ収める操作を <code>ToolbarOverflowMenu</code> に置く。末尾に残す操作には <code>.topBarPinnedTrailing</code> を使う。後二者はネイティブの macOS では利用できない。プラットフォーム表を参照する。</li>
+<li>iOS 27 の <code>TabRole.prominent</code> は末尾の独立したタブに使える。<code>TabView</code> 内でラベルを備えたタブを定義する。ロールだけではタブの宣言は完成しない。</li>
+</ul>
+<p>iOS ではナビゲーションバーの最小化 API を直接使う。以下の条件付きコンパイルは、iOS のナビゲーションバーの動作をネイティブ macOS のレイアウトから分離するためのものである。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">#if</span> os(iOS)
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">AdaptiveNavigation</span>&lt;<span class="hljs-type">Content</span>: <span class="hljs-type">View</span>&gt;: <span class="hljs-title class_ inherited__">View</span> {
+    <span class="hljs-keyword">let</span> content: <span class="hljs-type">Content</span>
+
+    <span class="hljs-keyword">var</span> body: <span class="hljs-keyword">some</span> <span class="hljs-type">View</span> {
+        <span class="hljs-type">NavigationStack</span> {
+            content.toolbarMinimizationBehavior(
+                .onScrollDown, for: .navigationBar)
+        }
+    }
+}
+<span class="hljs-keyword">#endif</span>
+</code></pre>
+</div><h2 id="スクロール端と背景の延長">スクロール端と背景の延長<a href="#スクロール端と背景の延長" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>スクロール端のスタイルは原則として自動のままにする。境界を明確にする必要がある場合だけ <code>.scrollEdgeEffectStyle(.hard, for: .top)</code> を使う。<code>nil</code> で標準に戻る。自動スタイルは OS によって変わり得るため、新しい OS に対応する際は明示的な指定を見直す。</li>
+<li>UIKit では <code>UIScrollView</code> から各辺の効果を設定する。独自のオーバーレイは <code>UIScrollEdgeElementContainerInteraction</code> に登録し、別のぼかしを重ねない。</li>
+<li>背景画像に <code>backgroundExtensionEffect()</code> を適用してから、文字とコントロールをオーバーレイで追加する。操作部品を含むサイドバー全体には適用しない。UIKit と AppKit にはそれぞれ <code>UIBackgroundExtensionView</code> と <code>NSBackgroundExtensionView</code> がある。</li>
+</ul>
+<h2 id="uikit-と-appkit-への組み込み">UIKit と AppKit への組み込み<a href="#uikit-と-appkit-への組み込み" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>UIKit のカスタムガラスでは、<code>UIVisualEffectView.contentView</code> に内容を追加し、効果のビューと内容の両方に制約を設ける。次の関数はサイズ制約を持つガラスラベルを作る。返されたビューの配置は呼び出し側で行う。</p>
+<div class="code-block" data-lang="swift"><pre><code class="language-swift"><span class="hljs-keyword">import</span> UIKit
+
+<span class="hljs-meta">@MainActor</span>
+<span class="hljs-keyword">func</span> <span class="hljs-title function_">makeGlassLabel</span>() -&gt; <span class="hljs-type">UIVisualEffectView</span> {
+    <span class="hljs-keyword">let</span> glass <span class="hljs-operator">=</span> <span class="hljs-type">UIVisualEffectView</span>(effect: <span class="hljs-type">UIGlassEffect</span>(style: .regular))
+    <span class="hljs-keyword">let</span> label <span class="hljs-operator">=</span> <span class="hljs-type">UILabel</span>()
+    label.text <span class="hljs-operator">=</span> <span class="hljs-string">&quot;3 selected&quot;</span>
+    label.font <span class="hljs-operator">=</span> .preferredFont(forTextStyle: .headline)
+    label.adjustsFontForContentSizeCategory <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>
+    label.translatesAutoresizingMaskIntoConstraints <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>
+    glass.contentView.addSubview(label)
+    <span class="hljs-type">NSLayoutConstraint</span>.activate([
+        label.leadingAnchor.constraint(equalTo: glass.contentView.leadingAnchor, constant: <span class="hljs-number">16</span>),
+        label.trailingAnchor.constraint(equalTo: glass.contentView.trailingAnchor, constant: <span class="hljs-operator">-</span><span class="hljs-number">16</span>),
+        label.topAnchor.constraint(equalTo: glass.contentView.topAnchor, constant: <span class="hljs-number">12</span>),
+        label.bottomAnchor.constraint(equalTo: glass.contentView.bottomAnchor, constant: <span class="hljs-operator">-</span><span class="hljs-number">12</span>)
+    ])
+    <span class="hljs-keyword">return</span> glass
+}
+</code></pre>
+</div><ul>
+<li>隣接する複数の UIKit 効果は、<code>UIGlassContainerEffect</code> を設定した <code>UIVisualEffectView</code> の <code>contentView</code> 内に配置する。<code>spacing</code> が相互作用の距離を決める。</li>
+<li>macOS では <code>NSGlassEffectView</code> の <code>contentView</code>、<code>style</code>、<code>cornerRadius</code> と必要に応じて <code>tintColor</code> を設定する。関連するビューは <code>NSGlassEffectContainerView</code> でまとめる。ボタンには <code>.glass</code> ベゼルの <code>NSButton</code> を優先する。</li>
+<li>マウス操作に反応する AppKit のガラスには <code>effectIsInteractive = true</code> を設定する。<a href="liquid-glass-design.html">設計上の検証項目</a>に沿って性能とアクセシビリティを確認する。</li>
+</ul>
+<h2 id="公式資料">公式資料<a href="#公式資料" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views">Applying Liquid Glass to custom views</a></li>
+<li><a href="https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass">Adopting Liquid Glass</a></li>
+<li><a href="https://developer.apple.com/documentation/swiftui/tabviewbottomaccessoryplacement">TabViewBottomAccessoryPlacement</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/269/">What’s new in SwiftUI — WWDC26</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2026/278/">Modernize your UIKit app — WWDC26</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-api.html"><span class="related-cat">プラットフォーム</span><span class="related-title">Liquid Glass API リファレンス</span></a></li>
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">プラットフォーム</span><span class="related-title">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="liquid-glass-api.html"><span class="related-cat">プラットフォーム</span><span class="related-title">Liquid Glass API リファレンス</span></a></li>
+<li><a class="related-link" href="liquid-glass-design.html"><span class="related-cat">プラットフォーム</span><span class="related-title">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="liquid-glass-design.html"><span>前へ · プラットフォーム</span><strong>Liquid Glass の設計（Apple プラットフォーム）</strong></a>
+<span class="page-nav-empty"></span>
+</nav>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>このページの目次</h2>
+<ul>
+<li><a class="toc-link" href="#対象範囲">対象範囲</a></li>
+<li><a class="toc-link" href="#システムコンポーネントから始める">システムコンポーネントから始める</a></li>
+<li><a class="toc-link" href="#ボタン">ボタン</a></li>
+<li><a class="toc-link" href="#カスタムのガラス効果">カスタムのガラス効果</a></li>
+<li><a class="toc-link" href="#コンテナー-モーフィング-結合">コンテナー、モーフィング、結合</a></li>
+<li><a class="toc-link" href="#タブバーとアクセサリビュー">タブバーとアクセサリビュー</a></li>
+<li><a class="toc-link" href="#ツールバーとナビゲーション">ツールバーとナビゲーション</a></li>
+<li><a class="toc-link" href="#スクロール端と背景の延長">スクロール端と背景の延長</a></li>
+<li><a class="toc-link" href="#uikit-と-appkit-への組み込み">UIKit と AppKit への組み込み</a></li>
+<li><a class="toc-link" href="#公式資料">公式資料</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>TypeScript ツールチェーン · AI コーディングガイドライン</title>
+<meta name="description" content="TypeScript と Python は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/typescript.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/typescript.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/toolchain/typescript.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/typescript.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/toolchain/typescript.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="TypeScript ツールチェーン · AI コーディングガイドライン">
+<meta property="og:description" content="TypeScript と Python は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/toolchain/typescript.html">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="ナビゲーションを開閉">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI コーディングガイドライン"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="このページの目次" title="このページの目次" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="言語" title="言語" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="言語"><a lang="en" hreflang="en" href="../../en/toolchain/typescript.html">English</a><a lang="zh" hreflang="zh" href="../../zh/toolchain/typescript.html">中文</a><a lang="ja" hreflang="ja" href="typescript.html" aria-current="true" class="current">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="テーマ: システムに合わせる" title="テーマ: システムに合わせる" data-label-theme="テーマ" data-label-auto="システムに合わせる" data-label-light="ライト" data-label-dark="ダーク"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub リポジトリ" title="GitHub リポジトリ"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">このページの目次</h2><button class="toc-dismiss" type="button" aria-label="メニューを閉じる"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="ガイドライン一覧">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="メニューを閉じる" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">概要</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">プロジェクトで使う</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">用語集</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">原則</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">プラクティス</span></h3><ul>
+<li><a href="../practices/agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="../practices/agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="../practices/architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="../practices/change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="../practices/coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="../practices/corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="../practices/dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="../practices/language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="../practices/pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="../practices/project-documentation.html"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="../practices/security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="../practices/testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">ツールチェーン</span></h3><ul>
+<li><a href="databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="go.html"><span class="side-link-text">Go ツールチェーン</span></a></li>
+<li><a href="mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="rust.html"><span class="side-link-text">Rust ツールチェーン</span></a></li>
+<li><a href="typescript.html" aria-current="page"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">ライブラリ</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">プラットフォーム</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>このページの目次</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#適用義務">適用義務</a></li>
+<li><a class="toc-link" href="#バージョン方針">バージョン方針</a></li>
+<li><a class="toc-link" href="#pnpm">pnpm</a></li>
+<li><a class="toc-link" href="#oxlint">oxlint</a></li>
+<li><a class="toc-link" href="#oxfmt">oxfmt</a></li>
+<li><a class="toc-link" href="#tsconfig-のベースライン">tsconfig のベースライン</a></li>
+<li><a class="toc-link" href="#言語の利用ルール">言語の利用ルール</a></li>
+<li><a class="toc-link" href="#プロジェクト規約">プロジェクト規約</a></li>
+<li><a class="toc-link" href="#連携">連携</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-toolchain">ツールチェーン</a>
+
+</div>
+<h1 id="typescript-ツールチェーン">TypeScript ツールチェーン<a href="#typescript-ツールチェーン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<h2 id="適用義務">適用義務<a href="#適用義務" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>TypeScript と Python は、ライブラリと AI エージェントのエコシステムが最も充実しているため、AI 支援開発のデフォルト言語とする。</p>
+<p>言語の優先順位：</p>
+<ul>
+<li>プロダクト開発やフルスタック開発では TypeScript をデフォルトとする。</li>
+<li>Python は <a href="python.html">Python ツールチェーン</a> に示すケースに限り使う。</li>
+<li>Go と Rust は、性能が重要な処理やシステム領域に限って使う。導入には明確な理由とユーザーの承認が必要であり、プロジェクトの ADR に記録する。<a href="go.html">Go</a> と <a href="rust.html">Rust</a> を参照。</li>
+</ul>
+<p>フレームワークの選定については <a href="../libraries/frontend-framework.html">フロントエンドフレームワーク：Vite vs Next.js</a> を参照。</p>
+<h2 id="バージョン方針">バージョン方針<a href="#バージョン方針" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>最新の安定版 TypeScript と Active LTS ラインの Node.js を使う。</p>
+<p>2026-08 時点では、Active LTS ラインは Node.js 24（EOL 2028-04）である。Node.js 22 はメンテナンス期（EOL 2027-04）にあり、Node.js 26 は 2026-10 まで Current ラインである。Current ラインを対象にしてはならない。Node.js のメジャーバージョンは、新しい LTS ラインが定着してから更新する。</p>
+<p>モデルは学習データに基づいてコードを生成する。そのため、AI 支援開発では主流で十分に検証されたバージョンのほうがエラーが起きにくい。わずかな性能向上よりも、これらのバージョンを優先する。この原則は <a href="../principles/core-principles.html">中核となるエンジニアリング原則</a> に定められている。</p>
+<p>Node.js のバージョンはプロジェクトの mise 設定に固定し、TypeScript のバージョンは pnpm のロックファイルで固定する。いずれもグローバルにインストールされたバージョンに依存しない。</p>
+<h2 id="pnpm">pnpm<a href="#pnpm" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>pnpm</code> を使う。この方針は、通常の Node.js プロジェクトと monorepo の両方に適用する。</p>
+<p><code>mise.toml</code> で <code>pnpm</code> のバージョンを固定する際は、最新バージョンを使い、mise（<code>mise latest pnpm</code>）で確認する。なお、npm 上の <code>pnpm</code> の <code>latest</code> は 11 だが、実際の最新バージョンは 12 である点に注意する。</p>
+<p>外部ドキュメントに npm や yarn のコマンドが記載されている場合は、別のパッケージマネージャーを導入せず、pnpm 用のコマンドに読み替える。</p>
+<p>プロジェクトのロックファイルは、pnpm と整合した状態を保たなければならない。</p>
+<h3 id="採用しない代替案">採用しない代替案<a href="#採用しない代替案" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>次のツールは使わない。</p>
+<ul>
+<li>npm</li>
+<li>yarn</li>
+</ul>
+<h2 id="oxlint">oxlint<a href="#oxlint" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>oxlint</code> は TypeScript / JavaScript の標準リンターである。</p>
+<p>フレームワーク、テンプレート、ライブラリが ESLint を推奨する場合は、次の手順で対応する。</p>
+<ol>
+<li>どの ESLint ルールやプラグインに依存しているかを特定する。</li>
+<li>必要な機能が oxlint でサポートされているかを確認する。</li>
+<li>可能な限り oxlint の対応する機能を使う。</li>
+<li>テンプレートが生成したというだけの理由で、ESLint を残してはならない。</li>
+</ol>
+<p>具体的な互換性の問題がない限り、最新の安定版 oxlint を使う。</p>
+<h3 id="ルール設定">ルール設定<a href="#ルール設定" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>oxlint はデフォルトのままにせず、コードの実行環境に合わせてルールとプラグインを有効化する。テンプレートが有効にしていないという理由で、有用な推奨チェックを外したままにしないこと。</p>
+<p>Node.js 上で動くコードでは、<code>.oxlintrc.json</code> で <code>node</code> プラグインを有効にし、旧来の CommonJS パターンを防ぐルールも含めて有効化する。一方で、プロジェクトの用途と合わない制限ルールは無効にする（たとえば、同期ファイルアクセスを意図的に使う CLI では <code>no-sync</code> を無効にする）。</p>
+<h3 id="型情報を使うリントと型チェック">型情報を使うリントと型チェック<a href="#型情報を使うリントと型チェック" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>プロジェクトに適している場合は、oxlint が公式にサポートする TypeScript の型情報を使ったリントと型チェックを有効にする。</p>
+<p>最新の <code>oxlint</code> とともに <code>oxlint-tsgolint</code> をインストールし、ルートの <code>.oxlintrc.json</code> で <code>options.typeAware</code> と <code>options.typeCheck</code> を有効にする（<code>typeCheck</code> は 2026-08 時点で実験的機能）。</p>
+<p>古いプロジェクトの設定をコピーせず最新の公式ドキュメントに従って設定し、oxlint で対応できる型情報を使うルールのために ESLint を追加しないこと。</p>
+<h3 id="採用しない代替案-1">採用しない代替案<a href="#採用しない代替案-1" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>デフォルトのリントシステムとして ESLint を使わない。</p>
+<h2 id="oxfmt">oxfmt<a href="#oxfmt" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p><code>oxfmt</code> は TypeScript / JavaScript プロジェクトの標準フォーマッターである。</p>
+<p>具体的な互換性の問題がない限り、最新の安定版 oxfmt を使う。</p>
+<p>同じソースファイルに対して、競合する複数のフォーマッターを実行しない。</p>
+<h3 id="採用しない代替案-2">採用しない代替案<a href="#採用しない代替案-2" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>Prettier を使わない。</p>
+<h2 id="tsconfig-のベースライン">tsconfig のベースライン<a href="#tsconfig-のベースライン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトで、厳格な tsconfig ベースラインを起点にする。</p>
+<ul>
+<li><code>&quot;strict&quot;: true</code>——厳格モードの基盤。ADR レベルの理由なく、個別の strict フラグを無効化しない。</li>
+<li><code>&quot;noUncheckedIndexedAccess&quot;: true</code>——インデックスアクセスが <code>T | undefined</code> になり、未定義ケースの処理を強制する。</li>
+<li><code>&quot;verbatimModuleSyntax&quot;: true</code>——型だけのインポートには <code>import type</code> を必須とし、誤ってランタイムのインポートが混入するのを防ぐ。</li>
+<li><code>&quot;isolatedModules&quot;: true</code>——各ファイルが独立してコンパイルできることを強制し、bundler やトランスパイラの実際の処理単位と一致させる。</li>
+<li>ESM のみ。アプリケーションは <code>&quot;module&quot;: &quot;ESNext&quot;</code> と <code>&quot;moduleResolution&quot;: &quot;Bundler&quot;</code>、Node.js 向けライブラリは <code>&quot;module&quot;: &quot;NodeNext&quot;</code> と <code>&quot;moduleResolution&quot;: &quot;NodeNext&quot;</code> を使う。</li>
+<li>アプリケーションでは tsc による出力を行わない。<code>&quot;noEmit&quot;: true</code> を設定し、出力は bundler に任せる。</li>
+</ul>
+<p>ベースラインの例：</p>
+<div class="code-block" data-lang="jsonc"><pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;compilerOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;strict&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;noUncheckedIndexedAccess&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;verbatimModuleSyntax&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;isolatedModules&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;module&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ESNext&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;moduleResolution&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bundler&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ES2022&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lib&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;ES2022&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;DOM&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;noEmit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+</div><h2 id="言語の利用ルール">言語の利用ルール<a href="#言語の利用ルール" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>値の型がまだ不明な場合は <code>any</code> ではなく <code>unknown</code> を使い、使用前に型を絞り込む。<code>any</code> は本当に動的な相互運用が必要な場合に限り、理由をコメントで示す。</li>
+<li>非 null アサーション演算子（<code>!</code>）を使う場合は、その時点で値が null や undefined になり得ない理由をコメントで示す。</li>
+<li>エクスポートする関数には戻り値の型を明示する。</li>
+<li>状態はブール値のグループではなく、判別可能なユニオン（discriminated union）でモデル化する。</li>
+<li>設定オブジェクトは <code>satisfies</code> で検証する。定義時にエラーが表面化し、リテラル型も保持される。</li>
+<li>リテラルテーブルには <code>as const</code> を適用し、要素型を狭く保つ。</li>
+<li><code>enum</code> の代わりにユニオン型または <code>const</code> オブジェクトを使う。</li>
+<li>Promise を放置しない。<code>await</code> するか、結果を意図的に破棄する場合は <code>void</code> と、その理由を示すコメントを付ける。</li>
+<li>例外には <code>Error</code> のサブクラスだけを使い、文字列やプレーンオブジェクトを送出してはならない。</li>
+</ul>
+<h2 id="プロジェクト規約">プロジェクト規約<a href="#プロジェクト規約" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li>アプリケーションのソースは <code>src/</code> に置き、エントリーポイントを <code>package.json</code> 経由で公開する。</li>
+<li>ファイル名は kebab-case（<code>user-profile-card.tsx</code>）、値は camelCase、型、コンポーネント、クラスは PascalCase とする。</li>
+<li>バレルファイル（<code>index.ts</code> でディレクトリ全体を再エクスポートするファイル）は避け、定義元のモジュールから直接インポートする。バレルファイルは tree-shaking を阻害し、循環インポートを招きやすい。</li>
+</ul>
+<h2 id="連携">連携<a href="#連携" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<ul>
+<li><a href="../libraries/frontend-framework.html">フロントエンドフレームワーク：Vite vs Next.js</a></li>
+<li><a href="../libraries/typescript-backend.html">TypeScript バックエンド</a></li>
+<li><a href="quality-gates.html">品質ゲート</a></li>
+<li><a href="../practices/testing.html">テスト戦略</a></li>
+<li><a href="../practices/coding-standards.html">コーディング規約</a></li>
+</ul>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="python.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Python ツールチェーン</span></a></li>
+<li><a class="related-link" href="go.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Go ツールチェーン</span></a></li>
+<li><a class="related-link" href="rust.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Rust ツールチェーン</span></a></li>
+<li><a class="related-link" href="../libraries/frontend-framework.html"><span class="related-cat">ライブラリ</span><span class="related-title">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a class="related-link" href="../principles/core-principles.html"><span class="related-cat">原則</span><span class="related-title">中核となるエンジニアリング原則</span></a></li>
+<li><a class="related-link" href="../libraries/typescript-backend.html"><span class="related-cat">ライブラリ</span><span class="related-title">TypeScript バックエンド</span></a></li>
+<li><a class="related-link" href="quality-gates.html"><span class="related-cat">ツールチェーン</span><span class="related-title">品質ゲート</span></a></li>
+<li><a class="related-link" href="../practices/testing.html"><span class="related-cat">プラクティス</span><span class="related-title">テスト戦略</span></a></li>
+<li><a class="related-link" href="../practices/coding-standards.html"><span class="related-cat">プラクティス</span><span class="related-title">コーディング規約</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="../practices/agent-protocol.html"><span class="related-cat">プラクティス</span><span class="related-title">エージェント運用プロトコル</span></a></li>
+<li><a class="related-link" href="../practices/dependencies.html"><span class="related-cat">プラクティス</span><span class="related-title">依存関係の管理方針</span></a></li>
+<li><a class="related-link" href="python.html"><span class="related-cat">ツールチェーン</span><span class="related-title">Python ツールチェーン</span></a></li>
+<li><a class="related-link" href="../libraries/frontend-framework.html"><span class="related-cat">ライブラリ</span><span class="related-title">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a class="related-link" href="../libraries/typescript-backend.html"><span class="related-cat">ライブラリ</span><span class="related-title">TypeScript バックエンド</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="rust.html"><span>前へ · ツールチェーン</span><strong>Rust ツールチェーン</strong></a>
+<a class="page-nav-next" href="../libraries/agentation.html"><span>次へ · ライブラリ</span><strong>Agentation</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>このページの目次</h2>
+<ul>
+<li><a class="toc-link" href="#適用義務">適用義務</a></li>
+<li><a class="toc-link" href="#バージョン方針">バージョン方針</a></li>
+<li><a class="toc-link" href="#pnpm">pnpm</a></li>
+<li><a class="toc-link" href="#oxlint">oxlint</a></li>
+<li><a class="toc-link" href="#oxfmt">oxfmt</a></li>
+<li><a class="toc-link" href="#tsconfig-のベースライン">tsconfig のベースライン</a></li>
+<li><a class="toc-link" href="#言語の利用ルール">言語の利用ルール</a></li>
+<li><a class="toc-link" href="#プロジェクト規約">プロジェクト規約</a></li>
+<li><a class="toc-link" href="#連携">連携</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

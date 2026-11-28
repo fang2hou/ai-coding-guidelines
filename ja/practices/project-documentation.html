@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>必須のプロジェクトドキュメント · AI コーディングガイドライン</title>
+<meta name="description" content="すべてのプロジェクトは、AGENTS.md、README.md、DEVELOPMENT.md、CONTRIBUTING.md を維持しなければならない。重要なアーキテクチャ上の境界を持つプロジェクトでは、ARCHITECTURE.md も…">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/project-documentation.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/project-documentation.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/practices/project-documentation.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/project-documentation.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/practices/project-documentation.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI コーディングガイドライン">
+<meta property="og:title" content="必須のプロジェクトドキュメント · AI コーディングガイドライン">
+<meta property="og:description" content="すべてのプロジェクトは、AGENTS.md、README.md、DEVELOPMENT.md、CONTRIBUTING.md を維持しなければならない。重要なアーキテクチャ上の境界を持つプロジェクトでは、ARCHITECTURE.md も…">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/ja/practices/project-documentation.html">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="ナビゲーションを開閉">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="ナビゲーションを開閉"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="../index.html" aria-label="AI コーディングガイドライン"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI コーディングガイドライン</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="このページの目次" title="このページの目次" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="言語" title="言語" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="言語"><a lang="en" hreflang="en" href="../../en/practices/project-documentation.html">English</a><a lang="zh" hreflang="zh" href="../../zh/practices/project-documentation.html">中文</a><a lang="ja" hreflang="ja" href="project-documentation.html" aria-current="true" class="current">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="テーマ: システムに合わせる" title="テーマ: システムに合わせる" data-label-theme="テーマ" data-label-auto="システムに合わせる" data-label-light="ライト" data-label-dark="ダーク"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub リポジトリ" title="GitHub リポジトリ"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">このページの目次</h2><button class="toc-dismiss" type="button" aria-label="メニューを閉じる"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout has-toc">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="ガイドライン一覧">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="メニューを閉じる" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="../index.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">概要</span></a>
+<a class="side-home" href="../index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">プロジェクトで使う</span></a>
+<a class="side-home" href="../glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">用語集</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">原則</span></h3><ul>
+<li><a href="../principles/core-principles.html"><span class="side-link-text">中核となるエンジニアリング原則</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">プラクティス</span></h3><ul>
+<li><a href="agent-protocol.html"><span class="side-link-text">エージェント運用プロトコル</span></a></li>
+<li><a href="agents-file.html"><span class="side-link-text">AGENTS.md の執筆</span></a></li>
+<li><a href="architecture-governance.html"><span class="side-link-text">アーキテクチャガバナンス</span></a></li>
+<li><a href="change-discipline.html"><span class="side-link-text">変更の規律</span></a></li>
+<li><a href="coding-standards.html"><span class="side-link-text">コーディング規約</span></a></li>
+<li><a href="corner-radius.html"><span class="side-link-text">角丸</span></a></li>
+<li><a href="dependencies.html"><span class="side-link-text">依存関係の管理方針</span></a></li>
+<li><a href="language-policy.html"><span class="side-link-text">言語ポリシー</span></a></li>
+<li><a href="pipeline.html"><span class="side-link-text">パイプライン</span></a></li>
+<li><a href="project-documentation.html" aria-current="page"><span class="side-link-text">必須のプロジェクトドキュメント</span></a></li>
+<li><a href="security.html"><span class="side-link-text">セキュリティ</span></a></li>
+<li><a href="testing.html"><span class="side-link-text">テスト戦略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">ツールチェーン</span></h3><ul>
+<li><a href="../toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="../toolchain/git.html"><span class="side-link-text">Git ワークフロー</span></a></li>
+<li><a href="../toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="../toolchain/go.html"><span class="side-link-text">Go ツールチェーン</span></a></li>
+<li><a href="../toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="../toolchain/python.html"><span class="side-link-text">Python ツールチェーン</span></a></li>
+<li><a href="../toolchain/quality-gates.html"><span class="side-link-text">品質ゲート</span></a></li>
+<li><a href="../toolchain/rust.html"><span class="side-link-text">Rust ツールチェーン</span></a></li>
+<li><a href="../toolchain/typescript.html"><span class="side-link-text">TypeScript ツールチェーン</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">ライブラリ</span></h3><ul>
+<li><a href="../libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="../libraries/frontend-framework.html"><span class="side-link-text">フロントエンドフレームワーク：Vite vs Next.js</span></a></li>
+<li><a href="../libraries/go-api-stack.html"><span class="side-link-text">Go API スタック</span></a></li>
+<li><a href="../libraries/python-api-stack.html"><span class="side-link-text">Python API スタック</span></a></li>
+<li><a href="../libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="../libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="../libraries/typescript-backend.html"><span class="side-link-text">TypeScript バックエンド</span></a></li>
+<li><a href="../libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">プラットフォーム</span></h3><ul>
+<li><a href="../platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API リファレンス</span></a></li>
+<li><a href="../platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass の設計（Apple プラットフォーム）</span></a></li>
+<li><a href="../platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 実装パターン</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<details class="page-toc-inline">
+<summary><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg><span>このページの目次</span><svg class="icon toc-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+<ul>
+<li><a class="toc-link" href="#agents-md">AGENTS.md</a></li>
+<li><a class="toc-link" href="#readme-md">README.md</a></li>
+<li><a class="toc-link" href="#development-md">DEVELOPMENT.md</a></li>
+<li><a class="toc-link" href="#contributing-md">CONTRIBUTING.md</a></li>
+<li><a class="toc-link" href="#architecture-md">ARCHITECTURE.md</a></li>
+</ul>
+</details>
+<article class="doc">
+<div class="doc-meta">
+<a class="meta-cat" href="../index.html#cat-practices">プラクティス</a>
+
+</div>
+<h1 id="必須のプロジェクトドキュメント">必須のプロジェクトドキュメント<a href="#必須のプロジェクトドキュメント" class="anchor" aria-hidden="true" tabindex="-1">#</a></h1>
+<p>すべてのプロジェクトは、<code>AGENTS.md</code>、<code>README.md</code>、<code>DEVELOPMENT.md</code>、<code>CONTRIBUTING.md</code> を維持しなければならない。重要なアーキテクチャ上の境界を持つプロジェクトでは、<code>ARCHITECTURE.md</code> も必須とする。出発点として、<code>templates/</code> 配下のテンプレートを使用すること。</p>
+<p>ドキュメントの役割分担は <a href="https://diataxis.fr/">Diátaxis</a> に基づく。<code>README.md</code> は人間の読者にプロジェクトを紹介して使い始め方を示し、<code>DEVELOPMENT.md</code> と <code>CONTRIBUTING.md</code> は利用方法と参考資料、<code>ARCHITECTURE.md</code> は解説、<code>AGENTS.md</code> はエージェント向けの参考資料を担う。1 つのドキュメントが担うモードは 1 つとし、別のモードの内容が必要になったら、それを担うドキュメントへリンクすること。1 つのファイルに混ぜないこと。</p>
+<h2 id="agents-md">AGENTS.md<a href="#agents-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトは、リポジトリのルートに <code>AGENTS.md</code> を置かなければならない。</p>
+<p>これはエージェント向けの入口である。コマンド、エンジニアリング標準、リポジトリの構成、境界、確定した言語ポリシー、プロジェクトの規約を記述する。</p>
+<p>書き方のルール（記載内容の振り分け、セクション順、長さの上限、ネストしたファイル）は、<a href="agents-file.html">AGENTS.md の執筆</a>で定める。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/project-agents.template.md">project-agents.template.md</a></p>
+<h2 id="readme-md">README.md<a href="#readme-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトに <code>README.md</code> を含めること。</p>
+<h3 id="読者と役割">読者と役割<a href="#読者と役割" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p><code>README.md</code> は人間の読者に向けて書く。プロジェクトの概要、できること、使い方や動かし方を簡潔に伝えることが目的である。チュートリアル、内部向け参考資料、長い背景解説を重複して載せず、単体でプロジェクトの入口として機能させること。</p>
+<p><code>README.md</code> をリポジトリ内のファイル案内ページや、「目的 → 読むドキュメント」形式の索引表にしてはならない。現在の AI コーディングエージェントは <code>AGENTS.md</code> や <code>docs/</code> を自動で検出し、リポジトリ構成や内部ドキュメントへのリンクもすでに <code>AGENTS.md</code> にまとまっている。</p>
+<p>エージェント向けのルール（エンジニアリング標準、<a href="language-policy.html">言語ポリシー</a>で確定したプロダクト/UI の言語ポリシー、プロジェクト規約）は <code>AGENTS.md</code> に記録し、<code>README.md</code> には記載しないこと。</p>
+<h3 id="構成とレイアウト">構成とレイアウト<a href="#構成とレイアウト" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>本文はリポジトリのディレクトリ構成ではなく、人間の読者が最初に必要とする情報の順に並べる。独立した Why セクションは設けず、次の順序に従うこと。</p>
+<ul>
+<li><strong>冒頭のヒーローブロック</strong>：<code>&lt;div align=&quot;center&quot;&gt;</code> で中央揃えにし、任意のロゴやバナー画像、1 つだけの <code># プロジェクト名</code> 見出し（ロゴにプロジェクト名が含まれる場合は省略）、プロジェクトの内容と対象を一文で示すタグライン、任意のナビゲーションリンク行、<code>flat-square</code> スタイル（<code>style=flat-square</code>）の簡潔なステータスバッジを順に配置する。</li>
+<li><strong>概要</strong>：プロジェクトが何を行い、どんな課題を解決するかを平易な 1〜3 文で述べる。スコープの制約や開発ステータスは、読者の時間を節約できる場合に限り記す。</li>
+<li><strong>ビジュアルプレビュー（任意）</strong>：UI、CLI 出力、生成物など視覚的に示せる対象がある場合は、概要の直後にスクリーンショットまたは短い GIF を置く。</li>
+<li><strong>利用者向けの導入と使い方</strong>：エンドユーザー向けの手順とコントリビューター向けの開発環境構築を明確に分ける。インストール可能なプログラム、CLI、パッケージ、フォントなどのダウンロード配布物では、<code>## 📦 Installation</code>（または <code>## 📦 Download &amp; Install</code>）で入手方法を示し、続けて <code>## 🚀 Usage</code> で代表的な 2〜3 の使い方を期待出力付きで示す。エンドユーザーへ配布しない開発専用リポジトリでは <code>Installation</code> を省き、<code>## 🚀 Quick Start</code> とする。</li>
+<li><strong>任意の紹介セクション</strong>：プロジェクトに本当に必要なセクションだけを、読者に最も伝えたい順に並べる。
+<ul>
+<li><code>Features</code>：プロジェクトの機能を飾らず説明する。内容が多い場合は番号付きの <code>### `1` </code> / <code>### `2` </code> サブセクションで各 1〜2 文にまとめ、簡潔なプロジェクトでは 2 列の表または自然な文の箇条書きを使う。</li>
+<li><code>Concepts</code>：既存の代替案とは異なる独自の設計思想や切り口を持つプロジェクトでのみ置く。</li>
+<li><code>Performance</code>：性能最適化や性能が重要な用途を主眼とするプロジェクトでのみ置く。性能の主張を一文で述べ、裏付けとなる図表、計測環境（ハードウェア、ランタイムバージョン、計測日）、再現手順へのリンクを添える。数値の裏付けがない主張は書かない。</li>
+<li><code>Experiments</code>：実験的な機能を提供している場合にのみ置く。</li>
+</ul>
+</li>
+<li><strong>ローカル開発</strong>：リポジトリ開発者向けのローカル構築手順（<code>mise install</code>、<code>mise run dev</code>、必要な環境変数、外部サービス）は独立した <code>## 🛠️ Development</code> セクションにまとめ、利用者向けの <code>Installation</code> や <code>Usage</code> に混ぜない。</li>
+<li><strong>コントリビュート</strong>：個人プロジェクトではない場合に限り簡潔な <code>## 🤝 Contributing</code> セクションを置き、<code>DEVELOPMENT.md</code>、<code>CONTRIBUTING.md</code>、および存在する場合は <code>ARCHITECTURE.md</code> へリンクする。個人プロジェクトか共同プロジェクトか判断できない場合は、追加する前にユーザーへ確認すること。</li>
+<li><strong>ライセンス</strong>：<code>## 📄 License</code> の直下に <code>MIT</code> のように SPDX 識別子を直接書く（必要なら <code>LICENSE</code> ファイルへ直接リンクする）。<code>MIT — see LICENSE</code> のような冗長な前置きは書かないこと。</li>
+</ul>
+<p>長い補助情報（プラットフォーム別の手順、環境変数の一覧、応用例、トラブルシューティング）は <code>&lt;details&gt;</code> ブロックに折りたたむ。<code>&lt;summary&gt;</code> は数語で内容を示し、Markdown が正しく描画されるよう直後に空行を 1 つ入れる。冒頭、利用者向けの主要コマンド、ライセンスは折りたたまないこと。</p>
+<h3 id="ai-エージェント向けの案内">AI エージェント向けの案内<a href="#ai-エージェント向けの案内" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p><code>README.md</code> に定型的な AI 引き継ぎプロンプト（「以下の文をエージェントに貼り付けて <code>AGENTS.md</code> を読ませる」など）を載せてはならない。</p>
+<p>標準的なプロジェクトではエージェントが自動で <code>AGENTS.md</code> を読むため、<code>README.md</code> から AI 向けの案内自体を省く。インストール可能なエージェントスキル、MCP サーバー、独自のルーティングファイルなど、そのプロジェクト固有の AI 入口や自明でないワークフローがある場合に限り、実際の導入手順だけを簡潔に記すこと。</p>
+<h3 id="見出し-書式-トーン">見出し、書式、トーン<a href="#見出し-書式-トーン" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>Markdown の見出し階層を明快に保つ。最上位の <code>#</code> は冒頭のプロジェクト名に最大 1 回だけ使い（ロゴにプロジェクト名が含まれる場合は省く）、主要セクションに <code>##</code>、サブセクションに <code>###</code> を使う。複数の H1 見出し、シェアボタン行、宣伝用のスローガンは使わないこと。</p>
+<p>すべての <code>##</code> 主要セクション見出しの先頭には、意味に合った絵文字を 1 つ付ける。標準の <code>##</code> セクションでは、導入・ダウンロードに 📦（<code>Installation</code> / <code>Download &amp; Install</code>）、使い方・開始手順に 🚀（<code>Usage</code> / <code>Quick Start</code>）、機能に ✨（<code>Features</code>）、概念に 💡（<code>Concepts</code>）、性能に ⚡（<code>Performance</code>）、実験に 🧪（<code>Experiments</code>）、ローカル開発に 🛠️（<code>Development</code>）、コントリビュートに 🤝（<code>Contributing</code>）、ライセンスに 📄（<code>License</code>）を使う。番号付きの <code>### `1` </code> / <code>### `2` </code> や簡潔なプレーンテキストの方が収まりが良い場合、<code>###</code> 見出しに無理に絵文字を付けない。プロジェクト名の <code>#</code> 見出しと本文には絵文字を使わないこと。</p>
+<p>次の書式パターンは禁止とする。</p>
+<ul>
+<li>リンクバーの区切りに <code>·</code>（中点・インターパンク）を使ってはならない。代わりに <code>|</code> または個別のバッジを使うこと。</li>
+</ul>
+<div class="code-block" data-lang="markdown"><pre><code class="language-markdown">&lt;!-- 避ける --&gt;
+[<span class="hljs-string">Docs</span>](<span class="hljs-link">...</span>) · [<span class="hljs-string">Changelog</span>](<span class="hljs-link">...</span>)
+[<span class="hljs-string">English</span>](<span class="hljs-link">...</span>) · [<span class="hljs-string">中文</span>](<span class="hljs-link">...</span>) · [<span class="hljs-string">日本語</span>](<span class="hljs-link">...</span>)
+
+&lt;!-- 代わりに使う --&gt;
+[<span class="hljs-string">Docs</span>](<span class="hljs-link">...</span>) | [<span class="hljs-string">Changelog</span>](<span class="hljs-link">...</span>)
+[<span class="hljs-string">English</span>](<span class="hljs-link">...</span>) | [<span class="hljs-string">中文</span>](<span class="hljs-link">...</span>) | [<span class="hljs-string">日本語</span>](<span class="hljs-link">...</span>)
+</code></pre>
+</div><ul>
+<li><code>- **項目名** — 説明</code> という太字とエムダッシュを組み合わせた箇条書きの定型を使ってはならない。README 全体でもエムダッシュ（<code>—</code>）の使用は最小限に抑え、読点、コロン、括弧、通常の文、<code>###</code> サブセクション、2 列の表で表現すること。</li>
+</ul>
+<p>文体は実用的かつ率直に保つ。</p>
+<ul>
+<li>基本的な機能も含め、プロジェクトが実際に行うことを事実に即して記述する。「競合との違い」を誇張する宣伝文句や、根拠のない美辞麗句（<code>powerful</code>、<code>seamless</code>、<code>modern-design</code>、<code>revolutionary</code>、<code>easy</code>、<code>simple</code>、<code>簡単</code>、<code>手軽</code>、<code>シームレス</code>、<code>革新的</code>、<code>強力</code> など）は避けること。</li>
+<li>段落は 1〜3 文に収め、コピーして使うコマンドはコードブロックに置く。列挙は長い文章にせず、リストか表で示す。</li>
+<li>目次は、README が数画面を超える長さになった場合にのみ追加する。</li>
+</ul>
+<h3 id="メンテナンス">メンテナンス<a href="#メンテナンス" class="anchor" aria-hidden="true" tabindex="-1">#</a></h3>
+<p>日常の更新で <code>README.md</code> を頻繁に書き換えずに済む構成を保つ。ドキュメント、ルール、ファイルの正確な件数や、コマンド出力に含まれる具体的な件数文字列など、項目や言語を増やすたびに陳腐化する数値や内部識別子は書かないこと。<code>README.md</code> の更新は、大きな仕様変更、セットアップや使い方の変更、節目のリファクタリングにとどめる。</p>
+<p>古い README は無いより悪い。読者を誤った手順へ導いてしまうからである。セットアップ、使い方、対象範囲が変わるときは、同じ変更の中で <code>README.md</code> も更新すること。開発が停滞または停止した場合は、冒頭で明示すること。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/README.template.md">README.template.md</a></p>
+<h2 id="development-md">DEVELOPMENT.md<a href="#development-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトに <code>DEVELOPMENT.md</code> を含めること。</p>
+<p>開発ワークフローを手順に沿って説明し、その後にコマンドと設定の参考資料を置くこと。</p>
+<p>次の内容を記載すること。</p>
+<ul>
+<li>開発ワークフロー</li>
+<li>ツールチェーン</li>
+<li>よく使う mise タスク</li>
+<li>コーディング規約</li>
+<li>テストワークフロー</li>
+<li>ローカル環境のセットアップ</li>
+<li>検証ワークフロー</li>
+<li>必要に応じたデプロイワークフロー</li>
+</ul>
+<p>人間と AI エージェントの双方が、開発の進め方を理解できるようにすること。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/DEVELOPMENT.template.md">DEVELOPMENT.template.md</a></p>
+<h2 id="contributing-md">CONTRIBUTING.md<a href="#contributing-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>すべてのプロジェクトに <code>CONTRIBUTING.md</code> を含めること。</p>
+<p>このドキュメントは、変更を送ってからマージされるまでの手順を順に示す。背景解説の長文は書かないこと。</p>
+<p>次の内容を文書化すること。</p>
+<ul>
+<li>コントリビューションにあたっての要件</li>
+<li>必要に応じた Issue のワークフロー</li>
+<li>プルリクエストのワークフロー</li>
+<li>レビュー要件</li>
+<li>必須の検証</li>
+<li>コミット規約</li>
+</ul>
+<p>すべてのプルリクエストの説明文には、次の内容を明確に含めること。</p>
+<ul>
+<li>変更の目的</li>
+<li>変更の影響</li>
+<li>関連する文脈や背景</li>
+<li>潜在的なリスクや懸念</li>
+<li>実施したテストまたは検証</li>
+</ul>
+<p>GitHub のプルリクエストテンプレートは、これらの要件との同期を保つこと。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/CONTRIBUTING.template.md">CONTRIBUTING.template.md</a></p>
+<h2 id="architecture-md">ARCHITECTURE.md<a href="#architecture-md" class="anchor" aria-hidden="true" tabindex="-1">#</a></h2>
+<p>重要なアーキテクチャ上の境界を持つプロジェクトでは、<code>ARCHITECTURE.md</code> を維持すること。</p>
+<p>内容は短く実用的に保つ。簡潔な概要、大まかなコード構成（モジュール名だけを示し、個別ファイルにはリンクしない）、アーキテクチャの不変条件を記載する。</p>
+<p>この文書の役割は、境界を設けた理由を説明してアーキテクチャの意図しない崩れを防ぐことであり、網羅的なリファレンスや抽象的な理論書にすることではない。</p>
+<p>不変条件と ADR の運用は、<a href="architecture-governance.html">アーキテクチャガバナンス</a>で定める。</p>
+<p>テンプレート：<a href="https://github.com/fang2hou/ai-coding-guidelines/blob/main/templates/ARCHITECTURE.template.md">ARCHITECTURE.template.md</a></p>
+
+</article>
+<section class="related-section" aria-label="関連ガイドライン">
+<h2>関連ガイドライン</h2>
+<div class="related-grid">
+<div class="related-group">
+<h3>この文書が参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="agents-file.html"><span class="related-cat">プラクティス</span><span class="related-title">AGENTS.md の執筆</span></a></li>
+<li><a class="related-link" href="language-policy.html"><span class="related-cat">プラクティス</span><span class="related-title">言語ポリシー</span></a></li>
+<li><a class="related-link" href="architecture-governance.html"><span class="related-cat">プラクティス</span><span class="related-title">アーキテクチャガバナンス</span></a></li>
+</ul>
+</div>
+<div class="related-group">
+<h3>この文書を参照しているガイドライン</h3>
+<ul class="related-list">
+<li><a class="related-link" href="architecture-governance.html"><span class="related-cat">プラクティス</span><span class="related-title">アーキテクチャガバナンス</span></a></li>
+<li><a class="related-link" href="language-policy.html"><span class="related-cat">プラクティス</span><span class="related-title">言語ポリシー</span></a></li>
+</ul>
+</div>
+</div>
+</section>
+<nav class="page-nav" aria-label="前へ / 次へ">
+<a class="page-nav-prev" href="pipeline.html"><span>前へ · プラクティス</span><strong>パイプライン</strong></a>
+<a class="page-nav-next" href="security.html"><span>次へ · プラクティス</span><strong>セキュリティ</strong></a>
+</nav>
+</main>
+<aside class="page-toc" aria-label="このページの目次">
+<div class="toc-inner">
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg>このページの目次</h2>
+<ul>
+<li><a class="toc-link" href="#agents-md">AGENTS.md</a></li>
+<li><a class="toc-link" href="#readme-md">README.md</a></li>
+<li><a class="toc-link" href="#development-md">DEVELOPMENT.md</a></li>
+<li><a class="toc-link" href="#contributing-md">CONTRIBUTING.md</a></li>
+<li><a class="toc-link" href="#architecture-md">ARCHITECTURE.md</a></li>
+</ul>
+</div>
+</aside>
+</div>
+</body>
+</html>

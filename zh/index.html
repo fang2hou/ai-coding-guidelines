@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf1c7">
+<title>AI 编码指南</title>
+<meta name="description" content="面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范。">
+<link rel="canonical" href="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<link rel="alternate" hreflang="en" href="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<link rel="alternate" hreflang="zh" href="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<link rel="alternate" hreflang="ja" href="https://fang2hou.github.io/ai-coding-guidelines/ja/index.html">
+<link rel="alternate" hreflang="x-default" href="https://fang2hou.github.io/ai-coding-guidelines/en/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 编码指南">
+<meta property="og:title" content="AI 编码指南">
+<meta property="og:description" content="面向 AI Agent 与代码评审者的工程指南：涵盖工具链、工程实践、库与框架选型及平台规范。">
+<meta property="og:url" content="https://fang2hou.github.io/ai-coding-guidelines/zh/index.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpath%20fill-rule%3D'evenodd'%20fill%3D'%233a8b8f'%20d%3D'M14%207h36v50L32%2044%2014%2057V7Zm10%2013h16v4H24v-4Zm0%2010h10v4H24v-4Z'%2F%3E%3C%2Fsvg%3E">
+<script src="../site.js?v=769ad59e"></script>
+<link rel="stylesheet" href="../style.css?v=769ad59e">
+</head>
+<body>
+<div class="page-scroll" aria-hidden="true" hidden><div class="page-scroll-thumb"></div></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="展开导航菜单">
+<a class="skip-link" href="#main">跳至正文</a>
+<header class="site-header">
+<label class="nav-toggle-label" for="nav-toggle" aria-label="展开导航菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />   <path d="M4 12h16" />   <path d="M4 19h16" /></svg></label>
+<a class="site-title" href="index.html" aria-label="AI 编码指南"><svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" d="M7 3.5h18v25l-9-6.5-9 6.5v-25Zm5 6.5h8v2h-8v-2Zm0 5h5v2h-5v-2Z"/></svg><span class="site-title-text">AI 编码指南</span></a>
+<div class="header-actions">
+<button class="toc-toggle" type="button" aria-label="本页目录" title="本页目录" aria-haspopup="dialog" aria-controls="mobile-toc" hidden><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h.01" />   <path d="M3 12h.01" />   <path d="M3 19h.01" />   <path d="M8 5h13" />   <path d="M8 12h13" />   <path d="M8 19h13" /></svg></button>
+<div class="lang-switch">
+<button class="lang-toggle" type="button" aria-label="语言" title="语言" aria-expanded="false" aria-controls="language-options"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><ellipse cx="12" cy="12" rx="4" ry="10" /></svg></button>
+<nav class="lang-nav" id="language-options" aria-label="语言"><a lang="en" hreflang="en" href="../en/index.html">English</a><a lang="zh" hreflang="zh" href="index.html" aria-current="true" class="current">中文</a><a lang="ja" hreflang="ja" href="../ja/index.html">日本語</a></nav>
+</div>
+<button class="theme-toggle" type="button" data-mode="auto" aria-label="主题: 跟随系统" title="主题: 跟随系统" data-label-theme="主题" data-label-auto="跟随系统" data-label-light="浅色" data-label-dark="深色"><svg class="theme-icon theme-icon-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" />   <line x1="8" x2="16" y1="21" y2="21" />   <line x1="12" x2="12" y1="17" y2="21" /></svg><svg class="theme-icon theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" />   <path d="M12 2v2" />   <path d="M12 20v2" />   <path d="m4.93 4.93 1.41 1.41" />   <path d="m17.66 17.66 1.41 1.41" />   <path d="M2 12h2" />   <path d="M20 12h2" />   <path d="m6.34 17.66-1.41 1.41" />   <path d="m19.07 4.93-1.41 1.41" /></svg><svg class="theme-icon theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></button>
+<a class="repo-link" href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub 仓库" title="GitHub 仓库"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />   <path d="M9 18c-4.51 2-5-2-7-2" /></svg></a>
+</div>
+</header>
+<dialog class="toc-dialog" id="mobile-toc" aria-labelledby="mobile-toc-title">
+<div class="toc-dialog-header"><h2 id="mobile-toc-title">本页目录</h2><button class="toc-dismiss" type="button" aria-label="关闭菜单"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></button></div>
+<nav class="toc-dialog-links" aria-labelledby="mobile-toc-title"></nav>
+</dialog>
+<label class="nav-overlay" for="nav-toggle" aria-hidden="true"></label>
+<div class="layout">
+<div class="sidebar-shell">
+<aside class="sidebar">
+<nav class="side-nav" aria-label="指南目录">
+<div class="side-top">
+<label class="side-close" for="nav-toggle" title="关闭菜单" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" />   <path d="m6 6 12 12" /></svg></label>
+<a class="side-home" href="index.html" aria-current="page"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="side-label">总览</span></a>
+<a class="side-home" href="index.html#usage-heading"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19h8" />   <path d="m4 17 6-6-6-6" /></svg><span class="side-label">在项目中使用</span></a>
+<a class="side-home" href="glossary.html"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16" />   <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><span class="side-label">术语表</span></a>
+</div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" />   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg><span class="side-label">核心原则</span></h3><ul>
+<li><a href="principles/core-principles.html"><span class="side-link-text">核心工程原则</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" />   <path d="M12 19H3" />   <path d="M14 3v4" />   <path d="M16 17v4" />   <path d="M21 12h-9" />   <path d="M21 19h-5" />   <path d="M21 5h-7" />   <path d="M8 10v4" />   <path d="M8 12H3" /></svg><span class="side-label">工程实践</span></h3><ul>
+<li><a href="practices/agent-protocol.html"><span class="side-link-text">Agent 操作协议</span></a></li>
+<li><a href="practices/agents-file.html"><span class="side-link-text">编写 AGENTS.md</span></a></li>
+<li><a href="practices/architecture-governance.html"><span class="side-link-text">架构治理</span></a></li>
+<li><a href="practices/change-discipline.html"><span class="side-link-text">变更纪律</span></a></li>
+<li><a href="practices/coding-standards.html"><span class="side-link-text">编码标准</span></a></li>
+<li><a href="practices/corner-radius.html"><span class="side-link-text">圆角</span></a></li>
+<li><a href="practices/dependencies.html"><span class="side-link-text">依赖管理规范</span></a></li>
+<li><a href="practices/language-policy.html"><span class="side-link-text">语言政策</span></a></li>
+<li><a href="practices/pipeline.html"><span class="side-link-text">流水线</span></a></li>
+<li><a href="practices/project-documentation.html"><span class="side-link-text">必备项目文档</span></a></li>
+<li><a href="practices/security.html"><span class="side-link-text">安全</span></a></li>
+<li><a href="practices/testing.html"><span class="side-link-text">测试策略</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg><span class="side-label">工具链</span></h3><ul>
+<li><a href="toolchain/databricks.html"><span class="side-link-text">Databricks</span></a></li>
+<li><a href="toolchain/git.html"><span class="side-link-text">Git 工作流</span></a></li>
+<li><a href="toolchain/github-actions.html"><span class="side-link-text">GitHub Actions</span></a></li>
+<li><a href="toolchain/go.html"><span class="side-link-text">Go 工具链</span></a></li>
+<li><a href="toolchain/mise.html"><span class="side-link-text">mise</span></a></li>
+<li><a href="toolchain/python.html"><span class="side-link-text">Python 工具链</span></a></li>
+<li><a href="toolchain/quality-gates.html"><span class="side-link-text">质量门禁</span></a></li>
+<li><a href="toolchain/rust.html"><span class="side-link-text">Rust 工具链</span></a></li>
+<li><a href="toolchain/typescript.html"><span class="side-link-text">TypeScript 工具链</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />   <rect x="14" y="2" width="8" height="8" rx="1" /></svg><span class="side-label">库与框架</span></h3><ul>
+<li><a href="libraries/agentation.html"><span class="side-link-text">Agentation</span></a></li>
+<li><a href="libraries/frontend-framework.html"><span class="side-link-text">前端框架：Vite 与 Next.js</span></a></li>
+<li><a href="libraries/go-api-stack.html"><span class="side-link-text">Go API 技术栈</span></a></li>
+<li><a href="libraries/python-api-stack.html"><span class="side-link-text">Python API 技术栈</span></a></li>
+<li><a href="libraries/svelte.html"><span class="side-link-text">Svelte（Svelte 5 + SvelteKit）</span></a></li>
+<li><a href="libraries/tailwindcss.html"><span class="side-link-text">Tailwind CSS</span></a></li>
+<li><a href="libraries/typescript-backend.html"><span class="side-link-text">TypeScript 后端技术栈</span></a></li>
+<li><a href="libraries/vercel-ai-sdk.html"><span class="side-link-text">Vercel AI SDK</span></a></li>
+</ul></div>
+<div class="side-group">
+<h3><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" />   <path d="M3 9h18" />   <path d="M9 21V9" /></svg><span class="side-label">平台规范</span></h3><ul>
+<li><a href="platforms/liquid-glass-api.html"><span class="side-link-text">Liquid Glass API 参考</span></a></li>
+<li><a href="platforms/liquid-glass-design.html"><span class="side-link-text">Liquid Glass 设计（Apple 平台）</span></a></li>
+<li><a href="platforms/liquid-glass-patterns.html"><span class="side-link-text">Liquid Glass 实现模式</span></a></li>
+</ul></div>
+</nav>
+</aside>
+<div class="sidebar-fade sidebar-fade-top" aria-hidden="true"></div>
+<div class="sidebar-fade sidebar-fade-bottom" aria-hidden="true"></div>
+</div>
+<main class="main" id="main">
+<article class="doc index-doc">
+<header class="index-hero">
+<p class="kicker">工程参考 · 33 篇</p>
+<h1>AI 编码指南</h1>
+<p class="intro">给 AI Agent 和代码评审者看的工程指南，涵盖工具链、工程实践、技术选型与平台规范，并按任务场景组织阅读顺序。</p>
+</header>
+<section class="usage-section" aria-labelledby="usage-heading"><div class="section-head"><h2 id="usage-heading">在项目中使用</h2></div><div class="usage-example"><div class="usage-toolbar"><h3>安装 skill</h3><button class="copy-button" type="button" aria-label="复制: 安装 skill" data-copy-label="复制" data-copied-label="已复制" data-error-label="请选中文字并复制"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span role="status">复制</span></button></div><p>在项目目录运行这条命令，然后明确要求 Agent 按本指南执行当前任务。</p><pre><code>pnpm dlx skills add fang2hou/ai-coding-guidelines@apply-guidelines</code></pre></div><div class="usage-example"><div class="usage-toolbar"><h3>直接交给 AI Agent</h3><button class="copy-button" type="button" aria-label="复制: 直接交给 AI Agent" data-copy-label="复制" data-copied-label="已复制" data-error-label="请选中文字并复制"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" />   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span role="status">复制</span></button></div><p>也可以不安装 skill，直接把下面的提示词发给 AI Agent。</p><pre><code>请按 https://github.com/fang2hou/ai-coding-guidelines 中的指南执行当前任务。
+从 PORTAL.md 开始，按任务对应的阅读顺序查阅并应用相关规范。</code></pre></div></section>
+<section class="start-section" aria-labelledby="start-heading">
+<div class="section-head"><h2 id="start-heading">必读基础</h2><p>开始任何任务前，先读这两篇。</p></div>
+<ul class="start-list">
+<li><a class="start-item" href="principles/core-principles.html"><span class="start-copy"><strong>核心工程原则</strong><span>整套指南为什么存在，以及所有规则背后的五条基本原则。</span></span><span class="start-arrow" aria-hidden="true"><svg class="icon arrow-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" />   <path d="m12 5 7 7-7 7" /></svg></span></a></li>
+<li><a class="start-item" href="practices/agent-protocol.html"><span class="start-copy"><strong>Agent 操作协议</strong><span>AI Agent 在动手修改代码前必须执行的 12 步操作协议。</span></span><span class="start-arrow" aria-hidden="true"><svg class="icon arrow-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" />   <path d="m12 5 7 7-7 7" /></svg></span></a></li>
+</ul></section>
+<section class="paths-section" aria-labelledby="paths-heading">
+<div class="section-head"><h2 id="paths-heading">按任务选读</h2><p>根据手头的任务，按顺序阅读对应的指南链。</p></div>
+<div class="path-list">
+<div class="path-row"><h3>新建 TypeScript / 前端项目</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/typescript.html">TypeScript 工具链</a></li>
+<li><a class="path-link" href="libraries/frontend-framework.html">前端框架：Vite 与 Next.js</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">编码标准</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">质量门禁</a></li></ol></div>
+<div class="path-row"><h3>构建 TypeScript 后端服务</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/typescript.html">TypeScript 工具链</a></li>
+<li><a class="path-link" href="libraries/typescript-backend.html">TypeScript 后端技术栈</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">编码标准</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">质量门禁</a></li></ol></div>
+<div class="path-row"><h3>开发 Python API 服务</h3><ol class="path-steps"><li><a class="path-link" href="toolchain/mise.html">mise</a></li>
+<li><a class="path-link" href="toolchain/python.html">Python 工具链</a></li>
+<li><a class="path-link" href="libraries/python-api-stack.html">Python API 技术栈</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">编码标准</a></li>
+<li><a class="path-link" href="toolchain/quality-gates.html">质量门禁</a></li></ol></div>
+<div class="path-row"><h3>UI 样式与圆角细节</h3><ol class="path-steps"><li><a class="path-link" href="practices/corner-radius.html">圆角</a></li>
+<li><a class="path-link" href="practices/coding-standards.html">编码标准</a></li>
+<li><a class="path-link" href="practices/language-policy.html">语言政策</a></li>
+<li><a class="path-link" href="libraries/tailwindcss.html">Tailwind CSS</a></li></ol></div>
+<div class="path-row"><h3>iOS 27 / macOS 27 Liquid Glass 应用</h3><ol class="path-steps"><li><a class="path-link" href="platforms/liquid-glass-design.html">Liquid Glass 设计（Apple 平台）</a></li>
+<li><a class="path-link" href="platforms/liquid-glass-patterns.html">Liquid Glass 实现模式</a></li>
+<li><a class="path-link" href="platforms/liquid-glass-api.html">Liquid Glass API 参考</a></li></ol></div>
+<div class="path-row"><h3>测试、Git 提交与 CI/CD</h3><ol class="path-steps"><li><a class="path-link" href="practices/testing.html">测试策略</a></li>
+<li><a class="path-link" href="toolchain/git.html">Git 工作流</a></li>
+<li><a class="path-link" href="practices/change-discipline.html">变更纪律</a></li>
+<li><a class="path-link" href="practices/pipeline.html">流水线</a></li>
+<li><a class="path-link" href="toolchain/github-actions.html">GitHub Actions</a></li></ol></div>
+</div></section>
+<section class="catalog-section" aria-labelledby="catalog-heading">
+<div class="section-head"><h2 id="catalog-heading">按分类浏览</h2><p>全部指南按所属技术层分组，便于逐类浏览。</p></div>
+<div class="catalog">
+<section class="cat-section" id="cat-principles">
+<div class="cat-header"><h3>核心原则</h3><span class="cat-count">1 篇</span></div>
+<p>整套指南立身的基本原则：快速校验、收敛选择、解决根本原因。</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="principles/core-principles.html"><span class="doc-row-head"><strong>核心工程原则</strong></span><span class="doc-summary">本指南规定 AI 辅助快速验证想法、开发 POC 时遵循的工程标准。</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-practices">
+<div class="cat-header"><h3>工程实践</h3><span class="cat-count">12 篇</span></div>
+<p>日常工程实践：编码规范、测试、项目文档、依赖管理、流水线与安全。</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="practices/agent-protocol.html"><span class="doc-row-head"><strong>Agent 操作协议</strong></span><span class="doc-summary">开始实质性变更前，AI Agent 应：</span></a></li>
+<li><a class="doc-row" href="practices/agents-file.html"><span class="doc-row-head"><strong>编写 AGENTS.md</strong></span><span class="doc-summary">AGENTS.md 是仓库中 AI Agent 的入口文件。Agent 工具在每次会话开始时都会加载它，且上下文空间有限，因此每一行都必须言之有物。</span></a></li>
+<li><a class="doc-row" href="practices/architecture-governance.html"><span class="doc-row-head"><strong>架构治理</strong></span><span class="doc-summary">在 ARCHITECTURE.md 中明确记录架构边界和不变量，防止 AI Agent 无意间打破它们。</span></a></li>
+<li><a class="doc-row" href="practices/change-discipline.html"><span class="doc-row-head"><strong>变更纪律</strong></span><span class="doc-summary">每项实质性变更交付评审前，都要按这份清单检查，并遵循操作协议。</span></a></li>
+<li><a class="doc-row" href="practices/coding-standards.html"><span class="doc-row-head"><strong>编码标准</strong></span><span class="doc-summary">遵循所用语言和框架的通行惯例，不要另搞一套私有写法。</span></a></li>
+<li><a class="doc-row" href="practices/corner-radius.html"><span class="doc-row-head"><strong>圆角</strong></span><span class="doc-summary">圆角是一套体系，不要给每个元素单独写死数值：项目只需定义几个固定的设计令牌档位，所有圆角都从中选取。 两条规则涵盖所有情况：单层表面用连续圆角，嵌套表面用同心圆角。</span></a></li>
+<li><a class="doc-row" href="practices/dependencies.html"><span class="doc-row-head"><strong>依赖管理规范</strong></span><span class="doc-summary">添加依赖之前，按顺序回答以下五个问题：</span></a></li>
+<li><a class="doc-row" href="practices/language-policy.html"><span class="doc-row-head"><strong>语言政策</strong></span><span class="doc-summary">分别确定以下三种语言，切勿从其中一种推断另一种：</span></a></li>
+<li><a class="doc-row" href="practices/pipeline.html"><span class="doc-row-head"><strong>流水线</strong></span><span class="doc-summary">这些规则适用于任何系统中的 CI/CD 流水线——GitHub Actions、GitLab CI、CircleCI、Jenkins 或其他系统。所选系统的专属规则见对应的工具链文档。</span></a></li>
+<li><a class="doc-row" href="practices/project-documentation.html"><span class="doc-row-head"><strong>必备项目文档</strong></span><span class="doc-summary">每个项目必须维护 AGENTS.md、README.md、DEVELOPMENT.md 与 CONTRIBUTING.md。项目一旦形成有实际意义的架构边界，ARCHITECTURE.md 也成为必备文档。以 templates/ 下的模…</span></a></li>
+<li><a class="doc-row" href="practices/security.html"><span class="doc-row-head"><strong>安全</strong></span><span class="doc-summary">严禁向仓库提交任何敏感信息，包括但不限于：</span></a></li>
+<li><a class="doc-row" href="practices/testing.html"><span class="doc-row-head"><strong>测试策略</strong></span><span class="doc-summary">编写测试是为了验证有实际意义的行为，而不是凑覆盖率数字。</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-toolchain">
+<div class="cat-header"><h3>工具链</h3><span class="cat-count">9 篇</span></div>
+<p>各语言生态的统一工具链，本地开发与 CI 环境保持完全一致。</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="toolchain/databricks.html"><span class="doc-row-head"><strong>Databricks</strong></span><span class="doc-summary">对于数据和 AI 工作负载，优先选用 Databricks：用 Databricks Apps 托管和管理应用，用 Databricks Jobs 执行定时或自动任务。</span></a></li>
+<li><a class="doc-row" href="toolchain/git.html"><span class="doc-row-head"><strong>Git 工作流</strong></span><span class="doc-summary">所有项目提交必须遵循 Conventional Commits 规范。</span></a></li>
+<li><a class="doc-row" href="toolchain/github-actions.html"><span class="doc-row-head"><strong>GitHub Actions</strong></span><span class="doc-summary">GitHub Actions 是标准 CI/CD 平台；用户未指定流水线系统时，默认选择 GitHub Actions。与工具无关的流水线规则见 流水线。</span></a></li>
+<li><a class="doc-row" href="toolchain/go.html"><span class="doc-row-head"><strong>Go 工具链</strong></span><span class="doc-summary">TypeScript 与 Python 是 AI 辅助开发的默认语言。Go 不是默认选项，仅当项目确实需要以下能力时才选择 Go：</span></a></li>
+<li><a class="doc-row" href="toolchain/mise.html"><span class="doc-row-head"><strong>mise</strong></span><span class="doc-summary">每个项目必须使用 mise。</span></a></li>
+<li><a class="doc-row" href="toolchain/python.html"><span class="doc-row-head"><strong>Python 工具链</strong></span><span class="doc-summary">Python 与 TypeScript 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</span></a></li>
+<li><a class="doc-row" href="toolchain/quality-gates.html"><span class="doc-row-head"><strong>质量门禁</strong></span><span class="doc-summary">使用 prek 作为标准的预提交框架。</span></a></li>
+<li><a class="doc-row" href="toolchain/rust.html"><span class="doc-row-head"><strong>Rust 工具链</strong></span><span class="doc-summary">TypeScript 与 Python 是 AI 辅助开发的默认语言。Rust 不是默认选项，仅当项目确实需要以下能力时才选择 Rust：</span></a></li>
+<li><a class="doc-row" href="toolchain/typescript.html"><span class="doc-row-head"><strong>TypeScript 工具链</strong></span><span class="doc-summary">TypeScript 和 Python 是 AI 辅助开发的默认语言，因为它们的库生态和 AI Agent 生态最成熟。</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-libraries">
+<div class="cat-header"><h3>库与框架</h3><span class="cat-count">8 篇</span></div>
+<p>前后端、样式与 AI 应用的默认技术栈与选型边界。</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="libraries/agentation.html"><span class="doc-row-head"><strong>Agentation</strong></span><span class="doc-summary">视情况采用——在前端迭代和测试期间启用 Agentation，将视觉反馈转换为 AI 编码 Agent 可直接使用的结构化上下文。</span></a></li>
+<li><a class="doc-row" href="libraries/frontend-framework.html"><span class="doc-row-head"><strong>前端框架：Vite 与 Next.js</strong></span><span class="doc-summary">首选——Vite 是默认前端框架；只有项目确实需要全栈 React 能力时才选择 Next.js。</span></a></li>
+<li><a class="doc-row" href="libraries/go-api-stack.html"><span class="doc-row-head"><strong>Go API 技术栈</strong></span><span class="doc-summary">首选——Go Web 框架使用 Echo，请求校验使用 github.com/go-playground/validator/v10。只有依据 Go 工具链 的标准完成 Go 本身的选型论证后，才适用本技术栈。</span></a></li>
+<li><a class="doc-row" href="libraries/python-api-stack.html"><span class="doc-row-head"><strong>Python API 技术栈</strong></span><span class="doc-summary">首选——FastAPI + Pydantic + Uvicorn 是标准的 Python API 技术栈；三者应作为一个整体采用，而不是分别挑选。</span></a></li>
+<li><a class="doc-row" href="libraries/svelte.html"><span class="doc-row-head"><strong>Svelte（Svelte 5 + SvelteKit）</strong></span><span class="doc-summary">视情况采用——Svelte 5 加 SvelteKit 允许用于以开发乐趣为目标的小型个人项目和实验项目。它不是默认选择：生产前端仍使用前端框架中选定的 React 技术栈。</span></a></li>
+<li><a class="doc-row" href="libraries/tailwindcss.html"><span class="doc-row-head"><strong>Tailwind CSS</strong></span><span class="doc-summary">视情况采用——项目已在用 Tailwind，或组件套件依赖 Tailwind 时才使用。新的样式开发默认使用原生 CSS。</span></a></li>
+<li><a class="doc-row" href="libraries/typescript-backend.html"><span class="doc-row-head"><strong>TypeScript 后端技术栈</strong></span><span class="doc-summary">首选——TypeScript 后端服务使用 Hono。默认运行时为 Node.js Active LTS 版本线；Web 标准 API 使服务可移植到 Cloudflare Workers 等其他运行时。模型根据训练数据生成代码，主流且经…</span></a></li>
+<li><a class="doc-row" href="libraries/vercel-ai-sdk.html"><span class="doc-row-head"><strong>Vercel AI SDK</strong></span><span class="doc-summary">视情况采用——仅当 Next.js 项目确实要用到 Vercel AI SDK 的流式响应或 UI 集成功能时才使用。</span></a></li>
+</ul></section>
+<section class="cat-section" id="cat-platforms">
+<div class="cat-header"><h3>平台规范</h3><span class="cat-count">3 篇</span></div>
+<p>Apple 平台（iOS / macOS 27 Liquid Glass）的设计与实现规范。</p>
+<ul class="doc-list">
+<li><a class="doc-row" href="platforms/liquid-glass-api.html"><span class="doc-row-head"><strong>Liquid Glass API 参考</strong></span><span class="doc-summary">面向使用 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，最低系统版本均设为 27.0。核验日期为 2026-09-06，依据 Apple 文档和 Xcode 27 Beta 构建 27A5252f（iPhoneO…</span></a></li>
+<li><a class="doc-row" href="platforms/liquid-glass-design.html"><span class="doc-row-head"><strong>Liquid Glass 设计（Apple 平台）</strong></span><span class="doc-summary">面向 iOS 27 与原生 macOS 27 的新应用，优先通过系统导航和控件采用 Liquid Glass。只有标准组件无法满足交互需求时，才添加自定义玻璃效果。最低系统版本设为 iOS 27.0 或 macOS 27.0，使用 Xco…</span></a></li>
+<li><a class="doc-row" href="platforms/liquid-glass-patterns.html"><span class="doc-row-head"><strong>Liquid Glass 实现模式</strong></span><span class="doc-summary">这些模式用于通过 Xcode 27 构建的 iOS 27 和原生 macOS 27 应用，对应最低系统版本设为 27.0。优先采用 SwiftUI；自定义集成在 iOS 使用 UIKit，在 macOS 使用 AppKit。共享代码须隔离…</span></a></li>
+</ul></section>
+</div></section>
+</article>
+<nav class="page-nav" aria-label="上一篇 / 下一篇">
+<span class="page-nav-empty"></span>
+<a class="page-nav-next" href="principles/core-principles.html"><span>下一篇 · 核心原则</span><strong>核心工程原则</strong></a>
+</nav>
+<footer class="site-footer">
+<a href="https://github.com/fang2hou/ai-coding-guidelines" rel="noopener" aria-label="GitHub 仓库">GitHub 仓库<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10" />   <path d="M7 17 17 7" /></svg></a>
+</footer>
+</main>
+
+</div>
+</body>
+</html>
