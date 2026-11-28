@@ -1,10 +1,10 @@
 ---
 id: practices/coding-standards
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: e43127ef
+digest: 6d5e7a32
 ---
 
 # コーディング規約
@@ -80,6 +80,8 @@ function saveReportSilently(report: Report) {
 
 ## 命名
 
+コードの可読性は、まず明確な関数名と変数名で確保する。説明コメントに頼らず、名前そのもので意図を伝えること。
+
 目的と振る舞いを正確に表す、意味のある英語の名前を使用すること。
 
 次のような名前を避けること。
@@ -100,12 +102,44 @@ let hasUnsavedChanges = false;
 
 コードの言語の規則については、[言語ポリシー](language-policy.md)に従うこと。
 
+## 関数の分割
+
+明確な命名と適切な関数の分割を組み合わせ、関数名と呼び出し構造だけで処理の流れが分かるようにする。
+
+- 処理のまとまりに見出しコメントや補足説明が要る場合は、コメントを足さずに意図の伝わるヘルパー関数へ切り出すか、変数名を見直すこと。
+- 各関数は 1 つの抽象度にそろえること。上位の処理は、細かな実装の詳細を混ぜず、意味のある手順の連なりとして読める形にする。
+- 実際の振る舞いの境界に沿って分割すること。処理の流れを追いにくくするだけの 1 行ラッパー関数は作らない。
+
+```ts
+// bad
+function checkout(cart: Cart, user: User) {
+  // verify inventory before charging
+  for (const item of cart.items) {
+    if (item.quantity > item.stock) throw new OutOfStockError(item.id);
+  }
+  // apply member discount
+  const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = user.isMember ? subtotal * 0.9 : subtotal;
+  return chargeCustomer(user.id, total);
+}
+
+// good
+function checkout(cart: Cart, user: User) {
+  assertItemsInStock(cart.items);
+  const total = calculateDiscountedTotal(cart.items, user.isMember);
+  return chargeCustomer(user.id, total);
+}
+```
+
 ## コメント
 
-コメントがほとんど要らないコードを書くこと。処理の内容は名前と構造で伝え、コードだけでは読み取れない理由だけをコメントに書く。
+コメントの密度はコード品質を直接映し出す。通常のプルリクエストでも後続の修正でも、コメントが多すぎる場合は構造や意図の表現に問題がある。処理内容をコメントで補わないと読めないなら、コメントを足すのではなくコード自体をリファクタリングすること。
 
-- 理由だけを書き、処理内容を言い換えないこと。
-- ロジックを逐一説明しないこと。逐一説明が必要な箇所は、まず構成を見直すこと。
+良いコード、とりわけ既存コードベースへの変更は、周囲のロジックや規約に自然になじむ。文脈の飛躍を補う説明や場当たり的な回避策の言い訳、手順の逐一解説がなくても、流れを無理なく追える状態に保つこと。
+
+- 処理の内容は明確な名前と適切な関数の分割で伝え、コメントはコードだけでは読み取れない理由（不変条件、外部制約、微妙な実行順序やトレードオフ）に限り、最小限にとどめること。
+- ロジックを逐一説明したり、長い関数の途中を見出しコメントで区切ったりしないこと。まずヘルパー関数を切り出すか、変数名を見直すこと。
+- プルリクエストや修正を終える前に、追加したコメントをすべて見直すこと。複雑な制御フローや場当たり的なパッチの言い訳、処理内容の言い換えにとどまるコメントは削除し、コード自体を修正・リファクタリングする。
 - 削除済みの振る舞いや過去の意図を説明するコメントを残さないこと。
 - 設定ファイルにはコメントを残さず、根拠はプルリクエストまたはプロジェクトドキュメントに記録すること。
 

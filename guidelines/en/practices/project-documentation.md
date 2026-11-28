@@ -4,7 +4,7 @@ lang: en
 version: 8
 source-lang: en
 status: active
-digest: 802084e7
+digest: eaf5a503
 ---
 
 # Required Project Documentation
@@ -29,7 +29,7 @@ Every project must include `README.md`.
 
 ### Audience and scope
 
-`README.md` is written for human readers who want to know what the project is, what it does, and how to use or run it. It should stand alone as the project's front door without duplicating tutorials, internal reference manuals, or long background essays.
+Write `README.md` for human readers who want to know what the project is, what it does, and how to use or run it. It must stand alone as the project's front door without duplicating tutorials, internal reference manuals, or long background essays.
 
 Do not turn `README.md` into a file portal or a `Goal -> Read` index table for repository files. Modern AI coding agents discover `AGENTS.md` and `docs/` automatically, and `AGENTS.md` already holds repository layout and links to internal documentation.
 
@@ -39,24 +39,24 @@ Agent-facing rules (engineering standards, the confirmed product/UI language pol
 
 Organize the README around what a human reader needs first, not around the repository directory tree. Do not add a separate Why section. Follow this order:
 
-- **Top hero block**: center the opening inside `<div align="center">` with a clean visual rhythm: an optional logo or banner image, a single `# Project Name` heading (omit the `#` heading when the logo already includes the project name), a one-sentence tagline stating what the project is and who it is for, an optional navigation link bar, and compact status badges using the `flat-square` style (`style=flat-square`).
+- **Top hero block**: center the opening inside `<div align="center">`. Include an optional logo or banner image, a single `# Project Name` heading (omitted if the logo already includes the name), a one-sentence tagline stating what the project is and who it is for, an optional navigation link bar, and compact `flat-square` badges (`style=flat-square`).
 - **Opening summary**: one to three plain sentences stating what the project does and the problem it solves. Mention scope limits or project status only when that saves the reader time.
 - **Visual preview (optional)**: when the project has a visual surface (UI, CLI output, or generated artifacts), place a screenshot or short GIF right after the opening summary.
-- **User installation and usage**: keep end-user steps separate from contributor tooling. For installable programs, CLIs, packages, or downloadable assets (such as fonts), include an explicit `## 📦 Installation` (or `## 📦 Download & Install`) section followed by `## 🚀 Usage` showing the two or three most common uses with their expected output. For developer-only repositories that are not distributed to end users, omit `Installation` and use `## 🚀 Quick Start`.
+- **User installation and usage**: separate end-user steps from contributor tooling. For installable programs, CLIs, packages, or downloadable assets (such as fonts), add `## 📦 Installation` (or `## 📦 Download & Install`) followed by `## 🚀 Usage` with two or three common examples and their expected output. For developer-only repositories not distributed to end users, omit `Installation` and use `## 🚀 Quick Start`.
 - **Optional showcase sections**: include only the sections the project actually needs, ordered by what matters most to the reader:
   - `Features`: what the project does, stated plainly. For richer projects, use numbered ``### `1` `` / ``### `2` `` subsections with one or two sentences each; for compact projects, use a two-column table or plain-sentence bullets.
   - `Concepts`: include only when the project has a distinct design concept or angle that differs from alternatives.
   - `Performance`: include only for projects focused on performance optimization or performance-sensitive workloads. State the claim in one sentence, backed by a chart or table, the measurement environment (hardware, runtime versions, date), and a link to reproduction steps. Every performance claim needs numbers.
-  - `Experiments`: experimental capabilities, if the project has any.
+  - `Experiments`: include only when the project exposes experimental capabilities.
 - **Development**: put local contributor setup (`mise install`, `mise run dev`, required environment variables, and external services) in a dedicated `## 🛠️ Development` section rather than mixing contributor commands into end-user `Installation` or `Usage`.
-- **Contributing**: include a brief `## 🤝 Contributing` section only for non-personal projects, linking to `DEVELOPMENT.md` and `CONTRIBUTING.md` (and `ARCHITECTURE.md` when present) where helpful to human contributors. If it is unclear whether a project is personal or collaborative, ask the user before adding this section.
+- **Contributing**: include a brief `## 🤝 Contributing` section only for non-personal projects, linking to `DEVELOPMENT.md`, `CONTRIBUTING.md`, and `ARCHITECTURE.md` (when present). If it is unclear whether a project is personal or collaborative, ask the user before adding this section.
 - **License**: under `## 📄 License`, state the SPDX identifier directly (for example, `MIT`, optionally linked directly to the `LICENSE` file). Do not write filler such as `MIT — see LICENSE`.
 
 Fold long secondary details (platform-specific setup, environment variable tables, extended examples, troubleshooting) into `<details>` blocks whose `<summary>` names the content in a few words. Leave one blank line after `<summary>` so Markdown renders. Never collapse the opening, the primary user commands, or the license.
 
 ### AI agent instructions
 
-Do not add a cookie-cutter AI handoff prompt (such as "paste this into your agent to read `AGENTS.md`") to `README.md`.
+Do not add a boilerplate AI handoff prompt (such as "paste this into your agent to read `AGENTS.md`") to `README.md`.
 
 Standard projects omit AI agent instructions from `README.md` because coding agents read `AGENTS.md` on their own. Include a concise, project-specific AI setup subsection only when the project provides a dedicated AI entry point or non-obvious agent workflow, such as an installable agent skill, an MCP server, or a custom routing file.
 
@@ -90,7 +90,7 @@ Write pragmatic, direct prose:
 
 ### Maintenance
 
-Keep `README.md` stable across routine updates. Avoid volatile counts or internal identifiers (such as exact document, rule, or file counts, or exact count strings in expected command output) that go stale whenever items or languages are added. `README.md` should only require edits for major changes, setup or usage shifts, or milestone refactors.
+Keep `README.md` stable across routine updates. Avoid volatile counts or internal identifiers (such as exact document, rule, or file counts, or exact count strings in expected command output) that go stale whenever items or languages are added. Edit `README.md` only for major changes, setup or usage shifts, or milestone refactors.
 
 An outdated README is worse than none, because it actively misleads readers. Update `README.md` in the same change that alters setup, usage, or scope, and state at the top when development has slowed or stopped.
 

@@ -1,10 +1,10 @@
 ---
 id: practices/change-discipline
 lang: zh
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 7a9b136a
+digest: e00a60e4
 ---
 
 # 变更纪律
@@ -23,6 +23,8 @@ digest: 7a9b136a
 - 运行相应的 [prek 检查](../toolchain/quality-gates.md)。
 - 提交时，校验 [Conventional Commits](../toolchain/git.md)。
 - 检查 diff。
+- 检查修改是否与周边代码的逻辑和惯例一致，而非拼凑临时补丁（[编码标准](coding-standards.md)）。
+- 逐条检查新增注释：凡是只用来解释混乱流程、临时补丁或代码本身行为的，删掉注释，改用更清晰的命名或函数拆分来修复代码；注释只保留代码本身看不出的原因（[编码标准](coding-standards.md)）。
 - 检查是否有非预期变更。
 - 检查是否有不必要的新依赖。
 - 检查是否有不必要的新文件。
@@ -67,7 +69,7 @@ $ git diff --stat
  1 file changed
 ```
 
-只改了一个文件：没有新增依赖或文件，也不影响架构。测试里新增的注释按[语言政策](language-policy.md)使用英文；没有改动用户界面文案；测试凭据留在测试夹具中，未出现在 diff 里（[安全](security.md)）。
+只改了一个文件：没有新增依赖或文件，也不影响架构。唯一新增的注释用英文说明了一处隐含的时序约束（[编码标准](coding-standards.md)、[语言政策](language-policy.md)）；没有改动用户界面文案；测试凭据留在测试夹具中，未出现在 diff 里（[安全](security.md)）。
 
 提交。prek 会对暂存区再次运行同样的检查，提交信息遵循 [Conventional Commits](../toolchain/git.md)：
 

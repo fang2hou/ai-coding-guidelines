@@ -1,10 +1,10 @@
 ---
 id: practices/coding-standards
 lang: zh
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: e97847b8
+digest: a94e1102
 ---
 
 # 编码标准
@@ -80,14 +80,16 @@ function saveReportSilently(report: Report) {
 
 ## 命名
 
+代码可读性首先靠清晰的函数名和变量名保证：用命名传达意图，而不是写解释性注释。
+
 使用有意义的英文名称，准确描述用途和行为。
 
 避免：
 
 - 语义模糊的缩写
-- 有更好名称可用时，`data`、`thing`、`value` 之类的通用名
+- 有更准确的名称时，仍使用 `data`、`thing`、`value` 等通用名
 - 音译
-- 已有标准英文术语时的项目专属俚语
+- 已有标准英文术语时，使用项目内部俚语
 
 ```ts
 // bad
@@ -100,12 +102,44 @@ let hasUnsavedChanges = false;
 
 遵循[语言政策](language-policy.md)中的代码语言规则。
 
+## 函数拆分
+
+配合清晰的命名做好函数拆分，让读者只看函数名和调用结构就能理解流程。
+
+- 一段代码需要分段注释或行内说明时，改为提取命名清晰的辅助函数或重命名变量。
+- 每个函数保持在同一抽象层级：顶层流程应由若干命名清晰的步骤串联而成，不要混入底层实现细节。
+- 按真实的行为边界拆分函数；不要为简单的一行逻辑套一层多余的封装，以免让控制流更难追踪。
+
+```ts
+// bad
+function checkout(cart: Cart, user: User) {
+  // verify inventory before charging
+  for (const item of cart.items) {
+    if (item.quantity > item.stock) throw new OutOfStockError(item.id);
+  }
+  // apply member discount
+  const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = user.isMember ? subtotal * 0.9 : subtotal;
+  return chargeCustomer(user.id, total);
+}
+
+// good
+function checkout(cart: Cart, user: User) {
+  assertItemsInStock(cart.items);
+  const total = calculateDiscountedTotal(cart.items, user.isMember);
+  return chargeCustomer(user.id, total);
+}
+```
+
 ## 注释
 
-写出本身就容易读懂、几乎不需要注释的代码。靠清晰的命名和合理拆分表达代码做了什么；注释只用来补充代码本身无法表达的原因。
+注释密度直接反映代码质量。无论常规 pull request 还是后续修复，注释一多往往意味着结构混乱或表达不清：凡是必须靠注释解释“代码在做什么”的地方，都应重构代码，而非补写说明。
 
-- 注释解释原因，不要复述代码做了什么。
-- 不要逐步讲解逻辑；如果一段代码需要一条条注释才能说明逻辑，先重构它。
+好的代码，尤其是对既有代码库的改动，应与周边逻辑和惯例保持一致，通篇自然易读，不必靠注释弥合逻辑断层、为临时补丁找理由，或逐行复述步骤。
+
+- 用清晰的命名和合理的函数拆分交代代码行为；注释务必克制，只说明代码本身看不出的原因（如不变量、外部约束、微妙的执行顺序或设计权衡）。
+- 不要逐行解说逻辑，也不要在长函数中用分段注释切分代码块；先提取辅助函数或重命名变量。
+- 完成 pull request 或修复前，逐条检查新增注释：凡是只用来解释混乱流程、临时拼凑的补丁或代码本身行为的，一律删掉注释，直接修正或重构代码。
 - 不要保留描述已删除行为或过去意图的注释。
 - 配置文件中不要写注释；将理由写入 pull request 或项目文档。
 
