@@ -1,10 +1,10 @@
 ---
 id: practices/change-discipline
 lang: en
-version: 2
+version: 3
 source-lang: en
 status: active
-digest: 8669071a
+digest: 8140f478
 ---
 
 # Change Discipline
@@ -23,6 +23,8 @@ Before considering a change complete:
 - Run the appropriate [prek checks](../toolchain/quality-gates.md).
 - Validate [Conventional Commits](../toolchain/git.md) when working with commits.
 - Review the diff.
+- Check that edits follow the surrounding logic and conventions cleanly instead of bolting on workarounds ([Coding Standards](coding-standards.md)).
+- Inspect every added comment: if a comment exists only to explain confusing flow, patched-on logic, or what the code does, delete it and fix or refactor the code through clearer naming or function decomposition; keep comments strictly sparse for genuinely non-obvious why ([Coding Standards](coding-standards.md)).
 - Check for unintended changes.
 - Check for unnecessary new dependencies.
 - Check for unnecessary new files.
@@ -67,7 +69,7 @@ $ git diff --stat
  1 file changed
 ```
 
-Only one file changed: no new dependencies, no new files, and no architecture changes. The new test comment is in English ([Language Policy](language-policy.md)), no UI text changed, and test credentials stay in the fixture rather than the diff ([Security](security.md)).
+Only one file changed: no new dependencies, no new files, and no architecture changes. The single added comment explains a non-obvious timing constraint in English ([Coding Standards](coding-standards.md), [Language Policy](language-policy.md)), no UI text changed, and test credentials stay in the fixture rather than the diff ([Security](security.md)).
 
 Commit. prek runs the same checks over the staged tree, and the message follows [Conventional Commits](../toolchain/git.md):
 

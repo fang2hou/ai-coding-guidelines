@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: zh
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: 20eb0d0b
+digest: 5a8d198f
 ---
 
 # Agent 操作协议
@@ -22,13 +22,15 @@ digest: 20eb0d0b
 7. 做出能完整解决需求的最小变更。
 8. 不做无关的清理。
 9. 运行相关校验。
-10. 审阅生成的 diff。
+10. 审阅生成的 diff，检查逻辑一致性与多余注释。
 11. 确认没有引入多余文件或无关变更。
 12. 说明架构、依赖、安全或行为方面的重大变更。
 
 不要只因偏好另一种风格，就重写本来正常的代码。
 
 不要因为相似代码出现两次就引入抽象；只有当抽象能解决实际的维护、正确性或架构问题时才引入。
+
+让修改自然融入周边代码的逻辑与惯例，保持从头到尾顺畅可读。如果一个 pull request 或后续修复需要大量注释才能说明自己在做什么，应将其视为代码质量问题，通过改进命名与函数拆分来重构代码（[编码标准](../practices/coding-standards.md)）。
 
 ## 记忆行为
 
@@ -77,3 +79,4 @@ digest: 20eb0d0b
 22. 未经适当批准，对共享历史强制推送。([git](../toolchain/git.md))
 23. 把 CI 通过当成实现正确的证明。([change-discipline](../practices/change-discipline.md))
 24. 在没有明确供应链策略的情况下，将 GitHub Actions 固定到 commit SHA，而不是当前主版本 tag。([github-actions](../toolchain/github-actions.md))
+25. 用解释性注释掩盖混乱的流程、权宜补丁或不清晰的代码，而不去修正逻辑、命名或函数拆分。([coding-standards](../practices/coding-standards.md))

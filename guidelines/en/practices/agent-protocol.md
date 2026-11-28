@@ -1,10 +1,10 @@
 ---
 id: practices/agent-protocol
 lang: en
-version: 5
+version: 6
 source-lang: en
 status: active
-digest: cc9ad788
+digest: 9ddaae0f
 ---
 
 # Agent Operating Protocol
@@ -22,13 +22,15 @@ Before making a non-trivial change, an AI agent should:
 7. Make the smallest complete change that solves the requirement.
 8. Avoid unrelated cleanup.
 9. Run relevant validation.
-10. Review the resulting diff.
+10. Review the resulting diff for logic consistency and unnecessary comments.
 11. Confirm that no accidental files or unrelated changes were introduced.
 12. Explain significant architectural, dependency, security, or behavioral changes.
 
 Do not rewrite working code merely because you prefer another style.
 
 Do not add an abstraction just because similar code appears twice; add one only when it solves a real maintenance, correctness, or architecture problem.
+
+Keep edits consistent with the surrounding logic and conventions so the code reads cleanly end-to-end. If a pull request or follow-up fix needs many comments to explain what it does, treat that as a code-quality problem and refactor its naming and function decomposition instead ([Coding Standards](../practices/coding-standards.md)).
 
 ## Memory behavior
 
@@ -77,3 +79,4 @@ The following behaviors are prohibited. Each item links to the document that def
 22. Force push shared history without approval. ([git](../toolchain/git.md))
 23. Treat a green CI as proof that the implementation is correct. ([change-discipline](../practices/change-discipline.md))
 24. Pin GitHub Actions to commit SHAs rather than current major-version tags, without a stated supply-chain policy. ([github-actions](../toolchain/github-actions.md))
+25. Paper over confusing flow, patched-on logic, or unclear code with explanatory comments instead of fixing the logic, naming, or function decomposition. ([coding-standards](../practices/coding-standards.md))

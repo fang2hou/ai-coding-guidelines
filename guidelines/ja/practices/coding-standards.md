@@ -1,10 +1,10 @@
 ---
 id: practices/coding-standards
 lang: ja
-version: 3
+version: 4
 source-lang: en
 status: active
-digest: e43127ef
+digest: 5dec3eeb
 ---
 
 # コーディング規約
@@ -80,6 +80,8 @@ function saveReportSilently(report: Report) {
 
 ## 命名
 
+明確な関数名と変数名は、コードの可読性を確保する第一の手段である。説明用のコメントを書く代わりに、名前で意図を伝えること。
+
 目的と振る舞いを正確に表す、意味のある英語の名前を使用すること。
 
 次のような名前を避けること。
@@ -100,12 +102,44 @@ let hasUnsavedChanges = false;
 
 コードの言語の規則については、[言語ポリシー](language-policy.md)に従うこと。
 
+## 関数の分割
+
+明確な命名と適切な関数の分割を組み合わせ、関数名と呼び出し構造だけから処理内容を読み取れるようにすること。
+
+- コードのかたまりに見出しコメントや補足説明が必要だと感じたら、コメントを書く代わりに、意図の伝わるヘルパー関数へ切り出すか、変数名を見直すこと。
+- 各関数は 1 つの抽象度にそろえること。上位の処理は、細かな実装手続きを混在させず、名前の付いた手順の連なりとして読める形にする。
+- 実際の振る舞いの境界で分割すること。制御の流れを追いにくくするだけの自明な 1 行ラッパーは作らない。
+
+```ts
+// bad
+function checkout(cart: Cart, user: User) {
+  // verify inventory before charging
+  for (const item of cart.items) {
+    if (item.quantity > item.stock) throw new OutOfStockError(item.id);
+  }
+  // apply member discount
+  const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = user.isMember ? subtotal * 0.9 : subtotal;
+  return chargeCustomer(user.id, total);
+}
+
+// good
+function checkout(cart: Cart, user: User) {
+  assertItemsInStock(cart.items);
+  const total = calculateDiscountedTotal(cart.items, user.isMember);
+  return chargeCustomer(user.id, total);
+}
+```
+
 ## コメント
 
-コメントがほとんど要らないコードを書くこと。処理の内容は名前と構造で伝え、コードだけでは読み取れない理由だけをコメントに書く。
+コメントの多さは、コード品質を測る直接の指標として扱うこと。通常のプルリクエストでも後続の修正でも、コメントが多い状態はコード品質が低い強いサインである。何が起きているかを多数のコメントで説明しないと分からないなら、コード自体の構造や明確さに問題がある。
 
-- 理由だけを書き、処理内容を言い換えないこと。
-- ロジックを逐一説明しないこと。逐一説明が必要な箇所は、まず構成を見直すこと。
+良いコード、とりわけ既存のコードベースへの変更は、周囲のロジックや規約に自然になじみ、隙間を埋める説明や場当たり的な回避策の言い訳、手順の逐一解説がなくても最初から最後まで通して読める。
+
+- 処理の内容は明確な名前と適切な関数の分割で伝え、コメントはコードだけでは読み取れない理由（不変条件、外部制約、微妙な順序やトレードオフ）に限り、最小限にとどめること。
+- ロジックを逐一説明したり、長い関数の途中を見出しコメントで区切ったりしないこと。まずヘルパー関数を切り出すか、変数名を見直すこと。
+- プルリクエストや修正を完了する前に、追加したコメントを 1 つずつ確認すること。分かりにくい流れ、後付けのパッチ処理、あるいは処理内容の言い換えを説明しているだけなら、コメントを削除してコード自体を修正・リファクタリングすること。
 - 削除済みの振る舞いや過去の意図を説明するコメントを残さないこと。
 - 設定ファイルにはコメントを残さず、根拠はプルリクエストまたはプロジェクトドキュメントに記録すること。
 
