@@ -4,7 +4,7 @@ lang: en
 version: 3
 source-lang: en
 status: active
-digest: 8140f478
+digest: e8ea0c35
 ---
 
 # Change Discipline
@@ -23,8 +23,8 @@ Before considering a change complete:
 - Run the appropriate [prek checks](../toolchain/quality-gates.md).
 - Validate [Conventional Commits](../toolchain/git.md) when working with commits.
 - Review the diff.
-- Check that edits follow the surrounding logic and conventions cleanly instead of bolting on workarounds ([Coding Standards](coding-standards.md)).
-- Inspect every added comment: if a comment exists only to explain confusing flow, patched-on logic, or what the code does, delete it and fix or refactor the code through clearer naming or function decomposition; keep comments strictly sparse for genuinely non-obvious why ([Coding Standards](coding-standards.md)).
+- Confirm that edits fit the surrounding logic and conventions instead of introducing ad-hoc workarounds ([Coding Standards](coding-standards.md)).
+- Audit every added comment: delete any comment that only explains confusing control flow, an ad-hoc workaround, or what the code does, and fix the code through clearer naming or function decomposition instead. Reserve comments for genuinely non-obvious why ([Coding Standards](coding-standards.md)).
 - Check for unintended changes.
 - Check for unnecessary new dependencies.
 - Check for unnecessary new files.

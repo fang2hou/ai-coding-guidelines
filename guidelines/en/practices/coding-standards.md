@@ -4,7 +4,7 @@ lang: en
 version: 4
 source-lang: en
 status: active
-digest: 28413625
+digest: a9766a3d
 ---
 
 # Coding Standards
@@ -80,7 +80,7 @@ function saveReportSilently(report: Report) {
 
 ## Naming
 
-Clear function and variable names are the primary mechanism for readable code — use them to replace explanatory comments.
+Clear function and variable names are the primary way to make code readable: convey intent through names instead of explanatory comments.
 
 Use meaningful English names that accurately describe purpose and behavior.
 
@@ -104,10 +104,10 @@ Follow the code-language rules in [Language Policy](language-policy.md).
 
 ## Function decomposition
 
-Pair clear naming with sensible function decomposition so readers understand what happens directly from function names and call structure.
+Pair clear naming with focused function decomposition so readers can follow the logic from function names and call structure alone.
 
-- When a block of code feels like it needs a section comment or inline explanation, extract a well-named helper function or rename variables instead.
-- Keep each function at one level of detail: a top-level flow should read as a clean sequence of named steps rather than interleaved low-level mechanics.
+- When a block needs a section comment or inline explanation, extract a well-named helper or rename its variables instead.
+- Keep each function at one level of detail: a top-level flow should read as a clean sequence of named steps rather than mixing in low-level mechanics.
 - Split along real behavioral boundaries; do not extract trivial one-line wrappers that obscure control flow.
 
 ```ts
@@ -133,13 +133,13 @@ function checkout(cart: Cart, user: User) {
 
 ## Comments
 
-Treat comment density as a direct indicator of code quality. In both regular pull requests and follow-up fixes, having many comments is a strong signal of poor code quality: if code needs many comments to explain what is happening, the code itself has a structural or clarity problem.
+Treat comment density as a direct code-quality signal. Whether in a regular pull request or a follow-up fix, frequent comments point to structural or clarity defects: if code relies on prose to explain what it does, refactor the code instead.
 
-Good code — especially edits on top of an existing codebase — stays consistent with the surrounding logic and conventions so it reads end-to-end without comments to bridge gaps, justify workarounds, or narrate steps.
+Good code, especially changes to an existing codebase, fits the surrounding logic and conventions and reads cleanly end to end without comments to bridge gaps, excuse workarounds, or narrate steps.
 
-- Let clear names and well-decomposed functions show what the code does; keep comments strictly sparse for genuinely non-obvious _why_ (invariants, external constraints, subtle ordering, or tradeoffs).
+- Let clear names and focused functions show what the code does; keep comments sparse and reserve them for genuinely non-obvious _why_ (invariants, external constraints, subtle ordering, or tradeoffs).
 - Never narrate logic step by step or add section comments to label blocks in a long function; extract a helper or rename variables first.
-- Before finishing a pull request or fix, inspect every added comment: if it exists only to explain confusing flow, patched-on logic, or what the code does, delete the comment and fix or refactor the code instead.
+- Before finishing a pull request or fix, audit every added comment: if it only explains confusing control flow, an ad-hoc workaround, or what the code does, delete the comment and fix or refactor the code instead.
 - Do not keep comments that describe removed behavior or past intentions.
 - Keep configuration files comment-free; put the rationale in the pull request or the project documentation.
 

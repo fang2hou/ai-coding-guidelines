@@ -2,7 +2,7 @@
 
 <!-- Optional: project logo or banner -->
 <!-- <img src="{{assets/logo.png}}" alt="{{Project Name}}" width="120" /> -->
-<!-- if the logo includes Project name, then remove the h1 -->
+<!-- If the logo already includes the project name, omit the # heading below. -->
 
 # {{Project Name}}
 
@@ -93,7 +93,7 @@ mise run dev
 
 ## 🤝 Contributing
 
-<!-- Only needed for non-personal projects, if you don't know, ask user to decide. -->
+<!-- Include only for collaborative projects. If unsure whether the project is personal or collaborative, ask the user before adding this section. -->
 
 See [DEVELOPMENT.md](./DEVELOPMENT.md) for local setup and workflow, and [CONTRIBUTING.md](./CONTRIBUTING.md) for pull request and review rules.
 
